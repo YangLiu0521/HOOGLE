@@ -13,7 +13,7 @@ public class OrdDetailVO implements java.io.Serializable{
 		this.orddetailId = orddetailId;
 	}
 	public Integer getOrdId() {
-		return orddetailId;
+		return ordId;
 	}
 	public void setOrdId(Integer ordId) {
 		this.ordId = ordId;
