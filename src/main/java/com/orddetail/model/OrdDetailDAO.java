@@ -17,21 +17,21 @@ import javax.sql.DataSource;
 public class OrdDetailDAO implements OrdDetailDAO_interface{
 
 	
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/HOOGLE?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
+//	String driver = "com.mysql.cj.jdbc.Driver";
+//	String url = "jdbc:mysql://localhost:3306/HOOGLE?serverTimezone=Asia/Taipei";
+//	String userid = "root";
+//	String passwd = "password";
 	
-//	private static DataSource ds = null;
-//	static {
-//		try {
-//			
-//			Context ctx = new InitialContext();
-//			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/HOOGLEDB");
-//		} catch (NamingException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	private static DataSource ds = null;
+	static {
+		try {
+			
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/HOOGLEDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 		private static final String INSERT_STMT = 
 			"INSERT INTO orddetail (ordId, roomAuto, roomNumber) VALUES (?, ?, ?)";
@@ -53,9 +53,9 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 		PreparedStatement pstmt = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-//			con = ds.getConnection();
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
 			pstmt.setInt(1, orddetailVO.getOrdId());
@@ -64,11 +64,12 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 
 			pstmt.executeUpdate();
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-
-		}catch (SQLException se) {
+		} 
+//		catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		}
+		catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "+ se.getMessage());
 		} finally {
 			if (pstmt != null) {
@@ -95,9 +96,9 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 		PreparedStatement pstmt = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-//			con = ds.getConnection();
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setInt(1, orddetailVO.getOrdId());
@@ -107,11 +108,12 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 
 			pstmt.executeUpdate();
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-
-		}catch (SQLException se) {
+		} 
+//		catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		}
+		catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "+ se.getMessage());
 		} finally {
 			if (pstmt != null) {
@@ -138,20 +140,21 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 		PreparedStatement pstmt = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-//			con = ds.getConnection();
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, orddetailId);
 
 			pstmt.executeUpdate();
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-
-		}catch (SQLException se) {
+		} 
+//		catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		}
+		catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "+ se.getMessage());
 		} finally {
 			if (pstmt != null) {
@@ -180,9 +183,9 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-//			con = ds.getConnection();
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, orddetailId);
@@ -198,11 +201,12 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 				
 			}
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-
-		}catch (SQLException se) {
+		} 
+//		catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		}
+		catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "+ se.getMessage());
 		} finally {
 			if (rs != null) {
@@ -241,9 +245,9 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-//			con = ds.getConnection();
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -258,11 +262,12 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 				
 			}
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-
-		}catch (SQLException se) {
+		} 
+//		catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		}
+		catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "+ se.getMessage());
 		} finally {
 			if (rs != null) {
