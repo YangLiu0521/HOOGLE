@@ -4,7 +4,6 @@ import java.sql.Date;
 
 public class OrdVO implements java.io.Serializable {
 	
-	
 	private Integer ordId;
 	private Integer userId;
 	private Integer hotelId;
