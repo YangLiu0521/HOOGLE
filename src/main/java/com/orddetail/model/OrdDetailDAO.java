@@ -255,7 +255,6 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 				orddetailVO.setRoomNumber(rs.getInt("roomNumber"));
 	
 				list.add(orddetailVO); 
-				
 			}
 
 		} catch (ClassNotFoundException e) {
