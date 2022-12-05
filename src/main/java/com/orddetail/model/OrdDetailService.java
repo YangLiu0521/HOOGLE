@@ -52,7 +52,7 @@ public class OrdDetailService {
 		return dao.findByPrimaryKey(orddetailId);
 	}
 
-	public OrdDetailVO getOneOrd(Integer ordId) {
+	public List<OrdDetailVO> getOneOrd(Integer ordId) {
 		return dao.findByOrdId(ordId);
 	}
 

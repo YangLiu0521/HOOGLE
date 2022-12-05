@@ -62,12 +62,16 @@
 		<th>房間編號</th>
 		<th>訂房房數</th>
 	</tr>
+
+		<c:forEach var="orddetailVO" items="${list}" >	
 	<tr>
+		<td>111111111</td>
 		<td>${orddetailVO.orddetailId}</td>
 		<td>${orddetailVO.ordId}</td>
 		<td>${orddetailVO.roomAuto}</td>
 		<td>${orddetailVO.roomNumber}</td>
 	</tr>
+		</c:forEach>
 </table>
 
 </body>

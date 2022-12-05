@@ -180,8 +180,11 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 	
 	
 	@Override
-	public OrdDetailVO findByOrdId(Integer OrdId) {
+	public List<OrdDetailVO> findByOrdId(Integer ordId) {
+		
+		List<OrdDetailVO> list = new ArrayList<OrdDetailVO>();
 		OrdDetailVO orddetailVO = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -191,18 +194,23 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 //			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ORD_STMT);
-
-			pstmt.setInt(1, OrdId);
-
+			pstmt.setInt(1, ordId);
+			
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				orddetailVO = new OrdDetailVO();
-				orddetailVO.setOrdId(rs.getInt("ordId"));
-				orddetailVO.setRoomAuto(rs.getInt("roomAuto"));
-				orddetailVO.setRoomNumber(rs.getInt("roomNumber"));
 				orddetailVO.setOrddetailId(rs.getInt("orddetailId"));
-				
+				System.out.println(rs.getInt("orddetailId"));
+				orddetailVO.setOrdId(rs.getInt("ordId"));
+				System.out.println(rs.getInt("ordId"));
+				orddetailVO.setRoomAuto(rs.getInt("roomAuto"));
+				System.out.println(rs.getInt("roomAuto"));
+				orddetailVO.setRoomNumber(rs.getInt("roomNumber"));
+				System.out.println(rs.getInt("roomNumber"));
+	
+				list.add(orddetailVO);
+			
 			}
 
 		} 
@@ -235,7 +243,67 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 				}
 			}
 		}
-		return orddetailVO;
+		return list;
+		
+		
+		
+		
+		
+//		OrdDetailVO orddetailVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//
+//		try {
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+////			con = ds.getConnection();
+//			pstmt = con.prepareStatement(GET_ORD_STMT);
+//
+//			pstmt.setInt(1, OrdId);
+//
+//			rs = pstmt.executeQuery();
+//
+//			while (rs.next()) {
+//				orddetailVO = new OrdDetailVO();
+//				orddetailVO.setOrdId(rs.getInt("ordId"));
+//				orddetailVO.setRoomAuto(rs.getInt("roomAuto"));
+//				orddetailVO.setRoomNumber(rs.getInt("roomNumber"));
+//				orddetailVO.setOrddetailId(rs.getInt("orddetailId"));
+//				
+//			}
+//
+//		} 
+//		catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		}
+//		catch (SQLException se) {
+//			throw new RuntimeException("A database error occured. "+ se.getMessage());
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (Exception e) {
+//					e.printStackTrace(System.err);
+//				}
+//			}
+//		}
+//		return orddetailVO;
 	}
 
 	@Override

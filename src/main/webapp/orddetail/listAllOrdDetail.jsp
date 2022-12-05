@@ -54,7 +54,7 @@
 <!-- <h4>此頁練習採用 EL 的寫法取值:</h4> -->
 <table id="table-1">
 	<tr><td>
-		 <h3>所有訂單資料 - listAllEmp.jsp</h3>
+		 <h3>所有訂單資料 - listAllOrdDetail.jsp</h3>
 		 <h4><a href="select_orddetail_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -76,18 +76,6 @@
 			<td>${orddetailVO.ordId}</td>
 			<td>${orddetailVO.roomAuto}</td>
 			<td>${orddetailVO.roomNumber}</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orddetail/orddetail.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="orddetailId"  value="${orddetailVO.orddetailId}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orddetail/orddetail.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
-			     <input type="hidden" name="orddetailId"  value="${orddetailVO.orddetailId}">
-			     <input type="hidden" name="action" value="delete"></FORM>
-			</td>
 		</tr>
 	</c:forEach>
 </table>

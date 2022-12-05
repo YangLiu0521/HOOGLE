@@ -2,6 +2,7 @@ package com.orddetail.controller;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -121,7 +122,8 @@ public class OrdDetailServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 *****************************************/
 			OrdDetailService orddetailSvc = new OrdDetailService();
-			OrdDetailVO orddetailVO = orddetailSvc.getOneOrd(ordId);
+			List<OrdDetailVO> orddetailVO = orddetailSvc.getOneOrd(ordId);
+			System.out.println("1===================================");
 			if (ordId == null) {
 				errorMsgs.put("ordId", "查無資料");
 //				errorMsgs.add("查無資料");
@@ -134,6 +136,8 @@ public class OrdDetailServlet extends HttpServlet {
 			}
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+			
+			System.out.println("有執行+++++++++++++++++++++++++++++++++++++");
 			req.setAttribute("orddetailVO", orddetailVO); // 資料庫取出的ordVO物件,存入req
 			String url = "/orddetail/listOneOrdDetail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneOrdDetail.jsp
