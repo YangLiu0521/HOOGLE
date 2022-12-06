@@ -1,4 +1,4 @@
-package commend.model;
+package com.commend.model;
 
 import java.sql.Date;
 
@@ -38,8 +38,5 @@ public class CommendVO implements java.io.Serializable {
 	public void setCommendDate(Date commendDate) {
 		this.commendDate = commendDate;
 	}
-	
-	
-	
 	
 }
