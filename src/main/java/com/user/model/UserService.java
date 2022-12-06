@@ -1,6 +1,7 @@
 package com.user.model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.sql.*;
 
 public class UserService {
@@ -13,7 +14,7 @@ public class UserService {
 	}
 
 	public UserVO addUser(String userEmail, String userPassword, String userName, String userPhone, String userIdentity,
-			java.sql.Date userBirthday, java.sql.Date userRegistration) {
+			java.sql.Date userBirthday, java.sql.Timestamp userRegistration) {
 
 		UserVO userVO = new UserVO();
 
@@ -35,7 +36,7 @@ public class UserService {
 	}
 
 	public UserVO updateUser(Integer userId, String userEmail, String userPassword, String userName, String userPhone,
-			String userIdentity, java.sql.Date userBirthday, java.sql.Date userRegistration) {
+			String userIdentity, java.sql.Date userBirthday, java.sql.Timestamp userRegistration) {
 
 		UserVO userVO = new UserVO();
 
@@ -48,12 +49,15 @@ public class UserService {
 		userVO.setUserBirthday(userBirthday);
 		userVO.setUserRegistration(userRegistration);
 
-		return dao.findByPrimaryKey(userId);
+		dao.update(userVO);
+		return userVO;
 	}
 
 	// 預留給 Struts 2 用的
-	public void updateUser(UserVO userVO) {
+	public UserVO updateUser(UserVO userVO) {
+		System.out.println("### updateUser service");
 		dao.update(userVO);
+		return userVO;
 	}
 	
 	public void deleteUser(Integer userId) {
@@ -61,11 +65,28 @@ public class UserService {
 	}
 	
 	public UserVO getOneUser(Integer userId) {
-		return dao.findByPrimaryKey(userId);
+//		return dao.findByPrimaryKey(userId);
+		return dao.getAll().stream()
+				.filter(e -> e.getUserId().equals(userId))
+				.findAny().orElse(null);
 	}
 	
 	public List<UserVO> getAll(){
 		return dao.getAll();
 	}
-
+	
+	public List<UserVO> getUserEmails(String userEmail){
+		return dao.getAll().stream()
+				.filter(e -> e.getUserEmail().equals(userEmail))
+				.collect(Collectors.toList());
+	}
+	
+	public UserVO findByUserEmail(String userEmail) {
+		return dao.findByUserEmail(userEmail);
+	}
+	
+	public String pwdhash(String userPassword) {
+		dao.pwdhash(userPassword);
+		return userPassword;
+	}
 }
