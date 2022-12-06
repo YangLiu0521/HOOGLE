@@ -64,13 +64,26 @@
    
   <li>
      <FORM METHOD="post" ACTION="orddetail.do" >
-       <b>選擇訂單編號:</b>
+       <b>選擇訂單明細編號:</b>
        <select size="1" name="orddetailId">
          <c:forEach var="orddetailVO" items="${orddetailSvc.all}" > 
           <option value="${orddetailVO.orddetailId}">${orddetailVO.orddetailId}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
+       <input type="submit" value="送出">
+    </FORM>
+  </li>
+  
+  <li>
+     <FORM METHOD="post" ACTION="orddetail.do" >
+       <b>選擇訂單編號:</b>
+       <select size="1" name="ordId">
+         <c:forEach var="orddetailVO" items="${orddetailSvc.all}" > 
+          <option value="${orddetailVO.ordId}">${orddetailVO.ordId}
+         </c:forEach>   
+       </select>
+       <input type="hidden" name="action" value="OrdId_getOne_For_Display">
        <input type="submit" value="送出">
     </FORM>
   </li>
