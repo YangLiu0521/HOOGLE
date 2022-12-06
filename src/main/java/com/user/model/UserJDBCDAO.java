@@ -14,6 +14,8 @@ public class UserJDBCDAO implements UserDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO user (userEmail,userPassword,userName,userPhone,userIdentity,userBirthday,userRegistration) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT userId,userEmail,userPassword,userName,userPhone,userIdentity,userBirthday,userRegistration FROM user";
 	private static final String GET_ONE_STMT = "SELECT userId,userEmail,userPassword,userName,userPhone,userIdentity,userBirthday,userRegistration FROM user where userId = ?";
+	private static final String GET_EMAIL_STMT = "SELECT userId,userEmail,userPassword,userName,userPhone,userIdentity,userBirthday,userRegistration FROM user where upper(userEmail) like upper(?)";
+	private static final String GET_EMAILbyUser_STMT = "select userId,userEmail,userPassword,userName,userPhone,userIdentity,userBirthday,userRegistration from user where userEmail = ?";
 	private static final String DELETE = "DELETE FROM user where userId = ?";
 	private static final String UPDATE = "UPDATE user set userEmail=?, userPassword=?, userName=?, userPhone=?, userIdentity=?, userBirthday=?, userRegistration=? where userId = ?";
 
@@ -35,7 +37,7 @@ public class UserJDBCDAO implements UserDAO_interface {
 			pstmt.setString(4, userVO.getUserPhone());
 			pstmt.setString(5, userVO.getUserIdentity());
 			pstmt.setDate(6, userVO.getUserBirthday());
-			pstmt.setDate(7, userVO.getUserRegistration());
+			pstmt.setTimestamp(7, userVO.getUserRegistration());
 
 			pstmt.executeUpdate();
 
@@ -83,7 +85,7 @@ public class UserJDBCDAO implements UserDAO_interface {
 			pstmt.setString(4, userVO.getUserPhone());
 			pstmt.setString(5, userVO.getUserIdentity());
 			pstmt.setDate(6, userVO.getUserBirthday());
-			pstmt.setDate(7, userVO.getUserRegistration());
+			pstmt.setTimestamp(7, userVO.getUserRegistration());
 			pstmt.setInt(8, userVO.getUserId());
 
 			pstmt.executeUpdate();
@@ -183,7 +185,7 @@ public class UserJDBCDAO implements UserDAO_interface {
 				userVO.setUserPhone(rs.getString("userPhone"));
 				userVO.setUserIdentity(rs.getString("userIdentity"));
 				userVO.setUserBirthday(rs.getDate("userBirthday"));
-				userVO.setUserRegistration(rs.getDate("userRegistration"));
+				userVO.setUserRegistration(rs.getTimestamp("userRegistration"));
 			}
 
 			// Handle any driver errors
@@ -248,7 +250,7 @@ public class UserJDBCDAO implements UserDAO_interface {
 				userVO.setUserPhone(rs.getString("userPhone"));
 				userVO.setUserIdentity(rs.getString("userIdentity"));
 				userVO.setUserBirthday(rs.getDate("userBirthday"));
-				userVO.setUserRegistration(rs.getDate("userRegistration"));
+				userVO.setUserRegistration(rs.getTimestamp("userRegistration"));
 				list.add(userVO); // Store the row in the list
 			}
 
@@ -283,6 +285,144 @@ public class UserJDBCDAO implements UserDAO_interface {
 			}
 		}
 		return list;
+		
+	}
+	
+	@Override
+	public List<UserVO> findByEmail(String userEmail) {
+		
+		List<UserVO> list = new ArrayList<UserVO>();
+		UserVO userVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_EMAIL_STMT);
+			pstmt.setString(1, userEmail);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				
+				userVO = new UserVO();
+				userVO.setUserId(rs.getInt("userId"));
+				userVO.setUserEmail(rs.getString("userEmail"));
+				userVO.setUserPassword(rs.getString("userPassword"));
+				userVO.setUserName(rs.getString("userName"));
+				userVO.setUserPhone(rs.getString("userPhone"));
+				userVO.setUserIdentity(rs.getString("userIdentity"));
+				userVO.setUserBirthday(rs.getDate("userBirthday"));
+				userVO.setUserRegistration(rs.getTimestamp("userRegistration"));
+				list.add(userVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+		
+	}
+	
+	@Override
+	public UserVO findByUserEmail(String userEmail) {
+		
+		UserVO userVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_EMAILbyUser_STMT);
+
+			pstmt.setString(1, userEmail);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVo 也稱為 Domain objects
+				userVO = new UserVO();
+				userVO.setUserId(rs.getInt("userId"));
+				userVO.setUserEmail(rs.getString("userEmail"));
+				userVO.setUserPassword(rs.getString("userPassword"));
+				userVO.setUserName(rs.getString("userName"));
+				userVO.setUserPhone(rs.getString("userPhone"));
+				userVO.setUserIdentity(rs.getString("userIdentity"));
+				userVO.setUserBirthday(rs.getDate("userBirthday"));
+				userVO.setUserRegistration(rs.getTimestamp("userRegistration"));
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+		return userVO;
+		
+	}
+	
+	@Override
+	public String pwdhash(String userPassword) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public static void main(String[] args) {
@@ -290,19 +430,19 @@ public class UserJDBCDAO implements UserDAO_interface {
 		UserJDBCDAO dao = new UserJDBCDAO();
 
 		// 新增test
-//		UserVO insertTest = new UserVO();
-//		insertTest.setUserEmail("test123@gmail.com");
-//		insertTest.setUserPassword("1234");
-//		insertTest.setUserName("aga");
-//		insertTest.setUserPhone("0912345678");
-//		insertTest.setUserIdentity("A123456789");
-//		insertTest.setUserBirthday(java.sql.Date.valueOf("2022-11-22"));
-//		insertTest.setUserRegistration(java.sql.Date.valueOf("2022-11-22"));
-//		dao.insert(insertTest);
+		UserVO insertTest = new UserVO();
+		insertTest.setUserEmail("test123@gmail.com");
+		insertTest.setUserPassword("1234");
+		insertTest.setUserName("aga");
+		insertTest.setUserPhone("0912345678");
+		insertTest.setUserIdentity("A123456789");
+		insertTest.setUserBirthday(java.sql.Date.valueOf("2022-11-22"));
+		insertTest.setUserRegistration(java.sql.Timestamp.valueOf("2022-11-22 00:00:00"));
+		dao.insert(insertTest);
 
 		// 修改test
 //		UserVO updateTest = new UserVO();
-//		updateTest.setUserId(1);
+//		updateTest.setUserId(3);
 //		updateTest.setUserEmail("yang123@gmail.com");
 //		updateTest.setUserPassword("5678");
 //		updateTest.setUserName("yang");
@@ -313,7 +453,7 @@ public class UserJDBCDAO implements UserDAO_interface {
 //		dao.update(updateTest);
 
 		// 刪除test
-//		dao.delete(1);
+		dao.delete(3);
 
 		// 查詢單一項test
 //		UserVO selectTest = dao.findByPrimaryKey(1);
@@ -343,5 +483,11 @@ public class UserJDBCDAO implements UserDAO_interface {
 //		}
 
 	}
+
+	
+
+	
+
+	
 
 }
