@@ -9,7 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-   <servlet>
+  <servlet>
     <servlet-name>OrdServlet</servlet-name>
     <servlet-class>com.ord.controller.OrdServlet</servlet-class>
   </servlet>

@@ -111,7 +111,7 @@ public class OrdDetailServlet extends HttpServlet {
 				ordId = Integer.valueOf(str);
 			} catch (Exception e) {
 				errorMsgs.put("ordId", "訂單編號格式不正確");
-//				errorMsgs.add("訂單編號格式不正確");
+				//errorMsgs.add("訂單編號格式不正確");
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
@@ -123,7 +123,6 @@ public class OrdDetailServlet extends HttpServlet {
 			/*************************** 2.開始查詢資料 *****************************************/
 			OrdDetailService orddetailSvc = new OrdDetailService();
 			List<OrdDetailVO> orddetailVO = orddetailSvc.getOneOrd(ordId);
-			System.out.println("1===================================");
 			if (ordId == null) {
 				errorMsgs.put("ordId", "查無資料");
 //				errorMsgs.add("查無資料");
@@ -137,14 +136,13 @@ public class OrdDetailServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			
-			System.out.println("有執行+++++++++++++++++++++++++++++++++++++");
-			req.setAttribute("orddetailVO", orddetailVO); // 資料庫取出的ordVO物件,存入req
-			String url = "/orddetail/listOneOrdDetail.jsp";
+			req.setAttribute("orddetailVO", orddetailVO); // 資料庫取出的orddetailVO物件,存入req
+			String url = "/orddetail/listAllOrdDetailByOrdId.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneOrdDetail.jsp
 			successView.forward(req, res);
 		}
 		
-		if ("getOne_For_Update".equals(action)) { // 來自listAllOrd.jsp的請求
+		if ("getOne_For_Update".equals(action)) { // 來自listAllOrddetail.jsp的請求
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);

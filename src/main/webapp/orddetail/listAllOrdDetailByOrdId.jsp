@@ -1,15 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.ord.model.*" %>
+<%@ page import="java.util.*"%>
+<%@ page import="com.orddetail.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-  OrdVO ordVO = (OrdVO) request.getAttribute("OrdVO"); //OrdServlet.java(Concroller), 存入req的ordVO物件
+  OrdDetailVO orddetailVO = (OrdDetailVO) request.getAttribute("OrddetailVO"); //OrdServlet.java(Concroller), 存入req的ordVO物件
 %>
 
 <html>
 <head>
-<title>訂單資料 - listOneOrd.jsp</title>
+<title>訂單資料 - listOneOrdDetail.jsp</title>
 
 <style>
   table#table-1 {
@@ -50,38 +51,28 @@
 <!-- <h4>此頁暫練習採用 Script 的寫法取值:</h4> -->
 <table id="table-1">
 	<tr><td>
-		 <h3>訂單資料 - ListOneOrd.jsp</h3>
-		 <h4><a href="select_ord_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h3>訂單資料 - ListOneOrdDetail.jsp</h3>
+		 <h4><a href="select_orddetail_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
 <table>
 	<tr>
+		<th>訂單明細編號</th>
 		<th>訂單編號</th>
-		<th>旅客編號</th>
-		<th>飯店編號</th>
-		<th>旅客名稱</th>
-		<th>飯店名稱</th>
-		<th>訂房日期</th>
-		<th>入住日期</th>
-		<th>退房日期</th>
-		<th>訂房天數</th>
-		<th>注意事項</th>
-		
-		
+		<th>房間編號</th>
+		<th>訂房房數</th>
 	</tr>
+
+		<c:forEach var="orddetailVO" items="${list}" >	
 	<tr>
-		<td>${ordVO.ordId}</td>
-		<td>${ordVO.userId}</td>
-		<td>${ordVO.hotelId}</td>
-		<td>${ordVO.userName}</td>
-		<td>${ordVO.hotelName}</td>
-		<td>${ordVO.ordDate}</td>
-		<td>${ordVO.ordCheckin}</td>
-		<td>${ordVO.ordCheckout}</td>
-		<td>${ordVO.ordNights}</td>
-		<td>${ordVO.ordRemark}</td>
+		
+		<td>${orddetailVO.orddetailId}</td>
+		<td>${orddetailVO.ordId}</td>
+		<td>${orddetailVO.roomAuto}</td>
+		<td>${orddetailVO.roomNumber}</td>
 	</tr>
+		</c:forEach>
 </table>
 
 </body>
