@@ -103,7 +103,7 @@ public class UserServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
-// ===================================================新增資料=========================================================//
+// ===================================================旅客註冊=========================================================//
 		if ("insert".equals(action)) {
 			
 			System.out.println("### into insert user ###");
@@ -383,13 +383,13 @@ public class UserServlet extends HttpServlet {
 //				errorMsgs.add("請輸入正確信箱格式");
 //			}
 
-//			String userPassword = req.getParameter("userPassword");
-//			String comfirmPassword = req.getParameter("comfirmpassword");
-//			if (userPassword == null || userPassword.trim().length() == 0) {
-//				errorMsgs.add("請輸入密碼");
-//			} else if (!userPassword.equals(comfirmPassword)) {
-//				errorMsgs.add("兩次密碼需一致");
-//			} 
+			String userPassword = req.getParameter("userPassword");
+			String comfirmPassword = req.getParameter("comfirmpassword");
+			if (userPassword == null || userPassword.trim().length() == 0) {
+				errorMsgs.add("請輸入密碼");
+			} else if (!userPassword.equals(comfirmPassword)) {
+				errorMsgs.add("兩次密碼需一致");
+			} 
 
 			String userName = req.getParameter("userName");
 			String userNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
@@ -440,7 +440,7 @@ public class UserServlet extends HttpServlet {
 //			UserVO userVO = new UserVO();
 //			userVO.setUserId(userId);
 //			userVO.setUserEmail(userEmail);
-//			userVO.setUserPassword(userPassword);
+			userVO.setUserPassword(userPassword);
 			userVO.setUserName(userName);
 			userVO.setUserPhone(userPhone);
 			userVO.setUserIdentity(userIdentity);

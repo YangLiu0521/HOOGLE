@@ -236,16 +236,16 @@
 
                   <div class="form-group">
                     <h6>舊密碼</h6><br>
-                    <input type="password" class="form-control" placeholder="舊密碼" name="userPassword"
-                    >
+                    <input type="test" class="form-control" disabled placeholder="舊密碼" name=""
+                    value="<%=(userVO == null) ? "" : userVO.getUserPassword()%>">
                   </div>
                   <div class="form-group">
                     <h6>新密碼</h6><br>
-                    <input type="password" class="form-control" placeholder="">
+                    <input type="password" class="form-control" placeholder="請輸入新密碼" name="userPassword">
                   </div>
                   <div class="form-group">
                     <h6>密碼確認</h6><br>
-                    <input type="password" class="form-control" placeholder="">
+                    <input type="password" class="form-control" placeholder="再次確認新密碼" name="comfirmpassword">
                   </div>
                   <br>
                   <button type="submit" class="btn book-now-btn w-50">確認修改</button>
