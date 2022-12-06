@@ -172,7 +172,6 @@ public class CommendServlet extends HttpServlet {
 			if (str == null || (str.trim()).length() == 0) {
 				errorMsgs.add("請輸入訂單編號");
 			}
-
 			Integer ordId = null;
 			try {
 				ordId = Integer.valueOf(str);
@@ -183,31 +182,29 @@ public class CommendServlet extends HttpServlet {
 			Integer commendGrade = Integer.valueOf(req.getParameter("commendGrade"));
 			if(commendGrade == null) {
 				errorMsgs.add("評價等級請勿空白");
+			}else if(commendGrade > 0 && commendGrade < 6) {
+				commendGrade = Integer.valueOf(req.getParameter("commendGrade").trim());
+			}else {
+				errorMsgs.add("評價等級請填1-5");
 			}
 //			String str1 = req.getParameter("commendGrade");
 //			if (str1 == null || (str1.trim()).length() == 0) {
 //				errorMsgs.add("請輸入評價等級");
 //			}
-//			System.out.println(str1);
-//			
 //			Integer commendGrade = null;
 //			try {
 //				commendGrade = Integer.valueOf(str1);
 //			} catch (Exception e) {
 //				errorMsgs.add("評價等級格式不正確");
-//			}
-//			System.out.println(commendGrade);
-//			commendGrade = Integer.valueOf(req.getParameter("commendGrade").trim());
-			
+//			}			
 //			if (commendGrade == null) {
 //				errorMsgs.add("評價等級請勿空白");
 //			} else 
-				if (commendGrade > 0 && commendGrade < 6) {
-				commendGrade = Integer.valueOf(req.getParameter("commendGrade").trim());
-			} else {
-				errorMsgs.add("評價等級請輸入1-5");
-			}
-				System.out.println("====1=====");
+//				if (commendGrade > 0 && commendGrade < 6) {
+//				commendGrade = Integer.valueOf(req.getParameter("commendGrade").trim());
+//			} else {
+//				errorMsgs.add("評價等級請輸入1-5");
+//			}
 
 			String commendContent = req.getParameter("commendContent");
 			if (commendContent == null || commendContent.trim().length() == 0) {

@@ -75,7 +75,7 @@
 	<tr>
 		<td>評價等級:</td>
 		<td><input type="TEXT" name="commendGrade" size="45"
-			 value="${commendVO.commendGrade}" /></td>
+			 value="<%=commendVO == null? "" : commendVO.getCommendGrade()%>" /></td>
 	</tr>
 	<tr>
 		<td>評價內容:</td>
