@@ -27,21 +27,20 @@
 <!-- favicon -->
   <link rel="icon" href="favicon.ico" />
   <!-- bootstrap core CSS -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/datetimepicker/css/bootstrap.min.css">
   <!-- font awesome -->
-  <link href="css/all.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/datetimepicker/css/all.min.css" rel="stylesheet">
   <!-- owl carousel -->
-  <link href="css/owl.carousel.min.css" rel="stylesheet">
-  <link href="css/owl.theme.default.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/datetimepicker/css/owl.carousel.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/datetimepicker/css/owl.theme.default.min.css" rel="stylesheet">
   <!-- venobox css -->
-  <link rel="stylesheet" href="css/venobox.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/datetimepicker/css/venobox.css">
   <!-- datepicker css -->
-  <link rel="stylesheet" href="css/datepicker.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/datetimepicker/css/datepicker.min.css">
   <!-- custom styles for this template -->
-  <link href="css/custom.css" rel="stylesheet">
-  <link href="css/responsive.css" rel="stylesheet">
-  <link href="css/helper.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/memberCenter.css">
+  <link href="<%=request.getContextPath()%>/datetimepicker/css/custom.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/datetimepicker/css/responsive.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/datetimepicker/css/helper.css" rel="stylesheet">
 </head>
 <body>
 <!-- ================ Preloader ================ -->
@@ -325,22 +324,22 @@
   <!-- ================ MemberCenter page end ================ -->
   
   <!-- js files -->
-  <script src="js/jquery-3.5.1.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="<%=request.getContextPath()%>/datetimepicker/js/jquery-3.5.1.min.js"></script>
+  <script src="<%=request.getContextPath()%>/datetimepicker/js/bootstrap.bundle.min.js"></script>
   <!-- counter js -->
-  <script src="js/jquery-1.10.2.min.js"></script>
-  <script src="js/waypoints.min.js"></script>
-  <script src="js/jquery.counterup.min.js"></script>
+  <script src="<%=request.getContextPath()%>/datetimepicker/js/jquery-1.10.2.min.js"></script>
+  <script src="<%=request.getContextPath()%>/datetimepicker/js/waypoints.min.js"></script>
+  <script src="<%=request.getContextPath()%>/datetimepicker/js/jquery.counterup.min.js"></script>
   <!-- venobox js -->
-  <script src="js/venobox.min.js"></script>
+  <script src="<%=request.getContextPath()%>/datetimepicker/js/venobox.min.js"></script>
   <!-- owl carousel -->
-  <script src="js/owl.carousel.min.js"></script>
+  <script src="<%=request.getContextPath()%>/datetimepicker/js/owl.carousel.min.js"></script>
   <!-- portfolio js -->
-  <script src="js/jquery.mixitup.min.js"></script>
+  <script src="<%=request.getContextPath()%>/datetimepicker/js/jquery.mixitup.min.js"></script>
   <!-- datepicker js -->
-  <script src="js/datepicker.min.js"></script>
+  <script src="<%=request.getContextPath()%>/datetimepicker/js/datepicker.min.js"></script>
   <!-- script js -->
-  <script src="js/custom.js"></script>
+  <script src="<%=request.getContextPath()%>/datetimepicker/js/custom.js"></script>
   <script src="https://kit.fontawesome.com/4ce3b6b697.js" crossorigin="anonymous"></script>
   
 </body>
