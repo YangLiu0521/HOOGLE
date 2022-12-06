@@ -5,8 +5,9 @@
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-  OrdDetailVO orddetailVO = (OrdDetailVO) request.getAttribute("OrddetailVO"); //OrdServlet.java(Concroller), 存入req的ordVO物件
+//   OrdDetailVO orddetailVO = (OrdDetailVO) request.getAttribute("OrddetailVO"); //OrdServlet.java(Concroller), 存入req的ordVO物件
   OrdDetailService orddetailSvc = new OrdDetailService();
+//   List<OrdDetailVO> list = orddetailSvc.getOneOrd(Integer.valueOf(getInitParameter("OrddetailVO")));
   List<OrdDetailVO> list = orddetailSvc.getOneOrd(5002);
   pageContext.setAttribute("list",list);
 %>
