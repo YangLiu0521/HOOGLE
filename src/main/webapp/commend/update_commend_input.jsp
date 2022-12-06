@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="commend.model.*"%>
+<%@ page import="com.commend.model.*"%>
 
 <%
   CommendVO commendVO = (CommendVO) request.getAttribute("commendVO"); //CommendServlet.java (Concroller) 存入req的commendVO物件 (包括幫忙取出的commendVO, 也包括輸入資料錯誤時的commendVO物件)
@@ -73,7 +73,8 @@
 	</tr>
 	<tr>
 		<td>訂單編號:</td>
-		<td><input type="TEXT" name="ordId" size="45" value="${commendVO.ordId}" /></td>
+		<td><input type="TEXT" name="ordId" size="45" value="<%=commendVO.getOrdId() %>"></td>
+<!-- 		<input type="TEXT" name="ordId" size="45"/> ${commendVO.ordId}-->
 	</tr>
 	<tr>
 		<td>評價等級:</td>

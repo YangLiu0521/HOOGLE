@@ -66,13 +66,13 @@ h4 {
 		</li>
 
 		<jsp:useBean id="commendSvc" scope="page"
-			class="commend.model.CommendService"></jsp:useBean>
+			class="com.commend.model.CommendService"></jsp:useBean>
 
 				<li>
 					<FORM METHOD="post" ACTION="commend.do">
-						<b>輸入訂單編號：</b> <select size="1" name="ordId">
+						<b>輸入訂單編號：</b> <select size="1" name="commendAuto">
 							<c:forEach var="commendVO" items="${commendSvc.all}">
-								<option value="${commendVO.ordId}">${commendVO.ordId}
+								<option value="${commendVO.commendAuto}">${commendVO.ordId}
 							</c:forEach>
 						</select> <input type="hidden" name="action" value="getOne_For_Display">
 						<input type="submit" value="送出">

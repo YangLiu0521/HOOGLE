@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="commend.model.*"%>
+<%@ page import="com.commend.model.*"%>
 
 <%
 CommendService comservice = new CommendService();
@@ -84,7 +84,7 @@ th, td {
 				<td>${commendVO.commendDate}</td>
 				<td>
 					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/commend/CommendServlet"
+						ACTION="<%=request.getContextPath()%>/commend/commend.do"
 						style="margin-bottom: 0px;">
 						<input type="submit" value="修改"> <input type="hidden"
 							name="commendAuto" value="${commendVO.commendAuto}"> <input
@@ -93,7 +93,7 @@ th, td {
 				</td>
 				<td>
 					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/commend/CommendServlet"
+						ACTION="<%=request.getContextPath()%>/commend/commend.do"
 						style="margin-bottom: 0px;">
 						<input type="submit" value="刪除"> <input type="hidden"
 							name="commendAuto" value="${commendVO.commendAuto}"> <input
