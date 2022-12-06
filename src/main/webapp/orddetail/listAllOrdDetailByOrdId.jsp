@@ -6,6 +6,9 @@
 
 <%
   OrdDetailVO orddetailVO = (OrdDetailVO) request.getAttribute("OrddetailVO"); //OrdServlet.java(Concroller), 存入req的ordVO物件
+  OrdDetailService orddetailSvc = new OrdDetailService();
+  List<OrdDetailVO> list = orddetailSvc.getOneOrd(5002);
+  pageContext.setAttribute("list",list);
 %>
 
 <html>
@@ -66,7 +69,6 @@
 
 		<c:forEach var="orddetailVO" items="${list}" >	
 	<tr>
-		
 		<td>${orddetailVO.orddetailId}</td>
 		<td>${orddetailVO.ordId}</td>
 		<td>${orddetailVO.roomAuto}</td>
