@@ -2,17 +2,16 @@ package com.orddetail.controller;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.ord.model.OrdService;
-import com.ord.model.OrdVO;
 import com.orddetail.model.OrdDetailService;
 import com.orddetail.model.OrdDetailVO;
 
@@ -31,6 +30,7 @@ public class OrdDetailServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		HttpSession session = req.getSession();
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -41,12 +41,12 @@ public class OrdDetailServlet extends HttpServlet {
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			String str = req.getParameter("orddetailId");
 			if (str == null || (str.trim()).length() == 0) {
-				errorMsgs.put("orddetailID", "請輸入訂單編號");
+				errorMsgs.put("orddetailID", "請輸入訂單明細編號");
 //				errorMsgs.add("請輸入訂單編號");
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/orddetail/select_ord_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/orddetail/select_orddetail_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -55,12 +55,12 @@ public class OrdDetailServlet extends HttpServlet {
 			try {
 				orddetailId = Integer.valueOf(str);
 			} catch (Exception e) {
-				errorMsgs.put("orddetailId", "訂單編號格式不正確");
+				errorMsgs.put("orddetailId", "訂單明細編號格式不正確");
 //				errorMsgs.add("訂單編號格式不正確");
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/orddetail/select_ord_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/orddetail/select_orddetail_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -74,7 +74,7 @@ public class OrdDetailServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/orddetail/select_ord_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/orddetail/select_orddetail_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -86,7 +86,63 @@ public class OrdDetailServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
-		if ("getOne_For_Update".equals(action)) { // 來自listAllOrd.jsp的請求
+		if ("OrdId_getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
+
+			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+//			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+			String str = req.getParameter("ordId");
+			if (str == null || (str.trim()).length() == 0) {
+				errorMsgs.put("ordId", "請輸入訂單編號");
+//				errorMsgs.add("請輸入訂單編號");
+			}
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/orddetail/select_orddetail_page.jsp");
+				failureView.forward(req, res);
+				return;// 程式中斷
+			}
+
+			Integer ordId = null;
+			try {
+				ordId = Integer.valueOf(str);
+			} catch (Exception e) {
+				errorMsgs.put("ordId", "訂單編號格式不正確");
+				//errorMsgs.add("訂單編號格式不正確");
+			}
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/orddetail/select_orddetail_page.jsp");
+				failureView.forward(req, res);
+				return;// 程式中斷
+			}
+
+			/*************************** 2.開始查詢資料 *****************************************/
+			OrdDetailService orddetailSvc = new OrdDetailService();
+			List<OrdDetailVO> orddetailVO = orddetailSvc.getOneOrd(ordId);
+			if (ordId == null) {
+				errorMsgs.put("ordId", "查無資料");
+//				errorMsgs.add("查無資料");
+			}
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/orddetail/select_orddetail_page.jsp");
+				failureView.forward(req, res);
+				return;// 程式中斷
+			}
+
+			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+			
+			session.setAttribute("orddetailVO", orddetailVO); // 資料庫取出的orddetailVO物件,存入req
+			
+			String url = "/orddetail/listAllOrdDetailByOrdId.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneOrdDetail.jsp
+			successView.forward(req, res);
+		}
+		
+		if ("getOne_For_Update".equals(action)) { // 來自listAllOrddetail.jsp的請求
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -219,8 +275,8 @@ public class OrdDetailServlet extends HttpServlet {
 				Integer orddetailId = Integer.valueOf(req.getParameter("orddetailId"));
 				
 				/***************************2.開始刪除資料***************************************/
-				OrdService ordSvc = new OrdService();
-				ordSvc.deleteOrd(orddetailId);
+				OrdDetailService orddetailSvc = new OrdDetailService();
+				orddetailSvc.deleteOrddetail(orddetailId);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
 				String url = "/orddetail/listAllOrdDetail.jsp";

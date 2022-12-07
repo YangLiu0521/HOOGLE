@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%@ page import="com.orddetail.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
@@ -62,6 +63,7 @@
 		<th>房間編號</th>
 		<th>訂房房數</th>
 	</tr>
+
 	<tr>
 		<td>${orddetailVO.orddetailId}</td>
 		<td>${orddetailVO.ordId}</td>

@@ -1,49 +1,66 @@
 package com.commend.model;
 
-import java.util.*;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.sql.*;
+import javax.sql.DataSource;
 
 public class CommendDAO implements CommendDAO_interface {
 
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://localhost:3306/HOOGLE?serverTimezone=Asia/Taipei";
+	String userid = "root";
+	String passwd = "password";
+
 	private static DataSource ds = null;
 	static {
-		try {
+		try {			
 			Context ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/HOOGLEDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-	}																	
+	}
+
 	private static final String INSERT_STMT = "INSERT INTO commend (ordId,commendGrade,commendContent,commendDate) VALUES (?, ?, ?, ?)";
-	private static final String UPDATE = "UPDATE commend set commendGrade=?, commendContent=?, commendDate=? where commendAuto = ?";
-	private static final String GET_ONE_STMT = "SELECT * FROM commend where commendAuto = ?";
-	private static final String GET_ALL_STMT = "SELECT * FROM commend";
+	private static final String GET_ALL_STMT = "SELECT commendAuto,ordId,commendGrade,commendContent,commendDate FROM commend order by commendAuto";
+	private static final String GET_ONE_STMT = "SELECT commendAuto,ordId,commendGrade,commendContent,commendDate FROM commend where commendAuto = ?";
 	private static final String DELETE = "DELETE FROM commend where commendAuto = ?";
+	private static final String UPDATE = "UPDATE commend set ordId=?, commendGrade=?, commendContent=?, commendDate=? where commendAuto=?";
 
 	@Override
-	public void insert(CommendVO CommendVO) {
+	public void insert(CommendVO commendVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
-
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setInt(1, CommendVO.getOrdId());
-			pstmt.setInt(2, CommendVO.getCommendGrade());
-			pstmt.setString(3, CommendVO.getCommendContent());
-			pstmt.setDate(4, CommendVO.getCommendDate());
+
+			pstmt.setInt(1, commendVO.getOrdId());
+			pstmt.setInt(2, commendVO.getCommendGrade());
+			pstmt.setString(3, commendVO.getCommendContent());
+			pstmt.setDate(4, commendVO.getCommendDate());
 
 			pstmt.executeUpdate();
-		} catch (SQLException se) {
+		} 
+//		catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		} 
+		catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -63,27 +80,31 @@ public class CommendDAO implements CommendDAO_interface {
 	}
 
 	@Override
-	public void update(CommendVO CommendVO) {
+	public void update(CommendVO commendVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
-
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setInt(1, CommendVO.getCommendGrade());
-			pstmt.setString(2, CommendVO.getCommendContent());
-			pstmt.setDate(3, CommendVO.getCommendDate());
-			pstmt.setInt(4, CommendVO.getCommendAuto());
+			pstmt.setInt(1, commendVO.getOrdId());
+			pstmt.setInt(2, commendVO.getCommendGrade());
+			pstmt.setString(3, commendVO.getCommendContent());
+			pstmt.setDate(4, commendVO.getCommendDate());
 
 			pstmt.executeUpdate();
 
-			// Handle any SQL errors
-		} catch (SQLException se) {
+		} 
+//		catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		} 
+		catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -100,7 +121,6 @@ public class CommendDAO implements CommendDAO_interface {
 				}
 			}
 		}
-
 	}
 
 	@Override
@@ -110,7 +130,8 @@ public class CommendDAO implements CommendDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
@@ -118,10 +139,13 @@ public class CommendDAO implements CommendDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (SQLException se) {
+		} 
+//		catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		} 
+		catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -138,19 +162,18 @@ public class CommendDAO implements CommendDAO_interface {
 				}
 			}
 		}
-
 	}
 
 	@Override
 	public CommendVO findByPrimaryKey(Integer commendAuto) {
-		
-		CommendVO CommendVO = null;
+		CommendVO commendVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		try {
 
+		try {
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
@@ -159,20 +182,22 @@ public class CommendDAO implements CommendDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo 也稱為 Domain objects
-				CommendVO = new CommendVO();
-				CommendVO.setCommendAuto(rs.getInt("commendAuto"));
-				CommendVO.setOrdId(rs.getInt("ordId"));
-				CommendVO.setCommendGrade(rs.getInt("commendGrade"));
-				CommendVO.setCommendContent(rs.getString("commendContent"));
-				CommendVO.setCommendDate(rs.getDate("commendDate"));
+				commendVO = new CommendVO();
+				commendVO.setCommendAuto(rs.getInt("commendAuto"));
+				commendVO.setOrdId(rs.getInt("ordId"));
+				commendVO.setCommendGrade(rs.getInt("commendGrade"));
+				commendVO.setCommendContent(rs.getString("commendContent"));
+				commendVO.setCommendDate(rs.getDate("commendDate"));
+
 			}
 
-			// Handle any driver errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
+		} 
+//		catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		} 
+		catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -196,42 +221,43 @@ public class CommendDAO implements CommendDAO_interface {
 				}
 			}
 		}
-		
-		return CommendVO;
+		return commendVO;
 	}
 
 	@Override
 	public List<CommendVO> getAll() {
-		
 		List<CommendVO> list = new ArrayList<CommendVO>();
-		CommendVO CommendVO = null;
-		
+		CommendVO commendVO = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		try {
 
+		try {
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO 也稱為 Domain objects
-				CommendVO = new CommendVO();
-				CommendVO.setCommendAuto(rs.getInt("commendAuto"));
-				CommendVO.setOrdId(rs.getInt("ordId"));
-				CommendVO.setCommendGrade(rs.getInt("commendGrade"));
-				CommendVO.setCommendContent(rs.getString("commendContent"));
-				CommendVO.setCommendDate(rs.getDate("commendDate"));
-				list.add(CommendVO); // Store the row in the list
+				commendVO = new CommendVO();
+				commendVO.setCommendAuto(rs.getInt("commendAuto"));
+				commendVO.setOrdId(rs.getInt("ordId"));
+				commendVO.setCommendGrade(rs.getInt("commendGrade"));
+				commendVO.setCommendContent(rs.getString("commendContent"));
+				commendVO.setCommendDate(rs.getDate("commendDate"));
+				list.add(commendVO);
+
 			}
 
-			// Handle any driver errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
+		} 
+//		catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		} 
+		catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -257,4 +283,5 @@ public class CommendDAO implements CommendDAO_interface {
 		}
 		return list;
 	}
+
 }
