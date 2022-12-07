@@ -6,6 +6,7 @@ public class OrdDetailVO implements java.io.Serializable{
 	private Integer ordId;
 	private Integer roomAuto;
 	private Integer roomNumber;
+	
 	public Integer getOrddetailId() {
 		return orddetailId;
 	}

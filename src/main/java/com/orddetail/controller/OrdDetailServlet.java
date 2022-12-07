@@ -2,17 +2,16 @@ package com.orddetail.controller;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.ord.model.OrdService;
-import com.ord.model.OrdVO;
 import com.orddetail.model.OrdDetailService;
 import com.orddetail.model.OrdDetailVO;
 
@@ -31,6 +30,7 @@ public class OrdDetailServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		HttpSession session = req.getSession();
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -110,7 +110,7 @@ public class OrdDetailServlet extends HttpServlet {
 				ordId = Integer.valueOf(str);
 			} catch (Exception e) {
 				errorMsgs.put("ordId", "訂單編號格式不正確");
-//				errorMsgs.add("訂單編號格式不正確");
+				//errorMsgs.add("訂單編號格式不正確");
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
@@ -121,7 +121,7 @@ public class OrdDetailServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 *****************************************/
 			OrdDetailService orddetailSvc = new OrdDetailService();
-			OrdDetailVO orddetailVO = orddetailSvc.getOneOrd(ordId);
+			List<OrdDetailVO> orddetailVO = orddetailSvc.getOneOrd(ordId);
 			if (ordId == null) {
 				errorMsgs.put("ordId", "查無資料");
 //				errorMsgs.add("查無資料");
@@ -134,13 +134,15 @@ public class OrdDetailServlet extends HttpServlet {
 			}
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("orddetailVO", orddetailVO); // 資料庫取出的ordVO物件,存入req
-			String url = "/orddetail/listOneOrdDetail.jsp";
+			
+			session.setAttribute("orddetailVO", orddetailVO); // 資料庫取出的orddetailVO物件,存入req
+			
+			String url = "/orddetail/listAllOrdDetailByOrdId.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneOrdDetail.jsp
 			successView.forward(req, res);
 		}
 		
-		if ("getOne_For_Update".equals(action)) { // 來自listAllOrd.jsp的請求
+		if ("getOne_For_Update".equals(action)) { // 來自listAllOrddetail.jsp的請求
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
