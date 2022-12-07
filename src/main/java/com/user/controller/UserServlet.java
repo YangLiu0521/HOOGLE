@@ -201,7 +201,7 @@ public class UserServlet extends HttpServlet {
 
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("userVO", userVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/user/RegisterForUser.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/user/registerForUser.jsp");
 					failureView.forward(req, res);
 					return;
 //					JSONObject jsonObject = new JSONObject();
@@ -231,7 +231,7 @@ public class UserServlet extends HttpServlet {
 //						   "</script>";
 				
 				// 新增完成，準備轉交
-				String url = "/user/LoginForUser.jsp";
+				String url = "/user/loginForUser.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交到旅客總表listAllUser.jsp
 				successView.forward(req, res);
 				// 回傳 json
@@ -305,7 +305,7 @@ public class UserServlet extends HttpServlet {
 				// 確認資料有誤，印出錯誤資料並跳回原頁
 				if (!errorMsgs.isEmpty()) {
 //					session.setAttribute("userVO", userVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/user/LoginForUser.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/user/loginForUser.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -328,7 +328,7 @@ public class UserServlet extends HttpServlet {
 				
 			}catch(Exception e) {
 //				errorMsgs.add(":" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/user/LoginForUser.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/user/loginForUser.jsp");
 				failureView.forward(req, res);
 			}
 			
@@ -474,6 +474,60 @@ public class UserServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+// ===================================================忘記密碼=========================================================//
+		if("forgotPassword".equals(action)) {
+			System.out.println("### into forgotPassword ###");
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				
+				String userEmail = req.getParameter("userEmail");
+				String userEmailReg = "^[_a-z0-9-]+([.][_a-z0-9-]+)*@[a-z0-9-]+([.][a-z0-9-]+)*$";
+				if (userEmail == null || userEmail.trim().length() == 0) {
+					errorMsgs.add("請填寫信箱");
+				} else if (!userEmail.trim().matches(userEmailReg)) {
+					errorMsgs.add("請輸入正確信箱格式");
+				}
+				
+				System.out.println(userEmail);
+				
+				UserService userSvc = new UserService();
+				UserVO userVO = userSvc.findByUserEmail(userEmail);
+				if(userVO == null) {
+					errorMsgs.add("Your userEmail userVO != null");
+				}
+				
+				if(userEmail.equals(userVO.getUserEmail())) {
+					errorMsgs.add("非註冊信箱");
+				}
+				
+				// 確認資料有誤，印出錯誤資料並跳回原頁
+				if (!errorMsgs.isEmpty()) {
+					session.setAttribute("userVO", userVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/user/loginForUser.jsp"); //錯誤返回登入頁面		
+					failureView.forward(req, res);
+					return;
+				}
+				
+				
+				
+			}catch(Exception e) {
+				e.getStackTrace();
+				errorMsgs.add("忘記密碼錯誤" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/user/loginForUser.jsp");
+				failureView.forward(req, res);
+			}
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+		
 
 // ===================================================刪除資料=========================================================//
 		if ("delete".equals(action)) {
