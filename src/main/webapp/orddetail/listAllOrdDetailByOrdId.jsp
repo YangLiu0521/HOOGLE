@@ -5,11 +5,11 @@
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-//   OrdDetailVO orddetailVO = (OrdDetailVO) request.getAttribute("OrddetailVO"); //OrdServlet.java(Concroller), 存入req的ordVO物件
-  OrdDetailService orddetailSvc = new OrdDetailService();
+//   OrdDetailVO orddetailVO = (OrdDetailVO) request.getSession().getAttribute("OrddetailVO"); //OrdServlet.java(Concroller), 存入req的orddetailVO物件
+//   OrdDetailService orddetailSvc = new OrdDetailService();
 //   List<OrdDetailVO> list = orddetailSvc.getOneOrd(Integer.valueOf(getInitParameter("OrddetailVO")));
-  List<OrdDetailVO> list = orddetailSvc.getOneOrd(5002);
-  pageContext.setAttribute("list",list);
+//   List<OrdDetailVO> list = orddetailSvc.getOneOrd(5002);
+//   pageContext.setAttribute("list",list);
 %>
 
 <html>
@@ -68,7 +68,7 @@
 		<th>訂房房數</th>
 	</tr>
 
-		<c:forEach var="orddetailVO" items="${list}" >	
+		<c:forEach var="orddetailVO" items="${orddetailVO}" >	
 	<tr>
 		<td>${orddetailVO.orddetailId}</td>
 		<td>${orddetailVO.ordId}</td>

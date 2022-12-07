@@ -7,13 +7,11 @@ import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.ord.model.OrdService;
-import com.ord.model.OrdVO;
 import com.orddetail.model.OrdDetailService;
 import com.orddetail.model.OrdDetailVO;
 
@@ -32,6 +30,7 @@ public class OrdDetailServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		HttpSession session = req.getSession();
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -136,7 +135,8 @@ public class OrdDetailServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			
-			req.setAttribute("orddetailVO", orddetailVO); // 資料庫取出的orddetailVO物件,存入req
+			session.setAttribute("orddetailVO", orddetailVO); // 資料庫取出的orddetailVO物件,存入req
+			
 			String url = "/orddetail/listAllOrdDetailByOrdId.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneOrdDetail.jsp
 			successView.forward(req, res);
