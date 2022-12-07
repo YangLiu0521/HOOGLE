@@ -52,6 +52,10 @@ public class OrdDetailService {
 		return dao.findByPrimaryKey(orddetailId);
 	}
 
+	public List<OrdDetailVO> getOneOrd(Integer ordId) {
+		return dao.findByOrdId(ordId);
+	}
+
 	public List<OrdDetailVO> getAll() {
 		return dao.getAll();
 	}

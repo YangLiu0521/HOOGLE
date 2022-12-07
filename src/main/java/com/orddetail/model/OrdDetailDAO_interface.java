@@ -7,6 +7,7 @@ public interface OrdDetailDAO_interface {
 	public void insert(OrdDetailVO orddetailVO);
 	public void update(OrdDetailVO orddetailVO);
 	public void delete(Integer orddetailId);
+	public List<OrdDetailVO> findByOrdId(Integer ordId);
 	public OrdDetailVO findByPrimaryKey(Integer orddetailId);
 	public List<OrdDetailVO> getAll();
 
