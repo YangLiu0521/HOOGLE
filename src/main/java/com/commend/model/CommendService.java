@@ -2,6 +2,9 @@ package com.commend.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.hibernate.query.criteria.internal.expression.function.CurrentDateFunction;
 
 public class CommendService {
 
@@ -32,13 +35,13 @@ public class CommendService {
 
 		CommendVO commendVO = new CommendVO();
 		
-//		commendVO.setCommendAuto(commendAuto);
+		commendVO.setCommendAuto(commendAuto);
 		commendVO.setOrdId(ordId);
 		commendVO.setCommendGrade(commendGrade);
 		commendVO.setCommendContent(commendContent);
 		commendVO.setCommendDate(commendDate);
 		dao.update(commendVO);
-								//commendAuto?
+								
 		return dao.findByPrimaryKey(commendAuto);
 	}
 	
@@ -56,5 +59,11 @@ public class CommendService {
 
 	public List<CommendVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public List<CommendVO> findByOrdId(Integer ordId){
+		return dao.getAll().stream()
+			    .filter(e -> e.getOrdId().equals(ordId))
+			    .collect(Collectors.toList());
 	}
 }

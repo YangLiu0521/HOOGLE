@@ -31,8 +31,9 @@ public class UserService {
 	}
 
 	// 預留給 Struts 2 或 Spring MVC 用
-	public void addUser(UserVO userVO) {
+	public UserVO addUser(UserVO userVO) {
 		dao.insert(userVO);
+		return userVO;
 	}
 
 	public UserVO updateUser(Integer userId, String userEmail, String userPassword, String userName, String userPhone,

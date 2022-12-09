@@ -12,7 +12,7 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>LoginForUser</title>
+<title>loginForUser</title>
 
 <!-- favicon -->
 <!-- <link rel="icon" href="favicon.ico" /> -->
@@ -64,8 +64,8 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 				<div class="col-lg-6 offset-lg-3">
 					<!-- login box -->
 					<div class="login-box">
-						<form class="form-style-1 shadow p-30" METHOD="post" ACTION="user.do" name="form1">
-							<h3 class="text-center">登入系統</h3>
+						<form class="form-style-1 shadow p-30" METHOD="post" ACTION="UserServlet" name="form1">
+							<h3 class="text-center">旅客登入系統</h3>
 
 							<c:if test="${not empty errorMsgs}">
 								<font style="color: red">請修正以下錯誤:</font>
@@ -87,12 +87,12 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 								<input type="password" class="form-control" placeholder="密碼" name="userPassword"
 								value="<%=(userVO == null) ? "" : userVO.getUserPassword()%>"
 								>
-							</div>
+							</div>		
 							<div class="row">
 								<div class="col-lg-6 col-md-6 col-sm-6">
 									<div class="form-group">
 										<div class="forgot-password">
-											<a href="./forgotPassword.html" class="text-danger">忘記密碼</a>
+											<a href="<%=request.getContextPath()%>/user/forgotPassword.jsp" class="text-danger">忘記密碼</a>
 										</div>
 									</div>
 								</div>
@@ -102,7 +102,7 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 								<input type="hidden" name="action" value="loginForUser"> 
 							</div>
 							<p class="mb-0">
-								還不是會員？ <a href="./registerForWho.html">註冊專區</a>
+								還不是會員？ <a href="<%=request.getContextPath()%>/user/registerForUser.jsp">註冊專區</a>
 							</p>
 						</form>
 					</div>
@@ -112,6 +112,7 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 		</div>
 	</div>
 	<!-- ================ Login page end ================ -->
+	
 
 	<!-- js files -->
 	<script src="<%=request.getContextPath()%>/datetimepicker/js/jquery-3.5.1.min.js"></script>
