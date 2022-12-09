@@ -1,9 +1,9 @@
 package com.service.model;
 
+
 public class ServiceVO implements java.io.Serializable{
 	private Integer serviceId;
 	private String serviceName;
-	
 	public Integer getServiceId() {
 		return serviceId;
 	}
@@ -16,6 +16,7 @@ public class ServiceVO implements java.io.Serializable{
 	public void setServiceName(String serviceName) {
 		this.serviceName = serviceName;
 	}
+	
 	
 	
 }
