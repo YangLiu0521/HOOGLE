@@ -12,7 +12,7 @@ AdministratorVO administratorVO = (AdministratorVO) request.getAttribute("admini
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HOOGLE</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/admin.css">
 
 </head>
 <body id="body-pd">
@@ -155,7 +155,7 @@ AdministratorVO administratorVO = (AdministratorVO) request.getAttribute("admini
 	</FORM>
 
 	<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
-	<script src="<%=request.getContextPath()%>/js/admin.js"></script>
+	<script src="<%=request.getContextPath()%>/js/admin/admin.js"></script>
 
 </body>
 </html>
