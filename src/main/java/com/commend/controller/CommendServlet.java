@@ -84,7 +84,8 @@ public class CommendServlet extends HttpServlet {
 
 		if ("getOne_For_Update".equals(action)) { // 來自listAllOrd.jsp的請求
 
-			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+//			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 ****************************************/
@@ -95,11 +96,13 @@ public class CommendServlet extends HttpServlet {
 			CommendVO commendVO = commendSvc.getOneCommend(commendAuto);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-			String param = "?commendAuto=" + commendVO.getCommendAuto() + "&ordId=" + commendVO.getOrdId()
-					+ "&commendGrade=" + commendVO.getCommendGrade() + "&commendContent="
-					+ commendVO.getCommendContent() + "&commnedDate=" + commendVO.getCommendDate();
+//			String param = "?commendAuto=" + commendVO.getCommendAuto() + "&ordId=" + commendVO.getOrdId()
+//					+ "&commendGrade=" + commendVO.getCommendGrade() + "&commendContent="
+//					+ commendVO.getCommendContent() + "&commnedDate=" + commendVO.getCommendDate();
 
-			String url = "/commend/update_input.jsp" + param;
+			req.setAttribute("commendVO", commendVO);
+
+			String url = "/commend/update_commend_input.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_ord_input.jsp
 			successView.forward(req, res);
 		}
@@ -129,9 +132,17 @@ public class CommendServlet extends HttpServlet {
 			String commendContent = req.getParameter("commendContent");
 			if (commendContent == null || commendContent.trim().length() == 0) {
 				errorMsgs.add("請填寫評論");
+			} else if (commendContent.trim().length() > 500) {
+				errorMsgs.add("評價內容500字以內");
 			}
 
 			java.sql.Date commendDate = null;
+			try {
+				commendDate = java.sql.Date.valueOf(req.getParameter("commendDate").trim());
+			} catch (IllegalArgumentException e) {
+//				errorMsgs.put("commendDate","請輸入日期");
+				errorMsgs.add("請輸入日期");
+			}
 
 			CommendVO commendVO = new CommendVO();
 			commendVO.setCommendAuto(commendAuto);
@@ -158,8 +169,6 @@ public class CommendServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
-		
-		
 		if ("insert".equals(action)) { // 來自addCommend.jsp的請求
 
 //			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
@@ -167,11 +176,17 @@ public class CommendServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+			
+			CommendService commendSvc = new CommendService();
 
 			String str = req.getParameter("ordId");
+//			Integer ordId = Integer.valueOf(req.getParameter("ordId").trim());
 			if (str == null || (str.trim()).length() == 0) {
 				errorMsgs.add("請輸入訂單編號");
 			}
+//			else if(commendSvc.findByOrdId(str).size() > 0) {
+//				errorMsgs.add("訂單編號不可重複");
+//			}
 			Integer ordId = null;
 			try {
 				ordId = Integer.valueOf(str);
@@ -179,37 +194,23 @@ public class CommendServlet extends HttpServlet {
 				errorMsgs.add("訂單編號格式不正確");
 			}
 			
-			Integer commendGrade = Integer.valueOf(req.getParameter("commendGrade"));
-			if(commendGrade == null) {
+			String gradeStr = req.getParameter("commendGrade");
+			Integer commendGrade = null;
+			if (gradeStr == null || gradeStr.isEmpty()) {
 				errorMsgs.add("評價等級請勿空白");
-			}else if(commendGrade > 0 && commendGrade < 6) {
-				commendGrade = Integer.valueOf(req.getParameter("commendGrade").trim());
-			}else {
-				errorMsgs.add("評價等級請填1-5");
+			} else {
+				commendGrade = Integer.valueOf(gradeStr);
+				if (!(commendGrade > 0 && commendGrade < 6)) {
+					errorMsgs.add("評價等級請填1-5");
+				}
 			}
-//			String str1 = req.getParameter("commendGrade");
-//			if (str1 == null || (str1.trim()).length() == 0) {
-//				errorMsgs.add("請輸入評價等級");
-//			}
-//			Integer commendGrade = null;
-//			try {
-//				commendGrade = Integer.valueOf(str1);
-//			} catch (Exception e) {
-//				errorMsgs.add("評價等級格式不正確");
-//			}			
-//			if (commendGrade == null) {
-//				errorMsgs.add("評價等級請勿空白");
-//			} else 
-//				if (commendGrade > 0 && commendGrade < 6) {
-//				commendGrade = Integer.valueOf(req.getParameter("commendGrade").trim());
-//			} else {
-//				errorMsgs.add("評價等級請輸入1-5");
-//			}
 
 			String commendContent = req.getParameter("commendContent");
 			if (commendContent == null || commendContent.trim().length() == 0) {
 //				errorMsgs.put("評價內容", "請勿空白");
 				errorMsgs.add("評價內容請勿空白");
+			} else if (commendContent.trim().length() > 500) {
+				errorMsgs.add("評價內容500字以內");
 			}
 
 			java.sql.Date commendDate = null;
@@ -232,7 +233,7 @@ public class CommendServlet extends HttpServlet {
 			}
 
 			// 開始新增資料
-			CommendService commendSvc = new CommendService();
+			commendSvc = new CommendService();
 			commendVO = commendSvc.addCommend(ordId, commendGrade, commendContent, commendDate);
 
 			// 新增完成，準備轉交
@@ -240,9 +241,7 @@ public class CommendServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交到旅客總表listAllCommend.jsp
 			successView.forward(req, res);
 		}
-		
-		
-		
+
 		if ("delete".equals(action)) { // 來自listAllCommend.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();
