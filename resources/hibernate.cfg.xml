@@ -14,7 +14,7 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.hbm2ddl.auto">validate</property>
 
-		<mapping class="model.CustomerBean" />
-		<mapping class="model.ProductBean" />
+		<mapping class="com.ordHibernate.model.OrdBean" />
+		
     </session-factory>
 </hibernate-configuration>
