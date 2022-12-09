@@ -168,15 +168,7 @@
           </aside>
         </div>
         
-		<c:if test="${not empty errorMsgs}">
-					<div>
-						<ul>
-							<c:forEach var="message" items="${errorMsgs}">
-								<li style="color: red">${message}</li>
-							</c:forEach>
-						</ul>
-					</div>
-				</c:if> 
+		
         
         
         
@@ -193,7 +185,7 @@
                     aria-controls="tab2" aria-selected="false">密碼修改</a> </li>
               </ul>
 			
-			<form action="user.do" method="POST">
+			<form action="UserServlet" method="POST">
 <!-- 			<input type="hidden" name="action" value="update"> -->
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active p-15" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
@@ -241,7 +233,8 @@
                   </div>
                   <div class="form-group">
                     <h6>新密碼</h6><br>
-                    <input type="password" class="form-control" placeholder="請輸入新密碼" name="userPassword">
+                    <input type="password" class="form-control" placeholder="請輸入新密碼" name="userPassword"
+                    value="<%=(userVO == null) ? "" : userVO.getUserPassword()%>">
                   </div>
                   <div class="form-group">
                     <h6>密碼確認</h6><br>

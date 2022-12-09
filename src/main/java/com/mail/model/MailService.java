@@ -1,6 +1,10 @@
 package com.mail.model;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Properties;
+import java.util.Set;
+
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -23,10 +27,7 @@ public class MailService {
 			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 			props.put("mail.smtp.auth", "true");
 			props.put("mail.smtp.port", "465");
-			
-
-			// ●設定 gmail 的帳號 & 密碼 (將藉由你的Gmail來傳送Email)
-			// ●須將myGmail的【安全性較低的應用程式存取權】打開
+		
 
 			final String myGmail = "tibameaga1013@gmail.com";
 			final String myGmail_password = "knuptqwapweademo";
@@ -54,18 +55,52 @@ public class MailService {
 
 	}
 
-	public static void main(String[] args) {
-		// 自訂收件地址
-		String to = "yang521521521@gmail.com";
+	public String genAuthCode() {
 
-		String subject = "yang還敢搞R";
+//		System.out.print("\n" + "print GenAuthCode :");
+		String authCode = "";
 
-		String ch_name = "peter1";
-		String passRandom = "111";
-		String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)";
+		Set<Character> set1 = new HashSet<>();
+		while (set1.size() != 6) {
+			int r = (int) (Math.random() * 123) + 47;
+			if (r < 48) {
 
-		MailService mailService = new MailService();
-		mailService.sendMail(to, subject, messageText);
+			} else if (r < 58) {
+				set1.add((char)r);
+			}
+			if (r < 65) {
 
+			} else if (r < 91) {
+				set1.add((char)r);
+			} else if (r < 97) {
+
+			} else if (r < 123) {
+				set1.add((char)r);
+			}
+		}
+		Iterator<Character> it = set1.iterator();
+		while (it.hasNext()) {
+			authCode += it.next();
+		}
+		return authCode;
 	}
+	
+	
+	
+	
+	
+//	public static void main(String[] args) {
+//		// 自訂收件地址
+//		String to = "yang521521521@gmail.com";
+//
+//		String subject = "yang還敢搞R";
+//
+//		String ch_name = "peter1";
+//		String passRandom = "111";
+//		String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)";
+//
+//		MailService mailService = new MailService();
+//		mailService.sendMail(to, subject, messageText);
+//
+//	}
 }

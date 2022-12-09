@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.user.model.*"%>
+<%
+UserVO userVO = (UserVO) request.getAttribute("userVO");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,19 +78,31 @@
 				<div class="col-lg-6 offset-lg-3">
 					<!-- login box -->
 					<div class="login-box">
-						<form class="form-style-1 shadow p-30" action="user.do" method="POST">
+						<form class="form-style-1 shadow p-30" action="UserServlet"
+							method="POST">
 							<h3 class="text-center">忘記密碼</h3>
 							<br>
+
 							<div class="form-group">
 								<div class="input-group mb-3">
-									<input type="email" class="form-control" placeholder="Email">
+									<input type="email" class="form-control" placeholder="Email"
+										name="userEmail"
+										value="<%=(userVO == null) ? "" : userVO.getUserEmail()%>">
+
 									<div class="input-group-append">
 										<div class="input-group-text">
 											<span class="fas fa-envelope"></span>
 										</div>
 									</div>
 								</div>
-
+								<c:if test="${not empty errorMsgs}">
+									<!-- 								<font style="color: red">請修正以下錯誤:</font> -->
+									<ul>
+										<c:forEach var="message" items="${errorMsgs}">
+											<li style="color: red">${message}</li>
+										</c:forEach>
+									</ul>
+								</c:if>
 
 								<div class="form-group">
 									<button type="submit" class="btn-style-1 w-100">發送驗證信</button>
