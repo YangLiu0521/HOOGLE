@@ -63,7 +63,7 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 				<div class="col-lg-6 offset-lg-3">
 					<!-- register box -->
 					<div class="login-box">
-						<form class="form-style-1 shadow p-30" METHOD="post" ACTION="user.do" name="form1"> 
+						<form class="form-style-1 shadow p-30" METHOD="post" ACTION="UserServlet" name="form1"> 
 							<p>還沒有帳號嗎？立即註冊吧！</p>
 
 							
