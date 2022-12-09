@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/java?serverTimezone=Asia/Taipei</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/HOOGLE?serverTimezone=Asia/Taipei</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">password</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
@@ -14,7 +14,6 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.hbm2ddl.auto">validate</property>
 
-		<mapping class="model.CustomerBean" />
-		<mapping class="model.ProductBean" />
+		<mapping class="com.ordHibernate.model.OrdBean" />
     </session-factory>
 </hibernate-configuration>

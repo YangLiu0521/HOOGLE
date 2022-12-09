@@ -9,9 +9,9 @@ import org.hibernate.Transaction;
 
 import model.hibernate.HibernateUtil;
 
-public class OrdServiceHibernate {
+public class OrdService {
 	private OrdDAOHibernate_interface OrdDao;
-	public OrdServiceHibernate(OrdDAOHibernate_interface OrdDao) {
+	public OrdService(OrdDAOHibernate_interface OrdDao) {
 		super();
 		this.OrdDao = OrdDao;
 	}	
@@ -20,7 +20,7 @@ public class OrdServiceHibernate {
 			Session session = sessionFactory.getCurrentSession();
 			Transaction transaction = session.beginTransaction();
 
-			OrdServiceHibernate ordService = new OrdServiceHibernate(new OrdDAOHibernate(sessionFactory));
+			OrdService ordService = new OrdService(new OrdDAOHibernate(sessionFactory));
 			
 			
 			transaction.commit();
