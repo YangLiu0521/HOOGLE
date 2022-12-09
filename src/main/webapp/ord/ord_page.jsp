@@ -20,20 +20,20 @@
     <!-- favicon -->
     <link rel="icon" href="favicon.ico" />
     <!-- bootstrap core CSS -->
-    <link rel="stylesheet" href="/HOOGLE/datetimepicker/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/HOOGLE/css/bootstrap.min.css" />
     <!-- font awesome -->
-    <link href="/HOOGLE/datetimepicker/css/all.min.css" rel="stylesheet" />
+    <link href="/HOOGLE/css/all.min.css" rel="stylesheet" />
     <!-- owl carousel -->
-    <link href="/HOOGLE/datetimepicker/css/owl.carousel.min.css" rel="stylesheet" />
-    <link href="/HOOGLE/datetimepicker/css/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="/HOOGLE/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="/HOOGLE/css/owl.theme.default.min.css" rel="stylesheet" />
     <!-- venobox css -->
-    <link rel="stylesheet" href="/HOOGLE/datetimepicker/css/venobox.css" />
+    <link rel="stylesheet" href="/HOOGLE/css/venobox.css" />
     <!-- datepicker css -->
-    <link rel="stylesheet" href="/HOOGLE/datetimepicker/css/datepicker.min.css" />
+    <link rel="stylesheet" href="/HOOGLE/css/datepicker.min.css" />
     <!-- custom styles for this template -->
-    <link href="/HOOGLE/datetimepicker/css/custom.css" rel="stylesheet" />
-    <link href="/HOOGLE/datetimepicker/css/responsive.css" rel="stylesheet" />
-    <link href="/HOOGLE/datetimepicker/css/helper.css" rel="stylesheet" />
+    <link href="/HOOGLE/css/custom.css" rel="stylesheet" />
+    <link href="/HOOGLE/css/responsive.css" rel="stylesheet" />
+    <link href="/HOOGLE/css/helper.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -643,21 +643,21 @@
     <!-- ================ Top scroll end ================ -->
 
 <!--     js files -->
-    <script src="/HOOGLE/datetimepicker/js/jquery-3.5.1.min.js"></script>
-    <script src="/HOOGLE/datetimepicker/js/bootstrap.bundle.min.js"></script>
+    <script src="/HOOGLE/js/jquery-3.5.1.min.js"></script>
+    <script src="/HOOGLE/js/bootstrap.bundle.min.js"></script>
 <!--     counter js -->
-    <script src="/HOOGLE/datetimepicker/js/jquery-1.10.2.min.js"></script>
-    <script src="/HOOGLE/datetimepicker/js/waypoints.min.js"></script>
-    <script src="/HOOGLE/datetimepicker/js/jquery.counterup.min.js"></script>
+    <script src="/HOOGLE/js/jquery-1.10.2.min.js"></script>
+    <script src="/HOOGLE/js/waypoints.min.js"></script>
+    <script src="/HOOGLE/js/jquery.counterup.min.js"></script>
 <!--     venobox js -->
-    <script src="/HOOGLE/datetimepicker/js/venobox.min.js"></script>
+    <script src="/HOOGLE/js/venobox.min.js"></script>
 <!--     owl carousel -->
-    <script src="/HOOGLE/datetimepicker/js/owl.carousel.min.js"></script>
+    <script src="/HOOGLE/js/owl.carousel.min.js"></script>
 <!--     portfolio js -->
-    <script src="/HOOGLE/datetimepicker/js/jquery.mixitup.min.js"></script>
+    <script src="/HOOGLE/js/jquery.mixitup.min.js"></script>
 <!--     datepicker js -->
-    <script src="/HOOGLE/datetimepicker/js/datepicker.min.js"></script>
+    <script src="/HOOGLE/js/datepicker.min.js"></script>
 <!--     script js -->
-    <script src="/HOOGLE/datetimepicker/js/custom.js"></script>
+    <script src="/HOOGLE/js/custom.js"></script>
   </body>
 </html>

@@ -48,7 +48,7 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>評價資料修改  - update_emp_input.jsp</h3>
+		 <h3>評價資料修改  - update_commend_input.jsp</h3>
 		 <h4><a href="select_page.jsp"><img src="img/logo.jpg" width="100" height="100" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -73,8 +73,9 @@
 	</tr>
 	<tr>
 		<td>訂單編號:</td>
-		<td><input type="TEXT" name="ordId" size="45" value="<%=commendVO.getOrdId() %>"></td>
-<!-- 		<input type="TEXT" name="ordId" size="45"/> ${commendVO.ordId}-->
+		<td>
+		<input type="TEXT" name="ordId" size="45" value="${commendVO.ordId}"/> 
+		</td>
 	</tr>
 	<tr>
 		<td>評價等級:</td>
@@ -86,8 +87,9 @@
 	</tr>
 	<tr>
 		<td>評價日期：</td>
-		<td><input type="Date" name="commendDate" size="20"
-			value="${commendVO.commendDate}"></td>
+		<td>
+		<input type="Date" name="commendDate" size="20" value="${commendVO.commendDate}">
+		</td>
 	</tr>
 	
 </table>
@@ -95,6 +97,14 @@
 <input type="hidden" name="action" value="update">
 <input type="hidden" name="commendAuto" value="${commendVO.commendAuto}">
 <input type="submit" value="送出修改"></FORM>
+
+<!-- <input type="hidden" name="action" value="update"> -->
+<%-- <input type="hidden" name="commendAuto" value="${commendVO.commendAuto}"> --%>
+<%-- <input type="hidden" name="ordId" value="${commendVO.ordId}"> --%>
+<%-- <input type="hidden" name="commendGrade" value="${commendVO.commendGrade}"> --%>
+<%-- <input type="hidden" name="commendContent" value="${commendVO.commendContent}"> --%>
+<%-- <input type="hidden" name="commendDate" value="${commendVO.commendDate}"> --%>
+<!-- <input type="submit" value="送出修改"></FORM> -->
 </body>
 
 </html>

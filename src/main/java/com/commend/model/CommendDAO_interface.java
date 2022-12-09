@@ -9,7 +9,7 @@ public interface CommendDAO_interface {
 	public void delete(Integer commendAuto);
 	public CommendVO findByPrimaryKey(Integer ordId);
 	public List<CommendVO> getAll();
-
+	public List<CommendVO> findByOrdId(Integer ordId);
 }
 	
 

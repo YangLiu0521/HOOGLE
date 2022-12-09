@@ -35,6 +35,7 @@ public class CommendDAO implements CommendDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT commendAuto,ordId,commendGrade,commendContent,commendDate FROM commend where commendAuto = ?";
 	private static final String DELETE = "DELETE FROM commend where commendAuto = ?";
 	private static final String UPDATE = "UPDATE commend set ordId=?, commendGrade=?, commendContent=?, commendDate=? where commendAuto=?";
+	private static final String GET_ORDID_STMT = "SELECT commendAuto,ordId,commendGrade,commendContent,commendDate FROM commend where upper(ordId) like upper(?)";
 
 	@Override
 	public void insert(CommendVO commendVO) {
@@ -95,6 +96,7 @@ public class CommendDAO implements CommendDAO_interface {
 			pstmt.setInt(2, commendVO.getCommendGrade());
 			pstmt.setString(3, commendVO.getCommendContent());
 			pstmt.setDate(4, commendVO.getCommendDate());
+			pstmt.setInt(5, commendVO.getCommendAuto());
 
 			pstmt.executeUpdate();
 
@@ -284,4 +286,62 @@ public class CommendDAO implements CommendDAO_interface {
 		return list;
 	}
 
-}
+	@Override
+	public List<CommendVO> findByOrdId(Integer ordId) {
+		List<CommendVO> list = new ArrayList<CommendVO>();
+		CommendVO commendVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ORDID_STMT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				commendVO = new CommendVO();
+				commendVO.setCommendAuto(rs.getInt("commendAuto"));
+				commendVO.setOrdId(rs.getInt("ordId"));
+				commendVO.setCommendGrade(rs.getInt("commendGrade"));
+				commendVO.setCommendContent(rs.getString("commendContent"));
+				commendVO.setCommendDate(rs.getDate("commendDate"));
+				list.add(commendVO);
+
+			}
+
+		} 
+//		catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		} 
+		catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}}

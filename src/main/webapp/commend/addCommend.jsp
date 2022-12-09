@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>評價新增 - addCommend.jsp</title>
+<title>住宿經驗評價</title>
 
 <style>
   table#table-1 {
@@ -75,7 +75,7 @@
 	<tr>
 		<td>評價等級:</td>
 		<td><input type="TEXT" name="commendGrade" size="45"
-			 value="${commendVO.commendGrade}" /></td>
+			 value="<%=commendVO == null? "" : commendVO.getCommendGrade()%>" /></td>
 	</tr>
 	<tr>
 		<td>評價內容:</td>
