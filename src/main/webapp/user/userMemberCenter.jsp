@@ -5,15 +5,15 @@
 <%@ page import="java.util.*" %>
 
 <%
-// 	if (session.getAttribute("userVO") == null && session.getAttribute("hotelVO") == null ) {
-// 		RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
-// 		dispatcher.forward(request, response);
-// 		return;
-// 	}else if(session.getAttribute("copVO") != null){
-// 		RequestDispatcher dispatcher = request.getRequestDispatcher("/company/CopDtal.jsp");
-// 		dispatcher.forward(request, response);
-// 		return;
-// 	}
+	if (session.getAttribute("userVO") == null && session.getAttribute("hotelVO") == null ) {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/HOOGLE/index.jsp");
+		dispatcher.forward(request, response);
+		return;
+	}else if(session.getAttribute("copVO") != null){
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/hotel/hotelMemberCenter.jsp");
+		dispatcher.forward(request, response);
+		return;
+	}
 	UserVO userVO = (UserVO) request.getSession().getAttribute("userVO"); //UserServlet.java(Controller)
 %>
 
@@ -27,20 +27,20 @@
 <!-- favicon -->
   <link rel="icon" href="favicon.ico" />
   <!-- bootstrap core CSS -->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/datetimepicker/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
   <!-- font awesome -->
-  <link href="<%=request.getContextPath()%>/datetimepicker/css/all.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/css/all.min.css" rel="stylesheet">
   <!-- owl carousel -->
-  <link href="<%=request.getContextPath()%>/datetimepicker/css/owl.carousel.min.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/datetimepicker/css/owl.theme.default.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/css/owl.carousel.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/css/owl.theme.default.min.css" rel="stylesheet">
   <!-- venobox css -->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/datetimepicker/css/venobox.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/venobox.css">
   <!-- datepicker css -->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/datetimepicker/css/datepicker.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datepicker.min.css">
   <!-- custom styles for this template -->
-  <link href="<%=request.getContextPath()%>/datetimepicker/css/custom.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/datetimepicker/css/responsive.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/datetimepicker/css/helper.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/css/custom.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/css/responsive.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/css/helper.css" rel="stylesheet">
 </head>
 <body>
 <!-- ================ Preloader ================ -->
@@ -67,8 +67,8 @@
               <!-- top Menu -->
               <div class="collapse navbar-collapse" id="navbarTheme">
                 <ul class="navbar-nav align-items-start align-items-lg-center">
-                  <li class="active"><a class="nav-link" href="index.html">首頁</a></li>
-                  <li><a class="nav-link" href="index.html">比價</a></li>
+                  <li class="active"><a class="nav-link" href="/HOOGLE/index.jsp">首頁</a></li>
+                  <li><a class="nav-link" href="/HOOGLE/index.jsp">比價</a></li>
                   <li><a class="nav-link" href="about.html">美食</a></li>
                   <!-- <li><a class="nav-link" href="gallery.html">畫廊</a></li> -->
                   <!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Destinations</a>
@@ -95,11 +95,11 @@
           </div>
           <div class="col-lg-4 col-md-6 col-sm-8 col-10 text-right">
             <!-- header right link -->
-            <div class="header-right-link">
+            <div class="header-right-link" id="header">
               <ul>
-                <li><a href="" class="header-request"><i class=""></i> <%=(userVO == null) ? "" : userVO.getUserEmail()%></a></li>  <%-- <%=userVO.getUserName()%> --%>
-                <li><a href=""><i class="fa-solid fas fa-user-gear"></i> 會員中心</a></li>
-                <li><a href="signin.html"><i class="fa-solid fa-right-from-bracket"></i> 登出</a></li>
+<%--                 <li><a href="" class="header-request"><i class=""></i> <%=(userVO == null) ? "" : userVO.getUserEmail()%></a></li>  <%=userVO.getUserName()%> --%>
+<!--                 <li><a href=""><i class="fa-solid fas fa-user-gear"></i> 會員中心</a></li> -->
+<!--                 <li><a href="signin.html"><i class="fa-solid fa-right-from-bracket"></i> 登出</a></li> -->
 
                 <!-- <li><a href="contact-us.html" class="header-request">Request a Quote</a></li> -->
               </ul>
@@ -147,8 +147,7 @@
                     aria-controls="tab5" aria-selected="true"><i class="fa-regular fa-circle-user"></i> 旅客基本資料</a> </li>
                 <li class="nav-item"> <a class="nav-link" id="order-paid-nav" data-toggle="tab" href="#order-paid" role="tab"
                     aria-controls="tab6" aria-selected="false"><i class="fa-solid fa-clipboard"></i> 住宿訂單管理</a> </li>
-                <li class="nav-item"> <a class="nav-link" href="./index.html"><i
-                      class="fa-solid fa-right-from-bracket"></i> 登出</a>
+                <li class="nav-item" id="Signout" style="cursor:pointer"><a class="nav-link"><i class="fa-solid fa-right-from-bracket"></i> 登出</a> </li>  
                 </li>
               </ul>
             </div>
@@ -317,23 +316,24 @@
   <!-- ================ MemberCenter page end ================ -->
   
   <!-- js files -->
-  <script src="<%=request.getContextPath()%>/datetimepicker/js/jquery-3.5.1.min.js"></script>
-  <script src="<%=request.getContextPath()%>/datetimepicker/js/bootstrap.bundle.min.js"></script>
+  <script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
+  <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
   <!-- counter js -->
-  <script src="<%=request.getContextPath()%>/datetimepicker/js/jquery-1.10.2.min.js"></script>
-  <script src="<%=request.getContextPath()%>/datetimepicker/js/waypoints.min.js"></script>
-  <script src="<%=request.getContextPath()%>/datetimepicker/js/jquery.counterup.min.js"></script>
+  <script src="<%=request.getContextPath()%>/js/jquery-1.10.2.min.js"></script>
+  <script src="<%=request.getContextPath()%>/js/waypoints.min.js"></script>
+  <script src="<%=request.getContextPath()%>/js/jquery.counterup.min.js"></script>
   <!-- venobox js -->
-  <script src="<%=request.getContextPath()%>/datetimepicker/js/venobox.min.js"></script>
+  <script src="<%=request.getContextPath()%>/js/venobox.min.js"></script>
   <!-- owl carousel -->
-  <script src="<%=request.getContextPath()%>/datetimepicker/js/owl.carousel.min.js"></script>
+  <script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
   <!-- portfolio js -->
-  <script src="<%=request.getContextPath()%>/datetimepicker/js/jquery.mixitup.min.js"></script>
+  <script src="<%=request.getContextPath()%>/js/jquery.mixitup.min.js"></script>
   <!-- datepicker js -->
-  <script src="<%=request.getContextPath()%>/datetimepicker/js/datepicker.min.js"></script>
+  <script src="<%=request.getContextPath()%>/js/datepicker.min.js"></script>
   <!-- script js -->
-  <script src="<%=request.getContextPath()%>/datetimepicker/js/custom.js"></script>
+  <script src="<%=request.getContextPath()%>/js/custom.js"></script>
   <script src="https://kit.fontawesome.com/4ce3b6b697.js" crossorigin="anonymous"></script>
+  <script src="<%=request.getContextPath()%>/js/member/memberHeader.js"></script>
   
 </body>
 </html>

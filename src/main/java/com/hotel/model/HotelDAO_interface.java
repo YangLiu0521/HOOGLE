@@ -13,6 +13,8 @@ public interface HotelDAO_interface {
 	public void delete(Integer hotelId);
 
 	public HotelVO findByPrimaryKey(Integer hotelId);
+	
+	public HotelVO findByHotelEmail(String hotelEmail, String hotelTaxid);
 
 	public List<HotelVO> getAll();
 }

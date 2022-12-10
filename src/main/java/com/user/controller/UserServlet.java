@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
+import com.hotel.model.HotelVO;
 import com.mail.model.MailService;
 import com.user.model.UserService;
 import com.user.model.UserVO;
@@ -174,7 +175,7 @@ public class UserServlet extends HttpServlet {
 
 				out.println("<meta http-equiv='refresh' content='1;URL=" + req.getContextPath()
 						+ "/user/loginForUser.jsp'>");
-				out.println("<script> alert('註冊成功weeeee');</script>");
+				out.println("<script> alert('註冊成功!');</script>");
 				// 回傳 json
 //				reportMsgs.add("註冊成功");
 //				JSONObject jsonObject = new JSONObject();
@@ -399,9 +400,12 @@ public class UserServlet extends HttpServlet {
 				System.out.println("修改成功");
 
 				// 修改完成，準備轉交
-				session.setAttribute("userVO", userVO);
-				RequestDispatcher successView = req.getRequestDispatcher("/user/userMemberCenter.jsp"); // 修改成功後,轉交listOneEmp.jsp
-				successView.forward(req, res);
+//				session.setAttribute("userVO", userVO);
+//				RequestDispatcher successView = req.getRequestDispatcher("/user/userMemberCenter.jsp"); // 修改成功後,轉交listOneEmp.jsp
+//				successView.forward(req, res);
+				out.println("<meta http-equiv='refresh' content='0;URL=" + req.getContextPath()
+				+ "/user/userMemberCenter.jsp'>");
+				out.println("<script> alert('修改資料完成!');</script>");
 
 			} catch (Exception e) {
 				System.out.println("update exception :" + e);
@@ -426,18 +430,12 @@ public class UserServlet extends HttpServlet {
 					errorMsgs.add("請填寫信箱");
 				} else if (!userEmail.trim().matches(userEmailReg)) {
 					errorMsgs.add("請輸入正確信箱格式");
-				} else if (userSvc.getUserEmails(userEmail).size() < 0) {
-					errorMsgs.add("無此信箱");
+				} else if (userSvc.getUserEmails(userEmail).size() <= 0) {
+					errorMsgs.add("無此信箱，請輸入註冊時信箱");
 				}
 				System.out.println("信箱通過驗證：" + userEmail);
 
 				userVO = userSvc.findByUserEmail(userEmail);
-//				
-//				
-//				
-//				if(!userEmail.equals(userVO.getUserEmail())) {
-//					errorMsgs.add("非註冊信箱");
-//				}
 
 				// 確認資料有誤，印出錯誤資料並跳回原頁
 				if (!errorMsgs.isEmpty()) {
@@ -455,7 +453,7 @@ public class UserServlet extends HttpServlet {
 				String messageText = "Hello!" + userVO.getUserName() + "您的新密碼 ：「 " + newPassword + "  」";
 				mailService.sendMail(userEmail, subject, messageText);
 
-				userVO.setUserPassword(newPassword);
+				userVO.setUserPassword(userSvc.pwdhash(newPassword));
 				System.out.println(userSvc.pwdhash(newPassword));
 				userVO = userSvc.updateUser(userVO);
 				System.out.println("forgotPasswordSuccess");
@@ -473,7 +471,44 @@ public class UserServlet extends HttpServlet {
 			}
 
 		}
+// ===================================================確認狀態=========================================================//		
 
+		if ("checkLogin".equals(action)) {
+			try {
+				UserVO userVO = (UserVO) session.getAttribute("userVO");
+				HotelVO hotelVO = (HotelVO) session.getAttribute("hotelVO");
+				
+				HashMap<String, String> userInfoMap = new HashMap<String, String>();
+				userInfoMap.put("check", "2");
+				
+				if(userVO != null) {
+					userInfoMap.put("check", "1");
+					userInfoMap.put("email", userVO.getUserEmail());
+					userInfoMap.put("url", "/HOOGLE/user/userMemberCenter.jsp");
+				} else if(hotelVO != null) {
+					userInfoMap.put("check", "1");
+					userInfoMap.put("email", hotelVO.getHotelEmail());
+					userInfoMap.put("url", "/HOOGLE/hotel/hotelMemberCenter.jsp");
+				}
+				
+				JSONObject obj = new JSONObject(userInfoMap);
+				out.println(obj);
+				System.out.println(obj);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+				RequestDispatcher failureView = req.getRequestDispatcher("index.html");
+				failureView.forward(req, res);
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 		out.flush();
 		out.close();
 	}

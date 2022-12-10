@@ -17,24 +17,24 @@ HotelVO hotelVO = (HotelVO) request.getAttribute("hotelVO");
 <!-- favicon -->
 <!-- <link rel="icon" href="favicon.ico" /> -->
 <!-- bootstrap core CSS -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/datetimepicker/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <!-- font awesome -->
-<link href="<%=request.getContextPath()%>/datetimepicker/css/all.min.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/all.min.css" rel="stylesheet">
 <!-- owl carousel -->
-<link href="<%=request.getContextPath()%>/datetimepicker/css/owl.carousel.min.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/datetimepicker/css/owl.theme.default.min.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/owl.carousel.min.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/owl.theme.default.min.css" rel="stylesheet">
 <!-- venobox css -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/datetimepicker/css/venobox.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/venobox.css">
 <!-- datepicker css -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/datetimepicker/css/datepicker.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/datepicker.min.css">
 <!-- custom styles for this template -->
-<link href="<%=request.getContextPath()%>/datetimepicker/css/custom.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/datetimepicker/css/responsive.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/datetimepicker/css/helper.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/custom.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/responsive.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/helper.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <!-- loginForhotel > forgotPassword css -->
-<link href="<%=request.getContextPath()%>/datetimepicker/css/hotel.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/hotel/hotel.css" rel="stylesheet">
 </head>
 <body>
 	<!-- ================ Inner banner ================ -->
@@ -66,7 +66,7 @@ HotelVO hotelVO = (HotelVO) request.getAttribute("hotelVO");
 				<div class="col-lg-6 offset-lg-3">
 					<!-- login box -->
 					<div class="login-box">
-						<form class="form-style-1 shadow p-30" METHOD="post" ACTION="hotel.do" enctype="multipart/form-data">
+						<form class="form-style-1 shadow p-30" METHOD="post" ACTION="<%=request.getContextPath()%>/hotel/HotelServlet" enctype="multipart/form-data">
 							<h3 class="text-center">飯店登入系統</h3>
 
 							<c:if test="${not empty errorMsgs}">
@@ -100,10 +100,10 @@ HotelVO hotelVO = (HotelVO) request.getAttribute("hotelVO");
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn-style-1 w-100">Sign In</button>
-								<input type="hidden" name="action" value="loginForUser"> 
+								<input type="hidden" name="hotelservlet" value="loginForHotel"> 
 							</div>
 							<p class="mb-0">
-								還不是會員？ <a href="<%=request.getContextPath()%>/user/registerForUser.jsp">註冊專區</a>
+								還不是會員？ <a href="<%=request.getContextPath()%>/hotel/registerForHotel.jsp">註冊專區</a>
 							</p>
 						</form>
 					</div>
@@ -120,9 +120,10 @@ HotelVO hotelVO = (HotelVO) request.getAttribute("hotelVO");
 			<article>
 				<label for="hotellogin" class="input-label">
 				 	<input type="text" name="hotelEmail" placeholder="請填註冊時信箱" autocomplete="off">		 	
-				 	<input type="text" name="hotelPassword" placeholder="請填註冊時密碼" autocomplete="off">
-					<input type="hidden" name="action" value="forgotPasswordForHotel">
-					<button class="input-button hotelbtn">送出</button>
+				 	<input type="text" name="hotelTaxid" placeholder="請填註冊時統一編號" autocomplete="off">
+					
+					<button type="submit" class="input-button hotelbtn">送出</button>
+					<input type="hidden" name="hotelservlet" value="forgotPasswordForHotel">
 					<button type="button" class="btn_modal_close btnNew hotelbtn">關閉</button>
 				</label>
 			</article>
@@ -131,23 +132,23 @@ HotelVO hotelVO = (HotelVO) request.getAttribute("hotelVO");
 	<!-- ForgotPasswordForHotel page end-->
 	
 	<!-- js files -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/jquery-3.5.1.min.js"></script>
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/bootstrap.bundle.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 	<!-- counter js -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/jquery-1.10.2.min.js"></script>
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/waypoints.min.js"></script>
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/jquery.counterup.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery-1.10.2.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/waypoints.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery.counterup.min.js"></script>
 	<!-- venobox js -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/venobox.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/venobox.min.js"></script>
 	<!-- owl carousel -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/owl.carousel.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
 	<!-- portfolio js -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/jquery.mixitup.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery.mixitup.min.js"></script>
 	<!-- datepicker js -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/datepicker.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/datepicker.min.js"></script>
 	<!-- script js -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/custom.js"></script>
+	<script src="<%=request.getContextPath()%>/js/custom.js"></script>
 	<!-- hotelForgotPassword js -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/hotelForgotPassword.js"></script>
+	<script src="<%=request.getContextPath()%>/js/hotel/hotelForgotPassword.js"></script>
 </body>
 </html>
