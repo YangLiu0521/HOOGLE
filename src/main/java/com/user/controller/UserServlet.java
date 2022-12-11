@@ -148,7 +148,7 @@ public class UserServlet extends HttpServlet {
 				userVO.setUserRegistration(userRegistration);
 
 				if (!errorMsgs.isEmpty()) {
-					session.setAttribute("userVO", userVO);
+					req.setAttribute("userVO", userVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/user/registerForUser.jsp");
 					failureView.forward(req, res);
 					return;

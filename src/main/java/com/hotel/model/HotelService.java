@@ -1,5 +1,7 @@
 package com.hotel.model;
 
+import com.user.model.UserVO;
+
 public class HotelService {
 	
 	private HotelDAO_interface dao;
@@ -8,8 +10,20 @@ public class HotelService {
 		dao = new HotelDAO();
 	}
 	
+	public HotelVO addHotel(HotelVO hotelVO) {
+		System.out.println("### addHotel service");
+		hotelVO.setHotelState(1);
+		dao.insert(hotelVO);
+		
+		return hotelVO;
+	}
+	
 	public HotelVO getOneHotel(String hotelEmail, String hotelTaxid) {
-		return dao.findByHotelEmail(hotelEmail, hotelTaxid);
+		return dao.findByHotelEmailandTaxid(hotelEmail, hotelTaxid);
+	}
+	
+	public HotelVO findByHotelEmail(String hotelEmail) {
+		return dao.findByHotelEmail(hotelEmail);
 	}
 	
 	public HotelVO updateHotel(HotelVO hotelVO) {
@@ -17,13 +31,11 @@ public class HotelService {
 		dao.update(hotelVO);
 		return hotelVO;
 	}
-//	public HotelVO addHotel(HotelVO hotelVO) {
-//		System.out.println("into addHotel service");
-//		hotelVO.setHotelCounty("臺北市"); //預設地區
-//		
-//		
-//	}
-	
+
+	public String pwdhash(String password) {
+		dao.pwdhash(password);
+		return password;
+	}
 	
 	
 }

@@ -80,14 +80,10 @@ HotelVO hotelVO = (HotelVO) request.getAttribute("hotelVO");
 
 							<br>
 							<div class="form-group">
-								<input type="email" class="form-control" placeholder="Email" name="hotelEmail" autocomplete="off"
-<%-- 								value="<%=(hotelVO == null) ? "" : hotelVO.getHotelEmail()%>" --%>
-								>
+								<input type="email" class="form-control" placeholder="Email" name="hotelEmail" autocomplete="off">
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" placeholder="密碼" name="HotelPassword"
-<%-- 								value="<%=(hotelVO == null) ? "" : hotelVO.getHotelPassword()%>" --%>
-								>
+								<input type="password" class="form-control" placeholder="密碼" name="hotelPassword">
 							</div>		
 							<div class="row">
 								<div class="col-lg-6 col-md-6 col-sm-6">
