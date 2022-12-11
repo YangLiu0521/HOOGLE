@@ -15,5 +15,7 @@
 		<property name="hibernate.hbm2ddl.auto">validate</property>
 
 		<mapping class="com.ordHibernate.model.OrdBean" />
+		<mapping class="com.search.model.SearchBean" />
+		
     </session-factory>
 </hibernate-configuration>
