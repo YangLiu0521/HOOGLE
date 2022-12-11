@@ -398,10 +398,10 @@ public class UserDAO implements UserDAO_interface {
 	}
 
 	@Override
-	public String pwdhash(String userPassword) {
+	public String pwdhash(String password) {
 		try {
 			Base64.Encoder enc = Base64.getEncoder();
-			String newPwd = enc.encodeToString(userPassword.getBytes());
+			String newPwd = enc.encodeToString(password.getBytes());
 			System.out.println("加密後的密碼: ====="+newPwd+"=====");
 			return newPwd;
 		}catch(Exception e) {
