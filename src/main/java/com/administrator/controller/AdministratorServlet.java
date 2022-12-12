@@ -296,24 +296,50 @@ req.setAttribute("administratorVO", administratorVO); // 含有輸入格式錯�
 		}
 		
 		
-		if ("delete".equals(action)) { // 來自listAllAdmin.jsp
+//		if ("delete".equals(action)) { // 來自listAllAdmin.jsp
+//
+//			List<String> errorMsgs = new LinkedList<String>();
+//			// Store this set in the request scope, in case we need to
+//			// send the ErrorPage view.
+//			req.setAttribute("errorMsgs", errorMsgs);
+//	
+//				/***************************1.接收請求參數***************************************/
+//				Integer administratorId = Integer.valueOf(req.getParameter("administratorId"));
+//				
+//				/***************************2.開始刪除資料***************************************/
+//				AdministratorService administratorSvc = new AdministratorService();
+//				administratorSvc.deleteAdministrator(administratorId);
+//				
+//				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+//				String url = "/back_end/administrator/admin_page.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+//				successView.forward(req, res);
+//		}
+		if ("disable".equals(action)) { // 來自listAllAdmin.jsp
+			
+			Integer administratorId = Integer.valueOf(req.getParameter("administratorId"));
+			
+			/***************************2.將所有權限修改為false***************************************/
+			Boolean administratorDominate = false;
+			Boolean newsDominate = false;
+			Boolean hotelDominate = false;
+			Boolean userDominate = false;
+			
+			AdministratorVO administratorVO = new AdministratorVO();
+			administratorVO.setAdministratorDominate(administratorDominate);
+			administratorVO.setNewsDominate(newsDominate);
+			administratorVO.setHotelDominate(hotelDominate);
+			administratorVO.setUserDominate(userDominate);
+			
+			AdministratorService administratorSvc = new AdministratorService();
+			administratorVO = administratorSvc.disableAdministrator(administratorDominate,newsDominate, 
+					hotelDominate, userDominate, administratorId);
 
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-	
-				/***************************1.接收請求參數***************************************/
-				Integer administratorId = Integer.valueOf(req.getParameter("administratorId"));
-				
-				/***************************2.開始刪除資料***************************************/
-				AdministratorService administratorSvc = new AdministratorService();
-				administratorSvc.deleteAdministrator(administratorId);
-				
-				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/back_end/administrator/admin_page.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
-				successView.forward(req, res);
+			
+			/***************************3.停權完成,準備轉交(Send the Success view)***********/								
+			String url = "/back_end/administrator/admin_page.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+			successView.forward(req, res);
 		}
 		
 		if ("login".equals(action)) { // 來自login.jsp

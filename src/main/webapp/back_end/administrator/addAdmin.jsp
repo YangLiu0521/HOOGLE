@@ -21,39 +21,36 @@ AdministratorVO administratorVO = (AdministratorVO) request.getAttribute("admini
 		<nav class="nav">
 			<div>
 				<div class="nav_link">
-					<a href="select_page.jsp" class="nav_logo">
-					<img src="<%=request.getContextPath()%>/images/whitebg_logo_small.jpg" class="pic">
-					<span class="nav_name aaa">HOOGLE</span>
+					<a href="<%=request.getContextPath()%>/back_end/administrator/admin_page.jsp" class="nav_logo"> <img
+						src="<%=request.getContextPath()%>/images/logo_small_removebg.png" class="pic"> <span
+						class="nav_name aaa">HOOGLE</span>
 					</a>
-
 				</div>
+				
 				<div class="nav_brand">
 					<!-- <ion-icon name="menu-outline" class="nav_toggle" id="nav_toggle"></ion-icon> -->
 					<span> <ion-icon name="menu-outline" class="nav_toggle"
 							id="nav-toggle"></ion-icon> <span class="nav_ch">管理者專區</span>
 					</span>
 				</div>
+				
 				<div class="nav_list">
 					<!-- <div class="nav_h2">管理者專區</div>  要調整字的顏色、字在縮起來時消失-->
+					
+					<a href="#" class="nav_link"> <ion-icon name="stats-chart-outline" class="nav_icon"></ion-icon>
+						<span class="nav_name">報表查詢</span>
+					</a>
+					
 					<div class="nav_link collapse">
 						<ion-icon name="search-outline" class="nav_icon"></ion-icon>
-						<span class="nav_name">查詢</span>
-						<ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-						<ul class="collapse_menu">
-							<a href="#" class="collapse__sublink"><pre>飯店資料</pre></a>
-							<a href="#" class="collapse__sublink"><pre>旅客資料</pre></a>
-							<a href="#" class="collapse__sublink"><pre>報表</pre></a>
-						</ul>
-					</div>
-					<div class="nav_link collapse">
-						<ion-icon name="repeat-outline" class="nav_icon"></ion-icon>
-						<span class="nav_name">資料異動</span>
+						<span class="nav_name">飯店及旅客資訊</span>
 						<ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 						<ul class="collapse_menu">
 							<a href="#" class="collapse__sublink"><pre>飯店</pre></a>
 							<a href="#" class="collapse__sublink"><pre>旅客</pre></a>
 						</ul>
 					</div>
+					
 					<div class="nav_link collapse">
 						<ion-icon name="checkmark-done-outline" class="nav_icon"></ion-icon>
 						<span class="nav_name">審核</span>
@@ -63,9 +60,12 @@ AdministratorVO administratorVO = (AdministratorVO) request.getAttribute("admini
 							<a href="#" class="collapse__sublink"><pre>房間上架</pre></a>
 						</ul>
 					</div>
-					<a href="./admin_page.jsp" class="nav_link"> <ion-icon name="people-outline"
-							class="nav_icon"></ion-icon> <span class="nav_name">管理者資料</span>
+					
+					<a href="<%=request.getContextPath()%>/back_end/administrator/admin_page.jsp"
+						class="nav_link"> <ion-icon name="people-outline" class="nav_icon"></ion-icon>
+						<span class="nav_name">管理者資料</span>
 					</a>
+					
 					<div class="nav_link collapse">
 						<ion-icon name="mail-outline" class="nav_icon"></ion-icon>
 						<span class="nav_name">系統訊息管理</span>
@@ -75,17 +75,23 @@ AdministratorVO administratorVO = (AdministratorVO) request.getAttribute("admini
 							<a href="#" class="collapse__sublink"><pre>旅客訊息</pre></a>
 						</ul>
 					</div>
-					<a href="#" class="nav_link"> <ion-icon
-							name="newspaper-outline" class="nav_icon"></ion-icon> <span
-						class="nav_name">最新消息上架</span>
-					</a> <a href="#" class="nav_link"> <ion-icon
-							name="newspaper-outline" class="nav_icon"></ion-icon> <span
-						class="nav_name">飯店設施管理</span>
+					
+					<a href="#" class="nav_link"> <ion-icon	name="newspaper-outline" class="nav_icon"></ion-icon>
+						<span class="nav_name">最新消息上架</span>
+					</a>
+					
+					<a href="#" class="nav_link"> <ion-icon name="game-controller-outline" class="nav_icon"></ion-icon>
+						<span class="nav_name">飯店設施管理</span>
 					</a>
 				</div>
 			</div>
+			<!-- <a href="#" class="nav_link">
+                <ion-icon name="log-out-outline" class="nav_icon" ></ion-icon>
+                <span class="nav_name">登出</span>
+            </a> -->
 		</nav>
 	</div>
+	
 	<div class="func_list">
 		<a href="#" class="logout_link"> <ion-icon name="log-out-outline"
 				class="logout_icon"></ion-icon>

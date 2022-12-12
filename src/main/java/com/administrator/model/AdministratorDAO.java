@@ -53,6 +53,10 @@ public class AdministratorDAO implements AdministratorDAO_interface {
 		
 		private static final String LOGIN_PASSWORD = "SELECT administratorPassword FROM administrator "
 				+ "where administratorAccount = ?";
+		
+		private static final String DISABLE = "UPDATE administrator set administratorDominate = ?, "
+				+ "newsDominate = ?, hotelDominate = ?, userDominate = ? "
+				+ "where administratorId = ?;";
 
 		
 		
@@ -173,6 +177,51 @@ public class AdministratorDAO implements AdministratorDAO_interface {
 			}
 			return adminPassword;
 		}
+		
+		
+
+
+		@Override
+		public void disable(AdministratorVO administratorVO) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+
+			try {
+
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(DISABLE);
+
+				pstmt.setBoolean(1, administratorVO.getAdministratorDominate());
+				pstmt.setBoolean(2, administratorVO.getNewsDominate());
+				pstmt.setBoolean(3, administratorVO.getHotelDominate());
+				pstmt.setBoolean(4, administratorVO.getUserDominate());
+				pstmt.setInt(5, administratorVO.getAdministratorId());
+
+				pstmt.executeUpdate();
+
+				// Handle any driver errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+		}
+
 
 
 		@Override

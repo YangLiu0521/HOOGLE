@@ -28,39 +28,36 @@ pageContext.setAttribute("list", list);
 		<nav class="nav">
 			<div>
 				<div class="nav_link">
-					<a href="select_page.jsp" class="nav_logo"> <img
-						src="<%=request.getContextPath()%>/images/whitebg_logo_small.jpg" class="pic"> <span
+					<a href="<%=request.getContextPath()%>/back_end/administrator/admin_page.jsp" class="nav_logo"> <img
+						src="<%=request.getContextPath()%>/images/logo_small_removebg.png" class="pic"> <span
 						class="nav_name aaa">HOOGLE</span>
 					</a>
-
 				</div>
+				
 				<div class="nav_brand">
 					<!-- <ion-icon name="menu-outline" class="nav_toggle" id="nav_toggle"></ion-icon> -->
 					<span> <ion-icon name="menu-outline" class="nav_toggle"
 							id="nav-toggle"></ion-icon> <span class="nav_ch">管理者專區</span>
 					</span>
 				</div>
+				
 				<div class="nav_list">
 					<!-- <div class="nav_h2">管理者專區</div>  要調整字的顏色、字在縮起來時消失-->
+					
+					<a href="#" class="nav_link"> <ion-icon name="stats-chart-outline" class="nav_icon"></ion-icon>
+						<span class="nav_name">報表查詢</span>
+					</a>
+					
 					<div class="nav_link collapse">
 						<ion-icon name="search-outline" class="nav_icon"></ion-icon>
-						<span class="nav_name">查詢</span>
-						<ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-						<ul class="collapse_menu">
-							<a href="#" class="collapse__sublink"><pre>飯店資料</pre></a>
-							<a href="#" class="collapse__sublink"><pre>旅客資料</pre></a>
-							<a href="#" class="collapse__sublink"><pre>報表</pre></a>
-						</ul>
-					</div>
-					<div class="nav_link collapse">
-						<ion-icon name="repeat-outline" class="nav_icon"></ion-icon>
-						<span class="nav_name">資料異動</span>
+						<span class="nav_name">飯店及旅客資訊</span>
 						<ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 						<ul class="collapse_menu">
 							<a href="#" class="collapse__sublink"><pre>飯店</pre></a>
 							<a href="#" class="collapse__sublink"><pre>旅客</pre></a>
 						</ul>
 					</div>
+					
 					<div class="nav_link collapse">
 						<ion-icon name="checkmark-done-outline" class="nav_icon"></ion-icon>
 						<span class="nav_name">審核</span>
@@ -70,9 +67,12 @@ pageContext.setAttribute("list", list);
 							<a href="#" class="collapse__sublink"><pre>房間上架</pre></a>
 						</ul>
 					</div>
-					<a href="./admin_page.jsp" class="nav_link"> <ion-icon name="people-outline"
-							class="nav_icon"></ion-icon> <span class="nav_name">管理者資料</span>
+					
+					<a href="<%=request.getContextPath()%>/back_end/administrator/admin_page.jsp"
+						class="nav_link"> <ion-icon name="people-outline" class="nav_icon"></ion-icon>
+						<span class="nav_name">管理者資料</span>
 					</a>
+					
 					<div class="nav_link collapse">
 						<ion-icon name="mail-outline" class="nav_icon"></ion-icon>
 						<span class="nav_name">系統訊息管理</span>
@@ -82,12 +82,13 @@ pageContext.setAttribute("list", list);
 							<a href="#" class="collapse__sublink"><pre>旅客訊息</pre></a>
 						</ul>
 					</div>
-					<a href="#" class="nav_link"> <ion-icon
-							name="newspaper-outline" class="nav_icon"></ion-icon> <span
-						class="nav_name">最新消息上架</span>
-					</a> <a href="#" class="nav_link"> <ion-icon
-							name="newspaper-outline" class="nav_icon"></ion-icon> <span
-						class="nav_name">飯店設施管理</span>
+					
+					<a href="#" class="nav_link"> <ion-icon	name="newspaper-outline" class="nav_icon"></ion-icon>
+						<span class="nav_name">最新消息上架</span>
+					</a>
+					
+					<a href="#" class="nav_link"> <ion-icon name="game-controller-outline" class="nav_icon"></ion-icon>
+						<span class="nav_name">飯店設施管理</span>
 					</a>
 				</div>
 			</div>
@@ -97,6 +98,7 @@ pageContext.setAttribute("list", list);
             </a> -->
 		</nav>
 	</div>
+	
 	<div class="func_list">
 		<a href="#" class="logout_link"> <ion-icon name="log-out-outline"
 				class="logout_icon"></ion-icon>
@@ -124,6 +126,7 @@ pageContext.setAttribute("list", list);
 			<a href='addAdmin.jsp' class="admin_create">新增管理者</a>
 
 		</div>
+		
 	</div>
 	<div class="div_table">
 	<table>
@@ -149,30 +152,39 @@ pageContext.setAttribute("list", list);
 				<td>${administratorVO.administratorAccount}</td>
 				<%-- 				<td>${administratorVO.administratorPassword}</td> --%>
 				<td><ion-icon
-						name=${(administratorVO.administratorDominate).equals(true)?"checkbox-outline":"square-outline"}></ion-icon></td>
+						name=${administratorVO.administratorDominate==true?"checkbox-outline":"square-outline"}></ion-icon></td>
 				<td><ion-icon
-						name=${(administratorVO.newsDominate).equals(true)?"checkbox-outline":"square-outline"}></ion-icon></td>
+						name=${administratorVO.newsDominate==true?"checkbox-outline":"square-outline"}></ion-icon></td>
 				<td><ion-icon
-						name=${(administratorVO.hotelDominate).equals(true)?"checkbox-outline":"square-outline"}></ion-icon></td>
+						name=${administratorVO.hotelDominate==true?"checkbox-outline":"square-outline"}></ion-icon></td>
 				<td><ion-icon
-						name=${(administratorVO.userDominate).equals(true)?"checkbox-outline":"square-outline"}></ion-icon></td>
+						name=${administratorVO.userDominate==true?"checkbox-outline":"square-outline"}></ion-icon></td>
 				<td>${administratorVO.administratorHiredate}</td>
 				<td>
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/back_end/administrator/AdministratorServlet"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="修改">
+						<input type="submit" value="修改" 
+						${(administratorVO.administratorDominate==false && 
+						administratorVO.newsDominate==false && 
+						administratorVO.hotelDominate==false && 
+						administratorVO.userDominate==false)?"disabled":""}>
 						<input type="hidden" name="administratorId" value="${administratorVO.administratorId}">
 						<input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>
 				<td>
+				
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/back_end/administrator/AdministratorServlet"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="停權">
+						<input type="submit" value="停權" 
+						${(administratorVO.administratorDominate==false && 
+						administratorVO.newsDominate==false && 
+						administratorVO.hotelDominate==false && 
+						administratorVO.userDominate==false)?"disabled":""}>
 						<input type="hidden" name="administratorId" value="${administratorVO.administratorId}">
-						<input type="hidden" name="action" value="delete">
+						<input type="hidden" name="action" value="disable">
 					</FORM>
 				</td>
 			</tr>
