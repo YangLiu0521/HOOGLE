@@ -16,6 +16,7 @@
 
 		<mapping class="com.ordHibernate.model.OrdBean" />
 		<mapping class="com.search.model.SearchBean" />
+		<mapping class="com.searchHotel.model.SearchHotelBean" />
 		
     </session-factory>
 </hibernate-configuration>
