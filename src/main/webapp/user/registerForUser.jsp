@@ -41,7 +41,7 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 				<div class="col-lg-8 col-md-8 mb-30">
 					<!-- page-title -->
 					<div class="page-title">
-						<h1>旅客註冊</h1>
+						<h1>旅客註冊1</h1>
 					</div>
 					<!-- page-title end -->
 				</div>
