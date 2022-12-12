@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
     
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -15,7 +15,7 @@
 <!-- page title -->
 <title>Hoogle</title>
 <!-- favicon -->
-<link rel="icon" href="favicon.ico" />
+<!-- <link rel="icon" href="favicon.ico" /> -->
 <!-- bootstrap core CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css" >
 <!-- font awesome -->
@@ -55,7 +55,7 @@
             <!-- top Menu -->
             <div class="collapse navbar-collapse" id="navbarTheme">
               <ul class="navbar-nav align-items-start align-items-lg-center">
-                <li class="active"><img src="images/abu-index/logo.png" alt="" class="img-fluid"></li> 
+                <li class="active"><a href="index.jsp"><img src="images/abu-index/logo.png" alt="" class="img-fluid"></a></li> 
                 <li><a class="nav-link" href="about.html">比價</a></li>
                 <li><a class="nav-link" href="gallery.html">美食</a></li>
                 <!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">關於我們</a>
@@ -79,18 +79,17 @@
         </div>
         <div class="col-lg-4 col-md-6 col-sm-8 col-10 text-right"> 
           <!-- header right link -->
-          <div class="header-right-link">
+          <div class="header-right-link" id="header">
             <ul>
               <!-- <li><a href="signin.html"><img src="./img/imgs/註冊.png" alt="" class="img-fluid"></li> -->
-                <li><a class="nav-link" href="about.html">會員名稱</a></li>
+<!--                 <li><a class="nav-link" href="about.html">會員名稱</a></li> -->
               <!-- <li><a href="contact-us.html" class="header-request">Request a Quote</a></li>
 
               <!-- 下拉式選單 -->
-              <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  <img src="images/abu-index/login.png" alt="" class="img-fluid"></a>
-                <div class="dropdown-menu" aria-labelledby="dropdown05"> <a class="dropdown-item" href="faq.html">登入</a> <a class="dropdown-item" href="QA.html">註冊</a> <a class="dropdown-item" href="Terms.html">會員中心</a> <a class="dropdown-item" href="customer-service.html">登出</a> 
+<!--               <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  <img src="images/abu-index/login.png" alt="" class="img-fluid"></a> -->
+<!--                 <div class="dropdown-menu" aria-labelledby="dropdown05"> <a class="dropdown-item" href="faq.html">登入</a> <a class="dropdown-item" href="QA.html">註冊</a> <a class="dropdown-item" href="Terms.html">會員中心</a> <a class="dropdown-item" href="customer-service.html">登出</a>  -->
                 <!-- <a class="dropdown-item" href="team.html">Team</a> <a class="dropdown-item" href="testimonial.html">Testimonial</a> <a class="dropdown-item" href="traveler-information.html">Traveler Information</a> <a class="dropdown-item" href="payment-information.html">Payment Information</a> <a class="dropdown-item" href="faq.html">Faq</a> </div> -->
-              </li>
-
+<!--               </li> -->
             </ul>
           </div>
           <!-- header right link end --> 
@@ -600,5 +599,7 @@
 <script src="js/datepicker.min.js"></script> 
 <!-- script js --> 
 <script src="js/abu-js/abu.js"></script>
+<!-- header right link js by aga -->
+<script src="js/member/memberHeader.js"></script>
 </body>
 </html>

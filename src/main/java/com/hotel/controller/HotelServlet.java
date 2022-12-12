@@ -2,8 +2,10 @@ package com.hotel.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,7 +43,7 @@ public class HotelServlet extends HttpServlet {
 		}
 		System.out.println("######  into HotelServlet  ######. hotelservlet is " + hotelservlet);
 
-// ===================================================旅客註冊=========================================================//
+// ===================================================飯店註冊=========================================================//
 		if ("registerHotel".equals(hotelservlet)) {
 
 			System.out.println("### into registerHotel  ###");
@@ -100,7 +102,7 @@ public class HotelServlet extends HttpServlet {
 				if (hotelTaxid == null || hotelTaxid.trim().length() == 0) {
 					errorMsgs.add("請輸入統一編號");
 				} else if (!hotelTaxid.trim().matches(hotelTaxidPhoneReg)) {
-					errorMsgs.add("統一編號: 只能是數字 , 且長度必需10");
+					errorMsgs.add("統一編號: 只能是數字 , 且長度必需8");
 				}
 
 				hotelVO.setHotelEmail(hotelEmail);
@@ -140,6 +142,96 @@ public class HotelServlet extends HttpServlet {
 
 		}
 
+// ===================================================飯店修改=========================================================//
+		if ("hotelupdate".equals(hotelservlet)) { // 來自userMemberCenter的請求
+
+			System.out.println("hotelupdate");
+
+			
+			Map<String, String> errors = new HashMap<String, String>();
+			req.setAttribute("errors", errors);
+
+			try {
+
+				HotelService hotelSvc = new HotelService();
+				HotelVO hotelVO = (HotelVO) session.getAttribute("hotelVO"); // 表示已登入，取得userVO物件
+				System.out.println("### into hotel update ### 1");
+
+				// 1.接收請求參數，輸入格式的錯誤處理
+
+//				String userPassword = req.getParameter("userPassword");
+//				String comfirmPassword = req.getParameter("comfirmpassword");
+//				if (userPassword == null || userPassword.trim().length() == 0) {
+//					errorMsgs.add("請輸入密碼");
+//				} else if (!userPassword.equals(comfirmPassword)) {
+//					errorMsgs.add("兩次密碼需一致");
+//				}
+
+				String hotelPassword = req.getParameter("hotelPassword");
+				String comfirmPassword = req.getParameter("comfirmPassword");
+				if (hotelPassword == null || hotelPassword.trim().length() == 0) {
+
+				} else if (comfirmPassword == null || comfirmPassword.trim().length() == 0) {
+
+				} else if (!hotelPassword.equals(comfirmPassword)) {
+//					errorMsgs.add("兩次密碼需一致");
+				}
+
+				String hotelName = req.getParameter("hotelName");
+				String hotelNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				if (hotelName == null || hotelName.trim().length() == 0) {
+					errors.put("hotelName", "請輸入飯店名稱");
+				} else if (!hotelName.trim().matches(hotelNameReg)) { // 以下練習正則(規)表示式(regular-expression)
+					errors.put("hotelName", "飯店名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+				}
+
+				String hotelPhone = req.getParameter("hotelPhone");
+				String hotelPhoneReg = "^[0-9]{10}$";
+				if (hotelPhone == null || hotelPhone.trim().length() == 0) {
+					errors.put("hotelPhone", "請輸入電話號碼");
+				} else if (!hotelPhone.trim().matches(hotelPhoneReg)) {
+					errors.put("hotelPhone", "電話號碼: 只能是數字 , 且長度必需是10");
+				}
+
+				String hotelPrincipal = req.getParameter("hotelPrincipal");
+				if (hotelPrincipal == null || hotelPrincipal.trim().length() == 0) {
+					errors.put("hotelPrincipal", "請輸入負責人");
+				} 
+
+
+				hotelVO.setHotelPassword(hotelSvc.pwdhash(hotelPassword));
+				hotelVO.setHotelName(hotelName);
+				hotelVO.setHotelPhone(hotelPhone);
+				hotelVO.setHotelPrincipal(hotelPrincipal);
+				
+				if(errors != null && !errors.isEmpty()) {
+					req.getRequestDispatcher("/hotel/hotelMemberCenter.jsp").forward(req, res);
+					return;
+				}
+				
+//				if (!errorMsgs.isEmpty()) {
+//					session.setAttribute("hotelVO", hotelVO);
+//					RequestDispatcher failureView = req.getRequestDispatcher("/hotel/hotelMemberCenter.jsp");
+//					failureView.forward(req, res);
+//					return;
+//				}
+
+				// 開始修改資料
+
+				hotelVO = hotelSvc.updateHotel(hotelVO);
+				System.out.println("修改成功");
+
+				// 修改完成，準備轉交
+				out.println("<meta http-equiv='refresh' content='0;URL=" + req.getContextPath()
+						+ "/hotel/hotelMemberCenter.jsp'>");
+				out.println("<script> alert('修改資料完成!');</script>");
+
+			} catch (Exception e) {
+				System.out.println("update exception :" + e);
+				RequestDispatcher failureView = req.getRequestDispatcher("index.jsp");
+				failureView.forward(req, res);
+			}
+		}
 // ===================================================飯店登入=========================================================//
 
 		if ("loginForHotel".equals(hotelservlet)) {
@@ -177,7 +269,7 @@ public class HotelServlet extends HttpServlet {
 				if (!hotelEmailCheck.equals(hotelEmail)) {
 					errorMsgs.add("信箱或密碼錯誤");
 				}
-				
+
 				String hotelPasswordCheck = hotelVO.getHotelPassword();
 				System.out.println(hotelEmailCheck);
 				if (!hotelPasswordCheck.equals(hotelPwd)) {
