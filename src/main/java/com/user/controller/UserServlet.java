@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -148,7 +149,7 @@ public class UserServlet extends HttpServlet {
 				userVO.setUserRegistration(userRegistration);
 
 				if (!errorMsgs.isEmpty()) {
-					session.setAttribute("userVO", userVO);
+					req.setAttribute("userVO", userVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/user/registerForUser.jsp");
 					failureView.forward(req, res);
 					return;
@@ -267,7 +268,7 @@ public class UserServlet extends HttpServlet {
 
 		}
 		
-// ===================================================旅客登出=========================================================//		
+// ===================================================旅客、飯店登出=========================================================//		
 
 		if("logout".equals(action)) {
 			try {
@@ -303,6 +304,8 @@ public class UserServlet extends HttpServlet {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+//			Map<String, String> errors = new HashMap<String, String>();
+//			req.setAttribute("errors", errors);
 
 			try {
 
@@ -321,13 +324,24 @@ public class UserServlet extends HttpServlet {
 //				errorMsgs.add("請輸入正確信箱格式");
 //			}
 
+//				String userPassword = req.getParameter("userPassword");
+//				String comfirmPassword = req.getParameter("comfirmpassword");
+//				if (userPassword == null || userPassword.trim().length() == 0) {
+//					errorMsgs.add("請輸入密碼");
+//				} else if (!userPassword.equals(comfirmPassword)) {
+//					errorMsgs.add("兩次密碼需一致");
+//				}
+				
 				String userPassword = req.getParameter("userPassword");
-				String comfirmPassword = req.getParameter("comfirmpassword");
-				if (userPassword == null || userPassword.trim().length() == 0) {
-					errorMsgs.add("請輸入密碼");
-				} else if (!userPassword.equals(comfirmPassword)) {
+				String comfirmPassword = req.getParameter("comfirmPassword");
+				if(userPassword == null || userPassword.trim().length() == 0) {
+					
+				} else if(comfirmPassword == null || comfirmPassword.trim().length() == 0) {
+					
+				} else if(!userPassword.equals(comfirmPassword)) {
 					errorMsgs.add("兩次密碼需一致");
 				}
+				
 
 				String userName = req.getParameter("userName");
 				String userNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
@@ -360,6 +374,8 @@ public class UserServlet extends HttpServlet {
 					userBirthday = new java.sql.Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入西元日期");
 				}
+				
+				
 
 //			java.sql.Timestamp userRegistration = null;
 //			try {
@@ -383,14 +399,14 @@ public class UserServlet extends HttpServlet {
 				userVO.setUserIdentity(userIdentity);
 				userVO.setUserBirthday(userBirthday);
 //			userVO.setUserRegistration(userRegistration);
-
+				
 				if (!errorMsgs.isEmpty()) {
 					session.setAttribute("userVO", userVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/user/userMemberCenter.jsp");
 					failureView.forward(req, res);
 					return;
 				}
-
+				
 				// 開始修改資料
 
 //			userVO = userSvc.updateUser(userId, userEmail, userPassword, userName, userPhone, userIdentity,
@@ -409,7 +425,7 @@ public class UserServlet extends HttpServlet {
 
 			} catch (Exception e) {
 				System.out.println("update exception :" + e);
-				RequestDispatcher failureView = req.getRequestDispatcher("index.html");
+				RequestDispatcher failureView = req.getRequestDispatcher("index.jsp");
 				failureView.forward(req, res);
 			}
 		}

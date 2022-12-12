@@ -78,15 +78,11 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 
 							<br>
 							<div class="form-group">
-								<input type="email" class="form-control" placeholder="Email" name="userEmail"
-								value="<%=(userVO == null) ? "" : userVO.getUserEmail()%>"
-								>
+								<input type="email" class="form-control" placeholder="Email" name="userEmail">
 							
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" placeholder="密碼" name="userPassword"
-								value="<%=(userVO == null) ? "" : userVO.getUserPassword()%>"
-								>
+								<input type="password" class="form-control" placeholder="密碼" name="userPassword">
 							</div>		
 							<div class="row">
 								<div class="col-lg-6 col-md-6 col-sm-6">

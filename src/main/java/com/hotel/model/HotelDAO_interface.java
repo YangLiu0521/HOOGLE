@@ -14,7 +14,11 @@ public interface HotelDAO_interface {
 
 	public HotelVO findByPrimaryKey(Integer hotelId);
 	
-	public HotelVO findByHotelEmail(String hotelEmail, String hotelTaxid);
+	public HotelVO findByHotelEmailandTaxid(String hotelEmail, String hotelTaxid);
+	
+	public HotelVO findByHotelEmail(String userEmail);
 
 	public List<HotelVO> getAll();
+	
+	public String pwdhash(String password);
 }
