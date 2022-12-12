@@ -15,22 +15,22 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 <title>loginForUser</title>
 
 <!-- favicon -->
-<!-- <link rel="icon" href="favicon.ico" /> -->
+<link rel="icon" href="favicon.ico" />
 <!-- bootstrap core CSS -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/datetimepicker/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <!-- font awesome -->
-<link href="<%=request.getContextPath()%>/datetimepicker/css/all.min.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/all.min.css" rel="stylesheet">
 <!-- owl carousel -->
-<link href="<%=request.getContextPath()%>/datetimepicker/css/owl.carousel.min.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/datetimepicker/css/owl.theme.default.min.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/owl.carousel.min.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/owl.theme.default.min.css" rel="stylesheet">
 <!-- venobox css -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/datetimepicker/css/venobox.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/venobox.css">
 <!-- datepicker css -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/datetimepicker/css/datepicker.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/datepicker.min.css">
 <!-- custom styles for this template -->
-<link href="<%=request.getContextPath()%>/datetimepicker/css/custom.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/datetimepicker/css/responsive.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/datetimepicker/css/helper.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/custom.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/responsive.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/helper.css" rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
@@ -49,7 +49,7 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 				<div class="col-lg-4 col-md-4 mb-30">
 					<!-- breadcrumb -->
 					<ol class="breadcrumb mb-0">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
 						<li class="breadcrumb-item active">Sign In</li>
 					</ol>
 					<!-- breadcrumb end -->
@@ -78,15 +78,11 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 
 							<br>
 							<div class="form-group">
-								<input type="email" class="form-control" placeholder="Email" name="userEmail"
-								value="<%=(userVO == null) ? "" : userVO.getUserEmail()%>"
-								>
+								<input type="email" class="form-control" placeholder="Email" name="userEmail">
 							
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" placeholder="密碼" name="userPassword"
-								value="<%=(userVO == null) ? "" : userVO.getUserPassword()%>"
-								>
+								<input type="password" class="form-control" placeholder="密碼" name="userPassword">
 							</div>		
 							<div class="row">
 								<div class="col-lg-6 col-md-6 col-sm-6">
@@ -115,21 +111,21 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 	
 
 	<!-- js files -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/jquery-3.5.1.min.js"></script>
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/bootstrap.bundle.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 	<!-- counter js -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/jquery-1.10.2.min.js"></script>
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/waypoints.min.js"></script>
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/jquery.counterup.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery-1.10.2.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/waypoints.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery.counterup.min.js"></script>
 	<!-- venobox js -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/venobox.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/venobox.min.js"></script>
 	<!-- owl carousel -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/owl.carousel.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
 	<!-- portfolio js -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/jquery.mixitup.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery.mixitup.min.js"></script>
 	<!-- datepicker js -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/datepicker.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/datepicker.min.js"></script>
 	<!-- script js -->
-	<script src="<%=request.getContextPath()%>/datetimepicker/js/custom.js"></script>
+	<script src="<%=request.getContextPath()%>/js/custom.js"></script>
 </body>
 </html>

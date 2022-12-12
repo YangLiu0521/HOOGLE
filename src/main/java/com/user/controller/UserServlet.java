@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
+import com.hotel.model.HotelVO;
 import com.mail.model.MailService;
 import com.user.model.UserService;
 import com.user.model.UserVO;
@@ -147,7 +149,7 @@ public class UserServlet extends HttpServlet {
 				userVO.setUserRegistration(userRegistration);
 
 				if (!errorMsgs.isEmpty()) {
-					session.setAttribute("userVO", userVO);
+					req.setAttribute("userVO", userVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/user/registerForUser.jsp");
 					failureView.forward(req, res);
 					return;
@@ -174,7 +176,7 @@ public class UserServlet extends HttpServlet {
 
 				out.println("<meta http-equiv='refresh' content='1;URL=" + req.getContextPath()
 						+ "/user/loginForUser.jsp'>");
-				out.println("<script> alert('註冊成功weeeee');</script>");
+				out.println("<script> alert('註冊成功!');</script>");
 				// 回傳 json
 //				reportMsgs.add("註冊成功");
 //				JSONObject jsonObject = new JSONObject();
@@ -266,7 +268,7 @@ public class UserServlet extends HttpServlet {
 
 		}
 		
-// ===================================================旅客登出=========================================================//		
+// ===================================================旅客、飯店登出=========================================================//		
 
 		if("logout".equals(action)) {
 			try {
@@ -302,6 +304,8 @@ public class UserServlet extends HttpServlet {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+//			Map<String, String> errors = new HashMap<String, String>();
+//			req.setAttribute("errors", errors);
 
 			try {
 
@@ -320,13 +324,24 @@ public class UserServlet extends HttpServlet {
 //				errorMsgs.add("請輸入正確信箱格式");
 //			}
 
+//				String userPassword = req.getParameter("userPassword");
+//				String comfirmPassword = req.getParameter("comfirmpassword");
+//				if (userPassword == null || userPassword.trim().length() == 0) {
+//					errorMsgs.add("請輸入密碼");
+//				} else if (!userPassword.equals(comfirmPassword)) {
+//					errorMsgs.add("兩次密碼需一致");
+//				}
+				
 				String userPassword = req.getParameter("userPassword");
-				String comfirmPassword = req.getParameter("comfirmpassword");
-				if (userPassword == null || userPassword.trim().length() == 0) {
-					errorMsgs.add("請輸入密碼");
-				} else if (!userPassword.equals(comfirmPassword)) {
+				String comfirmPassword = req.getParameter("comfirmPassword");
+				if(userPassword == null || userPassword.trim().length() == 0) {
+					
+				} else if(comfirmPassword == null || comfirmPassword.trim().length() == 0) {
+					
+				} else if(!userPassword.equals(comfirmPassword)) {
 					errorMsgs.add("兩次密碼需一致");
 				}
+				
 
 				String userName = req.getParameter("userName");
 				String userNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
@@ -359,6 +374,8 @@ public class UserServlet extends HttpServlet {
 					userBirthday = new java.sql.Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入西元日期");
 				}
+				
+				
 
 //			java.sql.Timestamp userRegistration = null;
 //			try {
@@ -382,14 +399,14 @@ public class UserServlet extends HttpServlet {
 				userVO.setUserIdentity(userIdentity);
 				userVO.setUserBirthday(userBirthday);
 //			userVO.setUserRegistration(userRegistration);
-
+				
 				if (!errorMsgs.isEmpty()) {
 					session.setAttribute("userVO", userVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/user/userMemberCenter.jsp");
 					failureView.forward(req, res);
 					return;
 				}
-
+				
 				// 開始修改資料
 
 //			userVO = userSvc.updateUser(userId, userEmail, userPassword, userName, userPhone, userIdentity,
@@ -399,13 +416,16 @@ public class UserServlet extends HttpServlet {
 				System.out.println("修改成功");
 
 				// 修改完成，準備轉交
-				session.setAttribute("userVO", userVO);
-				RequestDispatcher successView = req.getRequestDispatcher("/user/userMemberCenter.jsp"); // 修改成功後,轉交listOneEmp.jsp
-				successView.forward(req, res);
+//				session.setAttribute("userVO", userVO);
+//				RequestDispatcher successView = req.getRequestDispatcher("/user/userMemberCenter.jsp"); // 修改成功後,轉交listOneEmp.jsp
+//				successView.forward(req, res);
+				out.println("<meta http-equiv='refresh' content='0;URL=" + req.getContextPath()
+				+ "/user/userMemberCenter.jsp'>");
+				out.println("<script> alert('修改資料完成!');</script>");
 
 			} catch (Exception e) {
 				System.out.println("update exception :" + e);
-				RequestDispatcher failureView = req.getRequestDispatcher("index.html");
+				RequestDispatcher failureView = req.getRequestDispatcher("index.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -426,18 +446,12 @@ public class UserServlet extends HttpServlet {
 					errorMsgs.add("請填寫信箱");
 				} else if (!userEmail.trim().matches(userEmailReg)) {
 					errorMsgs.add("請輸入正確信箱格式");
-				} else if (userSvc.getUserEmails(userEmail).size() < 0) {
-					errorMsgs.add("無此信箱");
+				} else if (userSvc.getUserEmails(userEmail).size() <= 0) {
+					errorMsgs.add("無此信箱，請輸入註冊時信箱");
 				}
 				System.out.println("信箱通過驗證：" + userEmail);
 
 				userVO = userSvc.findByUserEmail(userEmail);
-//				
-//				
-//				
-//				if(!userEmail.equals(userVO.getUserEmail())) {
-//					errorMsgs.add("非註冊信箱");
-//				}
 
 				// 確認資料有誤，印出錯誤資料並跳回原頁
 				if (!errorMsgs.isEmpty()) {
@@ -455,7 +469,7 @@ public class UserServlet extends HttpServlet {
 				String messageText = "Hello!" + userVO.getUserName() + "您的新密碼 ：「 " + newPassword + "  」";
 				mailService.sendMail(userEmail, subject, messageText);
 
-				userVO.setUserPassword(newPassword);
+				userVO.setUserPassword(userSvc.pwdhash(newPassword));
 				System.out.println(userSvc.pwdhash(newPassword));
 				userVO = userSvc.updateUser(userVO);
 				System.out.println("forgotPasswordSuccess");
@@ -473,7 +487,44 @@ public class UserServlet extends HttpServlet {
 			}
 
 		}
+// ===================================================確認狀態=========================================================//		
 
+		if ("checkLogin".equals(action)) {
+			try {
+				UserVO userVO = (UserVO) session.getAttribute("userVO");
+				HotelVO hotelVO = (HotelVO) session.getAttribute("hotelVO");
+				
+				HashMap<String, String> userInfoMap = new HashMap<String, String>();
+				userInfoMap.put("check", "2");
+				
+				if(userVO != null) {
+					userInfoMap.put("check", "1");
+					userInfoMap.put("email", userVO.getUserEmail());
+					userInfoMap.put("url", "/HOOGLE/user/userMemberCenter.jsp");
+				} else if(hotelVO != null) {
+					userInfoMap.put("check", "1");
+					userInfoMap.put("email", hotelVO.getHotelEmail());
+					userInfoMap.put("url", "/HOOGLE/hotel/hotelMemberCenter.jsp");
+				}
+				
+				JSONObject obj = new JSONObject(userInfoMap);
+				out.println(obj);
+				System.out.println(obj);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+				RequestDispatcher failureView = req.getRequestDispatcher("index.html");
+				failureView.forward(req, res);
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 		out.flush();
 		out.close();
 	}
