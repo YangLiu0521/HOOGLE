@@ -3,7 +3,7 @@
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-  //FoodVO foodVO = (FoodVO) request.getAttribute("foodVO"); //FoodServlet.java(Concroller), 存入req的foodVO物件
+  FoodVO foodVO = (FoodVO) request.getAttribute("foodVO"); //FoodServlet.java(Concroller), 存入req的foodVO物件
 %>
 
 <html>
@@ -66,6 +66,8 @@
 			<td>${foodVO.restaurantId}</td>
 			<td>${foodVO.foodPic}</td>
 			<td>${foodVO.foodName}</td>
+			<td><img src="${pageContext.request.contextPath}/food/read?foodPicid=${foodVO.foodPicid}" height="100" width="100"></td>
+		
 	</tr>
 </table>
 

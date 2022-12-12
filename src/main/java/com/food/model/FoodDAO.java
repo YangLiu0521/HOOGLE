@@ -12,16 +12,16 @@ public class FoodDAO implements FoodDAO_interface {
 
 	private static DataSource ds = null;
 	static {
-		
-		 try{
+
+		try {
 			Context ctx = new InitialContext();
-				ds = (DataSource) ctx.lookup("java:comp/env/jdbc/HOOGLEDB");
-				
-		}catch(NamingException e) {
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/HOOGLEDB");
+
+		} catch (NamingException e) {
 			e.printStackTrace();
-			}
 		}
-	
+	}
+
 	private static final String INSERT_STMT = "INSERT INTO food (restaurantId,foodPic,foodName) VALUES (?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT foodPicid,restaurantId,foodPic,foodName FROM food";
 	private static final String GET_ONE_STMT = "SELECT foodPicid,restaurantId,foodPic,foodName FROM food where foodPicid = ?";
@@ -38,7 +38,7 @@ public class FoodDAO implements FoodDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-			
+
 			pstmt.setInt(1, foodVO.getRestaurantId());
 			pstmt.setBytes(2, foodVO.getFoodPic());
 			pstmt.setString(3, foodVO.getFoodName());
@@ -80,7 +80,6 @@ public class FoodDAO implements FoodDAO_interface {
 			pstmt.setBytes(2, foodVO.getFoodPic());
 			pstmt.setString(3, foodVO.getFoodName());
 			pstmt.setInt(4, foodVO.getFoodPicid());
-			
 
 			pstmt.executeUpdate();
 
@@ -147,12 +146,12 @@ public class FoodDAO implements FoodDAO_interface {
 
 	@Override
 	public FoodVO findByPrimaryKey(Integer foodPicid) {
-		
+
 		FoodVO foodVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 
 			con = ds.getConnection();
@@ -173,8 +172,7 @@ public class FoodDAO implements FoodDAO_interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -199,20 +197,20 @@ public class FoodDAO implements FoodDAO_interface {
 				}
 			}
 		}
-		
+
 		return foodVO;
 	}
 
 	@Override
 	public List<FoodVO> getAll() {
-		
+
 		List<FoodVO> list = new ArrayList<FoodVO>();
 		FoodVO foodVO = null;
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 
 			con = ds.getConnection();
@@ -231,8 +229,7 @@ public class FoodDAO implements FoodDAO_interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {

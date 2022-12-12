@@ -12,35 +12,39 @@ FoodVO foodVO = (FoodVO) request.getAttribute("foodVO"); //FoodServlet.java (Con
 <title>美食資料修改 - update_food_input.jsp</title>
 
 <style>
-  table#table-1 {
-    width: 450px;
+table#table-1 {
+	width: 450px;
 	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
+	border: 2px solid black;
+	text-align: center;
+}
+
+table#table-1 h4 {
+	color: red;
+	display: block;
+	margin-bottom: 1px;
+}
+
+h4 {
+	color: blue;
+	display: inline;
+}
 </style>
 
 <style>
-  table {
+table {
 	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
+}
+
+table, th, td {
+	border: 0px solid #CCCCFF;
+}
+
+th, td {
+	padding: 1px;
+}
 </style>
 
 </head>
@@ -77,36 +81,40 @@ FoodVO foodVO = (FoodVO) request.getAttribute("foodVO"); //FoodServlet.java (Con
 
 			<tr>
 				<td>美食照片編號:<font color=red><b>*</b></font></td>
-		<td>${param.foodPicid}</td>
-	</tr>
+				<td>${param.foodPicid}</td>
+			</tr>
+		
 			<tr>
 				<td>餐廳編號:<font color=red><b>*</b></font></td>
-		<td>${param.restaurantId}</td>
+				<td>${param.restaurantId}</td>
 				
 			</tr>
 			<tr>
 				<td>美食照片:</td>
-		<td><input type="file" name="foodPic" size="45"
-		value="${param.foodPic}"/></td><td>${errorMsgs.foodPic}
-		</td>
-		<tr>
-		
-		<td>美食名稱:</td>
+				<td><input type="file" name="foodPic" size="45"
+					value="${param.foodPic}" /></td>
+				<td>${errorMsgs.foodPic}</td>
+			<tr>
+
+				<td>美食名稱:</td>
 				<td><input type="TEXT" name="foodName" size="45"
 					value="${param.foodName}" /></td>
 				<td>${errorMsgs.foodName}</td>
-		</tr>	
-				
-				
-				</table>
-<br>
-<input type="hidden" name="action" value="update">
-<input type="hidden" name="empno" value="${param.empno}">
-<input type="submit" value="送出修改"></FORM>
+			</tr>
+
+
+		</table>
+		<br> <input type="hidden" name="action" value="update"> <input
+			type="hidden" name="food" value="${param.food}"> <input
+			type="submit" value="送出修改">
+	<input type="hidden" name="foodPicid" value="${param.foodPicid}">
+	<input type="hidden" name="restaurantId" value="${param.restaurantId}">
+
+	</FORM>
 </body>
 </html>
 
-			<%-- 	<jsp:useBean id="restaurantSvc" scope="page" class="com.restaurant.model.RestaurantService" /> --%>
+<%-- 	<jsp:useBean id="restaurantSvc" scope="page" class="com.restaurant.model.RestaurantService" /> --%>
 <!-- 			<tr> -->
 <!-- 				<td>餐廳:<font color=red><b>*</b></font></td> -->
 <!-- 				<td><select size="1" name="restaurantId"> -->
