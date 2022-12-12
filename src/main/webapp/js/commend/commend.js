@@ -10,11 +10,11 @@ divStars.onmouseover = function (e) {
   if (e.target.tagName === "IMG") {
     //事件源是圖片
     //把滑鼠移動到的星星替換圖片
-<<<<<<< HEAD
-    e.target.src="./images/commend/star.png";
-=======
+
     e.target.src="<%=request.getContextPath()%>/images/commend/star.png";
->>>>>>> origin/Dev
+
+    e.target.src="<%=request.getContextPath()%>/images/commend/star.png";
+
     //把滑鼠移動到的星星之前的星星替換圖片
     var prev = e.target.previousElementSibling;
     while (prev) {
