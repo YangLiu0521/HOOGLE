@@ -65,14 +65,15 @@ public class OrdService {
 			ordBean.setOrdCheckout(ordCheckout);
 			ordBean.setOrdNights(ordNights);
 			ordBean.setOrdRemark(ordRemark);
-			OrdDao.update(ordBean);
+			OrdDao.update(ordId, userId, hotelId, userName, hotelName, ordDate
+					, ordCheckin, ordCheckout, ordNights, ordRemark);
 
 			return OrdDao.findByPrimaryKey(ordId);
 		}
 		
-		public void updateOrd(OrdBean ordBean) {
-			OrdDao.update(ordBean);
-		}
+//		public void updateOrd(OrdBean ordBean) {
+//			OrdDao.update(ordBean);
+//		}
 
 		public void deleteOrd(Integer ordId) {
 			OrdDao.delete(ordId);

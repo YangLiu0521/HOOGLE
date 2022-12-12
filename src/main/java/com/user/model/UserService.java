@@ -86,8 +86,8 @@ public class UserService {
 		return dao.findByUserEmail(userEmail);
 	}
 	
-	public String pwdhash(String userPassword) {
-		dao.pwdhash(userPassword);
-		return userPassword;
+	public String pwdhash(String password) {
+		dao.pwdhash(password);
+		return password;
 	}
 }
