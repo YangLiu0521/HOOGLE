@@ -198,12 +198,13 @@ public class CommendServlet extends HttpServlet {
 			Integer commendGrade = null;
 			if (gradeStr == null || gradeStr.isEmpty()) {
 				errorMsgs.add("評價等級請勿空白");
-			} else {
-				commendGrade = Integer.valueOf(gradeStr);
-				if (!(commendGrade > 0 && commendGrade < 6)) {
-					errorMsgs.add("評價等級請填1-5");
-				}
-			}
+			} 
+//			else {
+//				commendGrade = Integer.valueOf(gradeStr);
+//				if (!(commendGrade > 0 && commendGrade < 6)) {
+//					errorMsgs.add("評價等級請填1-5");
+//				}
+//			}
 
 			String commendContent = req.getParameter("commendContent");
 			if (commendContent == null || commendContent.trim().length() == 0) {
@@ -213,19 +214,19 @@ public class CommendServlet extends HttpServlet {
 				errorMsgs.add("評價內容500字以內");
 			}
 
-			java.sql.Date commendDate = null;
-			try {
-				commendDate = java.sql.Date.valueOf(req.getParameter("commendDate").trim());
-			} catch (IllegalArgumentException e) {
+//			java.sql.Date commendDate = null;
+//			try {
+//				commendDate = java.sql.Date.valueOf(req.getParameter("commendDate").trim());
+//			} catch (IllegalArgumentException e) {
 //				errorMsgs.put("commendDate","請輸入日期");
-				errorMsgs.add("請輸入日期");
-			}
+//				errorMsgs.add("請輸入日期");
+//			}
 
 			CommendVO commendVO = new CommendVO();
 			commendVO.setOrdId(ordId);
 			commendVO.setCommendGrade(commendGrade);
 			commendVO.setCommendContent(commendContent);
-			commendVO.setCommendDate(commendDate);
+//			commendVO.setCommendDate(commendDate);
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req.getRequestDispatcher("/commend/addCommend.jsp");
 				failureView.forward(req, res);
@@ -234,7 +235,7 @@ public class CommendServlet extends HttpServlet {
 
 			// 開始新增資料
 			commendSvc = new CommendService();
-			commendVO = commendSvc.addCommend(ordId, commendGrade, commendContent, commendDate);
+			commendVO = commendSvc.addCommend(commendVO);
 
 			// 新增完成，準備轉交
 			String url = "/commend/listAllCommend.jsp";

@@ -3,13 +3,13 @@
 <%@ page import="com.commend.model.*"%>
 
 <%
-  CommendVO commendVO = (CommendVO) request.getAttribute("commendVO"); //CommendServlet.java (Concroller) 存入req的commendVO物件 (包括幫忙取出的commendVO, 也包括輸入資料錯誤時的commendVO物件)
+  CommendVO commendVO = (CommendVO) request.getAttribute("commendVO");
 %>
 <%-- --<%= commendVO==null %>--${commendVo.commendAuto}-- --%>
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>評價資料修改 - update_commend_input.jsp</title>
+<title>住宿經驗評價</title>
 
 <style>
   table#table-1 {
@@ -48,12 +48,12 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>評價資料修改  - update_commend_input.jsp</h3>
+		 <h3>評價新增 - addCommend.jsp</h3></td><td>
 		 <h4><a href="select_page.jsp"><img src="img/logo.jpg" width="100" height="100" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
-<h3>資料修改:</h3>
+<h3>資料新增:</h3>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -68,33 +68,28 @@
 <FORM METHOD="post" ACTION="commend.do" name="form1">
 <table>
 	<tr>
-		<td>評價編號:</td>
-		<td>${commendVO.commendAuto}</td>
-	</tr>
-	<tr>
 		<td>訂單編號:</td>
-		<td><input type="TEXT" name="ordId" size="45" value="${commendVO.ordId}"/></td>
+		<td><input type="TEXT" name="ordId" size="45" 
+			 value="${commendVO.ordId}" /></td>
 	</tr>
 	<tr>
 		<td>評價等級:</td>
-		<td><input type="TEXT" name="commendGrade" size="45" value="${commendVO.commendGrade}" /></td>
+		<td><input type="TEXT" name="commendGrade" size="45"
+			 value="<%=commendVO == null? "" : commendVO.getCommendGrade()%>" /></td>
 	</tr>
 	<tr>
 		<td>評價內容:</td>
-		<td><input type="TEXT" name="commendContent" size="100"	value="${commendVO.commendContent}" /></td>
+		<td><input type="TEXT" name="commendContent" size="100"
+			 value="${commendVO.commendContent}" /></td>
 	</tr>
-	<tr>
-		<td>評價日期：</td>
-		<td><input type="Date" name="commendDate" size="20" value="${commendVO.commendDate}"></td>
-	</tr>
-	
+<!-- 	<tr> -->
+<!-- 		<td>評價日期：</td> -->
+<!-- 		<td><input type="Date" name="commendDate" size="20" -->
+<%-- 			value="${commendVO.commendDate}"></td> --%>
+<!-- 	</tr> -->
 </table>
 <br>
-<input type="hidden" name="action" value="update">
-<input type="hidden" name="commendAuto" value="${commendVO.commendAuto}">
-<input type="submit" value="送出修改"></FORM>
-
-
+<input type="hidden" name="action" value="insert">
+<input type="submit" value="送出新增"></FORM>
 </body>
-
 </html>
