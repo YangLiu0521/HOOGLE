@@ -222,13 +222,14 @@ HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //User
 
 												<div class="form-group">
 													<h6>密碼修改</h6>
-													<br> <input type="password" class="form-control" placeholder="請輸入密碼" name="hotelPassword"
-														value="<%=(hotelVO == null) ? "" : hotelVO.getHotelPassword()%>">
+													<br> <input type="password" class="form-control" placeholder="請輸入密碼" name="hotelPassword">
+													<span class="error" style="color: red">${errors.hotelPassword}</span>
+<%-- 														value="<%=(hotelVO == null) ? "" : hotelVO.getHotelPassword()%>" --%>
 												</div>
 												<div class="form-group">
 													<h6>再次確認密碼</h6>
-													<br> <input type="password" class="form-control" placeholder="再次確認密碼" name="comfirmPassword"
-														value="<%=(hotelVO == null) ? "" : ""%>">
+													<br> <input type="password" class="form-control" placeholder="再次確認密碼" name="comfirmPassword">
+													<span class="error" style="color: red">${errors.hotelPassword}</span>
 												</div>
 												<div class="form-group">
 													<h6>飯店狀態</h6>

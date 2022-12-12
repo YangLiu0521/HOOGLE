@@ -183,7 +183,7 @@
                     aria-controls="tab2" aria-selected="false">密碼修改</a> </li>
               </ul>
 			
-			<form action="UserServlet" method="POST">
+			<form action="UserServlet" method="POST" id="comfirmChange">
 <!-- 			<input type="hidden" name="action" value="update"> -->
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active p-15" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
@@ -198,21 +198,25 @@
                     <h6>姓名</h6><br>
                     <input type="text" class="form-control" placeholder="註冊時姓名" name="userName"
                     value="<%=(userVO == null) ? "" : userVO.getUserName()%>">
+                    <span class="error" style="color: red">${errors.userName}</span>
                   </div>
                   <div class="form-group">
                     <h6>生日</h6><br>
                     <input type="date" class="form-control" placeholder="註冊時生日" name="userBirthday"
                     value="<%=(userVO == null) ? "" : userVO.getUserBirthday()%>">
+                    <span class="error" style="color: red">${errors.userBirthday}</span>
                   </div>
                   <div class="form-group">
                     <h6>電話</h6><br>
                     <input type="text" class="form-control" placeholder="註冊時電話" name="userPhone"
                     value="<%=(userVO == null) ? "" : userVO.getUserPhone()%>">
+                    <span class="error" style="color: red">${errors.userPhone}</span>
                   </div>
                   <div class="form-group">
                     <h6>身分證</h6><br>
                     <input type="text" class="form-control" placeholder="註冊時身分證" name="userIdentity"
                     value="<%=(userVO == null) ? "" : userVO.getUserIdentity()%>">
+                    <span class="error" style="color: red">${errors.userIdentity}</span>
                   </div>
                   <br>
                   <button type="submit" class="btn book-now-btn w-50">確認修改</button>
@@ -226,25 +230,27 @@
 
                   <div class="form-group">
                     <h6>舊密碼</h6><br>
-                    <input type="text" class="form-control" disabled placeholder="舊密碼" name="userPassword"
-                    value="<%=(userVO == null) ? "" : userVO.getUserPassword()%>">
+                    <input type="text" class="form-control" placeholder="舊密碼" name="oldUserPassword">
+                    <span class="error" style="color: red">${errors.oldUserPassword}</span>
                   </div>
                   <div class="form-group">
                     <h6>新密碼</h6><br>
-                    <input type="password" class="form-control" placeholder="請輸入新密碼" name="userPassword"
-                    value="<%=(userVO == null) ? "" : userVO.getUserPassword()%>">
+                    <input type="password" class="form-control" placeholder="請輸入新密碼" name="newUserPassword" id="newUserPassword"
+                    >
+<%--                     value="<%=(userVO == null) ? "" : userVO.getUserPassword()%>" --%>
                   </div>
                   <div class="form-group">
                     <h6>密碼確認</h6><br>
-                    <input type="password" class="form-control" placeholder="再次確認新密碼" name="comfirmPassword"
-                    value="<%=(userVO == null) ? "" : ""%>">
+                    <input type="password" class="form-control" placeholder="再次確認新密碼" name="comfirmPassword" id="comfirmPassword"
+                    >
+<%--                     value="<%=(userVO == null) ? "" : ""%>" --%>
                   </div>
                   <br>
-                  <button type="submit" class="btn book-now-btn w-50">確認修改</button>
+                  <button type="submit" class="btn book-now-btn w-50" >確認修改</button>
 <!-- 				   <input type="hidden" name="action" value="update"> -->
                 </div>
               </div>
-              </form>
+              </form>          
             </div>
           </div>
 
@@ -334,6 +340,7 @@
   <script src="<%=request.getContextPath()%>/js/custom.js"></script>
   <script src="https://kit.fontawesome.com/4ce3b6b697.js" crossorigin="anonymous"></script>
   <script src="<%=request.getContextPath()%>/js/member/memberHeader.js"></script>
+  <script src="<%=request.getContextPath()%>/js/member/memberChangePassword.js"></script>
   
 </body>
 </html>

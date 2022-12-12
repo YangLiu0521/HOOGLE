@@ -14,7 +14,7 @@ public class UserService {
 	}
 
 	public UserVO addUser(String userEmail, String userPassword, String userName, String userPhone, String userIdentity,
-			java.sql.Date userBirthday, java.sql.Timestamp userRegistration) {
+			java.sql.Date userBirthday, java.sql.Date userRegistration) {
 
 		UserVO userVO = new UserVO();
 
@@ -37,7 +37,7 @@ public class UserService {
 	}
 
 	public UserVO updateUser(Integer userId, String userEmail, String userPassword, String userName, String userPhone,
-			String userIdentity, java.sql.Date userBirthday, java.sql.Timestamp userRegistration) {
+			String userIdentity, java.sql.Date userBirthday, java.sql.Date userRegistration) {
 
 		UserVO userVO = new UserVO();
 

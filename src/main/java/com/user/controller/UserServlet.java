@@ -302,10 +302,10 @@ public class UserServlet extends HttpServlet {
 
 			System.out.println("update");
 
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-//			Map<String, String> errors = new HashMap<String, String>();
-//			req.setAttribute("errors", errors);
+//			List<String> errorMsgs = new LinkedList<String>();
+//			req.setAttribute("errorMsgs", errorMsgs);
+			Map<String, String> errors = new HashMap<String, String>();
+			req.setAttribute("errors", errors);
 
 			try {
 
@@ -328,43 +328,38 @@ public class UserServlet extends HttpServlet {
 //				String comfirmPassword = req.getParameter("comfirmpassword");
 //				if (userPassword == null || userPassword.trim().length() == 0) {
 //					errorMsgs.add("請輸入密碼");
-//				} else if (!userPassword.equals(comfirmPassword)) {
-//					errorMsgs.add("兩次密碼需一致");
-//				}
+//				} 
 				
-				String userPassword = req.getParameter("userPassword");
-				String comfirmPassword = req.getParameter("comfirmPassword");
-				if(userPassword == null || userPassword.trim().length() == 0) {
+				String oldUserPassword = req.getParameter("oldUserPassword");
+				String newUserPassword = req.getParameter("newUserPassword");
+				if(oldUserPassword == null || oldUserPassword.trim().length() == 0) {
+					newUserPassword = userVO.getUserPassword();
+				} else if(!oldUserPassword.equals(userVO.getUserPassword())) {
+					errors.put("oldUserPassword", "舊密碼錯誤");			
+				} 
 					
-				} else if(comfirmPassword == null || comfirmPassword.trim().length() == 0) {
-					
-				} else if(!userPassword.equals(comfirmPassword)) {
-					errorMsgs.add("兩次密碼需一致");
-				}
-				
-
 				String userName = req.getParameter("userName");
 				String userNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (userName == null || userName.trim().length() == 0) {
-					errorMsgs.add("請填寫姓名");
+					errors.put("userName", "請填寫姓名");
 				} else if (!userName.trim().matches(userNameReg)) { // 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errors.put("userName", "姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
 				}
 
 				String userPhone = req.getParameter("userPhone");
 				String userPhoneReg = "^[0-9]{10}$";
 				if (userPhone == null || userPhone.trim().length() == 0) {
-					errorMsgs.add("請輸入電話號碼");
+					errors.put("userPhone", "請輸入電話號碼");
 				} else if (!userPhone.trim().matches(userPhoneReg)) {
-					errorMsgs.add("電話號碼: 只能是數字 , 且長度必需是10");
+					errors.put("userPhone", "電話號碼: 只能是數字 , 且長度必需是10");
 				}
 
 				String userIdentity = req.getParameter("userIdentity");
 				String userIdentityReg = "^[A-Z][12]\\d{8}$";
 				if (userIdentity == null || userIdentity.trim().length() == 0) {
-					errorMsgs.add("請輸入身分證");
+					errors.put("userIdentity" ,"請輸入身分證");
 				} else if (!userIdentity.trim().matches(userIdentityReg)) {
-					errorMsgs.add("請符合身分證格式");
+					errors.put("userIdentity" ,"請符合身分證格式");
 				}
 
 				java.sql.Date userBirthday = null;
@@ -372,7 +367,7 @@ public class UserServlet extends HttpServlet {
 					userBirthday = java.sql.Date.valueOf(req.getParameter("userBirthday").trim());
 				} catch (IllegalArgumentException e) {
 					userBirthday = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸入西元日期");
+					errors.put("userBirthday" ,"請輸入西元日期");
 				}
 				
 				
@@ -389,23 +384,25 @@ public class UserServlet extends HttpServlet {
 //			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //			String timeStr = df.format(userRegistration);
 //			userRegistration = Timestamp.valueOf(timeStr);
+				
+				if (errors != null && !errors.isEmpty()) {
+					session.setAttribute("userVO", userVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/user/userMemberCenter.jsp");
+					failureView.forward(req, res);
+					return;
+				}
 
 //			UserVO userVO = new UserVO();
 //			userVO.setUserId(userId);
 //			userVO.setUserEmail(userEmail);
-				userVO.setUserPassword(userSvc.pwdhash(userPassword));
+				userVO.setUserPassword(userSvc.pwdhash(newUserPassword));
 				userVO.setUserName(userName);
 				userVO.setUserPhone(userPhone);
 				userVO.setUserIdentity(userIdentity);
 				userVO.setUserBirthday(userBirthday);
 //			userVO.setUserRegistration(userRegistration);
 				
-				if (!errorMsgs.isEmpty()) {
-					session.setAttribute("userVO", userVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/user/userMemberCenter.jsp");
-					failureView.forward(req, res);
-					return;
-				}
+				
 				
 				// 開始修改資料
 
