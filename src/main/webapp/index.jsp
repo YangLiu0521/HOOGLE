@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
 <!DOCTYPE html>
 <html lang="en">
@@ -153,9 +153,9 @@
           <div class="center-search">
             <h1 class="text-white">Go once, living anywhere</h1>
             <!-- <p class="text-white">living anywhere</p> -->
-            <form class="form-style-1">
+            <form class="form-style-1" method="get" action="${pageContext.request.contextPath}/searchHotel/searchHotel.controller">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="目的地">
+                <input type="text" class="form-control" name="hotelCounty" value="${param.hotelCounty}" placeholder="目的地">
               </div>
               <div class="row pt-20">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
@@ -202,7 +202,7 @@
                   <option>4</option> -->
                 </select>
               </div>
-              <button type="submit" class="btn-style-1 w-100">搜尋飯店</button>
+              <button type="submit" class="btn-style-1 w-100" name="searchHotel" value="Select">搜尋飯店</button>
             </form>
           </div>
         </div>

@@ -115,7 +115,7 @@ tr:hover td {
 </table>
 </c:if>
 	
-<h3><a href="<c:url value="/searchHotel/searchHotel.jsp" />">Search Table(重新查詢)</a></h3>
+<h3><a href="<c:url value="/index.jsp" />">Search Table(重新查詢)</a></h3>
 
 </body>
 </html>

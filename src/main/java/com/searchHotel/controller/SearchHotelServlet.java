@@ -79,7 +79,10 @@ private static final long serialVersionUID = 1L;
 //呼叫Model
 		SearchHotelBean bean = new SearchHotelBean();
 		bean.setHotelCounty(hotelCountyInput);
-		Query <SearchHotelBean> query = session.createQuery("From SearchHotelBean where hotelCounty = '台北市'",SearchHotelBean.class);
+//		Query <SearchHotelBean> query = session.createQuery("From SearchHotelBean where hotelCounty = '台北市'",SearchHotelBean.class);
+		Query <SearchHotelBean> query = session.createQuery("From SearchHotelBean where hotelCounty=?0",SearchHotelBean.class);
+		query.setParameter(0, hotelCountyInput);
+		
 		List results = query.list();
 		if(searchHotel!=null && searchHotel.equals("Select")) {
 			for(int i=0 ; i<results.size() ; i++) {
