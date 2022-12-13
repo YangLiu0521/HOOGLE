@@ -14,5 +14,6 @@ public interface AdministratorDAO_interface {
     
     public String findAccount(String administratorAccount);
     public String matchAccountPassword(String administratorAccount);
+    public void disable(AdministratorVO administratorVO);
 
 }

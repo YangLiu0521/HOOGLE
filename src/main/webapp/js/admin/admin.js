@@ -34,3 +34,13 @@ for(i=0;i<linkCollapse.length;i++){
     })
 }
 
+// ========== intput disabled ==========
+
+//function click_disabled(){
+//    var disabled = document.querySelectorAll(".input_disabled");
+//    
+//    for(var i = 0; i < disabled.length; i++){
+//        disabled[i].disabled = true;
+//    }
+//}
+//document.querySelector('.input_click_disabled').addEventListener('click', click_disabled);
