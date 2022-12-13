@@ -27,8 +27,13 @@ public class CommendService {
 		return commendVO;
 	}
 
-	public void addCommend(CommendVO commendVO) {
+	public CommendVO addCommend(CommendVO commendVO) {
+		java.util.Date date = new java.util.Date();
+		java.sql.Date dateSql = new java.sql.Date(date.getTime());
+		commendVO.setCommendDate(dateSql);
+		
 		dao.insert(commendVO);
+		return commendVO;
 	}
 	
 	public CommendVO updateCommend(Integer commendAuto,Integer ordId, Integer commendGrade, String commendContent, Date commendDate) {
