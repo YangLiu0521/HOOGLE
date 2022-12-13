@@ -47,7 +47,7 @@ AdministratorVO administratorVO = (AdministratorVO) request.getAttribute("admini
 						<ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 						<ul class="collapse_menu">
 							<a href="#" class="collapse__sublink"><pre>飯店</pre></a>
-							<a href="#" class="collapse__sublink"><pre>旅客</pre></a>
+							<a href="<%=request.getContextPath()%>/back_end/hotelAndUser/userList.jsp" class="collapse__sublink"><pre>旅客</pre></a>
 						</ul>
 					</div>
 					
@@ -117,22 +117,22 @@ AdministratorVO administratorVO = (AdministratorVO) request.getAttribute("admini
 	<div class="div_table">
 		<table>
 			<tr class="td_head">
-				<td>管理者編號</td>
-				<td>管理者姓名</td>
-				<td>管理者帳號</td>
-				<td>管理者密碼</td>
-				<td>管理者相關</td>
-				<td>上下架最新消息</td>
-				<td>飯店相關</td>
-				<td>旅客相關</td>
-				<td>雇用日期</td>
+				<td width="50px">管理者編號</td>
+				<td width="15%">管理者姓名</td>
+				<td width="20%">管理者帳號</td>
+				<td width="20%">管理者密碼</td>
+				<td width="40px">管理者相關</td>
+				<td width="40px">上下架最新消息</td>
+				<td width="40px">飯店相關</td>
+				<td width="40px">旅客相關</td>
+				<td width="85px">雇用日期</td>
 			</tr>
 			<tr class="td_body">
 				<td><%=administratorVO.getAdministratorId()%></td>
-				<td><input type="TEXT" name="administratorName" size="10"
+				<td><input type="TEXT" name="administratorName" size="12"
 					value="<%=administratorVO.getAdministratorName()%>" /></td>
 				<td><%=administratorVO.getAdministratorAccount()%></td>
-				<td><input type="TEXT" name="administratorPassword" size="20"
+				<td><input type="TEXT" name="administratorPassword" size="18"
 					value="<%=administratorVO.getAdministratorPassword()%>" /></td>
 				<!-- 		設定value="true"的話，有勾選會回傳boolean，否則會回傳null -->
 				<!-- 		利用三元運算，到資料庫取值，若資料庫資料是true則checkbox設定為checked -->

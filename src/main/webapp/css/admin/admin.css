@@ -313,14 +313,16 @@ div.test_radius{
   }
 
   table{
-    /* font-size: 14px; */
+    font-size: 14px;
     border-collapse:collapse;
-    display: flex;
+/*     display: flex; */
     justify-content: center;
     text-align: center;
     align-items: center;
-    /* width: 100%; */
+/*     width: 75%; */
     width: 900px;
+    table-layout: fixed;
+    word-break:break-all;
     color: black;
    
   }
@@ -332,7 +334,7 @@ div.test_radius{
   td, th{
     border: solid 1.5px var(--white-color);
     padding: 10px;
-    width: auto;
+/*     width: 10%; */
     height: 45px;
     vertical-align: middle;
   }

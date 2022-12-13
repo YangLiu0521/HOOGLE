@@ -54,7 +54,7 @@ pageContext.setAttribute("list", list);
 						<ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 						<ul class="collapse_menu">
 							<a href="#" class="collapse__sublink"><pre>飯店</pre></a>
-							<a href="#" class="collapse__sublink"><pre>旅客</pre></a>
+							<a href="<%=request.getContextPath()%>/back_end/hotelAndUser/userList.jsp" class="collapse__sublink"><pre>旅客</pre></a>
 						</ul>
 					</div>
 					
@@ -131,17 +131,17 @@ pageContext.setAttribute("list", list);
 	<div class="div_table">
 	<table>
 		<tr class="td_head">
-			<th>管理者編號</th>
-			<th>管理者姓名</th>
-			<th>管理者帳號</th>
+			<th width="50px">管理者編號</th>
+			<th width="60px">管理者姓名</th>
+			<th width="25%">管理者帳號</th>
 			<!-- <th>管理者密碼</th> -->
-			<th>管理者相關</th>
-			<th>上下架最新消息</th>
-			<th>飯店相關</th>
-			<th>旅客相關</th>
-			<th>雇用日期</th>
-			<th>修改</th>
-			<th>停權</th>
+			<th width="45px">管理者相關</th>
+			<th width="45px">上下架最新消息</th>
+			<th width="45px">飯店相關</th>
+			<th width="45px">旅客相關</th>
+			<th width="15%">雇用日期</th>
+			<th width="45px">修改</th>
+			<th width="40px">停權</th>
 		</tr>
 		<%-- 	<%@ include file="page1.file" %>  --%>
 		<%-- 	<c:forEach var="administratorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
