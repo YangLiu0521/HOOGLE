@@ -19,13 +19,13 @@ CommendVO commendVO = (CommendVO) request.getAttribute("commendVO");
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/commend/commend.css" />
-<title>住宿經驗評價</title>
+<title>修改住宿經驗評價</title>
 </head>
 <body>
 	<FORM METHOD="post" ACTION="commend.do" name="form1">
 		<!--header upper start-->
 		<header class="header">
-			<div class="header-up-bar">住宿經驗評價</div>
+			<div class="header-up-bar">住宿經驗評價(修改)</div>
 		</header>
 		<!--header upper end-->
 		<!-- 評價編號&訂單編號開始 -->
