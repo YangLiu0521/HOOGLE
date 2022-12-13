@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+<%@ page import="com.searchHotel.model.*"%>
+<%@ page import="java.util.*" %>
+
+<!-- //............... -->
+<%
+// 	SearchHotelService searchHotelSvc = new SearchHotelService();
+//     List <SearchHotelBean> list = searchHotelSvc.getAll();
+//     pageContext.setAttribute("list",list);
+%>
+<!-- //............... -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,20 +27,20 @@
 <!-- favicon -->
 <!-- <link rel="icon" href="favicon.ico" /> -->
 <!-- bootstrap core CSS -->
-<link rel="stylesheet" href="css/bootstrap.min.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" >
 <!-- font awesome -->
-<link href="css/all.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/all.min.css" rel="stylesheet">
 <!-- owl carousel -->
-<link href="css/owl.carousel.min.css" rel="stylesheet">
-<link href="css/owl.theme.default.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/owl.carousel.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/owl.theme.default.min.css" rel="stylesheet">
 <!-- venobox css -->
-<link rel="stylesheet" href="css/venobox.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/venobox.css">
 <!-- datepicker css -->
-<link rel="stylesheet" href="css/datepicker.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/datepicker.min.css">
 <!-- custom styles for this template -->
-<link href="css/abu-css/abu.css" rel="stylesheet">
-<link href="css/responsive.css" rel="stylesheet">
-<link href="css/helper.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/abu-css/abu.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/responsive.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/helper.css" rel="stylesheet">
 </head>
 
 <body>
@@ -55,7 +65,7 @@
             <!-- top Menu -->
             <div class="collapse navbar-collapse" id="navbarTheme">
               <ul class="navbar-nav align-items-start align-items-lg-center">
-                <li class="active"><a href="index.jsp"><img src="images/abu-index/logo.png" alt="" class="img-fluid"></a></li> 
+                <li class="active"><a href="/index.jsp"><img src="${pageContext.request.contextPath}/images/abu-index/logo.png" alt="" class="img-fluid"></a></li> 
                 <li><a class="nav-link" href="about.html">比價</a></li>
                 <li><a class="nav-link" href="gallery.html">美食</a></li>
                 <!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">關於我們</a>
@@ -213,13 +223,13 @@
   <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
     <div class="carousel-inner"> 
       <!-- slider item -->
-      <div class="carousel-item active"> <img src="images/abu-index/scenery.jpg" alt="" class="img-fluid"> </div>
+      <div class="carousel-item active"> <img src="${pageContext.request.contextPath}/images/abu-index/scenery.jpg" alt="" class="img-fluid"> </div>
       <!-- slider item end --> 
       <!-- slider item -->
-      <div class="carousel-item"> <img src="images/abu-index/scenery02.jpg" alt="" class="img-fluid"> </div>
+      <div class="carousel-item"> <img src="${pageContext.request.contextPath}/images/abu-index/scenery02.jpg" alt="" class="img-fluid"> </div>
       <!-- slider item end --> 
       <!-- slider item -->
-      <div class="carousel-item"> <img src="images/abu-index/scenery03.jpg" alt="" class="img-fluid"> </div>
+      <div class="carousel-item"> <img src="${pageContext.request.contextPath}/images/abu-index/scenery03.jpg" alt="" class="img-fluid"> </div>
       <!-- slider item end --> 
     </div>
     <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"> 
@@ -258,141 +268,141 @@
 </div>
 <!-- ================ About area end ================ --> 
 <!-- ================ Blog area ================ -->
-<div class="blog-area pt-70 pb-40 position-relative">
-  <div class="bg-style-1"></div>
-  <div class="container"> 
-    <!-- section title -->
-    <div class="section-title text-center">
-      <h2>最新消息</h2>
-      <span class="dashed-border"></span> </div>
-    <!-- section title -->
-    <div class="row">
-      <div class="col-lg-4 col-md-6 mb-30"> 
-        <!-- blog box -->
-        <div class="blog-box shadow">
-          <div class="blog_img mb-20"><img src="images/blog/blog-1.jpg" alt=""></div>
-          <div class="blog-des">
-            <h6 class="blog_date font-weight-normal text-muted"><span>公告類型</span> January 01, 2020</h6>
-            <h5 class="mt-10 mb-6"><a href="#" class="text-dark">The Most Advance Business Plan</a></h5>
-            <p class="text-muted">Lorem ipsum dolor sit amet consectetur ipiscing elit amet consectetur piscing elit consectetur adipiscing elit sed et eletum.</p>
-            <div class="read_more">
-              <div class="blog_border"></div>
-              <a href="#" class="text-dark text-uppercase"> Read More</a> </div>
-          </div>
-        </div>
-        <!-- blog box end --> 
-      </div>
-      <div class="col-lg-4 col-md-6 mb-30"> 
-        <!-- blog box -->
-        <div class="blog-box shadow">
-          <div class="blog_img mb-20"><img src="images/blog/blog-2.jpg" alt=""></div>
-          <div class="blog-des">
-            <h6 class="blog_date font-weight-normal text-muted"><span>公告類型</span> January 01, 2020</h6>
-            <h5 class="mt-10 mb-6"><a href="#" class="text-dark">Beautiful Home Page</a></h5>
-            <p class="text-muted">Lorem ipsum dolor sit amet consectetur ipiscing elit amet consectetur piscing elit consectetur adipiscing elit sed et eletum.</p>
-            <div class="read_more">
-              <div class="blog_border"></div>
-              <a href="#" class="text-dark text-uppercase"> Read More</a> </div>
-          </div>
-        </div>
-        <!-- blog box end --> 
-      </div>
-      <div class="col-lg-4 col-md-6 mb-30"> 
-        <!-- blog box -->
-        <div class="blog-box shadow">
-          <div class="blog_img mb-20"><img src="images/blog/blog-3.jpg" alt=""></div>
-          <div class="blog-des">
-            <h6 class="blog_date font-weight-normal text-muted"><span>公告類型</span> January 01, 2020</h6>
-            <h5 class="mt-10 mb-6"><a href="#" class="text-dark">Modern Design Concept</a></h5>
-            <p class="text-muted">Lorem ipsum dolor sit amet consectetur ipiscing elit amet consectetur piscing elit consectetur adipiscing elit sed et eletum.</p>
-            <div class="read_more">
-              <div class="blog_border"></div>
-              <a href="#" class="text-dark text-uppercase"> Read More</a> </div>
-          </div>
-        </div>
-        <!-- blog box end --> 
-      </div>
-    </div>
-  </div>
-</div>
+<!-- <div class="blog-area pt-70 pb-40 position-relative"> -->
+<!--   <div class="bg-style-1"></div> -->
+<!--   <div class="container">  -->
+<!--     section title -->
+<!--     <div class="section-title text-center"> -->
+<!--       <h2>最新消息</h2> -->
+<!--       <span class="dashed-border"></span> </div> -->
+<!--     section title -->
+<!--     <div class="row"> -->
+<!--       <div class="col-lg-4 col-md-6 mb-30">  -->
+<!--         blog box -->
+<!--         <div class="blog-box shadow"> -->
+<%--           <div class="blog_img mb-20"><img src="${pageContext.request.contextPath}/images/blog/blog-1.jpg" alt=""></div> --%>
+<!--           <div class="blog-des"> -->
+<!--             <h6 class="blog_date font-weight-normal text-muted"><span>公告類型</span> January 01, 2020</h6> -->
+<!--             <h5 class="mt-10 mb-6"><a href="#" class="text-dark">The Most Advance Business Plan</a></h5> -->
+<!--             <p class="text-muted">Lorem ipsum dolor sit amet consectetur ipiscing elit amet consectetur piscing elit consectetur adipiscing elit sed et eletum.</p> -->
+<!--             <div class="read_more"> -->
+<!--               <div class="blog_border"></div> -->
+<!--               <a href="#" class="text-dark text-uppercase"> Read More</a> </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--         blog box end  -->
+<!--       </div> -->
+<!--       <div class="col-lg-4 col-md-6 mb-30">  -->
+<!--         blog box -->
+<!--         <div class="blog-box shadow"> -->
+<%--           <div class="blog_img mb-20"><img src="${pageContext.request.contextPath}/images/blog/blog-2.jpg" alt=""></div> --%>
+<!--           <div class="blog-des"> -->
+<!--             <h6 class="blog_date font-weight-normal text-muted"><span>公告類型</span> January 01, 2020</h6> -->
+<!--             <h5 class="mt-10 mb-6"><a href="#" class="text-dark">Beautiful Home Page</a></h5> -->
+<!--             <p class="text-muted">Lorem ipsum dolor sit amet consectetur ipiscing elit amet consectetur piscing elit consectetur adipiscing elit sed et eletum.</p> -->
+<!--             <div class="read_more"> -->
+<!--               <div class="blog_border"></div> -->
+<!--               <a href="#" class="text-dark text-uppercase"> Read More</a> </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--         blog box end  -->
+<!--       </div> -->
+<!--       <div class="col-lg-4 col-md-6 mb-30">  -->
+<!--         blog box -->
+<!--         <div class="blog-box shadow"> -->
+<%--           <div class="blog_img mb-20"><img src="${pageContext.request.contextPath}/images/blog/blog-3.jpg" alt=""></div> --%>
+<!--           <div class="blog-des"> -->
+<!--             <h6 class="blog_date font-weight-normal text-muted"><span>公告類型</span> January 01, 2020</h6> -->
+<!--             <h5 class="mt-10 mb-6"><a href="#" class="text-dark">Modern Design Concept</a></h5> -->
+<!--             <p class="text-muted">Lorem ipsum dolor sit amet consectetur ipiscing elit amet consectetur piscing elit consectetur adipiscing elit sed et eletum.</p> -->
+<!--             <div class="read_more"> -->
+<!--               <div class="blog_border"></div> -->
+<!--               <a href="#" class="text-dark text-uppercase"> Read More</a> </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--         blog box end  -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </div> -->
 <!-- ================ Blog area end ================ --> 
 <!-- ================ Most popular hotel ================ -->
-<div class="most-popular-hotel pt-70 pb-70 position-relative">
-  <div class="bg-style-1"></div>
-  <div class="container"> 
-    <!-- section title -->
-    <div class="section-title text-center">
-      <h2>人氣飯店</h2>
-      <span class="dashed-border"></span> </div>
-    <!-- section title --> 
-  </div>
-  <div class="container-fluid"> 
-    <!-- popular hotel carousel -->
-    <div class="popular-hotel-carousel owl-carousel owl-theme">
-      <div class="item"> 
-        <!-- popular hotel box -->
-        <div class="popular-hotel-box">
-          <div class="imege mb-10"><img src="images/popular-hotel/1.jpg" alt="">
-            <div class="black-bg"> <a href=""><i class="fas fa-map-marker-alt"></i> Thailand</a> </div>
-          </div>
-          <div class="reting"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> </div>
-          <h4><a href="">Ansan Hotel</a></h4>
-          <div class="price">$100.00 / <span>Per night</span></div>
-        </div>
-        <!-- popular hotel box end --> 
-      </div>
-      <div class="item"> 
-        <!-- popular hotel box -->
-        <div class="popular-hotel-box">
-          <div class="imege mb-10"><img src="images/popular-hotel/2.jpg" alt="">
-            <div class="black-bg"> <a href=""><i class="fas fa-map-marker-alt"></i> Vietnam</a> </div>
-          </div>
-          <div class="reting"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> </div>
-          <h4><a href="">Fawlty Towers</a></h4>
-          <div class="price">$200.00 / <span>Per night</span></div>
-        </div>
-        <!-- popular hotel box end --> 
-      </div>
-      <div class="item"> 
-        <!-- popular hotel box -->
-        <div class="popular-hotel-box">
-          <div class="imege mb-10"><img src="images/popular-hotel/3.jpg" alt="">
-            <div class="black-bg"> <a href=""><i class="fas fa-map-marker-alt"></i> Italy</a> </div>
-          </div>
-          <div class="reting"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> </div>
-          <h4><a href="">Hotel Valle</a></h4>
-          <div class="price">$300.00 / <span>Per night</span></div>
-        </div>
-        <!-- popular hotel box end --> 
-      </div>
-      <div class="item"> 
-        <!-- popular hotel box -->
-        <div class="popular-hotel-box">
-          <div class="imege mb-10"><img src="images/popular-hotel/4.jpg" alt="">
-            <div class="black-bg"> <a href=""><i class="fas fa-map-marker-alt"></i> Mexico</a> </div>
-          </div>
-          <div class="reting"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> </div>
-          <h4><a href="">Hotel Las Trojes</a></h4>
-          <div class="price">$400.00 / <span>Per night</span></div>
-        </div>
-        <!-- popular hotel box end --> 
-      </div>
-      <div class="item"> 
-        <!-- popular hotel box -->
-        <div class="popular-hotel-box">
-          <div class="imege mb-10"><img src="images/popular-hotel/5.jpg" alt="">
-            <div class="black-bg"> <a href=""><i class="fas fa-map-marker-alt"></i> United States</a> </div>
-          </div>
-          <div class="reting"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> </div>
-          <h4><a href="">Rosen Shingle Creek</a></h4>
-          <div class="price">$500.00 / <span>Per night</span></div>
-        </div>
-        <!-- popular hotel box end --> 
-      </div>
-    </div>
-    <!-- popular hotel carousel end --> 
-  </div>
-</div>
+<!-- <div class="most-popular-hotel pt-70 pb-70 position-relative"> -->
+<!--   <div class="bg-style-1"></div> -->
+<!--   <div class="container">  -->
+<!--     section title -->
+<!--     <div class="section-title text-center"> -->
+<!--       <h2>人氣飯店</h2> -->
+<!--       <span class="dashed-border"></span> </div> -->
+<!--     section title  -->
+<!--   </div> -->
+<!--   <div class="container-fluid">  -->
+<!--     popular hotel carousel -->
+<!--     <div class="popular-hotel-carousel owl-carousel owl-theme"> -->
+<!--       <div class="item">  -->
+<!--         popular hotel box -->
+<!--         <div class="popular-hotel-box"> -->
+<%--           <div class="imege mb-10"><img src="${pageContext.request.contextPath}/images/popular-hotel/1.jpg" alt=""> --%>
+<!--             <div class="black-bg"> <a href=""><i class="fas fa-map-marker-alt"></i> Thailand</a> </div> -->
+<!--           </div> -->
+<!--           <div class="reting"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> </div> -->
+<!--           <h4><a href="">Ansan Hotel</a></h4> -->
+<!--           <div class="price">$100.00 / <span>Per night</span></div> -->
+<!--         </div> -->
+<!--         popular hotel box end  -->
+<!--       </div> -->
+<!--       <div class="item">  -->
+<!--         popular hotel box -->
+<!--         <div class="popular-hotel-box"> -->
+<%--           <div class="imege mb-10"><img src="${pageContext.request.contextPath}/images/popular-hotel/2.jpg" alt=""> --%>
+<!--             <div class="black-bg"> <a href=""><i class="fas fa-map-marker-alt"></i> Vietnam</a> </div> -->
+<!--           </div> -->
+<!--           <div class="reting"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> </div> -->
+<!--           <h4><a href="">Fawlty Towers</a></h4> -->
+<!--           <div class="price">$200.00 / <span>Per night</span></div> -->
+<!--         </div> -->
+<!--         popular hotel box end  -->
+<!--       </div> -->
+<!--       <div class="item">  -->
+<!--         popular hotel box -->
+<!--         <div class="popular-hotel-box"> -->
+<%--           <div class="imege mb-10"><img src="${pageContext.request.contextPath}/images/popular-hotel/3.jpg" alt=""> --%>
+<!--             <div class="black-bg"> <a href=""><i class="fas fa-map-marker-alt"></i> Italy</a> </div> -->
+<!--           </div> -->
+<!--           <div class="reting"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> </div> -->
+<!--           <h4><a href="">Hotel Valle</a></h4> -->
+<!--           <div class="price">$300.00 / <span>Per night</span></div> -->
+<!--         </div> -->
+<!--         popular hotel box end  -->
+<!--       </div> -->
+<!--       <div class="item">  -->
+<!--         popular hotel box -->
+<!--         <div class="popular-hotel-box"> -->
+<%--           <div class="imege mb-10"><img src="${pageContext.request.contextPath}/images/popular-hotel/4.jpg" alt=""> --%>
+<!--             <div class="black-bg"> <a href=""><i class="fas fa-map-marker-alt"></i> Mexico</a> </div> -->
+<!--           </div> -->
+<!--           <div class="reting"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> </div> -->
+<!--           <h4><a href="">Hotel Las Trojes</a></h4> -->
+<!--           <div class="price">$400.00 / <span>Per night</span></div> -->
+<!--         </div> -->
+<!--         popular hotel box end  -->
+<!--       </div> -->
+<!--       <div class="item">  -->
+<!--         popular hotel box -->
+<!--         <div class="popular-hotel-box"> -->
+<%--           <div class="imege mb-10"><img src="${pageContext.request.contextPath}/images/popular-hotel/5.jpg" alt=""> --%>
+<!--             <div class="black-bg"> <a href=""><i class="fas fa-map-marker-alt"></i> United States</a> </div> -->
+<!--           </div> -->
+<!--           <div class="reting"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> </div> -->
+<!--           <h4><a href="">Rosen Shingle Creek</a></h4> -->
+<!--           <div class="price">$500.00 / <span>Per night</span></div> -->
+<!--         </div> -->
+<!--         popular hotel box end  -->
+<!--       </div> -->
+<!--     </div> -->
+<!--     popular hotel carousel end  -->
+<!--   </div> -->
+<!-- </div> -->
 <!-- ================ Most popular hotel end ================ --> 
 
 
@@ -410,9 +420,16 @@
         <!-- popular destination box -->
         <div class="popular-destination-box">
           <div class="img-holder-overlay">
-            <div class="img-holder"><img src="images/popular-destination/1.jpg" alt=""></div>
+            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/popular-destination/1.jpg" alt=""></div>
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
+          
+          <table>
+          <tr>
+          	<td>${searchHotelBean.hotelId}</td>
+          </tr>
+          </table>
+          
           <div class="title">
             <h3><a href="">Orlando</a></h3>
           </div>
@@ -423,7 +440,7 @@
         <!-- popular destination box -->
         <div class="popular-destination-box">
           <div class="img-holder-overlay">
-            <div class="img-holder"><img src="images/popular-destination/2.jpg" alt=""></div>
+            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/popular-destination/2.jpg" alt=""></div>
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
@@ -436,7 +453,7 @@
         <!-- popular destination box -->
         <div class="popular-destination-box">
           <div class="img-holder-overlay">
-            <div class="img-holder"><img src="images/popular-destination/3.jpg" alt=""></div>
+            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/popular-destination/3.jpg" alt=""></div>
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
@@ -449,7 +466,7 @@
         <!-- popular destination box -->
         <div class="popular-destination-box">
           <div class="img-holder-overlay">
-            <div class="img-holder"><img src="images/popular-destination/4.jpg" alt=""></div>
+            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/popular-destination/4.jpg" alt=""></div>
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
@@ -462,7 +479,7 @@
         <!-- popular destination box -->
         <div class="popular-destination-box">
           <div class="img-holder-overlay">
-            <div class="img-holder"><img src="images/popular-destination/5.jpg" alt=""></div>
+            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/popular-destination/5.jpg" alt=""></div>
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
@@ -475,7 +492,7 @@
         <!-- popular destination box -->
         <div class="popular-destination-box">
           <div class="img-holder-overlay">
-            <div class="img-holder"><img src="images/popular-destination/6.jpg" alt=""></div>
+            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/popular-destination/6.jpg" alt=""></div>
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
@@ -487,6 +504,66 @@
     </div>
   </div>
 </div>
+
+<!-- <table> -->
+<!-- 	<thead> -->
+<!-- 	<tr> -->
+<!-- 		<th>hotelId</th> -->
+<!-- 		<th>hotelEmail</th> -->
+<!-- 		<th>hotelPassword</th> -->
+<!-- 		<th>hotelName</th> -->
+<!-- 		<th>hotelPhone</th> -->
+<!-- 		<th>hotelPrincipal</th> -->
+<!-- 		<th>hotelTaxid</th> -->
+<!-- 		<th>hotelCounty</th> -->
+<!-- 		<th>hotelAddress</th> -->
+<!-- 		<th>hotelType</th> -->
+<!-- 		<th>hotelNotice</th> -->
+<!-- 		<th>hotelQa</th> -->
+<!-- 		<th>hotelIntroduction</th> -->
+<!-- 		<th>hotelState</th> -->
+<!-- 	</tr> -->
+<!-- 	</thead> -->
+<!-- 	<tbody> -->
+		
+<%-- 		<c:forEach var="row" items="${list}"> --%>
+<%-- 		<c:url value="/searchHotel/displayHotel.jsp" var="path"> --%>
+<%-- 			<c:param name="hotelId" value="${row.hotelId}" /> --%>
+<%-- 			<c:param name="hotelEmail" value="${row.hotelEmail}" /> --%>
+<%-- 			<c:param name="hotelPassword" value="${row.hotelPassword}" /> --%>
+<%-- 			<c:param name="hotelName" value="${row.hotelName}" /> --%>
+<%-- 			<c:param name="hotelPhone" value="${row.hotelPhone}" /> --%>
+<%-- 			<c:param name="hotelPrincipal" value="${row.hotelPrincipal}" /> --%>
+<%-- 			<c:param name="hotelTaxid" value="${row.hotelTaxid}" /> --%>
+<%-- 			<c:param name="hotelCounty" value="${row.hotelCounty}" /> --%>
+<%-- 			<c:param name="hotelAddress" value="${row.hotelAddress}" /> --%>
+<%-- 			<c:param name="hotelType" value="${row.hotelType}" /> --%>
+<%-- 			<c:param name="hotelNotice" value="${row.hotelNotice}" /> --%>
+<%-- 			<c:param name="hotelQa" value="${row.hotelQa}" /> --%>
+<%-- 			<c:param name="hotelIntroduction" value="${row.hotelIntroduction}" /> --%>
+<%-- 			<c:param name="hotelState" value="${row.hotelState}" /> --%>
+<%-- 		</c:url> --%>
+		
+<!-- 	<tr> -->
+<%-- 		<td><a href="${path}">${row.hotelId}</a></td> --%>
+<%-- 		<td>${row.hotelEmail}</td> --%>
+<%-- 		<td>${row.hotelPassword}</td> --%>
+<%-- 		<td>${row.hotelName}</td> --%>
+<%-- 		<td>${row.hotelPhone}</td> --%>
+<%-- 		<td>${row.hotelPrincipal}</td> --%>
+<%-- 		<td>${row.hotelTaxid}</td> --%>
+<%-- 		<td>${row.hotelCounty}</td> --%>
+<%-- 		<td>${row.hotelAddress}</td> --%>
+<%-- 		<td>${row.hotelType}</td> --%>
+<%-- 		<td>${row.hotelNotice}</td> --%>
+<%-- 		<td>${row.hotelQa}</td> --%>
+<%-- 		<td>${row.hotelIntroduction}</td> --%>
+<%-- 		<td>${row.hotelState}</td> --%>
+<!-- 	</tr> -->
+<%-- 		</c:forEach> --%>
+	
+<!-- 	</tbody> -->
+<!-- </table> -->
 <!-- ================ Popular destinations end ================ --> 
 
 <!-- ================ Testimonials ================ -->
@@ -583,23 +660,23 @@
           <!-- footer newsletter form end -->
 
 <!-- js files --> 
-<script src="js/jquery-3.5.1.min.js"></script> 
-<script src="js/bootstrap.bundle.min.js"></script> 
+<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script> 
+<script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script> 
 <!-- counter js --> 
-<script src="js/jquery-1.10.2.min.js"></script> 
-<script src="js/waypoints.min.js"></script> 
-<script src="js/jquery.counterup.min.js"></script> 
+<script src="${pageContext.request.contextPath}/js/jquery-1.10.2.min.js"></script> 
+<script src="${pageContext.request.contextPath}/js/waypoints.min.js"></script> 
+<script src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script> 
 <!-- venobox js --> 
-<script src="js/venobox.min.js"></script> 
+<script src="${pageContext.request.contextPath}/js/venobox.min.js"></script> 
 <!-- owl carousel --> 
-<script src="js/owl.carousel.min.js"></script> 
+<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script> 
 <!-- portfolio js --> 
-<script src="js/jquery.mixitup.min.js"></script> 
+<script src="${pageContext.request.contextPath}/js/jquery.mixitup.min.js"></script> 
 <!-- datepicker js --> 
-<script src="js/datepicker.min.js"></script> 
+<script src="${pageContext.request.contextPath}/js/datepicker.min.js"></script> 
 <!-- script js --> 
-<script src="js/abu-js/abu.js"></script>
+<script src="${pageContext.request.contextPath}/js/abu-js/abu.js"></script>
 <!-- header right link js by aga -->
-<script src="js/member/memberHeader.js"></script>
+<script src="${pageContext.request.contextPath}/js/member/memberHeader.js"></script>
 </body>
 </html>

@@ -2,10 +2,17 @@ package com.searchHotel.model;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+
+import com.search.model.SearchBean;
 
 import model.hibernate.HibernateUtil;
 
@@ -15,6 +22,14 @@ public class SearchHotelDAOHibernate implements SearchHotelDAO{
 		super();
 		this.sessionFactory = sessionFactory;
 	}
+	
+	//...............
+	public SearchHotelDAOHibernate() {
+		// TODO Auto-generated constructor stub
+	}
+	//...............
+	
+	
 	public Session getSession() {
 		return this.sessionFactory.getCurrentSession();
 	}
@@ -22,35 +37,7 @@ public class SearchHotelDAOHibernate implements SearchHotelDAO{
 //	Session session = sessionFactory.getCurrentSession();
 //	Transaction transaction = session.beginTransaction();
 //	SearchHotelDAO dao = new SearchHotelDAOHibernate(sessionFactory);
-	
-//	query.setParameter(0, "台北市");
-//	System.out.println("query"+query);
-//	List<SearchHotelBean> objs =query.list();
-//	System.out.println(objs);	
-	
-//	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-//	Session session = sessionFactory.getCurrentSession();
-//	Transaction transaction = session.beginTransaction();
-//	SearchHotelDAO dao = new SearchHotelDAOHibernate(sessionFactory);
 
-//	Query query = session.createQuery("From SearchHotelBean where hotelCounty=?0",SearchHotelBean.class);
-//	query.setParameter(0, "台北市");
-//	List<SearchHotelBean> objs =query.list();
-
-	
-//	public static void main(String[] args) {
-//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-//		Session session = sessionFactory.getCurrentSession();
-//		Transaction transaction = session.beginTransaction();
-//		
-//		SearchDAO dao = new SearchDAOHibernate(sessionFactory);
-//		SearchBean beans = dao.select(2001);
-//		System.out.println("bean="+beans);
-//		
-//		transaction.commit();
-//		session.close();
-//		HibernateUtil.closeSessionFactory();
-//	}
 	@Override
 	public SearchHotelBean select(String hotelCounty) {
 		
@@ -59,22 +46,23 @@ public class SearchHotelDAOHibernate implements SearchHotelDAO{
 		}
 		return null;
 	}
-//	@Override
-//	public List<SearchBean> select() {
-//		CriteriaBuilder criteriaBuilder =  this.getSession().getCriteriaBuilder();
-//		CriteriaQuery<SearchBean> crteriaQuery = criteriaBuilder.createQuery(SearchBean.class);
-//		
-//		Root<SearchBean> root = crteriaQuery.from(SearchBean.class);		
-//		
-//		TypedQuery<SearchBean> typedQuery = this.getSession().createQuery(crteriaQuery);
-//		List<SearchBean> result = typedQuery.getResultList();
-//		if(result!=null && !result.isEmpty()) {
-//			return result;
-//		} else {
-//			return null;
-//		}
-//	}
-	
+	@Override
+	public List <SearchHotelBean> getAll() {
+//		return this.getSession().createQuery("from SearchHotelBean", SearchHotelBean.class).list();
+
+		CriteriaBuilder criteriaBuilder =  this.getSession().getCriteriaBuilder();
+		CriteriaQuery<SearchHotelBean> crteriaQuery = criteriaBuilder.createQuery(SearchHotelBean.class);
+		
+		Root<SearchHotelBean> root = crteriaQuery.from(SearchHotelBean.class);		
+		
+		TypedQuery <SearchHotelBean> typedQuery = this.getSession().createQuery(crteriaQuery);
+		List <SearchHotelBean> resultAll = typedQuery.getResultList();
+		if(resultAll!=null && !resultAll.isEmpty()) {
+			return resultAll;
+		} else {
+			return null;
+		}
+	}
 //	transaction.commit();
 //	session.close();
 }

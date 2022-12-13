@@ -60,13 +60,13 @@ private static final long serialVersionUID = 1L;
 		request.setAttribute("errors", errors);
 //轉換資料
 		String hotelCountyInput = "";
-		if(hotelCounty!=null && hotelCounty.length()!=0) {
+		if(hotelCounty!=null && hotelCounty.length()!=0 && hotelCounty!="") {
 			try {
 				hotelCountyInput = hotelCounty;
 				System.out.println("輸入縣市 : "+hotelCountyInput);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
-				errors.put("hotelCountyInput", "hotelCountyInput must be an integer");
+				errors.put("hotelCountyInput", "hotelCountyInput must be a String");
 			}
 		}
 		if(errors!=null && !errors.isEmpty()) {
@@ -78,23 +78,36 @@ private static final long serialVersionUID = 1L;
 		
 //呼叫Model
 		SearchHotelBean bean = new SearchHotelBean();
-		bean.setHotelCounty(hotelCountyInput);
-		Query <SearchHotelBean> query = session.createQuery("From SearchHotelBean where hotelCounty = '台北市'",SearchHotelBean.class);
+//		bean.setHotelCounty(hotelCountyInput);
+		Query <SearchHotelBean> query = session.createQuery("From SearchHotelBean where hotelCounty=?0",SearchHotelBean.class);
+		query.setParameter(0, hotelCountyInput);
+		
 		List results = query.list();
 		if(searchHotel!=null && searchHotel.equals("Select")) {
-			for(int i=0 ; i<results.size() ; i++) {
-				System.out.println("results="+results.get(i));  
-			}
 			request.setAttribute("select", results);
 			request.getRequestDispatcher(
 					"/searchHotel/displayHotel.jsp").forward(request, response);
 		} 
+//		else  {
+//			errors.put("action", "Unknown Action:"+searchHotel);
+//			request.getRequestDispatcher(
+//					"/searchHotel/displaySearchHotel.jsp").forward(request, response);
+//		}
+		
+//		if(searchHotel!=null && searchHotel.equals("ListAll")) {
+//			request.setAttribute("listAll", results);
+//			request.getRequestDispatcher(
+//					"/searchHotel/displayHotel.jsp").forward(request, response);
+//		} 
 		else  {
 			errors.put("action", "Unknown Action:"+searchHotel);
 			request.getRequestDispatcher(
-					"/searchHotel/searchHotel.jsp").forward(request, response);
+					"/searchHotel/displaySearchHotel.jsp").forward(request, response);
 		}
+		
+		
+		
 		transaction.commit();
-		session.close();
+//		session.close();
 	}
 }
