@@ -32,6 +32,9 @@ public class UserService {
 
 	// 預留給 Struts 2 或 Spring MVC 用
 	public UserVO addUser(UserVO userVO) {
+		java.util.Date date = new java.util.Date();
+		java.sql.Date dateSql = new java.sql.Date(date.getTime());
+		userVO.setUserRegistration(dateSql);
 		dao.insert(userVO);
 		return userVO;
 	}
@@ -87,7 +90,6 @@ public class UserService {
 	}
 	
 	public String pwdhash(String password) {
-		dao.pwdhash(password);
-		return password;
+		return dao.pwdhash(password);
 	}
 }

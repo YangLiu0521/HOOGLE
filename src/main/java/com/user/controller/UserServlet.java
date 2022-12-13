@@ -126,19 +126,11 @@ public class UserServlet extends HttpServlet {
 					errorMsgs.add("請輸入西元日期");
 				}
 
-//				java.sql.Date userRegistration = null;
-//				try {
-//					userRegistration = java.sql.Date.valueOf(req.getParameter("userRegistration").trim());
-//				} catch (IllegalArgumentException e) {
-//					userRegistration = new java.sql.Date(System.currentTimeMillis());
-//					errorMsgs.add("請輸入西元日期");
-//				}
-
 				// 獲得時間戳記
-				Timestamp userRegistration = new Timestamp(System.currentTimeMillis());// 獲取系統當前時間
-				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				String timeStr = df.format(userRegistration);
-				userRegistration = Timestamp.valueOf(timeStr);
+//				Timestamp userRegistration = new Timestamp(System.currentTimeMillis());// 獲取系統當前時間
+//				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//				String timeStr = df.format(userRegistration);
+//				userRegistration = Timestamp.valueOf(timeStr);
 
 				userVO.setUserEmail(userEmail);
 				userVO.setUserPassword(userSvc.pwdhash(userPassword));
@@ -146,7 +138,7 @@ public class UserServlet extends HttpServlet {
 				userVO.setUserPhone(userPhone);
 				userVO.setUserIdentity(userIdentity);
 				userVO.setUserBirthday(userBirthday);
-				userVO.setUserRegistration(userRegistration);
+//				userVO.setUserRegistration(userRegistration);
 
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("userVO", userVO);
@@ -298,6 +290,7 @@ public class UserServlet extends HttpServlet {
 		
 		
 // ===================================================旅客修改資料=========================================================//
+		
 		if ("update".equals(action)) { // 來自userMemberCenter的請求
 
 			System.out.println("update");
@@ -332,11 +325,14 @@ public class UserServlet extends HttpServlet {
 				
 				String oldUserPassword = req.getParameter("oldUserPassword");
 				String newUserPassword = req.getParameter("newUserPassword");
+				String oldPwd = userSvc.pwdhash(oldUserPassword);
 				if(oldUserPassword == null || oldUserPassword.trim().length() == 0) {
 					newUserPassword = userVO.getUserPassword();
-				} else if(!oldUserPassword.equals(userVO.getUserPassword())) {
+				} else if(!oldPwd.equals(userVO.getUserPassword())) {
 					errors.put("oldUserPassword", "舊密碼錯誤");			
 				} 
+				System.out.println(oldUserPassword);
+				System.out.println(newUserPassword);
 					
 				String userName = req.getParameter("userName");
 				String userNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
@@ -395,6 +391,8 @@ public class UserServlet extends HttpServlet {
 //			UserVO userVO = new UserVO();
 //			userVO.setUserId(userId);
 //			userVO.setUserEmail(userEmail);
+				
+			
 				userVO.setUserPassword(userSvc.pwdhash(newUserPassword));
 				userVO.setUserName(userName);
 				userVO.setUserPhone(userPhone);
@@ -513,15 +511,7 @@ public class UserServlet extends HttpServlet {
 				RequestDispatcher failureView = req.getRequestDispatcher("index.html");
 				failureView.forward(req, res);
 			}
-		}
-		
-		
-		
-		
-		
-		
-		
-		
+		}					
 		out.flush();
 		out.close();
 	}
