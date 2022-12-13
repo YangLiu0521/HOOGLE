@@ -7,6 +7,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.orddetail.model.OrdDetailDAO;
+import com.orddetail.model.OrdDetailDAO_interface;
+import com.orddetail.model.OrdDetailVO;
+import com.search.model.SearchBean;
+
 import model.hibernate.HibernateUtil;
 
 public class SearchHotelService {
@@ -15,6 +20,13 @@ public class SearchHotelService {
 		super();
 		this.searchHotelDao = searchHotelDao;
 	}
+	
+	//...............
+	public SearchHotelService() {
+		searchHotelDao = new SearchHotelDAOHibernate();
+	}
+	//...............
+	
 	
 //	public static void main(String[] args) {
 //		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -57,8 +69,15 @@ public class SearchHotelService {
 		
 		return result;
 	}
-//	public List<SearchBean> select(SearchBean bean) {
-//		List<SearchBean> result = null;
+	
+	//............... -->
+	public List <SearchHotelBean> getAll() {
+		return searchHotelDao.getAll();
+	//............... -->
+		
+	}
+//	public List<SearchHotelBean> getAll() {
+//		List<SearchHotelBean> result = null;
 //		if(bean!=null && bean.getUserId()!=null && !bean.getUserId().equals(0)) {
 //			SearchBean temp = searchDao.select(bean.getUserId());
 //			if(temp!=null) {

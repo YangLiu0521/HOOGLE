@@ -4,6 +4,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="com.searchHotel.model.*" %>
 
+<!--      SearchHotelService searchHotelSvc = new SearchHotelService(); -->
+<!--      List<SearchHotelBean> list = searchHotelSvc.getAll(); -->
+<!--      pageContext.setAttribute("list",list); -->
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -71,9 +75,6 @@ tr:hover td {
 	</tr>
 	</thead>
 	<tbody>
-<!-- 		<tr> -->
-<%-- 			<td>${select}</td> --%>
-<!-- 		</tr> -->
 		
 		<c:forEach var="row" items="${select}">
 		<c:url value="/searchHotel/displayHotel.jsp" var="path">
@@ -114,8 +115,10 @@ tr:hover td {
 	</tbody>
 </table>
 </c:if>
-	
-<h3><a href="<c:url value="/index.jsp" />">Search Table(重新查詢)</a></h3>
-
+<form  action="${pageContext.request.contextPath}/searchHotel/searchHotel.controller" method="get">
+<%-- <form action="<%=request.getContextPath()%>/searchHotel/searchHotel.controller" method="get"> --%>
+<input type="submit" name="searchHotel" value="Search Table(重新查詢)">
+<input type="hidden" name="searchHotel" value="ListAll">
+</form>
 </body>
 </html>
