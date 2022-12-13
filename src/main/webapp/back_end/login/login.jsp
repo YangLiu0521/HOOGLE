@@ -19,7 +19,7 @@
 
 <body>
 	<div class="img">
-		<img src="<%=request.getContextPath()%>/images/whitebg_logo.jpg" alt="#" width="100" height="100">
+		<img src="<%=request.getContextPath()%>/images/logo_removebg.png" alt="#" width="120" height="120">
 	</div>
 	<div class="system_name">
 		<h2>管理者專區</h2>

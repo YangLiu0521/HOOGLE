@@ -2,17 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.administrator.model.*"%>
+<%@ page import="com.userForBackEnd.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
-<jsp:useBean id="administratorSvc" scope="page" class="com.administrator.model.AdministratorService"/>
+<jsp:useBean id="userForBackEndSvc" scope="page" class="com.userForBackEnd.model.UserForBackEndService"/>
 <%
 // AdministratorService administratorSvc = new AdministratorService();
-List<AdministratorVO> list = administratorSvc.getAll();
+List<UserVO> list = userForBackEndSvc.getAll();
 pageContext.setAttribute("list", list);
-%>
-<%
-  AdministratorVO administratorVO = (AdministratorVO) request.getAttribute("administratorId");
 %>
 <!DOCTYPE html>
 <html>
@@ -102,85 +99,89 @@ pageContext.setAttribute("list", list);
 		</nav>
 	</div>
 	
-		<div class="func_list">
+	<div class="func_list">
 		<a href="#" class="logout_link"> <ion-icon name="log-out-outline"
 				class="logout_icon"></ion-icon>
-		</a> <a href="#" class="logout_link"> <ion-icon
-				name="notifications-outline" class="notification_icon"></ion-icon>
+		</a>
+		<a href="#" class="logout_link">
+			<ion-icon name="notifications-outline" class="notification_icon"></ion-icon>
 		</a>
 
-		<div class="test_radius">管理者列表</div>
+		<div class="test_radius">旅客列表</div>
 	</div>
-
-
+<!-- /HOOGLE/src/main/java/com/userForBackEnd/controller/UserForBackEndServlet.java -->
 
 	<div class="features">
 		<div class="features_search">
-			<FORM METHOD="post" ACTION="AdministratorServlet" class="searchbyid">
-				搜尋管理者
-				<select size="1" name="administratorId">
-					<c:forEach var="administratorVO" items="${administratorSvc.all}">
-						<option value="${administratorVO.administratorId}">${administratorVO.administratorId}：${administratorVO.administratorName}
+			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/UserForBackEndServlet" class="searchbyid">
+				搜尋旅客
+				<select size="1" name="userId">
+					<c:forEach var="userVO" items="${userForBackEndSvc.all}">
+						<option value="${userVO.userId}">${userVO.userId}：${userVO.userName}
 					</c:forEach>
 				</select>
-				<input type="hidden" name="action" value="getOne_For_Display">
+				<input type="hidden" name="action" value="getOne_For_User">
 				<input type="submit" class="csearchbyid" value="送出">
 			</FORM>
-
-			<a href='addAdmin.jsp' class="admin_create">新增管理者</a>
-
 		</div>
 	</div>
 	<div class="div_table">
 	<table>
 		<tr class="td_head">
-			<th width="80px">管理者編號</th>
-			<th width="100px">管理者姓名</th>
-			<th width="180px">管理者帳號</th>
-<!-- 			<th>管理者密碼</th> -->
-			<th width="8%">管理者相關</th>
-			<th width="10%">上下架最新消息</th>
-			<th width="7%">飯店相關</th>
-			<th width="7%">旅客相關</th>		
-			<th width="100px">雇用日期</th>
-			<th width="55px">修改</th>
-			<th width="55px">停權</th>
+			<th width="100px">旅客編號</th>
+			<th width="30%">旅客信箱</th>
+			<!-- <th>旅客密碼</th> -->
+			<th width="20%">旅客姓名</th>
+			<th width="30%">旅客電話</th>
+<!-- 			<th>旅客身分證</th> -->
+<!-- 			<th>旅客生日</th> -->
+			<th width="20%">旅客註冊日</th>
+			<th width="100px">詳細資料</th>
 		</tr>
-		<tr class="td_body">
-			<td>${administratorVO.administratorId}</td>
-			<td>${administratorVO.administratorName}</td>
-			<td>${administratorVO.administratorAccount}</td>
-<%-- 			<td>${administratorVO.administratorPassword}</td> --%>
-			<td><ion-icon name=${(administratorVO.administratorDominate).equals(true)?"checkbox-outline":"square-outline"}></ion-icon></td>
-			<td><ion-icon name=${(administratorVO.newsDominate).equals(true)?"checkbox-outline":"square-outline"}></ion-icon></td>
-			<td><ion-icon name=${(administratorVO.hotelDominate).equals(true)?"checkbox-outline":"square-outline"}></ion-icon></td>
-			<td><ion-icon name=${(administratorVO.userDominate).equals(true)?"checkbox-outline":"square-outline"}></ion-icon></td>
-			<td>${administratorVO.administratorHiredate}</td>
-			<td>
-					<FORM METHOD="post"	ACTION="AdministratorServlet" style="margin-bottom: 0px;">
-						<input type="submit" value="修改"
-						${(administratorVO.administratorDominate==false && 
-						administratorVO.newsDominate==false && 
-						administratorVO.hotelDominate==false && 
-						administratorVO.userDominate==false)?"disabled":""}>
-						<input type="hidden" name="administratorId" value="${administratorVO.administratorId}">
-						<input type="hidden" name="action" value="getOne_For_Update">
-					</FORM>
-				</td>
+		<%-- 	<%@ include file="page1.file" %>  --%>
+		<%-- 	<c:forEach var="administratorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
+		<c:forEach var="userVO" items="${list}">
+			<tr class="td_body">
+				<td>${userVO.userId}</td>
+				<td>${userVO.userEmail}</td>
+			<%-- <td>${userVO.userPassword}</td> --%>
+				<td>${userVO.userName}</td>
+				<td>${userVO.userPhone}</td>
+				<td>${userVO.userRegistration}</td>
 				<td>
-					<FORM METHOD="post"	ACTION="AdministratorServlet" style="margin-bottom: 0px;">
-						<input type="submit" value="停權"
-						${(administratorVO.administratorDominate==false && 
-						administratorVO.newsDominate==false && 
-						administratorVO.hotelDominate==false && 
-						administratorVO.userDominate==false)?"disabled":""}>
-						<input type="hidden" name="administratorId" value="${administratorVO.administratorId}">
-						<input type="hidden" name="action" value="disable">
-					</FORM>
+				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/UserForBackEndServlet" class="">
+					<input type="hidden" name="userId" value="${userVO.userId}">
+					<input type="hidden" name="action" value="getUserDetail">
+					<input type="submit" name="action" value="詳細資料">
+				</FORM>
 				</td>
-		</tr>
+<%-- 				<td><a href="<%=request.getContextPath()%>/back_end/hotelAneUser/userDetail.jsp">詳細資料</a></td> --%>
+
+<!-- ==不修改旅客==	-->
+<!-- 				<td> -->
+<!-- 					<FORM METHOD="post" -->
+<%-- 						ACTION="<%=request.getContextPath()%>/back_end/userForBackEnd/UserForBackEndServlet" --%>
+<!-- 						style="margin-bottom: 0px;"> -->
+<!-- 						<input type="submit" value="修改"> -->
+<%-- 						<input type="hidden" name="userId" value="${userVO.userId}"> --%>
+<!-- 						<input type="hidden" name="action" value="getOne_For_Update"> -->
+<!-- 					</FORM> -->
+<!-- 				</td> -->
+
+<!-- ==不停權== -->
+<!-- 				<td> -->
+<!-- 					<FORM METHOD="post" -->
+<%-- 						ACTION="<%=request.getContextPath()%>/back_end/userForBackEnd/UserForBackEndServlet" --%>
+<!-- 						style="margin-bottom: 0px;"> -->
+<!-- 						<input type="submit" value="停權"> -->
+<%-- 						<input type="hidden" name="userId" value="${userVO.userId}"> --%>
+<!-- 						<input type="hidden" name="action" value="disable"> -->
+<!-- 					</FORM> -->
+<!-- 				</td> -->
+			</tr>
+		</c:forEach>
 	</table>
-</div>
+	</div>
 	<%-- <%@ include file="page2.file" %> --%>
 
 	<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>

@@ -51,8 +51,21 @@ public class AdministratorService {
 		return administratorVO;
 	}
 
-	public void deleteAdministrator(Integer administratorId) {
-		dao.delete(administratorId);
+//	public void deleteAdministrator(Integer administratorId) {
+//		dao.delete(administratorId);
+//	}
+	public AdministratorVO disableAdministrator(Boolean administratorDominate, Boolean newsDominate, Boolean hotelDominate,
+			Boolean userDominate, Integer administratorId) {
+		AdministratorVO administratorVO = new AdministratorVO();
+		
+		administratorVO.setAdministratorDominate(administratorDominate);
+		administratorVO.setNewsDominate(newsDominate);
+		administratorVO.setHotelDominate(hotelDominate);
+		administratorVO.setUserDominate(userDominate);
+		administratorVO.setAdministratorId(administratorId);
+		dao.disable(administratorVO);
+
+		return administratorVO;
 	}
 
 	public AdministratorVO getOneAdministrator(Integer administratorId) {
