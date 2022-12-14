@@ -121,13 +121,17 @@ public class CommendServlet extends HttpServlet {
 				errorMsgs.add("訂單編號格式不正確");
 			}
 
+			String gradeStr = req.getParameter("stars");
 			Integer commendGrade = null;
-			try {
-				commendGrade = Integer.valueOf(req.getParameter("commendGrade").trim());
-			} catch (Exception e) {
-				errorMsgs.add("評價等級格式不正確");
+			if (gradeStr == null || gradeStr.isEmpty()) {
+				errorMsgs.add("評價等級請勿空白");
+			} else {
+				commendGrade = Integer.valueOf(gradeStr);
+				if (!(commendGrade > 0 && commendGrade < 6)) {
+					errorMsgs.add("評價等級請填1-5");
+				}
 			}
-
+			
 			String commendContent = req.getParameter("commendContent");
 			if (commendContent == null || commendContent.trim().length() == 0) {
 				errorMsgs.add("請填寫評論");
@@ -194,7 +198,7 @@ public class CommendServlet extends HttpServlet {
 				errorMsgs.add("訂單編號格式不正確");
 			}
 			
-			String gradeStr = req.getParameter("commendGrade");
+			String gradeStr = req.getParameter("stars");
 			Integer commendGrade = null;
 			if (gradeStr == null || gradeStr.isEmpty()) {
 				errorMsgs.add("評價等級請勿空白");

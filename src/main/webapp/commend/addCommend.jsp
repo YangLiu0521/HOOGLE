@@ -43,38 +43,40 @@ request.getAttribute("commendVO"); %>
           <div>
             <h2>評價等級:</h2>
           </div>
+          <form class="rating">
           <div id="stars" class="left">
             <img
-              name="1"
+              name="stars"
               src="<%=request.getContextPath()%>/images/commend/ostar.png"
               alt=""
               data-rating="1"
             />
             <img
-              name="2"
+              name="stars"
               src="<%=request.getContextPath()%>/images/commend/ostar.png"
               alt=""
               data-rating="2"
             />
             <img
-              name="3"
+              name="stars"
               src="<%=request.getContextPath()%>/images/commend/ostar.png"
               alt=""
               data-rating="3"
             />
             <img
-              name="4"
+              name="stars"
               src="<%=request.getContextPath()%>/images/commend/ostar.png"
               alt=""
               data-rating="4"
             />
             <img
-              name="5"
+              name="stars"
               src="<%=request.getContextPath()%>/images/commend/ostar.png"
               alt=""
               data-rating="5"
             />
           </div>
+          </form>
 <!--           <tr> -->
 <!--             <td>評價等級:</td> -->
 <!--             <td> -->
