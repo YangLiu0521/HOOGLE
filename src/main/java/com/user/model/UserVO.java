@@ -11,7 +11,7 @@ public class UserVO implements java.io.Serializable {
 	private String userPhone;
 	private String userIdentity;
 	private Date userBirthday;
-	private Timestamp userRegistration;
+	private Date userRegistration;
 
 	@Override
 	public String toString() {
@@ -76,11 +76,11 @@ public class UserVO implements java.io.Serializable {
 		this.userBirthday = userBirthday;
 	}
 
-	public Timestamp getUserRegistration() {
+	public Date getUserRegistration() {
 		return userRegistration;
 	}
 
-	public void setUserRegistration(Timestamp userRegistration) {
+	public void setUserRegistration(Date userRegistration) {
 		this.userRegistration = userRegistration;
 	}
 
