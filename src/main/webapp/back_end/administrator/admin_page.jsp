@@ -131,22 +131,27 @@ pageContext.setAttribute("list", list);
 	<div class="div_table">
 	<table>
 		<tr class="td_head">
-			<th width="50px">管理者編號</th>
-			<th width="60px">管理者姓名</th>
-			<th width="25%">管理者帳號</th>
+			<th width="50">管理者<br>編號</th>
+			<th width="60">管理者<br>姓名</th>
+			<th width="110">管理者帳號</th>
 			<!-- <th>管理者密碼</th> -->
-			<th width="45px">管理者相關</th>
-			<th width="45px">上下架最新消息</th>
-			<th width="45px">飯店相關</th>
-			<th width="45px">旅客相關</th>
-			<th width="15%">雇用日期</th>
-			<th width="45px">修改</th>
-			<th width="40px">停權</th>
+			<th width="45">管理者<br>相關</th>
+			<th width="55">上下架<br>最新消息</th>
+			<th width="45">飯店<br>相關</th>
+			<th width="45">旅客<br>相關</th>
+			<th width="80">雇用日期</th>
+			<th width="45">修改</th>
+			<th width="45">停權</th>
 		</tr>
 		<%-- 	<%@ include file="page1.file" %>  --%>
 		<%-- 	<c:forEach var="administratorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
 		<c:forEach var="administratorVO" items="${list}">
-			<tr class="td_body">
+			<tr class="td_body" style=
+			${(administratorVO.administratorDominate==false && 
+						administratorVO.newsDominate==false && 
+						administratorVO.hotelDominate==false && 
+						administratorVO.userDominate==false)?"color:gray;":""}>
+						
 				<td>${administratorVO.administratorId}</td>
 				<td>${administratorVO.administratorName}</td>
 				<td>${administratorVO.administratorAccount}</td>
@@ -164,11 +169,7 @@ pageContext.setAttribute("list", list);
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/back_end/administrator/AdministratorServlet"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="修改" 
-						${(administratorVO.administratorDominate==false && 
-						administratorVO.newsDominate==false && 
-						administratorVO.hotelDominate==false && 
-						administratorVO.userDominate==false)?"disabled":""}>
+						<input type="submit" value="修改">
 						<input type="hidden" name="administratorId" value="${administratorVO.administratorId}">
 						<input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>

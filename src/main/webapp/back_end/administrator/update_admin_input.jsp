@@ -117,22 +117,22 @@ AdministratorVO administratorVO = (AdministratorVO) request.getAttribute("admini
 	<div class="div_table">
 		<table>
 			<tr class="td_head">
-				<td width="50px">管理者編號</td>
-				<td width="15%">管理者姓名</td>
-				<td width="20%">管理者帳號</td>
-				<td width="20%">管理者密碼</td>
-				<td width="40px">管理者相關</td>
-				<td width="40px">上下架最新消息</td>
-				<td width="40px">飯店相關</td>
-				<td width="40px">旅客相關</td>
-				<td width="85px">雇用日期</td>
+				<td width="40">管理者<br>編號</td>
+				<td width="70">管理者<br>姓名</td>
+				<td width="100">管理者帳號</td>
+				<td width="100">管理者密碼</td>
+				<td width="40">管理者<br>相關</td>
+				<td width="55">上下架<br>最新消息</td>
+				<td width="40">飯店<br>相關</td>
+				<td width="40">旅客<br>相關</td>
+				<td width="70">雇用日期</td>
 			</tr>
 			<tr class="td_body">
 				<td><%=administratorVO.getAdministratorId()%></td>
-				<td><input type="TEXT" name="administratorName" size="12"
+				<td><input type="TEXT" name="administratorName" size="8"
 					value="<%=administratorVO.getAdministratorName()%>" /></td>
 				<td><%=administratorVO.getAdministratorAccount()%></td>
-				<td><input type="TEXT" name="administratorPassword" size="18"
+				<td><input type="TEXT" name="administratorPassword" size="15"
 					value="<%=administratorVO.getAdministratorPassword()%>" /></td>
 				<!-- 		設定value="true"的話，有勾選會回傳boolean，否則會回傳null -->
 				<!-- 		利用三元運算，到資料庫取值，若資料庫資料是true則checkbox設定為checked -->
