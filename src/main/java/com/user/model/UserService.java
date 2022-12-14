@@ -14,7 +14,7 @@ public class UserService {
 	}
 
 	public UserVO addUser(String userEmail, String userPassword, String userName, String userPhone, String userIdentity,
-			java.sql.Date userBirthday, java.sql.Timestamp userRegistration) {
+			java.sql.Date userBirthday, java.sql.Date userRegistration) {
 
 		UserVO userVO = new UserVO();
 
@@ -32,12 +32,15 @@ public class UserService {
 
 	// 預留給 Struts 2 或 Spring MVC 用
 	public UserVO addUser(UserVO userVO) {
+		java.util.Date date = new java.util.Date();
+		java.sql.Date dateSql = new java.sql.Date(date.getTime());
+		userVO.setUserRegistration(dateSql);
 		dao.insert(userVO);
 		return userVO;
 	}
 
 	public UserVO updateUser(Integer userId, String userEmail, String userPassword, String userName, String userPhone,
-			String userIdentity, java.sql.Date userBirthday, java.sql.Timestamp userRegistration) {
+			String userIdentity, java.sql.Date userBirthday, java.sql.Date userRegistration) {
 
 		UserVO userVO = new UserVO();
 
@@ -87,7 +90,6 @@ public class UserService {
 	}
 	
 	public String pwdhash(String password) {
-		dao.pwdhash(password);
-		return password;
+		return dao.pwdhash(password);
 	}
 }

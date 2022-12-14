@@ -44,7 +44,7 @@ public class UserDAO implements UserDAO_interface {
 			pstmt.setString(4, userVO.getUserPhone());
 			pstmt.setString(5, userVO.getUserIdentity());
 			pstmt.setDate(6, userVO.getUserBirthday());
-			pstmt.setTimestamp(7, userVO.getUserRegistration());
+			pstmt.setDate(7, userVO.getUserRegistration());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -85,7 +85,7 @@ public class UserDAO implements UserDAO_interface {
 			pstmt.setString(4, userVO.getUserPhone());
 			pstmt.setString(5, userVO.getUserIdentity());
 			pstmt.setDate(6, userVO.getUserBirthday());
-			pstmt.setTimestamp(7, userVO.getUserRegistration());
+			pstmt.setDate(7, userVO.getUserRegistration());
 			pstmt.setInt(8, userVO.getUserId());
 
 			pstmt.executeUpdate();
@@ -178,7 +178,7 @@ public class UserDAO implements UserDAO_interface {
 				userVO.setUserPhone(rs.getString("userPhone"));
 				userVO.setUserIdentity(rs.getString("userIdentity"));
 				userVO.setUserBirthday(rs.getDate("userBirthday"));
-				userVO.setUserRegistration(rs.getTimestamp("userRegistration"));
+				userVO.setUserRegistration(rs.getDate("userRegistration"));
 			}
 
 			// Handle any driver errors
@@ -239,7 +239,7 @@ public class UserDAO implements UserDAO_interface {
 				userVO.setUserPhone(rs.getString("userPhone"));
 				userVO.setUserIdentity(rs.getString("userIdentity"));
 				userVO.setUserBirthday(rs.getDate("userBirthday"));
-				userVO.setUserRegistration(rs.getTimestamp("userRegistration"));
+				userVO.setUserRegistration(rs.getDate("userRegistration"));
 				list.add(userVO); // Store the row in the list
 			}
 
@@ -300,7 +300,7 @@ public class UserDAO implements UserDAO_interface {
 				userVO.setUserPhone(rs.getString("userPhone"));
 				userVO.setUserIdentity(rs.getString("userIdentity"));
 				userVO.setUserBirthday(rs.getDate("userBirthday"));
-				userVO.setUserRegistration(rs.getTimestamp("userRegistration"));
+				userVO.setUserRegistration(rs.getDate("userRegistration"));
 				list.add(userVO); // Store the row in the list
 			}
 
@@ -362,7 +362,7 @@ public class UserDAO implements UserDAO_interface {
 				userVO.setUserPhone(rs.getString("userPhone"));
 				userVO.setUserIdentity(rs.getString("userIdentity"));
 				userVO.setUserBirthday(rs.getDate("userBirthday"));
-				userVO.setUserRegistration(rs.getTimestamp("userRegistration"));
+				userVO.setUserRegistration(rs.getDate("userRegistration"));
 			}
 
 			// Handle any driver errors

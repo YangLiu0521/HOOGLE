@@ -154,27 +154,18 @@ public class HotelServlet extends HttpServlet {
 			try {
 
 				HotelService hotelSvc = new HotelService();
-				HotelVO hotelVO = (HotelVO) session.getAttribute("hotelVO"); // 表示已登入，取得userVO物件
+				HotelVO hotelVO = (HotelVO) session.getAttribute("hotelVO"); // 表示已登入，取得hotelVO物件
 				System.out.println("### into hotel update ### 1");
 
 				// 1.接收請求參數，輸入格式的錯誤處理
-
-//				String userPassword = req.getParameter("userPassword");
-//				String comfirmPassword = req.getParameter("comfirmpassword");
-//				if (userPassword == null || userPassword.trim().length() == 0) {
-//					errorMsgs.add("請輸入密碼");
-//				} else if (!userPassword.equals(comfirmPassword)) {
-//					errorMsgs.add("兩次密碼需一致");
-//				}
-
 				String hotelPassword = req.getParameter("hotelPassword");
 				String comfirmPassword = req.getParameter("comfirmPassword");
 				if (hotelPassword == null || hotelPassword.trim().length() == 0) {
-
+						hotelPassword = hotelVO.getHotelPassword();
 				} else if (comfirmPassword == null || comfirmPassword.trim().length() == 0) {
-
+						hotelPassword = hotelVO.getHotelPassword();
 				} else if (!hotelPassword.equals(comfirmPassword)) {
-//					errorMsgs.add("兩次密碼需一致");
+					errors.put("hotelPassword" ,"請認確輸入密碼是否一致");
 				}
 
 				String hotelName = req.getParameter("hotelName");
@@ -209,15 +200,7 @@ public class HotelServlet extends HttpServlet {
 					return;
 				}
 				
-//				if (!errorMsgs.isEmpty()) {
-//					session.setAttribute("hotelVO", hotelVO);
-//					RequestDispatcher failureView = req.getRequestDispatcher("/hotel/hotelMemberCenter.jsp");
-//					failureView.forward(req, res);
-//					return;
-//				}
-
 				// 開始修改資料
-
 				hotelVO = hotelSvc.updateHotel(hotelVO);
 				System.out.println("修改成功");
 
@@ -261,17 +244,13 @@ public class HotelServlet extends HttpServlet {
 				// 設定UserService傳入資訊
 
 				hotelVO = hotelSvc.findByHotelEmail(hotelEmail);
-				System.out.println(hotelVO);
 				String hotelPwd = hotelSvc.pwdhash(hotelPassword);
 
-				String hotelEmailCheck = hotelVO.getHotelEmail();
-				System.out.println(hotelEmailCheck);
-				if (!hotelEmailCheck.equals(hotelEmail)) {
+				if(hotelVO == null) {
 					errorMsgs.add("信箱或密碼錯誤");
 				}
 
 				String hotelPasswordCheck = hotelVO.getHotelPassword();
-				System.out.println(hotelEmailCheck);
 				if (!hotelPasswordCheck.equals(hotelPwd)) {
 					errorMsgs.add("信箱或密碼錯誤");
 				}
@@ -299,7 +278,6 @@ public class HotelServlet extends HttpServlet {
 				return;
 
 			} catch (Exception e) {
-				errorMsgs.add(":" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/hotel/loginForHotel.jsp");
 				failureView.forward(req, res);
 			}
@@ -321,13 +299,19 @@ public class HotelServlet extends HttpServlet {
 				System.out.println("hotelTaxid:" + hotelTaxid);
 				// 錯誤處理
 				if (hotelEmail == null || (hotelEmail.trim().length() == 0)) {
-					errorMsgs.add("請輸入註冊時信箱");
-				} else if (hotelTaxid == null || (hotelTaxid.trim().length() == 0)) {
-					errorMsgs.add("請輸入註冊時統一編號");
+					errorMsgs.add("請輸入信箱");
+				} 
+				
+				if (hotelTaxid == null || (hotelTaxid.trim().length() == 0)) {
+					errorMsgs.add("請輸入統一編號");
 				}
 
 				HotelService hotelSvc = new HotelService();
 				HotelVO hotelVO = hotelSvc.getOneHotel(hotelEmail, hotelTaxid);
+				if(hotelVO == null) {
+					errorMsgs.add("信箱或統編有誤");
+				}
+				
 				if (!hotelEmail.equals(hotelVO.getHotelEmail())) {
 					errorMsgs.add("非註冊信箱");
 				}
@@ -352,19 +336,24 @@ public class HotelServlet extends HttpServlet {
 				System.out.println("forgotPasswordSuccess");
 
 				// 設定成功，轉交回登入畫面
-
-				RequestDispatcher successView = req.getRequestDispatcher("/hotel/loginForHotel.jsp");
-				successView.forward(req, res);
+				out.println("<meta http-equiv='refresh' content='0;URL=" + req.getContextPath()
+						+ "/hotel/loginForHotel.jsp'>");
+				out.println("<script> alert('請至信箱提取新密碼');</script>");
+//				RequestDispatcher successView = req.getRequestDispatcher("/hotel/loginForHotel.jsp");
+//				successView.forward(req, res);
 
 			} catch (Exception e) {
 				e.getStackTrace();
-				errorMsgs.add("飯店忘記密碼錯誤" + e.getMessage());
+//				errorMsgs.add("請填寫註冊時信箱及統一編號");
 				RequestDispatcher failureView = req.getRequestDispatcher("/hotel/loginForHotel.jsp");
 				failureView.forward(req, res);
 			}
 
 		}
-
+		
+		
+		
+		
 	}
 
 }

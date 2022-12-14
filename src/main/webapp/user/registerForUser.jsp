@@ -14,24 +14,7 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>RegisterForUser</title>
 
-<!-- favicon -->
-<!-- <link rel="icon" href="favicon.ico" /> -->
-<!-- bootstrap core CSS -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
-<!-- font awesome -->
-<link href="<%=request.getContextPath()%>/css/all.min.css" rel="stylesheet">
-<!-- owl carousel -->
-<link href="<%=request.getContextPath()%>/css/owl.carousel.min.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/owl.theme.default.min.css" rel="stylesheet">
-<!-- venobox css -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/venobox.css">
-<!-- datepicker css -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/datepicker.min.css">
-<!-- custom styles for this template -->
-<link href="<%=request.getContextPath()%>/css/custom.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/responsive.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/helper.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<%@ include file="/header.jsp" %>
 </head>
 <body>
 	<!-- ================ Inner banner ================ -->
@@ -41,7 +24,7 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 				<div class="col-lg-8 col-md-8 mb-30">
 					<!-- page-title -->
 					<div class="page-title">
-						<h1>旅客註冊1</h1>
+						<h1>旅客註冊</h1>
 					</div>
 					<!-- page-title end -->
 				</div>
@@ -141,111 +124,7 @@ UserVO userVO = (UserVO) request.getAttribute("userVO");
 	</div>
 	<!-- ================ Register page end ================ -->
 	
-	<!-- js files -->
-  <script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
-  <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
-  <!-- counter js -->
-  <script src="<%=request.getContextPath()%>/js/jquery-1.10.2.min.js"></script>
-  <script src="<%=request.getContextPath()%>/js/waypoints.min.js"></script>
-  <script src="<%=request.getContextPath()%>/js/jquery.counterup.min.js"></script>
-  <!-- venobox js -->
-  <script src="<%=request.getContextPath()%>/js/venobox.min.js"></script>
-  <!-- owl carousel -->
-  <script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
-  <!-- portfolio js -->
-  <script src="<%=request.getContextPath()%>/js/jquery.mixitup.min.js"></script>
-  <!-- datepicker js -->
-  <script src="<%=request.getContextPath()%>/js/datepicker.min.js"></script>
-  <!-- script js -->
-  <script src="<%=request.getContextPath()%>/js/custom.js"></script>
-	
-<script>
-	function myFunction(){
-		alert("test");
-	}
-</script> 
-	
-	
-	<script>
-		let data = {
-				userEmail: '',
-				userPassword: '',
-				userName: '',
-				userPhone: '',
-				userIdentity: '',
-				userBirthday: '',
-				userRegistration: '',	
-				action: '',
-				
-		};
-		
-<%-- 		let url = '<%=request.getContextPath()%>/user/user.do'; --%>
-		console.log("test");
-		
-		// 註冊驗證
-		$('.register').click(function () {
-			
-			console.log("ooo", url);
-        data.userEmail = $('[name="userEmail"]').val();
-        if (!data.userEmail) {
-          alert('Email不可為空');
-          return;
-        }
-        data.userPassword = $('[name="userPassword"]').val();
-        if (!data.userPassword) {
-          alert('密碼不可為空');
-          return;
-        }
-        
-        
-        console.log("weeee");
-//         data.action = 'insert';
-        myFunction();
-        
-//         console.log("ooo", url);
-//         registerAccount();
-	      });
-</script>
-		
-// 	  // 註冊會員
-// 	  function registerAccount() {
-// 		  $.ajax({
-// 			  url: url,
-// 			  type: "post",
-// 			  data: data,
-// 			  datatype: 'json',
-// 			  success: function(res){
-// 				  console.log("hehehe", url);
-// 				  res = JSON.parse(res);
-				
-			  
-			  
-// 			  // 註冊
-// 			  if(res.data){
-// 				  alert(res.data + '，請進入您的郵箱查看密碼並登入');
-// 				  location.replace(
-<%-- 			         '<%=request.getContextPath() %>/user/listAllUser.jsp' --%>
-// 			      );
-// 				  tipMsg(data.userEmail, '新會員註冊成功');  
-// 			  // 註冊失敗
-// 			  } else{
-// 				  alert(res.err);
-// 	              location.replace(
-<%-- 	                '<%=request.getContextPath() %>/user/listAllUser.jsp' --%>
-// 	              );
-// 			  }
-// 			},
-// 		  });
-
-// 	  }
-	  
-// 	  function tipMsg(userEmail, msg){
-// 		  socket.data.register = {};
-// 	      socket.data.register.userEmail = userEmail;
-// 	      socket.data.register.msg = msg;
-// 	      sendMessage(socket.data);
-// 	  }
-<!-- 	</script> -->
+<%@ include file="/footer.jsp" %>
 
 </body>
 </html>
