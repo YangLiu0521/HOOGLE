@@ -189,7 +189,7 @@
               	
                 <div class="tab-pane fade show active p-15" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
                   <!-- 資料修改內文 -->
-                  <form>
+                  <form action="UserServlet" method="POST">
                   <div class="form-group">
                     <h6>信箱</h6><br>
                     <input type="email" class="form-control" disabled placeholder="註冊時email" name="userEmail"
@@ -229,7 +229,7 @@
 				
                 <div class="tab-pane fade p-15" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                   <!-- 密碼修改內文 -->
-                  <form>
+                  <form action="UserServlet" method="POST" id="comfirmChange">
 
                   <div class="form-group">
                     <h6>舊密碼</h6><br>
@@ -250,7 +250,7 @@
                   </div>
                   <br>
                   <button type="submit" class="btn book-now-btn w-50" >確認修改</button>
-<!-- 				   <input type="hidden" name="action" value="update"> -->
+				   <input type="hidden" name="action" value="updateUserPassword">
 				</form>
                 </div>
                 

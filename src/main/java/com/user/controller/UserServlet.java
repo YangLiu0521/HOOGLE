@@ -2,8 +2,6 @@ package com.user.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,17 +39,12 @@ public class UserServlet extends HttpServlet {
 		HttpSession session = req.getSession(); // 總共有64512條Session
 		PrintWriter out = res.getWriter();
 		String action = null;
-		String body = null;
 
 		if (req.getParameter("action") != null) {
 			action = req.getParameter("action");
 		}
 		System.out.println("######  into UserServlet  ######. action is " + action);
 
-//		if((body = req.getReader().readLine()) != null) {
-//			JSONObject paraJsonObj = new JSONObject(body);
-//			action = paraJsonObj.getString("action");
-//		}
 
 // ===================================================旅客註冊=========================================================//
 		if ("insert".equals(action)) {
@@ -61,8 +54,6 @@ public class UserServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-//			List<String> reportMsgs = new LinkedList<String>();
-//			HttpSession session = req.getSession();
 
 			try {
 
@@ -78,12 +69,6 @@ public class UserServlet extends HttpServlet {
 					errorMsgs.add("請輸入正確信箱格式");
 				} else if (userSvc.getUserEmails(userEmail).size() > 0) {
 					errorMsgs.add("已有此帳號，請直接登入");
-//					JSONObject jsonObject = new JSONObject();
-//					jsonObject.put("err", reportMsgs);
-//					jsonObject.put("status", 200);
-//					out.print(jsonObject);
-//					out.print(reportMsgs);
-//					return;
 				}
 
 				String userPassword = req.getParameter("userPassword");
@@ -138,51 +123,28 @@ public class UserServlet extends HttpServlet {
 				userVO.setUserPhone(userPhone);
 				userVO.setUserIdentity(userIdentity);
 				userVO.setUserBirthday(userBirthday);
-//				userVO.setUserRegistration(userRegistration);
 
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("userVO", userVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/user/registerForUser.jsp");
 					failureView.forward(req, res);
 					return;
-//					JSONObject jsonObject = new JSONObject();
-//					jsonObject.put("err", errorMsgs);
-//					jsonObject.put("status", 200);
-//					out.print(jsonObject);
-//					return;
 				}
 
 				// 開始新增資料
 
-//				userVO = userSvc.addUser(userEmail, userPassword, userName, userPhone, userIdentity, userBirthday,
-//						userRegistration);
 				userVO = userSvc.addUser(userVO);
 				session.setAttribute("userVO", userVO);
 
 				// 新增完成，準備轉交
-//				String url = "/user/loginForUser.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交到loginForUser.jsp
-//				
-//				System.out.println("有到這嗎");
-//				successView.forward(req, res);
 
 				out.println("<meta http-equiv='refresh' content='1;URL=" + req.getContextPath()
 						+ "/user/loginForUser.jsp'>");
 				out.println("<script> alert('註冊成功!');</script>");
-				// 回傳 json
-//				reportMsgs.add("註冊成功");
-//				JSONObject jsonObject = new JSONObject();
-//				jsonObject.put("data", reportMsgs);
-//				jsonObject.put("status", 200);
-//				out.print(jsonObject);
 
 			} catch (Exception e) {
 				session.setAttribute("userVO", "");
-				errorMsgs.add("新增資料失敗 " + e.getMessage());
-				JSONObject jsonObject = new JSONObject();
-				jsonObject.put("err", errorMsgs);
-				jsonObject.put("status", 200);
-				out.print(jsonObject);
+				req.getRequestDispatcher("/index.jsp").forward(req, res);			
 			}
 
 		}
@@ -217,15 +179,18 @@ public class UserServlet extends HttpServlet {
 
 				userVO = userSvc.findByUserEmail(userEmail);
 				String userPwd = userSvc.pwdhash(userPassword);
-
+				
+				if(userVO == null) {
+					errorMsgs.add("信箱或密碼有誤");
+				}
+				
 				String userEmailCheck = userVO.getUserEmail();
 				System.out.println(userEmailCheck);
 				if (!userEmailCheck.equals(userEmail)) {
-					errorMsgs.add("信箱或密碼錯誤");
+					errorMsgs.add("非註冊信箱");
 				}
-//				System.out.println(userEmailCheck);
+
 				String userPasswordCheck = userVO.getUserPassword();
-//				System.out.println(userPasswordCheck);
 				if (!userPasswordCheck.equals(userPwd)) {
 					errorMsgs.add("信箱或密碼錯誤");
 				}
@@ -253,7 +218,6 @@ public class UserServlet extends HttpServlet {
 				return;
 
 			} catch (Exception e) {
-//				errorMsgs.add(":" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/user/loginForUser.jsp");
 				failureView.forward(req, res);
 			}
@@ -295,8 +259,6 @@ public class UserServlet extends HttpServlet {
 
 			System.out.println("update");
 
-//			List<String> errorMsgs = new LinkedList<String>();
-//			req.setAttribute("errorMsgs", errorMsgs);
 			Map<String, String> errors = new HashMap<String, String>();
 			req.setAttribute("errors", errors);
 
@@ -307,33 +269,7 @@ public class UserServlet extends HttpServlet {
 				System.out.println("### into update ### 1");
 
 				// 1.接收請求參數，輸入格式的錯誤處理
-//			Integer userId = Integer.valueOf(req.getParameter("userId").trim());
-
-//			String userEmail = req.getParameter("userEmail");
-//			String userEmailReg = "^[_a-z0-9-]+([.][_a-z0-9-]+)*@[a-z0-9-]+([.][a-z0-9-]+)*$";
-//			if (userEmail == null || userEmail.trim().length() == 0) {
-//				errorMsgs.add("請填寫信箱");
-//			} else if (!userEmail.trim().matches(userEmailReg)) {
-//				errorMsgs.add("請輸入正確信箱格式");
-//			}
-
-//				String userPassword = req.getParameter("userPassword");
-//				String comfirmPassword = req.getParameter("comfirmpassword");
-//				if (userPassword == null || userPassword.trim().length() == 0) {
-//					errorMsgs.add("請輸入密碼");
-//				} 
-				
-				String oldUserPassword = req.getParameter("oldUserPassword");
-				String newUserPassword = req.getParameter("newUserPassword");
-				String oldPwd = userSvc.pwdhash(oldUserPassword);
-				if(oldUserPassword == null || oldUserPassword.trim().length() == 0) {
-					newUserPassword = userVO.getUserPassword();
-				} else if(!oldPwd.equals(userVO.getUserPassword())) {
-					errors.put("oldUserPassword", "舊密碼錯誤");			
-				} 
-				System.out.println(oldUserPassword);
-				System.out.println(newUserPassword);
-					
+			
 				String userName = req.getParameter("userName");
 				String userNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (userName == null || userName.trim().length() == 0) {
@@ -367,19 +303,63 @@ public class UserServlet extends HttpServlet {
 				}
 				
 				
+				if (errors != null && !errors.isEmpty()) {
+					session.setAttribute("userVO", userVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/user/userMemberCenter.jsp");
+					failureView.forward(req, res);
+					return;
+				}
 
-//			java.sql.Timestamp userRegistration = null;
-//			try {
-//				userRegistration = java.sql.Timestamp.valueOf(req.getParameter("userRegistration").trim());
-//			} catch (IllegalArgumentException e) {
-//				userRegistration = new java.sql.Timestamp(System.currentTimeMillis());
-//				errorMsgs.add("請輸入西元日期");
-//			}
+		
+				userVO.setUserName(userName);
+				userVO.setUserPhone(userPhone);
+				userVO.setUserIdentity(userIdentity);
+				userVO.setUserBirthday(userBirthday);
+		
+				// 開始修改資料
 
-//			Timestamp userRegistration = new Timestamp(System.currentTimeMillis());// 獲取系統當前時間
-//			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//			String timeStr = df.format(userRegistration);
-//			userRegistration = Timestamp.valueOf(timeStr);
+				userVO = userSvc.updateUser(userVO);
+				System.out.println("修改成功");
+
+				out.println("<meta http-equiv='refresh' content='0;URL=" + req.getContextPath()
+				+ "/user/userMemberCenter.jsp'>");
+				out.println("<script> alert('修改資料完成!');</script>");
+
+			} catch (Exception e) {
+				System.out.println("update exception :" + e);
+				RequestDispatcher failureView = req.getRequestDispatcher("/index.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+// ===================================================旅客修改密碼=========================================================//
+		
+		if("updateUserPassword".equals(action)) {
+			
+			System.out.println("updateUserPassword");
+
+			Map<String, String> errors = new HashMap<String, String>();
+			req.setAttribute("errors", errors);
+			
+			try {
+
+				UserService userSvc = new UserService();
+				UserVO userVO = (UserVO) session.getAttribute("userVO"); // 表示已登入，取得userVO物件
+				System.out.println("### into updateUserPassword ### 1");
+
+				
+				String oldUserPassword = req.getParameter("oldUserPassword");
+				String newUserPassword = req.getParameter("newUserPassword");
+				String oldPwd = userSvc.pwdhash(oldUserPassword);
+				if(oldUserPassword == null || oldUserPassword.trim().length() == 0) {
+					errors.put("oldUserPassword", "請輸入舊密碼");
+				} else if(!oldPwd.equals(userVO.getUserPassword())) {
+					errors.put("oldUserPassword", "舊密碼錯誤");			
+				} 
+				System.out.println(oldUserPassword);
+				System.out.println(newUserPassword);
+					
+						
 				
 				if (errors != null && !errors.isEmpty()) {
 					session.setAttribute("userVO", userVO);
@@ -388,42 +368,23 @@ public class UserServlet extends HttpServlet {
 					return;
 				}
 
-//			UserVO userVO = new UserVO();
-//			userVO.setUserId(userId);
-//			userVO.setUserEmail(userEmail);
-				
-			
-				userVO.setUserPassword(userSvc.pwdhash(newUserPassword));
-				userVO.setUserName(userName);
-				userVO.setUserPhone(userPhone);
-				userVO.setUserIdentity(userIdentity);
-				userVO.setUserBirthday(userBirthday);
-//			userVO.setUserRegistration(userRegistration);
-				
-				
-				
 				// 開始修改資料
-
-//			userVO = userSvc.updateUser(userId, userEmail, userPassword, userName, userPhone, userIdentity,
-//					userBirthday, userRegistration);
-
+				userVO.setUserPassword(userSvc.pwdhash(newUserPassword));
 				userVO = userSvc.updateUser(userVO);
-				System.out.println("修改成功");
-
-				// 修改完成，準備轉交
-//				session.setAttribute("userVO", userVO);
-//				RequestDispatcher successView = req.getRequestDispatcher("/user/userMemberCenter.jsp"); // 修改成功後,轉交listOneEmp.jsp
-//				successView.forward(req, res);
+				System.out.println("旅客密碼修改成功");
+						
 				out.println("<meta http-equiv='refresh' content='0;URL=" + req.getContextPath()
 				+ "/user/userMemberCenter.jsp'>");
-				out.println("<script> alert('修改資料完成!');</script>");
+				out.println("<script> alert('修改密碼成功!');</script>");
 
 			} catch (Exception e) {
 				System.out.println("update exception :" + e);
 				RequestDispatcher failureView = req.getRequestDispatcher("index.jsp");
 				failureView.forward(req, res);
 			}
+			
 		}
+		
 // ===================================================忘記密碼=========================================================//
 		if ("forgotPassword".equals(action)) {
 			System.out.println("### into forgotPassword ###");
@@ -470,9 +431,9 @@ public class UserServlet extends HttpServlet {
 				System.out.println("forgotPasswordSuccess");
 
 				// 設定成功，轉交回登入畫面
-
-				RequestDispatcher successView = req.getRequestDispatcher("/user/loginForUser.jsp");
-				successView.forward(req, res);
+				out.println("<meta http-equiv='refresh' content='0;URL=" + req.getContextPath()
+				+ "/user/loginForUser.jsp'>");
+				out.println("<script> alert('請至信箱提取新密碼');</script>");				
 
 			} catch (Exception e) {
 				session.setAttribute("userVO", "");
