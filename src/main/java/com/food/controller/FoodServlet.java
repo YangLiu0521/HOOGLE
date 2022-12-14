@@ -5,12 +5,13 @@ import java.util.*;
 
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import com.food.model.FoodService;
 import com.food.model.FoodVO;
 
-
+//@WebServlet("/food/FoodServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class FoodServlet extends HttpServlet {
 

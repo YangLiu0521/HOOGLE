@@ -271,28 +271,30 @@ public class ServiceJDBCDAO implements ServiceDAO_interface {
 
 		// 修改test
 //		ServiceVO updateTest = new ServiceVO();
-//		updateTest.setServiceId(9001);
-//		updateTest.setServiceName("游泳池");
+//		updateTest.setServiceId(9007);
+//		updateTest.setServiceName("停車場");
 //		dao.update(updateTest);
+//		System.out.println("修改ok");
 
 		// 刪除test
-//		dao.delete(9001);
-
+//		dao.delete(9008);
+//		System.out.println("修改ok");
+		
 		// 查詢單一項test
-		ServiceVO selectTest = dao.findByPrimaryKey(9002);
-		System.out.println(selectTest.getServiceId() + ",");
-		System.out.println(selectTest.getServiceName() + ",");
-		System.out.println("------------------");
+//		ServiceVO selectTest = dao.findByPrimaryKey(9007);
+//		System.out.println(selectTest.getServiceId() + ",");
+//		System.out.println(selectTest.getServiceName() + ",");
+//		System.out.println("------------------");
 	
 		// 查詢總表
 
-		List<ServiceVO> list = dao.getAll();
-		for (ServiceVO selectAllTest : list) {
-			System.out.println(selectAllTest.getServiceId() + ",");
-			System.out.println(selectAllTest.getServiceName() + ",");
-			System.out.println();
-		}
+//		List<ServiceVO> list = dao.getAll();
+//		for (ServiceVO selectAllTest : list) {
+//			System.out.println(selectAllTest.getServiceId() + ",");
+//			System.out.println(selectAllTest.getServiceName() + ",");
+//			System.out.println();
+//		}
 
-	}
+	}}
 
-}
+

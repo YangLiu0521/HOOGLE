@@ -56,7 +56,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>所有美食資料 - listAllFood.jsp</h3>
-		<h4><a href="select_page.jsp"><img src="images/stock-photo.jpg" width="500" height="200" border="0">回首頁</a></h4>
+		<h4><a href="select_page.jsp"><img src="images/stock-photo.jpg" width="30" height="20" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -75,7 +75,7 @@
 		<tr>
 			<td>${foodVO.foodPicid}</td>
 			<td>${foodVO.restaurantId}</td>
-			<td>${foodVO.foodPic}</td>
+			<td><img src="${pageContext.request.contextPath}/food/read?foodPicid=${foodVO.foodPicid}" height="100" width="100"></td>
 			<td>${foodVO.foodName}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/food/food.do" style="margin-bottom: 0px;">

@@ -1,4 +1,4 @@
-package com.food.controller;
+package com.hotelpic.controller;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

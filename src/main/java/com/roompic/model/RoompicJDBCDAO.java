@@ -279,13 +279,13 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 //		System.out.println("新增成功");
 		
 		// 修改test
-//		RoompicVO updateTest = new RoompicVO();
-//		updateTest.setRoompicId(14001);
-//		updateTest.setRoomAuto(4001);
-//		updateTest.setRoomType("單人房");
+		RoompicVO updateTest = new RoompicVO();
+		updateTest.setRoompicId(14001);
+		updateTest.setRoomAuto(4001);
+		updateTest.setRoomType("123");
 ////		updateTest.setRoompicPic();
-//		dao.update(updateTest);
-//		System.out.println("修改成功");
+		dao.update(updateTest);
+		System.out.println("修改成功");
 
 		// 刪除test
 //		dao.delete(14001);

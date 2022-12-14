@@ -7,7 +7,7 @@ public class ServiceListJDBCDAO implements ServiceListDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/HOOGLE?serverTimezone=Asia/Taipei";
 	String userid = "root";
-	String passwd = "t1i1n0g7";
+	String passwd = "password";
 
 	private static final String INSERT_STMT = 
 		"INSERT INTO serviceList (hotelId, serviceId) "
