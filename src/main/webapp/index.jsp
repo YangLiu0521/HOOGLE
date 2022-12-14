@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -102,95 +103,6 @@
 	</header>
 	<!-- ================ Header end ================ -->
 
-<<<<<<< HEAD
-              <!-- 下拉式選單 -->
-<!--               <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  <img src="images/abu-index/login.png" alt="" class="img-fluid"></a> -->
-<!--                 <div class="dropdown-menu" aria-labelledby="dropdown05"> <a class="dropdown-item" href="faq.html">登入</a> <a class="dropdown-item" href="QA.html">註冊</a> <a class="dropdown-item" href="Terms.html">會員中心</a> <a class="dropdown-item" href="customer-service.html">登出</a>  -->
-                <!-- <a class="dropdown-item" href="team.html">Team</a> <a class="dropdown-item" href="testimonial.html">Testimonial</a> <a class="dropdown-item" href="traveler-information.html">Traveler Information</a> <a class="dropdown-item" href="payment-information.html">Payment Information</a> <a class="dropdown-item" href="faq.html">Faq</a> </div> -->
-<!--               </li> -->
-            </ul>
-          </div>
-          <!-- header right link end --> 
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- header upper end --> 
-  <!-- header lover -->
-  <!-- <div class="header-lover">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-3 col-md-12">  -->
-          <!-- brand -->
-          <!-- <div class="logo"><a class="navbar-brand p-0" href="index.html"><img src="img/logo.png" alt=""></a></div> -->
-          <!-- brand end --> 
-        <!-- </div>
-        <div class="col-lg-9 col-md-12">  -->
-          <!-- header call us -->
-          <!-- <div class="header-call-us">
-            <ul>
-              <li>
-                <div class="iocn-holder"><i class="far fa-clock"></i></div>
-                <div class="text-holder">
-                  <h6>Working Hours</h6>
-                  <p class="mb-0">Monday - Sunday: 9.00am to 6.00pm</p>
-                </div>
-              </li>
-              <li>
-                <div class="iocn-holder"><i class="fas fa-phone-volume"></i></div>
-                <div class="text-holder">
-                  <h6>Call Us</h6>
-                  <p class="mb-0"><a href="tel:123456789">+011 123 4567</a></p>
-                </div>
-              </li>
-              <li>
-                <div class="iocn-holder"><i class="far fa-envelope"></i></div> -->
-                <!-- <div class="text-holder">
-                  <h6>Mail Us</h6>
-                  <p class="mb-0"><a href="mailto:info@exampal.com">info@exampal.com</a></p>
-                </div>
-              </li>
-            </ul>
-          </div> -->
-          <!-- header call us end --> 
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- header lover end --> 
-</header>
-<!-- ================ Header end ================ --> 
-
-<!-- ================ Slider area ================ -->
-<div class="slider"> 
-  <!-- search area -->
-  <div class="search-area">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 col-md-8 col-sm-12 col-12 offset-xl-0 offset-lg-3 offset-sm-0">
-          <div class="center-search">
-            <h1 class="text-white">Go once, living anywhere</h1>
-            <!-- <p class="text-white">living anywhere</p> -->
-            <form class="form-style-1" method="get" action="${pageContext.request.contextPath}/searchHotel/searchHotel.controller">
-              <div class="form-group">
-                <input type="text" class="form-control" name="hotelCounty" value="${param.hotelCounty}" placeholder="目的地">
-              </div>
-              <div class="row pt-20">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="check-in" placeholder="入住日期">
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="check-out" placeholder="退房日期">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                  <!-- <div class="form-group">
-=======
 	<!-- ================ Slider area ================ -->
 	<div class="slider">
 		<!-- search area -->
@@ -223,7 +135,6 @@
 								<div class="row">
 									<div class="col-lg-6 col-md-6 col-sm-6 col-6">
 										<!-- <div class="form-group">
->>>>>>> aga
                     <select class="form-control">
                       <option>Adult(s)(18+)</option>
                       <option>1</option>
@@ -252,39 +163,6 @@
                   <option>2</option>
                   <option>3</option>
                   <option>4</option> -->
-<<<<<<< HEAD
-                </select>
-              </div>
-              <button type="submit" class="btn-style-1 w-100" name="searchHotel" value="Select">搜尋飯店</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- search area end -->
-  <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
-    <div class="carousel-inner"> 
-      <!-- slider item -->
-      <div class="carousel-item active"> <img src="images/abu-index/scenery.jpg" alt="" class="img-fluid"> </div>
-      <!-- slider item end --> 
-      <!-- slider item -->
-      <div class="carousel-item"> <img src="images/abu-index/scenery02.jpg" alt="" class="img-fluid"> </div>
-      <!-- slider item end --> 
-      <!-- slider item -->
-      <div class="carousel-item"> <img src="images/abu-index/scenery03.jpg" alt="" class="img-fluid"> </div>
-      <!-- slider item end --> 
-    </div>
-    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"> 
-      <i class="fas fa-caret-left"></i>
-    </a> 
-    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"> 
-      <i class="fas fa-caret-right"></i>
-    </a>
-  </div>
-</div>
-<!-- ================ Slider area end ================ --> 
-=======
 									</select>
 								</div>
 								<button type="submit" class="btn-style-1 w-100">搜尋飯店</button>
@@ -322,7 +200,6 @@
 		</div>
 	</div>
 	<!-- ================ Slider area end ================ -->
->>>>>>> aga
 
 	<!-- ================ About area ================ -->
 	<div class="about-area pt-70 pb-60">
