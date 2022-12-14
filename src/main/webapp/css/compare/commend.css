@@ -10,8 +10,21 @@ body {
   textarea#commendContent {
     width: 660px;
     height: 260px;
-    font-size: 20px;
   }
+  /* div.commendAutoAndOrdId {
+    column-count: 2;
+    column-width: 200px;
+    display: inline-block;
+    text-align: left;
+  }
+  div.ordId {
+    font-display: auto;
+    margin: 10px;
+  }
+  div.commendAuto {
+    font-display: auto;
+    margin: 10px;
+  } */
   div.dateandsubmit {
     height: 50px;
   }
@@ -21,16 +34,6 @@ body {
     font-size: 20px;
   }
   input#submit{
-    height: 50px;
-    font-size: 20px;
-    border-radius: 6px;
-    float:unset;
-    background-color: lightcoral;
-  }
-  input.ordId{
-  font-size: 20px;
-  }
-  input#update{
     height: 50px;
     font-size: 20px;
     border-radius: 6px;

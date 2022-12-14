@@ -36,22 +36,26 @@ public class CommendService {
 		return commendVO;
 	}
 	
-	public CommendVO updateCommend(Integer commendAuto,Integer ordId, Integer commendGrade, String commendContent, Date commendDate) {
-
-		CommendVO commendVO = new CommendVO();
-		
-		commendVO.setCommendAuto(commendAuto);
-		commendVO.setOrdId(ordId);
-		commendVO.setCommendGrade(commendGrade);
-		commendVO.setCommendContent(commendContent);
-		commendVO.setCommendDate(commendDate);
-		dao.update(commendVO);
-								
-		return dao.findByPrimaryKey(commendAuto);
-	}
+//	public CommendVO updateCommend(Integer commendAuto,Integer ordId, Integer commendGrade, String commendContent, Date commendDate) {
+//
+//		CommendVO commendVO = new CommendVO();
+//		
+//		commendVO.setCommendAuto(commendAuto);
+//		commendVO.setOrdId(ordId);
+//		commendVO.setCommendGrade(commendGrade);
+//		commendVO.setCommendContent(commendContent);
+//		commendVO.setCommendDate(commendDate);
+//		dao.update(commendVO);
+//								
+//		return dao.findByPrimaryKey(commendAuto);
+//	}
 	
-	public void updateCommend(CommendVO commendVO) {
+	public CommendVO updateCommend(CommendVO commendVO) {
+		java.util.Date date = new java.util.Date();
+		java.sql.Date dateSql = new java.sql.Date(date.getTime());
+		commendVO.setCommendDate(dateSql);
 		dao.update(commendVO);
+		return commendVO;
 	}
 
 	public void deleteCommend(Integer commendAuto) {
