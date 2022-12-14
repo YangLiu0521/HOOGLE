@@ -134,17 +134,17 @@ pageContext.setAttribute("list", list);
 	<div class="div_table">
 	<table>
 		<tr class="td_head">
-			<th width="80px">管理者編號</th>
-			<th width="100px">管理者姓名</th>
-			<th width="180px">管理者帳號</th>
+			<th width="50">管理者<br>編號</th>
+			<th width="60">管理者<br>姓名</th>
+			<th width="110">管理者帳號</th>
 <!-- 			<th>管理者密碼</th> -->
-			<th width="8%">管理者相關</th>
-			<th width="10%">上下架最新消息</th>
-			<th width="7%">飯店相關</th>
-			<th width="7%">旅客相關</th>		
-			<th width="100px">雇用日期</th>
-			<th width="55px">修改</th>
-			<th width="55px">停權</th>
+			<th width="40">管理者<br>相關</th>
+			<th width="50">上下架最新消息</th>
+			<th width="40">飯店<br>相關</th>
+			<th width="40">旅客<br>相關</th>		
+			<th width="80">雇用日期</th>
+			<th width="40">修改</th>
+			<th width="40">停權</th>
 		</tr>
 		<tr class="td_body">
 			<td>${administratorVO.administratorId}</td>
@@ -158,11 +158,7 @@ pageContext.setAttribute("list", list);
 			<td>${administratorVO.administratorHiredate}</td>
 			<td>
 					<FORM METHOD="post"	ACTION="AdministratorServlet" style="margin-bottom: 0px;">
-						<input type="submit" value="修改"
-						${(administratorVO.administratorDominate==false && 
-						administratorVO.newsDominate==false && 
-						administratorVO.hotelDominate==false && 
-						administratorVO.userDominate==false)?"disabled":""}>
+						<input type="submit" value="修改">
 						<input type="hidden" name="administratorId" value="${administratorVO.administratorId}">
 						<input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>

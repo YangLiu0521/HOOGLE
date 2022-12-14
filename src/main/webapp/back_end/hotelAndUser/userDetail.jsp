@@ -132,13 +132,13 @@ UserVO userVO = (UserVO) request.getAttribute("userId");
 	<table>
 		<tr class="td_head">
 			<th width="20">旅客<br>編號</th>
-			<th width="50">旅客信箱</th>
+			<th width="70">旅客信箱</th>
 			<th width="50">旅客密碼</th>
 			<th width="30">旅客姓名</th>
 			<th width="40">旅客電話</th>
 			<th width="40">旅客身分證</th>
-			<th width="24">旅客<br>生日</th>
-			<th width="24">旅客<br>註冊日</th>
+			<th width="15">旅客<br>生日</th>
+			<th width="15">旅客<br>註冊日</th>
 			<th width="20">訂單<br>查詢</th>
 		</tr>
 		<tr class="td_body">
