@@ -23,9 +23,9 @@ import javax.sql.DataSource;
 /**
  * Servlet implementation class read
  */
-@WebServlet("/food/read")
+@WebServlet("/food/reader")
 @MultipartConfig
-public class read extends HttpServlet {
+public class reader extends HttpServlet {
 	Connection con;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
