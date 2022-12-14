@@ -1,6 +1,5 @@
 package com.hotelpic.model;
 
-import java.sql.Blob;
 
 public class HotelpicVO implements java.io.Serializable{
 	private Integer hotelpicId;

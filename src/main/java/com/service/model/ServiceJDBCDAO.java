@@ -1,28 +1,24 @@
-package com.roompic.model;
+package com.service.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoompicJDBCDAO implements RoompicDAO_interface {
+public class ServiceJDBCDAO implements ServiceDAO_interface {
 
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/HOOGLE?serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "password";
 
-	private static final String INSERT_STMT = "INSERT INTO roompic (roomAuto,roomType,roompicPic) VALUES (?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT roompicId,roomAuto,roomType,roompicPic FROM roompic";
-	private static final String GET_ONE_STMT = "SELECT roompicId,roomAuto,roomType,roompicPic FROM roompic where roompicId = ?";
-	private static final String DELETE = "DELETE FROM roompic where roompicId = ?";
-	private static final String UPDATE = "UPDATE roompic set roomAuto=?, roomType=?, roompicPic=? where roompicId = ?";
-
+	private static final String INSERT_STMT = "INSERT INTO service (serviceName) VALUES (?)";
+	private static final String UPDATE = "UPDATE service set serviceName=? where serviceId = ?";
+	private static final String DELETE = "DELETE FROM service where serviceId = ?";
+	private static final String GET_ONE_STMT = "SELECT * FROM service where serviceId = ?";
+	private static final String GET_ALL_STMT = "SELECT * FROM service";
+	
 	@Override
-	public void insert(RoompicVO roompicVO) {
+	public void insert(ServiceVO serviceVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -32,10 +28,9 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setInt(1, roompicVO.getRoomAuto());
-			pstmt.setString(2, roompicVO.getRoomType());
-			pstmt.setBytes(3, roompicVO.getRoompicPic());
 
+			pstmt.setString(1, serviceVO.getServiceName());
+			
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -65,7 +60,7 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 	}
 
 	@Override
-	public void update(RoompicVO roompicVO) {
+	public void update(ServiceVO serviceVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -76,10 +71,8 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setInt(1, roompicVO.getRoomAuto());
-			pstmt.setString(2, roompicVO.getRoomType());
-			pstmt.setBytes(3, roompicVO.getRoompicPic());
-			pstmt.setInt(4, roompicVO.getRoompicId());
+			pstmt.setString(1, serviceVO.getServiceName());
+			pstmt.setInt(2, serviceVO.getServiceId());
 
 			pstmt.executeUpdate();
 
@@ -110,7 +103,7 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 	}
 
 	@Override
-	public void delete(Integer roompicId) {
+	public void delete(Integer serviceId) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -121,7 +114,7 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setInt(1, roompicId);
+			pstmt.setInt(1, serviceId);
 
 			pstmt.executeUpdate();
 
@@ -151,30 +144,27 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 	}
 
 	@Override
-	public RoompicVO findByPrimaryKey(Integer roompicId) {
+	public ServiceVO findByPrimaryKey(Integer serviceId) {
 
-		RoompicVO roompicVO = null;
+		ServiceVO serviceVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setInt(1, roompicId);
+			pstmt.setInt(1, serviceId);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// empVo 也稱為 Domain objects
-				roompicVO = new RoompicVO();
-				roompicVO.setRoompicId(rs.getInt("roompicId"));
-				roompicVO.setRoomAuto(rs.getInt("roomAuto"));
-				roompicVO.setRoomType(rs.getString("roomType"));
-				roompicVO.setRoompicPic(rs.getBytes("roompicPic"));
+				serviceVO = new ServiceVO();
+				serviceVO.setServiceId(rs.getInt("serviceId"));
+				serviceVO.setServiceName(rs.getString("serviceName"));
 			}
 
 			// Handle any driver errors
@@ -185,6 +175,13 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -201,15 +198,15 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 			}
 		}
 
-		return roompicVO;
+		return serviceVO;
 
 	}
 
 	@Override
-	public List<RoompicVO> getAll() {
+	public List<ServiceVO> getAll() {
 
-		List<RoompicVO> list = new ArrayList<RoompicVO>();
-		RoompicVO roompicVO = null;
+		List<ServiceVO> list = new ArrayList<ServiceVO>();
+		ServiceVO serviceVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -224,13 +221,10 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 
 			while (rs.next()) {
 				// empVO 也稱為 Domain objects
-				roompicVO = new RoompicVO();
-				roompicVO.setRoompicId(rs.getInt("roompicId"));
-				roompicVO.setRoomAuto(rs.getInt("roomAuto"));
-				roompicVO.setRoomType(rs.getString("roomType"));
-				roompicVO.setRoompicPic(rs.getBytes("roompicPic"));
-
-				list.add(roompicVO); // Store the row in the list
+				serviceVO = new ServiceVO();
+				serviceVO.setServiceId(rs.getInt("serviceId"));
+				serviceVO.setServiceName(rs.getString("serviceName"));
+				list.add(serviceVO); // Store the row in the list
 			}
 
 			// Handle any driver errors
@@ -268,47 +262,39 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 
 	public static void main(String[] args) {
 
-		RoompicJDBCDAO dao = new RoompicJDBCDAO();
+		ServiceJDBCDAO dao = new ServiceJDBCDAO();
 
 		// 新增test
-//		RoompicVO insertTest = new RoompicVO();
-//		insertTest.setRoomAuto(4001);
-//		insertTest.setRoomType("單人房");
-////		insertTest.setRoompicPic(); //不知道怎麼弄
+//		ServiceVO insertTest = new ServiceVO();
+//		insertTest.setServiceName("會議室");
 //		dao.insert(insertTest);
-//		System.out.println("新增成功");
-		
+
 		// 修改test
-		RoompicVO updateTest = new RoompicVO();
-		updateTest.setRoompicId(14001);
-		updateTest.setRoomAuto(4001);
-		updateTest.setRoomType("123");
-////		updateTest.setRoompicPic();
-		dao.update(updateTest);
-		System.out.println("修改成功");
+//		ServiceVO updateTest = new ServiceVO();
+//		updateTest.setServiceId(9007);
+//		updateTest.setServiceName("停車場");
+//		dao.update(updateTest);
+//		System.out.println("修改ok");
 
 		// 刪除test
-//		dao.delete(14001);
-//		System.out.println("刪除成功");
-
+//		dao.delete(9008);
+//		System.out.println("修改ok");
+		
 		// 查詢單一項test
-//		RoompicVO selectTest = dao.findByPrimaryKey(14001);
-//		System.out.println(selectTest.getRoompicId() + ",");
-//		System.out.println(selectTest.getRoomAuto() + ",");
-//		System.out.println(selectTest.getRoomType() + ",");
-//		System.out.println(selectTest.getRoompicPic() + ",");
+//		ServiceVO selectTest = dao.findByPrimaryKey(9007);
+//		System.out.println(selectTest.getServiceId() + ",");
+//		System.out.println(selectTest.getServiceName() + ",");
 //		System.out.println("------------------");
-
+	
 		// 查詢總表
 
-//		List<RoompicVO> list = dao.getAll();
-//		for (RoompicVO selectAllTest : list) {
-//			System.out.println(selectAllTest.getRoompicId() + ",");
-//			System.out.println(selectAllTest.getRoomAuto() + ",");
-//			System.out.println(selectAllTest.getRoomType() + ",");
-//			System.out.println(selectAllTest.getRoompicPic() + ",\t");
+//		List<ServiceVO> list = dao.getAll();
+//		for (ServiceVO selectAllTest : list) {
+//			System.out.println(selectAllTest.getServiceId() + ",");
+//			System.out.println(selectAllTest.getServiceName() + ",");
 //			System.out.println();
 //		}
 
-	}
-}
+	}}
+
+

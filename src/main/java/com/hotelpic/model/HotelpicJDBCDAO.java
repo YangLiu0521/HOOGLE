@@ -1,10 +1,9 @@
 package com.hotelpic.model;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class HotelpicJDBCDAO implements HotelpicDAO_interface {
 
@@ -14,8 +13,8 @@ public class HotelpicJDBCDAO implements HotelpicDAO_interface {
 	String passwd = "password";
 
 	private static final String INSERT_STMT = "INSERT INTO hotelpic (hotelId,hotelpicNo,hotelpicName) VALUES (?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT hotelpicId,hotelId,hotelpicNo,hotelpicName FROM hotelpic";
-	private static final String GET_ONE_STMT = "SELECT hotelpicId,hotelId,hotelpicNo,hotelpicName FROM hotelpic where hotelpicId = ?";
+//	private static final String GET_ALL_STMT = "SELECT hotelpicId,hotelId,hotelpicNo,hotelpicName FROM hotelpic";
+//	private static final String GET_ONE_STMT = "SELECT hotelpicId,hotelId,hotelpicNo,hotelpicName FROM hotelpic where hotelpicId = ?";
 	private static final String DELETE = "DELETE FROM hotelpic where hotelpicId = ?";
 	private static final String UPDATE = "UPDATE hotelpic set hotelId=?, hotelpicNo=?, hotelpicName=? where hotelpicId = ?";
 
@@ -149,132 +148,132 @@ public class HotelpicJDBCDAO implements HotelpicDAO_interface {
 		}
 	}
 
-	@Override
-	public HotelpicVO findByPrimaryKey(Integer hotelpicId) {
-
-		HotelpicVO hotelpicVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ONE_STMT);
-
-			pstmt.setInt(1, hotelpicId);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				// empVo 也稱為 Domain objects
-				hotelpicVO = new HotelpicVO();
-				hotelpicVO.setHotelpicId(rs.getInt("hotelpicId"));
-				hotelpicVO.setHotelId(rs.getInt("hotelId"));
-				hotelpicVO.setHotelpicNo(rs.getBytes("hotelpicNo"));
-				hotelpicVO.setHotelpicName(rs.getString("hotelpicName"));
-			}
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
-		return hotelpicVO;
-
-	}
-
-	@Override
-	public List<HotelpicVO> getAll() {
-
-		List<HotelpicVO> list = new ArrayList<HotelpicVO>();
-		HotelpicVO hotelpicVO = null;
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ALL_STMT);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				// empVO 也稱為 Domain objects
-				hotelpicVO = new HotelpicVO();
-				hotelpicVO.setHotelpicId(rs.getInt("hotelpicId"));
-				hotelpicVO.setHotelId(rs.getInt("hotelId"));
-				hotelpicVO.setHotelpicNo(rs.getBytes("hotelpicNo"));
-				hotelpicVO.setHotelpicName(rs.getString("hotelpicName"));
-				list.add(hotelpicVO); // Store the row in the list
-			}
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return list;
-	}
+//	@Override
+//	public HotelpicVO findByPrimaryKey(Integer hotelpicId) {
+//
+//		HotelpicVO hotelpicVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//
+//		try {
+//
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+//			pstmt = con.prepareStatement(GET_ONE_STMT);
+//
+//			pstmt.setInt(1, hotelpicId);
+//
+//			rs = pstmt.executeQuery();
+//
+//			while (rs.next()) {
+//				// empVo 也稱為 Domain objects
+//				hotelpicVO = new HotelpicVO();
+//				hotelpicVO.setHotelpicId(rs.getInt("hotelpicId"));
+//				hotelpicVO.setHotelId(rs.getInt("hotelId"));
+//				hotelpicVO.setHotelpicNo(rs.getBytes("hotelpicNo"));
+//				hotelpicVO.setHotelpicName(rs.getString("hotelpicName"));
+//			}
+//
+//			// Handle any driver errors
+//		} catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		} catch (SQLException se) {
+//			throw new RuntimeException("A database error occured. " + se.getMessage());
+//			// Clean up JDBC resources
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (Exception e) {
+//					e.printStackTrace(System.err);
+//				}
+//			}
+//		}
+//
+//		return hotelpicVO;
+//
+//	}
+//
+//	@Override
+//	public List<HotelpicVO> getAll() {
+//
+//		List<HotelpicVO> list = new ArrayList<HotelpicVO>();
+//		HotelpicVO hotelpicVO = null;
+//
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//
+//		try {
+//
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+//			pstmt = con.prepareStatement(GET_ALL_STMT);
+//			rs = pstmt.executeQuery();
+//
+//			while (rs.next()) {
+//				// empVO 也稱為 Domain objects
+//				hotelpicVO = new HotelpicVO();
+//				hotelpicVO.setHotelpicId(rs.getInt("hotelpicId"));
+//				hotelpicVO.setHotelId(rs.getInt("hotelId"));
+//				hotelpicVO.setHotelpicNo(rs.getBytes("hotelpicNo"));
+//				hotelpicVO.setHotelpicName(rs.getString("hotelpicName"));
+//				list.add(hotelpicVO); // Store the row in the list
+//			}
+//
+//			// Handle any driver errors
+//		} catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		} catch (SQLException se) {
+//			throw new RuntimeException("A database error occured. " + se.getMessage());
+//			// Clean up JDBC resources
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (Exception e) {
+//					e.printStackTrace(System.err);
+//				}
+//			}
+//		}
+//		return list;
+//	}
 
 	public static void main(String[] args) {
 
 		HotelpicJDBCDAO dao = new HotelpicJDBCDAO();
-
+	//	byte[] pic = new byte[10];
 		// 新增test
 //		HotelpicVO insertTest = new HotelpicVO();
 //		insertTest.setHotelpicId(568797);
@@ -284,12 +283,12 @@ public class HotelpicJDBCDAO implements HotelpicDAO_interface {
 //		dao.insert(insertTest);
 
 		// 修改test
-//		HotelpicVO updateTest = new HotelpicVO();
-//		updateTest.setHotelpicId(1);
-//		updateTest.setHotelId(354667);
+		HotelpicVO updateTest = new HotelpicVO();
+		updateTest.setHotelpicId(13001);
+		updateTest.setHotelId(3001);
 //		updateTest.setHotelpicNo(C:/.........);
-//		updateTest.setHotelpicName("JSHDKHRJ");
-//		dao.update(updateTest);
+		updateTest.setHotelpicName("JRJ");
+		dao.update(updateTest);
 
 		// 刪除test
 //		dao.delete(1);
