@@ -27,6 +27,7 @@ public class CommendServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
+//=======================================================================================
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 			System.out.println("***** into getOne_For_Display *******");
 //			Map<String, String> errorMsgs = new Linkedne_For_DHashMap<String, String>();
@@ -82,6 +83,7 @@ public class CommendServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
+//=======================================================================================
 		if ("getOne_For_Update".equals(action)) { // 來自listAllOrd.jsp的請求
 
 //			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
@@ -96,17 +98,14 @@ public class CommendServlet extends HttpServlet {
 			CommendVO commendVO = commendSvc.getOneCommend(commendAuto);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-//			String param = "?commendAuto=" + commendVO.getCommendAuto() + "&ordId=" + commendVO.getOrdId()
-//					+ "&commendGrade=" + commendVO.getCommendGrade() + "&commendContent="
-//					+ commendVO.getCommendContent() + "&commnedDate=" + commendVO.getCommendDate();
-
 			req.setAttribute("commendVO", commendVO);
 
 			String url = "/commend/update_commend_input.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_ord_input.jsp
 			successView.forward(req, res);
 		}
-
+		
+//=======================================================================================
 		if ("update".equals(action)) { // 來自update_commend_input.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -137,12 +136,12 @@ public class CommendServlet extends HttpServlet {
 			}
 
 			java.sql.Date commendDate = null;
-			try {
-				commendDate = java.sql.Date.valueOf(req.getParameter("commendDate").trim());
-			} catch (IllegalArgumentException e) {
-//				errorMsgs.put("commendDate","請輸入日期");
-				errorMsgs.add("請輸入日期");
-			}
+//			try {
+//				commendDate = java.sql.Date.valueOf(req.getParameter("commendDate").trim());
+//			} catch (IllegalArgumentException e) {
+////				errorMsgs.put("commendDate","請輸入日期");
+//				errorMsgs.add("請輸入日期");
+//			}
 
 			CommendVO commendVO = new CommendVO();
 			commendVO.setCommendAuto(commendAuto);
@@ -160,15 +159,16 @@ public class CommendServlet extends HttpServlet {
 
 			/*************************** 2.開始修改資料 *****************************************/
 			CommendService commendSvc = new CommendService();
-			commendVO = commendSvc.updateCommend(commendAuto, ordId, commendGrade, commendContent, commendDate);
+			commendVO = commendSvc.updateCommend(commendVO);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("commendVO", commendVO); // 資料庫update成功後,正確的的commendVO物件,存入req
-			String url = "/commend/listOneCommend.jsp";
+			String url = "/commend/updateSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneCommend.jsp
 			successView.forward(req, res);
 		}
 
+//=======================================================================================		
 		if ("insert".equals(action)) { // 來自addCommend.jsp的請求
 
 //			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
@@ -198,13 +198,12 @@ public class CommendServlet extends HttpServlet {
 			Integer commendGrade = null;
 			if (gradeStr == null || gradeStr.isEmpty()) {
 				errorMsgs.add("評價等級請勿空白");
-			} 
-//			else {
-//				commendGrade = Integer.valueOf(gradeStr);
-//				if (!(commendGrade > 0 && commendGrade < 6)) {
-//					errorMsgs.add("評價等級請填1-5");
-//				}
-//			}
+			} else {
+				commendGrade = Integer.valueOf(gradeStr);
+				if (!(commendGrade > 0 && commendGrade < 6)) {
+					errorMsgs.add("評價等級請填1-5");
+				}
+			}
 
 			String commendContent = req.getParameter("commendContent");
 			if (commendContent == null || commendContent.trim().length() == 0) {
@@ -238,11 +237,12 @@ public class CommendServlet extends HttpServlet {
 			commendVO = commendSvc.addCommend(commendVO);
 
 			// 新增完成，準備轉交
-			String url = "/commend/listAllCommend.jsp";
+			String url = "/commend/addSuccess.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交到旅客總表listAllCommend.jsp
 			successView.forward(req, res);
 		}
 
+//=======================================================================================		
 		if ("delete".equals(action)) { // 來自listAllCommend.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();

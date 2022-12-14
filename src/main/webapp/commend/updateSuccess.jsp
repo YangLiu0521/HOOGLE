@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>新增評價成功</title>
+<title>修改評價成功</title>
 <style type="text/css">
 .center-in-center {
 	position: absolute;
@@ -19,9 +19,9 @@
 </style>
 </head>
 <body>
-<a href="<%=request.getContextPath() %>/commend/select_page.jsp">回首頁</a>
+<a href="<%=request.getContextPath() %>/commend/listAllCommend.jsp">回評價列表</a>
 	<div class="center-in-center">
-		<h1>新增資料成功，謝謝您的回饋</h1>
+		<h1>修改資料成功</h1>
 	</div>
 </body>
 </html>
