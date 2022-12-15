@@ -188,8 +188,8 @@ public class HotelServlet extends HttpServlet {
 				if (hotelPrincipal == null || hotelPrincipal.trim().length() == 0) {
 					errors.put("hotelPrincipal", "請輸入負責人");
 				} 
-
-
+				
+				
 				hotelVO.setHotelPassword(hotelSvc.pwdhash(hotelPassword));
 				hotelVO.setHotelName(hotelName);
 				hotelVO.setHotelPhone(hotelPhone);
@@ -253,6 +253,11 @@ public class HotelServlet extends HttpServlet {
 				String hotelPasswordCheck = hotelVO.getHotelPassword();
 				if (!hotelPasswordCheck.equals(hotelPwd)) {
 					errorMsgs.add("信箱或密碼錯誤");
+				}
+				
+				Integer hotelState = hotelVO.getHotelState();
+				if(hotelState == 2) {
+					errorMsgs.add("管理員審核中，驗證完將已mail通知");
 				}
 
 				// 確認資料有誤，印出錯誤資料並跳回原頁

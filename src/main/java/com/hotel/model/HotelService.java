@@ -12,7 +12,7 @@ public class HotelService {
 	
 	public HotelVO addHotel(HotelVO hotelVO) {
 		System.out.println("### addHotel service");
-		hotelVO.setHotelState(1);
+		hotelVO.setHotelState(2);
 		dao.insert(hotelVO);
 		
 		return hotelVO;
