@@ -2,7 +2,7 @@
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page
-import="com.commend.model.*"%> <% CommendVO commendVO = (CommendVO)
+import="tw.com.hoogle.commend.model.*"%> <% CommendVO commendVO = (CommendVO)
 request.getAttribute("commendVO"); %>
 <!DOCTYPE html>
 <html>

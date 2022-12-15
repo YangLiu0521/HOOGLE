@@ -66,7 +66,7 @@ h4 {
 		</li>
 
 		<jsp:useBean id="commendSvc" scope="page"
-			class="com.commend.model.CommendService"></jsp:useBean>
+			class="tw.com.hoogle.commend.model.CommendService"></jsp:useBean>
 
 				<li>
 					<FORM METHOD="post" ACTION="commend.do">
