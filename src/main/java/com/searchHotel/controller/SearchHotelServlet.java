@@ -72,7 +72,7 @@ private static final long serialVersionUID = 1L;
 		if(errors!=null && !errors.isEmpty()) {
 			System.out.println("error");
 			request.getRequestDispatcher(
-					"/searchHotel/searchHotel.jsp").forward(request, response);
+					"/index.jsp").forward(request, response);
 			return;
 		}
 		
@@ -86,7 +86,8 @@ private static final long serialVersionUID = 1L;
 		if(searchHotel!=null && searchHotel.equals("Select")) {
 			request.setAttribute("select", results);
 			request.getRequestDispatcher(
-					"/searchHotel/displayHotel.jsp").forward(request, response);
+//					"/searchHotel/displayHotel.jsp").forward(request, response);
+					"/searchHotel/displaySearchHotel.jsp").forward(request, response);
 		} 
 //		else  {
 //			errors.put("action", "Unknown Action:"+searchHotel);

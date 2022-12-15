@@ -114,9 +114,9 @@
 						<div class="center-search">
 							<h1 class="text-white">Go once, living anywhere</h1>
 							<!-- <p class="text-white">living anywhere</p> -->
-							<form class="form-style-1">
+							<form class="form-style-1" method="get" action="${pageContext.request.contextPath}/searchHotel/searchHotel.controller">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="目的地">
+									<input type="text" class="form-control" name="hotelCounty" value="${param.hotelCounty}" placeholder="目的地">
 								</div>
 								<div class="row pt-20">
 									<div class="col-lg-6 col-md-6 col-sm-6 col-6">
