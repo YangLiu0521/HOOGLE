@@ -2,10 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.administrator.model.*"%>
+<%@ page import="tw.com.hoogle.administrator.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
-<jsp:useBean id="administratorSvc" scope="page" class="com.administrator.model.AdministratorService"/>
+<jsp:useBean id="administratorSvc" scope="page" class="tw.com.hoogle.administrator.model.AdministratorService"/>
 <%
 // AdministratorService administratorSvc = new AdministratorService();
 List<AdministratorVO> list = administratorSvc.getAll();

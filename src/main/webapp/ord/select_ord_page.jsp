@@ -59,7 +59,7 @@
     </FORM>
   </li>
 
-  <jsp:useBean id="ordSvc" scope="page" class="com.ord.model.OrdService" />
+  <jsp:useBean id="ordSvc" scope="page" class="tw.com.hoogle.ord.model.OrdService" />
    
   <li>
      <FORM METHOD="post" ACTION="ord.do" >

@@ -60,7 +60,7 @@
     </FORM>
   </li>
 
-  <jsp:useBean id="foodSvc" scope="page" class="com.food.model.FoodService" />
+  <jsp:useBean id="foodSvc" scope="page" class="tw.com.hoogle.food.model.FoodService" />
    
   <li>
      <FORM METHOD="post" ACTION="food.do" >

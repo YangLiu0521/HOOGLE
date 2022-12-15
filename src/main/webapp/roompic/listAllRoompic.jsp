@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.roompic.model.*"%>
+<%@ page import="tw.com.hoogle.roompic.model.*"%>
 <%
 RoompicService roompicSvc = new RoompicService();
 List<RoompicVO> list = roompicSvc.getAll();

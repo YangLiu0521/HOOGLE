@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.ord.model.*"%>
+<%@ page import="tw.com.hoogle.ord.model.*"%>
 
 <%
   OrdVO ordVO = (OrdVO) request.getAttribute("ordVO"); //OrdServlet.java (Concroller) 存入req的ordVO物件 (包括幫忙取出的ordVO, 也包括輸入資料錯誤時的ordVO物件)
