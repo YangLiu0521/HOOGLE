@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.administrator.model.*"%>
+<%@ page import="tw.com.hoogle.administrator.model.*"%>
 
-<jsp:useBean id="administratorSvc" scope="page" class="com.administrator.model.AdministratorService"/>
+<jsp:useBean id="administratorSvc" scope="page" class="tw.com.hoogle.administrator.model.AdministratorService"/>
 <%AdministratorVO administratorVO = (AdministratorVO) request.getAttribute("administratorVO");%>
 
 <!DOCTYPE html>

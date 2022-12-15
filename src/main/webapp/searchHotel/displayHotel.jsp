@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page import="com.searchHotel.model.*" %>
+<%@ page import="tw.com.hoogle.searchHotel.model.*" %>
 
 <!--      SearchHotelService searchHotelSvc = new SearchHotelService(); -->
 <!--      List<SearchHotelBean> list = searchHotelSvc.getAll(); -->

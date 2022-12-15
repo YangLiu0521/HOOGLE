@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.commend.model.*"%>
+<%@ page import="tw.com.hoogle.commend.model.*"%>
 
 <%
   CommendVO commendVO = (CommendVO) request.getAttribute("commendVO"); //CommendServlet.java (Concroller) 存入req的commendVO物件 (包括幫忙取出的commendVO, 也包括輸入資料錯誤時的commendVO物件)

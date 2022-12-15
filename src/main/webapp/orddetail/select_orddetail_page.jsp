@@ -60,7 +60,7 @@
     </FORM>
   </li>
 
-  <jsp:useBean id="orddetailSvc" scope="page" class="com.orddetail.model.OrdDetailService" />
+  <jsp:useBean id="orddetailSvc" scope="page" class="tw.com.hoogle.orddetail.model.OrdDetailService" />
    
   <li>
      <FORM METHOD="post" ACTION="orddetail.do" >

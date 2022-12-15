@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.food.model.*"%>
+<%@ page import="tw.com.hoogle.food.model.*"%>
 
 <%
 FoodVO foodVO = (FoodVO) request.getAttribute("foodVO"); //FoodServlet.java (Concroller) 存入req的foodVO物件 (包括幫忙取出的foodVO, 也包括輸入資料錯誤時的foodVO物件)

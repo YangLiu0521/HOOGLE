@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.hotel.model.*"%>
+<%@ page import="tw.com.hoogle.hotel.model.*"%>
 <%@ page import="java.util.*"%>
 <%
 if (session.getAttribute("userVO") == null && session.getAttribute("hotelVO") == null) {
