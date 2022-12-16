@@ -2,7 +2,10 @@ package tw.com.hoogle.searchHotel.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +27,7 @@ import tw.com.hoogle.searchHotel.model.SearchHotelService;
 @Controller
 public class SearchHotelServlet extends HttpServlet{
 private static final long serialVersionUID = 1L;
-	private SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd");
+	private SimpleDateFormat sFormat = new SimpleDateFormat("MM/dd/yyyy");
 	@Autowired
 	private SearchHotelService searchHotelService;
 	@RequestMapping(
@@ -43,6 +46,25 @@ private static final long serialVersionUID = 1L;
 		String searchHotel = request.getParameter("searchHotel");
 		String checkinInput =request.getParameter("checkinInput");
 		String checkoutInput =request.getParameter("checkoutInput");
+		
+		java.util.Date date1 = null ,date2 = null;
+		try {
+			date1 = sFormat.parse(checkinInput);
+			date2 = sFormat.parse(checkoutInput);
+			System.out.println("checkinInput="+date1);
+			System.out.println("checkinoutput="+date2);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date1);
+		long time1 = cal.getTimeInMillis();
+		cal.setTime(date2);
+		long time2 = cal.getTimeInMillis();
+		long ordNights = (time2-time1)/(1000*60*60*24);
+		System.out.println("訂房天數共"+ordNights+"天");
+		
+		
 		Map<String, String> errors = new HashMap<String, String>();
 		request.setAttribute("errors", errors);
 //轉換資料
@@ -50,7 +72,6 @@ private static final long serialVersionUID = 1L;
 		if(hotelCounty!=null && hotelCounty.length()!=0 && hotelCounty!="") {
 			try {
 				hotelCountyInput = hotelCounty;
-				System.out.println("輸入縣市 : "+hotelCountyInput);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 				errors.put("hotelCountyInput", "hotelCountyInput must be a String");
@@ -75,6 +96,7 @@ private static final long serialVersionUID = 1L;
 			request.setAttribute("hotelCountyInput", hotelCountyInput);
 			request.setAttribute("checkinInput", checkinInput);
 			request.setAttribute("checkoutInput", checkoutInput);
+			request.setAttribute("ordNights", ordNights);
 			request.getRequestDispatcher(
 					"/searchHotel/displaySearchHotel.jsp").forward(request, response);
 		}

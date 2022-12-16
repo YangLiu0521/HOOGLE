@@ -198,8 +198,9 @@
     <c:if test="${not empty checkinInput}">
     <c:if test="${not empty checkoutInput}">
     <div class="section-title text-center">
-		<h2>訂房日期 : ${checkinInput}</h2>
-      	<h2>退房日期 : ${checkoutInput}</h2>     
+		<h4>訂房日期 : ${checkinInput}</h4>
+      	<h4>退房日期 : ${checkoutInput}</h4>
+      	<h4>入住天數 : ${ordNights}天</h4>   
      </div>
      </c:if>
      </c:if>
