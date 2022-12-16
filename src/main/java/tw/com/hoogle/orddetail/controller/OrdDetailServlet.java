@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import tw.com.hoogle.orddetail.model.OrdDetailService;
 import tw.com.hoogle.orddetail.model.OrdDetailVO;
 
 //@WebServlet("/OrddetailServlet")
+@WebServlet(name="OrddetailServlet",urlPatterns="/orddetail/orddetail.do")
 public class OrdDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

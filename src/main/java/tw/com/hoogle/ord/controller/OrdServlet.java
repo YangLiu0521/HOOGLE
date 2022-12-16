@@ -17,6 +17,7 @@ import tw.com.hoogle.ord.model.OrdService;
 import tw.com.hoogle.ord.model.OrdVO;
 
 //@WebServlet("/OrdServlet")
+@WebServlet(name="OrdServlet",urlPatterns="/ord/ord.do")
 public class OrdServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

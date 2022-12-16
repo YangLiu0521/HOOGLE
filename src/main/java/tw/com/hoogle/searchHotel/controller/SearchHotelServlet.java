@@ -1,58 +1,48 @@
 package tw.com.hoogle.searchHotel.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import tw.com.hoogle.ord.model.hibernate.HibernateUtil;
 import tw.com.hoogle.searchHotel.model.SearchHotelBean;
 import tw.com.hoogle.searchHotel.model.SearchHotelDAO;
 import tw.com.hoogle.searchHotel.model.SearchHotelDAOHibernate;
 import tw.com.hoogle.searchHotel.model.SearchHotelService;
 
-@WebServlet(
-		urlPatterns={"/searchHotel/searchHotel.controller"}		
-)
+@Controller
 public class SearchHotelServlet extends HttpServlet{
 private static final long serialVersionUID = 1L;
-	
 	private SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd");
+	@Autowired
 	private SearchHotelService searchHotelService;
-	@Override
-	public void init() throws ServletException {
-		
-		searchHotelService = new SearchHotelService(
-		new SearchHotelDAOHibernate(HibernateUtil.getSessionFactory()));
-	}
-	
+	@RequestMapping(
+			path ={"/searchHotel/searchHotel.controller"}		
+	)
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.getCurrentSession();
-		Transaction transaction = session.beginTransaction();
-		SearchHotelDAO dao = new SearchHotelDAOHibernate(sessionFactory);
-		
+//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//		Session session = sessionFactory.getCurrentSession();
+//		Transaction transaction = session.beginTransaction();
+//		SearchHotelDAO dao = new SearchHotelDAOHibernate(sessionFactory);
 		
 //接收資料
-		
 		String hotelCounty = request.getParameter("hotelCounty");
 		String searchHotel = request.getParameter("searchHotel");
-		
+		String checkinInput =request.getParameter("checkinInput");
+		String checkoutInput =request.getParameter("checkoutInput");
 		Map<String, String> errors = new HashMap<String, String>();
 		request.setAttribute("errors", errors);
 //轉換資料
@@ -72,40 +62,28 @@ private static final long serialVersionUID = 1L;
 					"/index.jsp").forward(request, response);
 			return;
 		}
-		
 //呼叫Model
 		SearchHotelBean bean = new SearchHotelBean();
-//		bean.setHotelCounty(hotelCountyInput);
-		Query <SearchHotelBean> query = session.createQuery("From SearchHotelBean where hotelCounty=?0",SearchHotelBean.class);
-		query.setParameter(0, hotelCountyInput);
+//		Query <SearchHotelBean> query = session.createQuery("From SearchHotelBean where hotelCounty=?0",SearchHotelBean.class);
+//		query.setParameter(0, hotelCountyInput);
+//		List results = query.list();
+		System.out.println("hotelCountyInput = "+hotelCountyInput);
+		System.out.println("checkinInput ="+checkinInput);
+		System.out.println("checkoutInput ="+checkoutInput);
 		
-		List results = query.list();
 		if(searchHotel!=null && searchHotel.equals("Select")) {
-			request.setAttribute("select", results);
-			request.getRequestDispatcher(
-//					"/searchHotel/displayHotel.jsp").forward(request, response);
-					"/searchHotel/displaySearchHotel.jsp").forward(request, response);
-		} 
-//		else  {
-//			errors.put("action", "Unknown Action:"+searchHotel);
-//			request.getRequestDispatcher(
-//					"/searchHotel/displaySearchHotel.jsp").forward(request, response);
-//		}
-		
-//		if(searchHotel!=null && searchHotel.equals("ListAll")) {
-//			request.setAttribute("listAll", results);
-//			request.getRequestDispatcher(
-//					"/searchHotel/displayHotel.jsp").forward(request, response);
-//		} 
-		else  {
-			errors.put("action", "Unknown Action:"+searchHotel);
+			request.setAttribute("hotelCountyInput", hotelCountyInput);
+			request.setAttribute("checkinInput", checkinInput);
+			request.setAttribute("checkoutInput", checkoutInput);
 			request.getRequestDispatcher(
 					"/searchHotel/displaySearchHotel.jsp").forward(request, response);
 		}
-		
-		
-		
-		transaction.commit();
+		else  {
+			errors.put("action", "Unknown Action:"+searchHotel);
+			request.getRequestDispatcher(
+					"/index.jsp").forward(request, response);
+		}
+//		transaction.commit();
 //		session.close();
 	}
 }

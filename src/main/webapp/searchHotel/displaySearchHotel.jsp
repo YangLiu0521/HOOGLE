@@ -3,14 +3,6 @@
 <%@ page import="tw.com.hoogle.searchHotel.model.*"%>
 <%@ page import="java.util.*" %>
 
-<!-- //............... -->
-<%
-// 	SearchHotelService searchHotelSvc = new SearchHotelService();
-//     List <SearchHotelBean> list = searchHotelSvc.getAll();
-//     pageContext.setAttribute("list",list);
-%>
-<!-- //............... -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +14,7 @@
 <script src="https://kit.fontawesome.com/0cf2b86d93.js" crossorigin="anonymous"></script>
 
 <!-- page title -->
-<title>Hoogle</title>
+<title>Hoogle_SearchHotel</title>
 <!-- favicon -->
 <!-- <link rel="icon" href="favicon.ico" /> -->
 <!-- bootstrap core CSS -->
@@ -64,13 +56,13 @@
             <!-- top Menu -->
             <div class="collapse navbar-collapse" id="navbarTheme">
               <ul class="navbar-nav align-items-start align-items-lg-center">
-                <li class="active"><a href="/index.jsp"><img src="${pageContext.request.contextPath}/images/abu-index/logo.png" alt="" class="img-fluid"></a></li> 
+                <li class="active"><a href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/images/abu-index/logo.png" alt="" class="img-fluid"></a></li> 
                 <li><a class="nav-link" href="about.html">比價</a></li>
                 <li><a class="nav-link" href="gallery.html">美食</a></li>
 
                 <!--原pages-->
                 <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">關於我們</a>
-                  <div class="dropdown-menu" aria-labelledby="dropdown05"> <a class="dropdown-item" href="faq.html">關於我們</a> <a class="dropdown-item" href="QA.html">常見問題QA</a> <a class="dropdown-item" href="Terms.html">服務條款</a> <a class="dropdown-item" href="customer-service.html">客服支援</a> 
+                  <div class="dropdown-menu" aria-labelledby="dropdown05"> <a class="dropdown-item" href="faq.html">關於我們</a> <a class="dropdown-item" href="QA.html">常見問題QA</a> <a class="dropdown-item" href="Terms.html">服務條款</a> <a class="dropdown-item" href="customer-service.html">客服支援</a> </div>
                   <!-- <a class="dropdown-item" href="team.html">Team</a> <a class="dropdown-item" href="testimonial.html">Testimonial</a> <a class="dropdown-item" href="traveler-information.html">Traveler Information</a> <a class="dropdown-item" href="payment-information.html">Payment Information</a> <a class="dropdown-item" href="faq.html">Faq</a> </div> -->
                 </li>
                 <!-- <li><a class="nav-link" href="contact-us.html">Contact Us</a></li> -->
@@ -82,19 +74,19 @@
         </div>
         <div class="col-lg-4 col-md-6 col-sm-8 col-10 text-right"> 
           <!-- header right link -->
-          <div class="header-right-link" id="header">
-            <ul>
-              <!-- <li><a href="signin.html"><img src="./img/imgs/註冊.png" alt="" class="img-fluid"></li> -->
-<!--                 <li><a class="nav-link" href="about.html">會員名稱</a></li> -->
-              <!-- <li><a href="contact-us.html" class="header-request">Request a Quote</a></li>
+<!--           <div class="header-right-link" id="header"> -->
+<!--             <ul> -->
+<!--               <li><a href="signin.html"><img src="./img/imgs/註冊.png" alt="" class="img-fluid"></li> -->
+<!-- <!--                 <li><a class="nav-link" href="about.html">會員名稱</a></li> --> -->
+<!--               <li><a href="contact-us.html" class="header-request">Request a Quote</a></li>
 
-              <!-- 下拉式選單 -->
-<!--               <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  <img src="images/abu-index/login.png" alt="" class="img-fluid"></a> -->
-<!--                 <div class="dropdown-menu" aria-labelledby="dropdown05"> <a class="dropdown-item" href="faq.html">登入</a> <a class="dropdown-item" href="QA.html">註冊</a> <a class="dropdown-item" href="Terms.html">會員中心</a> <a class="dropdown-item" href="customer-service.html">登出</a>  -->
-                <!-- <a class="dropdown-item" href="team.html">Team</a> <a class="dropdown-item" href="testimonial.html">Testimonial</a> <a class="dropdown-item" href="traveler-information.html">Traveler Information</a> <a class="dropdown-item" href="payment-information.html">Payment Information</a> <a class="dropdown-item" href="faq.html">Faq</a> </div> -->
-<!--               </li> -->
-            </ul>
-          </div>
+<!--               下拉式選單 -->
+<!-- <!--               <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  <img src="images/abu-index/login.png" alt="" class="img-fluid"></a> --> -->
+<!-- <!--                 <div class="dropdown-menu" aria-labelledby="dropdown05"> <a class="dropdown-item" href="faq.html">登入</a> <a class="dropdown-item" href="QA.html">註冊</a> <a class="dropdown-item" href="Terms.html">會員中心</a> <a class="dropdown-item" href="customer-service.html">登出</a>  --> -->
+<!--                 <a class="dropdown-item" href="team.html">Team</a> <a class="dropdown-item" href="testimonial.html">Testimonial</a> <a class="dropdown-item" href="traveler-information.html">Traveler Information</a> <a class="dropdown-item" href="payment-information.html">Payment Information</a> <a class="dropdown-item" href="faq.html">Faq</a> </div> -->
+<!-- <!--               </li> --> -->
+<!--             </ul> -->
+<!--           </div> -->
           <!-- header right link end --> 
         </div>
       </div>
@@ -127,12 +119,12 @@
               <div class="row pt-20">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="check-in" placeholder="入住日期">
+                    <input type="text" class="form-control" name="checkinInput" value="${param.checkinInput}"  id="check-in" placeholder="訂房日期">
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="check-out" placeholder="退房日期">
+                    <input type="text" class="form-control" name="checkoutInput" value="${param.checkoutInput}" id="check-out" placeholder="退房日期">
                   </div>
                 </div>
               </div>
@@ -194,19 +186,25 @@
 <!-- </div> -->
 <!-- ================ Most popular hotel end ================ --> 
 
-
 <!-- ================ Popular destinations ================ -->
 <div class="popular-destinations pt-70 pb-40 position-relative">
   <div class="bg-style-1"></div>
   <div class="container"> 
     <!-- section title -->
     <div class="section-title text-center">
-      <h2>各式飯店，任君挑選</h2>
-      <span class="dashed-border"></span> </div>
+    <h2>各式飯店，任君挑選</h2>
+    <span class="dashed-border"></span> </div>
     <!-- section title -->
-    <div class="row">
-    
-    
+    <c:if test="${not empty checkinInput}">
+    <c:if test="${not empty checkoutInput}">
+    <div class="section-title text-center">
+		<h2>訂房日期 : ${checkinInput}</h2>
+      	<h2>退房日期 : ${checkoutInput}</h2>     
+     </div>
+     </c:if>
+     </c:if>
+<div class="row">
+<c:if test="${hotelCountyInput=='台北市'}">
       <div class="col-lg-4 col-md-6 col-sm-6 mb-30">     
         <!-- popular destination box -->
         <div class="popular-destination-box">
@@ -215,14 +213,14 @@
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>        
           <div class="title">
-            <h3><a href="">1${row.hotelId}</a></h3>
+            <h3><a href="">${hotelCountyInput}</a></h3>
           </div>
         </div>
         <!-- popular destination box end --> 
       </div>
-      
-      
-      
+</c:if>
+ 
+    <c:if test="${hotelCountyInput=='新北市'}">  
       <div class="col-lg-4 col-md-6 col-sm-6 mb-30"> 
         <!-- popular destination box -->
         <div class="popular-destination-box">
@@ -231,12 +229,14 @@
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
-            <h3><a href="">2${row.hotelId}</a></h3>
+            <h3><a href="">${hotelCountyInput}</a></h3>
           </div>
         </div>
         <!-- popular destination box end --> 
       </div>
+   </c:if>
       
+    <c:if test="${hotelCountyInput=='台中市'}">  
       <div class="col-lg-4 col-md-6 col-sm-6 mb-30"> 
         <!-- popular destination box -->
         <div class="popular-destination-box">
@@ -245,12 +245,14 @@
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
-            <h3><a href="">3${row.hotelId}</a></h3>
+            <h3><a href="">${hotelCountyInput}</a></h3>
           </div>
         </div>
         <!-- popular destination box end --> 
       </div>
+     </c:if>
       
+     <c:if test="${hotelCountyInput=='台南市'}">  
       <div class="col-lg-4 col-md-6 col-sm-6 mb-30"> 
         <!-- popular destination box -->
         <div class="popular-destination-box">
@@ -259,12 +261,14 @@
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
-            <h3><a href="">4${row.hotelId}</a></h3>
+            <h3><a href="">${hotelCountyInput}</a></h3>
           </div>
         </div>
         <!-- popular destination box end --> 
       </div>
-      
+     </c:if>
+     
+     <c:if test="${hotelCountyInput=='高雄市'}">  
       <div class="col-lg-4 col-md-6 col-sm-6 mb-30"> 
         <!-- popular destination box -->
         <div class="popular-destination-box">
@@ -273,12 +277,14 @@
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
-            <h3><a href="">5${row.hotelId}</a></h3>
+            <h3><a href="">${hotelCountyInput}</a></h3>
           </div>
         </div>
         <!-- popular destination box end --> 
       </div>
+      </c:if>
       
+       <c:if test="${hotelCountyInput=='台北市'}">  
       <div class="col-lg-4 col-md-6 col-sm-6 mb-30"> 
 <!--         popular destination box -->
         <div class="popular-destination-box">
@@ -287,17 +293,18 @@
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
-            <h3><a href="">6${row.hotelId}</a></h3>
+            <h3><a href="">${hotelCountyInput}</a></h3>
           </div>
         </div>
 <!--         popular destination box end  -->
       </div>
-      
+     </c:if>
     </div>
   </div>
 </div>
 
 <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+<%-- <%-- <c:if test="${not empty select}">	 --%> 
 <!-- <table> -->
 <!-- 	<thead> -->
 <!-- 	<tr> -->
@@ -318,7 +325,7 @@
 <!-- 	</tr> -->
 <!-- 	</thead> -->
 <!-- 	<tbody> -->
-		
+
 <%-- 		<c:forEach var="row" items="${select}"> --%>
 <%-- 		<c:url value="/searchHotel/displayHotel.jsp" var="path"> --%>
 <%-- 			<c:param name="hotelId" value="${row.hotelId}" /> --%>
@@ -354,10 +361,10 @@
 <%-- 		<td>${row.hotelState}</td> --%>
 <!-- 	</tr> -->
 <%-- 		</c:forEach> --%>
-	
 <!-- 	</tbody> -->
 <!-- </table> -->
-<%-- </c:if> --%>
+<%-- <%-- </c:if>	 --%>
+</body>
 <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 
 <!-- ================ Popular destinations end ================ --> 
@@ -453,6 +460,10 @@
               <button type="submit">Subscribe</button>
             </form>
           </div>
+         </div>
+       </div>
+      </div>
+    </div>
           <!-- footer newsletter form end -->
 
 <!-- js files --> 
@@ -474,5 +485,5 @@
 <script src="${pageContext.request.contextPath}/js/abu-js/abu.js"></script>
 <!-- header right link js by aga -->
 <script src="${pageContext.request.contextPath}/js/member/memberHeader.js"></script>
-</body>
+</footer>
 </html>
