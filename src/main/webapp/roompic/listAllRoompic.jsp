@@ -72,7 +72,7 @@ th, td {
 				<td>${roompicVO.roompicId}</td>
 				<td>${roompicVO.roomAuto}</td>
 				<td>${roompicVO.roomType}</td>
-				<td><img src="${pageContext.request.contextPath}/RoompicReader?roompicId=${roompicVO.roompicId}" height="100" width="100"></td>
+				<td><img src="${pageContext.request.contextPath}/roompic/RoompicReader?roompicId=${roompicVO.roompicId}" height="100" width="100"></td>
 				
 			</tr>
 		</c:forEach>
