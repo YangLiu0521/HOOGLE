@@ -43,8 +43,7 @@ public class HotelService {
 	}
 
 	public String pwdhash(String password) {
-		dao.pwdhash(password);
-		return password;
+		return dao.pwdhash(password);	 
 	}
 	
 	

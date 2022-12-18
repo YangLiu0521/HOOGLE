@@ -37,6 +37,8 @@ public class RoompicReader extends HttpServlet {
 					out.write(buf, 0, len);
 				}
 				in.close();
+				System.out.println("照片輸出成功");
+				
 			} else {
 //				res.sendError(HttpServletResponse.SC_NOT_FOUND);
 				InputStream in = getServletContext().getResourceAsStream("/roompic/images/picNotFound.png");

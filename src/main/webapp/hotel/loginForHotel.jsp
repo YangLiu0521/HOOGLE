@@ -51,12 +51,12 @@ HotelVO hotelVO = (HotelVO) request.getAttribute("hotelVO");
 					<div class="login-box">
 						<form class="form-style-1 shadow p-30" METHOD="post" ACTION="<%=request.getContextPath()%>/hotel/HotelServlet" enctype="multipart/form-data">
 							<h3 class="text-center">飯店登入系統</h3>
+							<br>
 
 							<c:if test="${not empty errorMsgs}">
-								<font style="color: red">請修正以下錯誤:</font>
 								<ul>
 									<c:forEach var="message" items="${errorMsgs}">
-										<li style="color: red">${message}</li>
+										<center><li style="color: red">${message}</li></center>
 									</c:forEach>
 								</ul>
 							</c:if>

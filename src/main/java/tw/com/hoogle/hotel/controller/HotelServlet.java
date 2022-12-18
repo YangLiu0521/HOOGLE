@@ -106,7 +106,7 @@ public class HotelServlet extends HttpServlet {
 				}
 
 				hotelVO.setHotelEmail(hotelEmail);
-				hotelVO.setHotelPassword(hotelPassword);
+				hotelVO.setHotelPassword(hotelSvc.pwdhash(hotelPassword));
 				hotelVO.setHotelName(hotelName);
 				hotelVO.setHotelPhone(hotelPhone);
 				hotelVO.setHotelPrincipal(hotelPrincipal);
@@ -335,7 +335,7 @@ public class HotelServlet extends HttpServlet {
 				String messageText = "Hello!" + hotelVO.getHotelName() + "您的新密碼 ：「 " + newPassword + "  」";
 				mailService.sendMail(hotelEmail, subject, messageText);
 
-				hotelVO.setHotelPassword(newPassword);
+				hotelVO.setHotelPassword(hotelSvc.pwdhash(newPassword));
 				System.out.println(newPassword);
 				hotelVO = hotelSvc.updateHotel(hotelVO);
 				System.out.println("forgotPasswordSuccess");
