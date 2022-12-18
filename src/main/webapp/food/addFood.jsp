@@ -65,9 +65,9 @@
 <!-- 	</ul> -->
 <%-- </c:if> --%>
 
-<!-- <FORM METHOD="post" ACTION="food.do" name="form1"> -->
+<!-- <FORM METHOD="post" ACTION="/food/FoodServlet" name="form1"> -->
 
-<FORM action="<%=request.getContextPath() %>/food/food.do" method=post enctype="multipart/form-data">
+<FORM action="<%=request.getContextPath() %>/food/FoodServlet" method=post enctype="multipart/form-data">
 <table>
 <tr>
 		<td>美食照片編號:</td>
