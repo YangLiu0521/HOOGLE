@@ -1,5 +1,9 @@
 package tw.com.hoogle.hotel.model;
 
+import java.util.List;
+
+import tw.com.hoogle.user.model.UserVO;
+
 public class HotelService {
 	
 	private HotelDAO_interface dao;
@@ -8,12 +12,20 @@ public class HotelService {
 		dao = new HotelDAO();
 	}
 	
+	public List<HotelVO> getAll(){
+		return dao.getAll();
+	}
+	
 	public HotelVO addHotel(HotelVO hotelVO) {
 		System.out.println("### addHotel service");
 		hotelVO.setHotelState(2);
 		dao.insert(hotelVO);
 		
 		return hotelVO;
+	}
+	
+	public HotelVO getOneHotel(Integer hotelId) {
+		return dao.findByPrimaryKey(hotelId);	
 	}
 	
 	public HotelVO getOneHotel(String hotelEmail, String hotelTaxid) {
