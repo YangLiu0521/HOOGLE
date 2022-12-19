@@ -63,7 +63,7 @@ public class RoompicServlet extends HttpServlet {
 				roompicPic = new byte[is.available()];
 				is.read(roompicPic);
 				is.close();
-				
+				System.out.println("照片上傳成功");
 				
 				roompicVO.setRoomAuto(roomAuto);
 				roompicVO.setRoomType(roomType);

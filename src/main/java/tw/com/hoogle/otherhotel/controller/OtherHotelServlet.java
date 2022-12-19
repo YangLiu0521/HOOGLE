@@ -7,17 +7,20 @@ import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import tw.com.hoogle.hotel.model.HotelService;
+import tw.com.hoogle.hotel.model.HotelVO;
 import tw.com.hoogle.otherhotel.model.OtherHotelService;
 import tw.com.hoogle.otherhotel.model.OtherHotelVO;
 
 @WebServlet("/otherhotel/OtherHotelServlet")
-//@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class OtherHotelServlet extends HttpServlet {
 	//private static final long serialVersionUID = 1L;
 
@@ -38,7 +41,7 @@ public class OtherHotelServlet extends HttpServlet {
 		if (req.getParameter("otherhotelservlet") != null) {
 			otherhotelservlet = req.getParameter("otherhotelservlet");
 		}
-		System.out.println("###### update into HotelServlet  ######. hotelservlet is " + otherhotelservlet);
+		System.out.println("###### update into OtherHotelServlet  ######. otherhotelservlet is " + otherhotelservlet);
 
 
 
@@ -53,8 +56,10 @@ public class OtherHotelServlet extends HttpServlet {
 
 			try {
 
-				OtherHotelService otherhotelSvc = new OtherHotelService();
-				OtherHotelVO otherhotelVO = (OtherHotelVO) session.getAttribute("otherhotelVO"); // 表示已登入，取得userVO物件
+//				OtherHotelService otherhotelSvc = new OtherHotelService();
+//				OtherHotelVO otherhotelVO = (OtherHotelVO) session.getAttribute("hotelVO"); // 表示已登入，取得userVO物件
+				HotelService hotelSvc = new HotelService();
+				HotelVO hotelVO = (HotelVO) session.getAttribute("hotelVO"); // 表示已登入，取得hotelVO物件
 				System.out.println("### update into otherhotel update ### 1");
 
 				// 1.接收請求參數，輸入格式的錯誤處理
@@ -90,12 +95,12 @@ public class OtherHotelServlet extends HttpServlet {
 				} 
 
 
-				otherhotelVO.setHotelCounty(hotelCounty);
-				otherhotelVO.setHotelAddress(hotelAddress);
-				otherhotelVO.setHotelType(hotelType);
-				otherhotelVO.setHotelNotice(hotelNotice);
-				otherhotelVO.setHotelQa(hotelQa);
-				otherhotelVO.setHotelIntroduction(hotelIntroduction);
+				hotelVO.setHotelCounty(hotelCounty);
+				hotelVO.setHotelAddress(hotelAddress);
+				hotelVO.setHotelType(hotelType);
+				hotelVO.setHotelNotice(hotelNotice);
+				hotelVO.setHotelQa(hotelQa);
+				hotelVO.setHotelIntroduction(hotelIntroduction);
 				
 				
 				if(errors != null && !errors.isEmpty()) {
@@ -107,7 +112,7 @@ public class OtherHotelServlet extends HttpServlet {
 
 				// 開始修改資料
 
-				otherhotelVO = otherhotelSvc.updateHotel(otherhotelVO);
+				hotelVO = hotelSvc.updateHotel(hotelVO);
 				System.out.println("修改成功");
 
 				// 修改完成，準備轉交
@@ -119,7 +124,7 @@ public class OtherHotelServlet extends HttpServlet {
 				System.out.println("update exception :" + e);
 		
 				
-				RequestDispatcher failureView = req.getRequestDispatcher("listAllFood.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher(url);
 				failureView.forward(req, res);
 			}
 		}

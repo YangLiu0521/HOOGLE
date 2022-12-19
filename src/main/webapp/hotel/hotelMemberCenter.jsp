@@ -13,7 +13,7 @@ if (session.getAttribute("userVO") == null && session.getAttribute("hotelVO") ==
 	dispatcher.forward(request, response);
 	return;
 }
-HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //UserServlet.java(Controller)
+HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //HotelServlet.java(Controller)
 %>
 <!DOCTYPE html>
 <html>
@@ -23,95 +23,17 @@ HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //User
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>hotelMemberCenter</title>
-<!-- favicon -->
-<link rel="icon" href="favicon.ico" />
-<!-- bootstrap core CSS -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/bootstrap.min.css">
-<!-- font awesome -->
-<link href="<%=request.getContextPath()%>/css/all.min.css"
+
+<%@ include file="/header.jsp"%>
+
+
+<link href="<%=request.getContextPath()%>/css/hotel/hotelIntroduce.css"
 	rel="stylesheet">
-<!-- owl carousel -->
-<link href="<%=request.getContextPath()%>/css/owl.carousel.min.css"
-	rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/owl.theme.default.min.css"
-	rel="stylesheet">
-<!-- venobox css -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/venobox.css">
-<!-- datepicker css -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/datepicker.min.css">
-<!-- custom styles for this template -->
-<link href="<%=request.getContextPath()%>/css/custom.css"
-	rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/responsive.css"
-	rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/helper.css"
-	rel="stylesheet">
+
 </head>
 <body>
-	<!-- ================ Header ================ -->
-	<header class="header">
-		<!-- header upper -->
-		<div class="header-upper-bar">
-			<div class="container">
-				<div class="row d-flex align-items-center">
-					<div class="col-lg-8 col-md-6 col-sm-4 col-2">
-						<!-- header navigation -->
-						<nav class="navbar header-navigation navbar-expand-lg p-0">
-							<!-- mobile Toggle 手機切換 -->
-							<button class="navbar-toggler" type="button"
-								data-toggle="collapse" data-target="#navbarTheme"
-								aria-controls="navbarTheme" aria-expanded="false"
-								aria-label="Toggle navigation">
-								<span></span> <span></span> <span></span>
-							</button>
-							<!-- mobile toggle end -->
-							<!-- top Menu -->
-							<div class="collapse navbar-collapse" id="navbarTheme">
-								<ul class="navbar-nav align-items-start align-items-lg-center">
-									<li class="active"><a class="nav-link" href="/HOOGLE/index.jsp">首頁</a></li>
-									<li><a class="nav-link" href="/HOOGLE/index.jsp">比價</a></li>
-									<li><a class="nav-link" href="/HOOGLE/index.jsp">美食</a></li>
-									<!-- <li><a class="nav-link" href="gallery.html">畫廊</a></li> -->
-									<!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Destinations</a>
-                  <div class="dropdown-menu" aria-labelledby="dropdown02"> <a class="dropdown-item" href="destinations.html">Destinations</a> <a class="dropdown-item" href="destination-detail.html">Destination Detail</a> </div>
-                </li> -->
-									<li class="nav-item dropdown"><a
-										class="nav-link dropdown-toggle" href="#" id="dropdown04"
-										data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">關於我們</a>
-										<div class="dropdown-menu" aria-labelledby="dropdown04">
-											<a class="dropdown-item" href="about.html">關於我們</a> <a
-												class="dropdown-item" href="blog-single.html">常見問題</a> <a
-												class="dropdown-item" href="blog-single.html">聯絡我們</a> <a
-												class="dropdown-item" href="blog-single.html">服務條款</a>
-										</div></li>
-									<!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                  <div class="dropdown-menu" aria-labelledby="dropdown05"> <a class="dropdown-item" href="listing.html">Hotel Listing</a> <a class="dropdown-item" href="hotel-detail.html">Hotel Detail</a> <a class="dropdown-item" href="signin.html">Login</a> <a class="dropdown-item" href="register.html">Register</a> <a class="dropdown-item" href="team.html">Team</a> <a class="dropdown-item" href="testimonial.html">Testimonial</a> <a class="dropdown-item" href="traveler-information.html">Traveler Information</a> <a class="dropdown-item" href="payment-information.html">Payment Information</a> <a class="dropdown-item" href="faq.html">Faq</a> </div>
-                </li> -->
-									<!-- <li><a class="nav-link" href="contact-us.html">Contact Us</a></li> -->
-								</ul>
-							</div>
-							<!-- top menu end -->
-						</nav>
-						<!-- header navigation end -->
-					</div>
-					<div class="col-lg-4 col-md-6 col-sm-8 col-10 text-right">
-						<!-- header right link -->
-						<div class="header-right-link" id="header">
-							<ul>
-
-							</ul>
-						</div>
-						<!-- header right link end -->
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- header upper end -->
-		<!-- ================ Inner banner ================ -->
+	
+<!-- ================ Inner banner ================ -->
 		<div class="inner-banner inner-banner-bg pt-70 pb-40">
 			<div class="container">
 				<div class="row align-items-center">
@@ -177,7 +99,8 @@ HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //User
 											aria-controls="tab1" aria-selected="true">資料修改</a></li>
 									</ul>
 									<!-- 飯店資料修改開始 -->
-									<form action="HotelServlet" method="POST" enctype="multipart/form-data">
+									<form action="HotelServlet" method="POST"
+										enctype="multipart/form-data">
 										<div class="tab-content" id="myTabContent">
 											<div class="tab-pane fade show active p-15" id="tab1"
 												role="tabpanel" aria-labelledby="tab1-tab">
@@ -187,54 +110,62 @@ HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //User
 
 												<div class="form-group">
 													<h6>信箱</h6>
-													<br> <input type="email" class="form-control" disabled name="hotelEmail"
+													<br> <input type="email" class="form-control" disabled
+														name="hotelEmail"
 														value="<%=(hotelVO == null) ? "" : hotelVO.getHotelEmail()%>">
 												</div>
 
 
 												<div class="form-group">
 													<h6>名稱</h6>
-													<br> <input type="text" class="form-control" name="hotelName"
+													<br> <input type="text" class="form-control"
+														name="hotelName"
 														value="<%=(hotelVO == null) ? "" : hotelVO.getHotelName()%>">
-														<span class="error" style="color: red">${errors.hotelName}</span>
+													<span class="error" style="color: red">${errors.hotelName}</span>
 												</div>
 
 
 												<div class="form-group">
 													<h6>電話</h6>
-													<br> <input type="text" class="form-control" name="hotelPhone"
+													<br> <input type="text" class="form-control"
+														name="hotelPhone"
 														value="<%=(hotelVO == null) ? "" : hotelVO.getHotelPhone()%>">
-														<span class="error" style="color: red">${errors.hotelPhone}</span>
+													<span class="error" style="color: red">${errors.hotelPhone}</span>
 												</div>
 
 												<div class="form-group">
 													<h6>負責人</h6>
-													<br> <input type="text" class="form-control" name="hotelPrincipal"
+													<br> <input type="text" class="form-control"
+														name="hotelPrincipal"
 														value="<%=(hotelVO == null) ? "" : hotelVO.getHotelPrincipal()%>">
-														<span class="error" style="color: red">${errors.hotelPrincipal}</span>
+													<span class="error" style="color: red">${errors.hotelPrincipal}</span>
 												</div>
 
 												<div class="form-group">
 													<h6>統一編號</h6>
-													<br> <input type="text" class="form-control" disabled name="hotelTaxid"
+													<br> <input type="text" class="form-control" disabled
+														name="hotelTaxid"
 														value="<%=(hotelVO == null) ? "" : hotelVO.getHotelTaxid()%>">
 												</div>
 
 												<div class="form-group">
 													<h6>密碼修改</h6>
-													<br> <input type="password" class="form-control" placeholder="請輸入密碼" name="hotelPassword">
-													<span class="error" style="color: red">${errors.hotelPassword}</span>
-<%-- 														value="<%=(hotelVO == null) ? "" : hotelVO.getHotelPassword()%>" --%>
+													<br> <input type="password" class="form-control"
+														placeholder="請輸入密碼" name="hotelPassword"> <span
+														class="error" style="color: red">${errors.hotelPassword}</span>
+													<%-- 														value="<%=(hotelVO == null) ? "" : hotelVO.getHotelPassword()%>" --%>
 												</div>
 												<div class="form-group">
 													<h6>再次確認密碼</h6>
-													<br> <input type="password" class="form-control" placeholder="再次確認密碼" name="comfirmPassword">
-													<span class="error" style="color: red">${errors.hotelPassword}</span>
+													<br> <input type="password" class="form-control"
+														placeholder="再次確認密碼" name="comfirmPassword"> <span
+														class="error" style="color: red">${errors.hotelPassword}</span>
 												</div>
 												<div class="form-group">
 													<h6>飯店狀態</h6>
-													<br> <input type="text" class="form-control" disabled name="hotelState"
-														 value="<%=(hotelVO == null) ? "" : hotelVO.getHotelState()%>">
+													<br> <input type="text" class="form-control" disabled
+														name="hotelState"
+														value="<%=(hotelVO == null) ? "" : hotelVO.getHotelState()%>">
 												</div>
 												<br>
 												<button type="submit" class="btn-style-1 w-100">確認修改</button>
@@ -253,9 +184,123 @@ HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //User
 						<div class="tab-pane fade show" id="introduce-tab" role="tabpanel"
 							aria-labelledby="dashboard-nav">
 
-							<h4>飯店介紹</h4>
-							<p>飯店介紹內容</p>
+
+							<div class="card border-warning w-20">
+								<div class="card-header  bg-warning sm-3">
+									<h3 class="text-white">飯店介紹</h3>
+								</div>
+								<form action="<%=request.getContextPath()%>/otherhotel/OtherHotelServlet" method="post" enctype="multipart/form-data">
+									<div class="card-body bg-transparents">
+
+										<div class="form-row">
+
+											<div class="form-group col-md-6">
+												<select id="inputState" class="form-control" required name="hotelType">
+													<option selected hidden value="">類型*</option>
+													<option value="飯店">飯店</option>
+													<option value="民宿">民宿</option>
+													<option value="商旅">商旅</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-row">
+
+											<div class="form-group col-md-12">
+												<label for="exampleFormControlTextarea1" class="form-label">飯店介紹</label>
+												<textarea class="form-control" name="hotelIntroduction" id="exampleFormControlTextarea1" rows="2"></textarea>
+											</div>
+											<div class="form-group col-md-12">
+												<label for="exampleFormControlTextarea1" class="form-label">飯店須知</label>
+												<textarea class="form-control" name="hotelNotice"
+													id="exampleFormControlTextarea1" rows="2"></textarea>
+											</div>
+											<div class="form-group col-md-12">
+												<label for="exampleFormControlTextarea1" class="form-label">常見問答</label>
+												<textarea class="form-control" name="hotelQa"
+													id="exampleFormControlTextarea1" rows="2"></textarea>
+											</div>
+
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value=""
+													id="flexCheckDefault"> <label
+													class="form-check-label" for="flexCheckDefault">
+													停車場 </label>
+											</div>
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value=""
+													id="flexCheckChecked" checked> <label
+													class="form-check-label" for="flexCheckChecked">
+													可攜帶寵物 </label>
+											</div>
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value=""
+													id="flexCheckDefault"> <label
+													class="form-check-label" for="flexCheckDefault">
+													24小時接待櫃台 </label>
+											</div>
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value=""
+													id="flexCheckChecked" checked> <label
+													class="form-check-label" for="flexCheckChecked">
+													健身中心 </label>
+											</div>
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value=""
+													id="flexCheckDefault"> <label
+													class="form-check-label" for="flexCheckDefault">
+													無障礙設施 </label>
+											</div>
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value=""
+													id="flexCheckChecked" checked> <label
+													class="form-check-label" for="flexCheckChecked">
+													游泳池 </label>
+											</div>
+
+
+
+
+											<select id="city" name="hotelCounty">
+												<option value="<%=hotelVO.getHotelCounty()%>"><%=hotelVO.getHotelCounty()%></option>
+											</select> 
+											<select id="area" name="area" style="display: none;">
+												<option value="">請選擇</option>
+											</select>
+
+
+
+											<div class="form-group col-md-12">
+												<input type="text" class="form-control" id="inputAddress2" name="hotelAddress"
+													placeholder="飯店地址" value="${hotelVO.hotelAddress}">
+											</div>
+											<span class="error" style="color: red">${errors.hotelAddress}</span>
+
+											<div class="form-group col-md-9">
+												<label for="formFile" class="form-label">圖片</label>
+												<!-- <input class="form-control" type="file" id="formFile"> -->
+											</div>
+
+
+											<input type="file" id="the_file" multiple>
+											<ul class="picture_list"></ul>
+
+
+											<div class="d-grid gap-2 col-6  mx-auto">
+												<!-- <input class="btn btn-primary" type="submit" value="Submit">
+                                    <input class="btn btn-primary" type="reset" value="Reset"> -->
+												<button type="submit"
+													class="btn btn-primary btn-lg btn-block mt-3">送出</button>
+												<input type="hidden" name="otherhotelservlet" value="otherhotelupdate">
+												<button type="reset"
+													class="btn btn-dark btn-lg btn-block mt-3">重置</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
 						</div>
+
+
 						<div class="tab-pane fade" id="room-tab" role="tabpanel"
 							aria-labelledby="payment-nav">
 							<h4>房間管理區</h4>
@@ -316,23 +361,10 @@ HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //User
 		<!-- ================ Top scroll end ================ -->
 
 		<!-- js files -->
-  <script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
-  <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
-  <!-- counter js -->
-  <script src="<%=request.getContextPath()%>/js/jquery-1.10.2.min.js"></script>
-  <script src="<%=request.getContextPath()%>/js/waypoints.min.js"></script>
-  <script src="<%=request.getContextPath()%>/js/jquery.counterup.min.js"></script>
-  <!-- venobox js -->
-  <script src="<%=request.getContextPath()%>/js/venobox.min.js"></script>
-  <!-- owl carousel -->
-  <script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
-  <!-- portfolio js -->
-  <script src="<%=request.getContextPath()%>/js/jquery.mixitup.min.js"></script>
-  <!-- datepicker js -->
-  <script src="<%=request.getContextPath()%>/js/datepicker.min.js"></script>
-  <!-- script js -->
-  <script src="<%=request.getContextPath()%>/js/custom.js"></script>
-  <script src="https://kit.fontawesome.com/4ce3b6b697.js" crossorigin="anonymous"></script>
-  <script src="<%=request.getContextPath()%>/js/member/memberHeader.js"></script>
+
+		<%@ include file="/footer.jsp"%>
+
+		<!-- hotelIntroduce js by Joy -->
+		<script src="<%=request.getContextPath()%>/js/hotel/hotelIntroduce.js"></script>
 </body>
 </html>
