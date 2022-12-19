@@ -201,16 +201,29 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 			while (rs.next()) {
 				orddetailVO = new OrdDetailVO();
 				orddetailVO.setOrddetailId(rs.getInt("orddetailId"));
-				System.out.println(rs.getInt("orddetailId"));
 				orddetailVO.setOrdId(rs.getInt("ordId"));
-				System.out.println(rs.getInt("ordId"));
-				orddetailVO.setRoomAuto(rs.getInt("roomAuto"));
-				System.out.println(rs.getInt("roomAuto"));
+				
+				switch(rs.getInt("roomAuto")%10) {
+				case 1 :
+					orddetailVO.setRoomAuto(1);
+					break;
+				case 2 :
+					orddetailVO.setRoomAuto(1);
+					break;
+				case 3 :
+					orddetailVO.setRoomAuto(2);
+				case 4 :
+					orddetailVO.setRoomAuto(2);
+					break;
+				case 5 :
+					orddetailVO.setRoomAuto(2);
+					break;
+					default :
+					break;
+				}
+				
 				orddetailVO.setRoomNumber(rs.getInt("roomNumber"));
-				System.out.println(rs.getInt("roomNumber"));
-	
 				list.add(orddetailVO);
-			
 			}
 
 		} 

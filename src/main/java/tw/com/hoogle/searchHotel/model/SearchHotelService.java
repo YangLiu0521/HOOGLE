@@ -2,18 +2,24 @@ package tw.com.hoogle.searchHotel.model;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+@Service
+@Transactional
 public class SearchHotelService {
+	@Autowired
 	private SearchHotelDAO searchHotelDao;
-	public SearchHotelService(SearchHotelDAO searchHotelDao) {
-		super();
-		this.searchHotelDao = searchHotelDao;
-	}
+//	public SearchHotelService(SearchHotelDAO searchHotelDao) {
+//		super();
+//		this.searchHotelDao = searchHotelDao;
+//	}
 	
-	//...............
-	public SearchHotelService() {
-		searchHotelDao = new SearchHotelDAOHibernate();
-	}
-	//...............
+//	//...............
+//	public SearchHotelService() {
+//		searchHotelDao = new SearchHotelDAOHibernate();
+//	}
+//	//...............
 	
 	
 //	public static void main(String[] args) {

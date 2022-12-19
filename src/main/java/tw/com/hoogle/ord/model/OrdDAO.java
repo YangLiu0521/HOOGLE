@@ -13,6 +13,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import tw.com.hoogle.orddetail.model.*;
+
 public class OrdDAO implements OrdDAO_interface {
 
 //	String driver = "com.mysql.cj.jdbc.Driver";
@@ -33,6 +35,8 @@ public class OrdDAO implements OrdDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO ord (userId,hotelId,userName,hotelName,ordDate,ordCheckin,ordCheckout,ordNights,ordRemark) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT ordId,userId,hotelId,userName,hotelName,ordDate,ordCheckin,ordCheckout,ordNights,ordRemark FROM ord order by ordId";
 	private static final String GET_ONE_STMT = "SELECT ordId,userId,hotelId,userName,hotelName,ordDate,ordCheckin,ordCheckout,ordNights,ordRemark FROM ord where ordId = ?";
+	private static final String GET_ORD_STMT = "SELECT ordId,userId,hotelId,userName,hotelName,ordDate,ordCheckin,ordCheckout,ordNights,ordRemark FROM ord where userId = ?";
+//	private static final String GET_ORDDETAIL_STMT = "SELECT orddetailId,ordId,roomAuto,roomNumber FROM orddetail where ordId = ?";
 	private static final String DELETE = "DELETE FROM ord where ordId = ?";
 	private static final String UPDATE = "UPDATE ord set userId=?, hotelId=?, userName=?, hotelName=?, ordDate=?, ordCheckin=?, ordCheckout=?, ordNights=?, ordRemark=? where ordId=?";
 
@@ -305,4 +309,129 @@ public class OrdDAO implements OrdDAO_interface {
 		return list;
 	}
 
+	@Override
+	public OrdVO findByUserId(Integer userId) {
+		OrdVO ordVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ORD_STMT);
+
+			pstmt.setInt(1, userId);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				ordVO = new OrdVO();
+				ordVO.setUserId(rs.getInt("userId"));
+				ordVO.setHotelId(rs.getInt("hotelId"));
+				ordVO.setUserName(rs.getString("userName"));
+				ordVO.setHotelName(rs.getString("hotelName"));
+				ordVO.setOrdDate(rs.getDate("ordDate"));
+				ordVO.setOrdCheckin(rs.getDate("ordCheckin"));
+				ordVO.setOrdCheckout(rs.getDate("ordCheckout"));
+				ordVO.setOrdNights(rs.getInt("ordNights"));
+				ordVO.setOrdRemark(rs.getString("ordRemark"));
+				ordVO.setOrdId(rs.getInt("ordId"));
+
+			}
+
+		} 
+//		catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//			// Handle any SQL errors
+//		} 
+		catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return ordVO;
+	}
+
+//	@Override
+//	public List<OrdVO> findOrddetail(Integer ordId) {
+//		List<OrdVO> list = new ArrayList<OrdVO>();
+//		OrdVO ordVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//
+//		try {
+////			Class.forName(driver);
+////			con = DriverManager.getConnection(url, userid, passwd);
+//			con = ds.getConnection();
+//			pstmt = con.prepareStatement(GET_ORDDETAIL_STMT);
+//
+//			pstmt.setInt(1, ordId);
+//			rs = pstmt.executeQuery();
+//
+//			while (rs.next()) {
+//				ordVO = new OrdVO();
+//				ordVO.setOrddetailId(rs.getInt("orddetailId"));
+//				ordVO.setOrdId(rs.getInt("ordId"));
+//				ordVO.setRoomAuto(rs.getInt("roomAuto"));
+//				ordVO.setRoomNumber(rs.getInt("roomNumber"));
+//				list.add(ordVO);
+//			}
+//			System.out.println("ordVO="+ordVO);
+//		} 
+////		catch (ClassNotFoundException e) {
+////			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+////			// Handle any SQL errors
+////		} 
+//		catch (SQLException se) {
+//			throw new RuntimeException("A database error occured. " + se.getMessage());
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (Exception e) {
+//					e.printStackTrace(System.err);
+//				}
+//			}
+//		}
+//		System.out.println(ordVO);
+//		return list;
+//
+//}
 }

@@ -5,15 +5,21 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.core.ApplicationContext;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.WebApplicationContext;
 
 import tw.com.hoogle.ord.model.hibernate.HibernateUtil;
 import tw.com.hoogle.search.model.SearchBean;
@@ -21,30 +27,29 @@ import tw.com.hoogle.search.model.SearchDAO;
 import tw.com.hoogle.search.model.SearchDAOHibernate;
 import tw.com.hoogle.search.model.SearchService;
 
-@WebServlet(
-		urlPatterns={"/search/search.controller"}		
-)
+//@WebServlet(
+//		urlPatterns = {"/search/search.controller"}		
+//)
+@Controller
 public class SearchServlet extends HttpServlet{
 private static final long serialVersionUID = 1L;
 	
 	private SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd");
+	@Autowired
 	private SearchService searchService;
-	@Override
-	public void init() throws ServletException {
-		
-		searchService = new SearchService(
-		new SearchDAOHibernate(HibernateUtil.getSessionFactory()));
-	}
+	
+	@RequestMapping(
+		path ={"/search/search.controller"}		
+)
 	
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.getCurrentSession();
-		Transaction transaction = session.beginTransaction();
-		
-		SearchDAO dao = new SearchDAOHibernate(sessionFactory);
+//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//		Session session = sessionFactory.getCurrentSession();
+//		Transaction transaction = session.beginTransaction();
+//		SearchDAO dao = new SearchDAOHibernate(sessionFactory);
 		
 //接收資料
 		String userId = request.getParameter("userId");
@@ -137,8 +142,8 @@ private static final long serialVersionUID = 1L;
 			request.getRequestDispatcher(
 					"/search/search.jsp").forward(request, response);
 		}
-		transaction.commit();
-		session.close();
+//		transaction.commit();
+//		session.close();
 //		HibernateUtil.closeSessionFactory();
 	}
 //	@Override
