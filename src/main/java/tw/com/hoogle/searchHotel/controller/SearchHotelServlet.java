@@ -48,6 +48,7 @@ private static final long serialVersionUID = 1L;
 		String checkoutInput =request.getParameter("checkoutInput");
 		
 		java.util.Date date1 = null ,date2 = null;
+		long ordNights = 0;
 		try {
 			date1 = sFormat.parse(checkinInput);
 			date2 = sFormat.parse(checkoutInput);
@@ -56,13 +57,22 @@ private static final long serialVersionUID = 1L;
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
+		
 		Calendar cal = Calendar.getInstance();
+		
+		if(date1!=null && date2!=null) {
 		cal.setTime(date1);
 		long time1 = cal.getTimeInMillis();
+		
 		cal.setTime(date2);
 		long time2 = cal.getTimeInMillis();
-		long ordNights = (time2-time1)/(1000*60*60*24);
+		
+		ordNights = (time2-time1)/(1000*60*60*24);
 		System.out.println("訂房天數共"+ordNights+"天");
+		}
+		
+		
+		
 		
 		
 		Map<String, String> errors = new HashMap<String, String>();

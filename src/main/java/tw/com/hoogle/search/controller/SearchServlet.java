@@ -49,7 +49,6 @@ private static final long serialVersionUID = 1L;
 //		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 //		Session session = sessionFactory.getCurrentSession();
 //		Transaction transaction = session.beginTransaction();
-		
 //		SearchDAO dao = new SearchDAOHibernate(sessionFactory);
 		
 //接收資料

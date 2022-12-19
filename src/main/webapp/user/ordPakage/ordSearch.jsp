@@ -16,7 +16,7 @@
 		return;
 	}
 	UserVO userVO = (UserVO) request.getSession().getAttribute("userVO"); //UserServlet.java(Controller)
-
+	
 	OrdVO ordVO = (OrdVO) request.getSession().getAttribute("ordVO");
 	
 	OrdService ordSvc = new OrdService();
@@ -271,9 +271,9 @@
             <h2>住宿訂單管理</h2>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dashed-border"></span>
             <br><br>
-            <h3>訂單搜尋</h3>
+            <h3>訂單查尋</h3>
             
-            <!-- -----------------------------Yang修改區-----------------------------  -->
+<!-- -----------------------------Yang修改區-----------------------------  -->
             <div class="nav-pills mb-30">
               <br>
               <div class="table-responsive">
@@ -330,56 +330,7 @@
    		 	</FORM>
   			</li>
 <!-- -----------------------------Yang修改區-----------------------------  -->
-<!--             <input type="text"> -->
             
-
-<!--             <div class="nav-pills mb-30"> -->
-<!--               <br> -->
-<!--               <div class="table-responsive"> -->
-<!--                 <table class="table table-bordered"> -->
-<!--                   <thead class="thead-dark"> -->
-<!--                     <tr class="text-center"> -->
-<!--                       <th>項次</th> -->
-<!--                       <th>訂單編號</th> -->
-<!--                       <th>飯店名稱</th> -->
-<!--                       <th>訂單日期</th> -->
-<!--                       <th>金額</th> -->
-<!--                       <th>狀態</th> -->
-<!--                       <th>訂單明細</th> -->
-<!--                     </tr> -->
-<!--                   </thead> -->
-<!--                   <tbody> -->
-<!--                     <tr class="text-center"> -->
-<!--                       <td>1</td> -->
-<!--                       <td>xxxx</td> -->
-<!--                       <td>圓X飯店</td> -->
-<!--                       <td>2022-12-01</td> -->
-<!--                       <td>3000</td> -->
-<!--                       <td>已取消</td> -->
-<!--                       <td><button class="btn" style="color:red;">查看明細</button></td> -->
-<!--                     </tr> -->
-<!--                     <tr class="text-center"> -->
-<!--                       <td>2</td> -->
-<!--                       <td>xxxx</td> -->
-<!--                       <td>福X飯店</td> -->
-<!--                       <td>2022-12-02</td> -->
-<!--                       <td>5000</td> -->
-<!--                       <td>已付款</td> -->
-<!--                       <td><button class="btn" style="color:red;">查看明細</button></td> -->
-<!--                     </tr> -->
-<!--                     <tr class="text-center"> -->
-<!--                       <td>3</td> -->
-<!--                       <td>xxxx</td> -->
-<!--                       <td>Hoogle飯店</td> -->
-<!--                       <td>2022-12-03</td> -->
-<!--                       <td>10000</td> -->
-<!--                       <td>已付款</td> -->
-<!--                       <td><button class="btn" style="color:red;">查看明細</button></td> -->
-<!--                     </tr> -->
-<!--                   </tbody> -->
-<!--                 </table> -->
-<!--               </div> -->
-<!--             </div> -->
           </div>
 
 

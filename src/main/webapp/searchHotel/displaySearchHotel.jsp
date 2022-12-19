@@ -11,92 +11,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Fontawesome -->
-<script src="https://kit.fontawesome.com/0cf2b86d93.js" crossorigin="anonymous"></script>
+<!-- <script src="https://kit.fontawesome.com/0cf2b86d93.js" crossorigin="anonymous"></script> -->
 
 <!-- page title -->
 <title>Hoogle_SearchHotel</title>
-<!-- favicon -->
-<!-- <link rel="icon" href="favicon.ico" /> -->
-<!-- bootstrap core CSS -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" >
-<!-- font awesome -->
-<link href="${pageContext.request.contextPath}/css/all.min.css" rel="stylesheet">
-<!-- owl carousel -->
-<link href="${pageContext.request.contextPath}/css/owl.carousel.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/owl.theme.default.min.css" rel="stylesheet">
-<!-- venobox css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/venobox.css">
-<!-- datepicker css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/datepicker.min.css">
-<!-- custom styles for this template -->
-<link href="${pageContext.request.contextPath}/css/abu-css/abu.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/responsive.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/helper.css" rel="stylesheet">
+
+<%@ include file="/header.jsp" %>
 </head>
 
 <body>
 <!-- ================ Preloader ================ -->
-<div id="preloader">
-  <div class="spinner-grow" role="status"> <span class="sr-only">Loading...</span> </div>
-</div>
+<!-- <div id="preloader"> -->
+<!--   <div class="spinner-grow" role="status"> <span class="sr-only">Loading...</span> </div> -->
+<!-- </div> -->
 <!-- ================ Preloader end ================ --> 
 
 <!-- ================ Header ================ -->
 <header class="header"> 
-  <!-- header upper -->
-  <div class="header-upper-bar">
-    <div class="container">
-      <div class="row d-flex align-items-center">
-        <div class="col-lg-8 col-md-6 col-sm-4 col-2"> 
-          <!-- header navigation -->
-          <nav class="navbar header-navigation navbar-expand-lg p-0"> 
-            <!-- mobile Toggle -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTheme" aria-controls="navbarTheme" aria-expanded="false" aria-label="Toggle navigation"> <span></span> <span></span> <span></span> </button>
-            <!-- mobile toggle end --> 
-            <!-- top Menu -->
-            <div class="collapse navbar-collapse" id="navbarTheme">
-              <ul class="navbar-nav align-items-start align-items-lg-center">
-                <li class="active"><a href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/images/abu-index/logo.png" alt="" class="img-fluid"></a></li> 
-                <li><a class="nav-link" href="about.html">比價</a></li>
-                <li><a class="nav-link" href="gallery.html">美食</a></li>
 
-                <!--原pages-->
-                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">關於我們</a>
-                  <div class="dropdown-menu" aria-labelledby="dropdown05"> <a class="dropdown-item" href="faq.html">關於我們</a> <a class="dropdown-item" href="QA.html">常見問題QA</a> <a class="dropdown-item" href="Terms.html">服務條款</a> <a class="dropdown-item" href="customer-service.html">客服支援</a> </div>
-                  <!-- <a class="dropdown-item" href="team.html">Team</a> <a class="dropdown-item" href="testimonial.html">Testimonial</a> <a class="dropdown-item" href="traveler-information.html">Traveler Information</a> <a class="dropdown-item" href="payment-information.html">Payment Information</a> <a class="dropdown-item" href="faq.html">Faq</a> </div> -->
-                </li>
-                <!-- <li><a class="nav-link" href="contact-us.html">Contact Us</a></li> -->
-              </ul>
-            </div>
-            <!-- top menu end --> 
-          </nav>
-          <!-- header navigation end --> 
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-8 col-10 text-right"> 
-          <!-- header right link -->
-<!--           <div class="header-right-link" id="header"> -->
-<!--             <ul> -->
-<!--               <li><a href="signin.html"><img src="./img/imgs/註冊.png" alt="" class="img-fluid"></li> -->
-<!-- <!--                 <li><a class="nav-link" href="about.html">會員名稱</a></li> --> -->
-<!--               <li><a href="contact-us.html" class="header-request">Request a Quote</a></li>
-
-<!--               下拉式選單 -->
-<!-- <!--               <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  <img src="images/abu-index/login.png" alt="" class="img-fluid"></a> --> -->
-<!-- <!--                 <div class="dropdown-menu" aria-labelledby="dropdown05"> <a class="dropdown-item" href="faq.html">登入</a> <a class="dropdown-item" href="QA.html">註冊</a> <a class="dropdown-item" href="Terms.html">會員中心</a> <a class="dropdown-item" href="customer-service.html">登出</a>  --> -->
-<!--                 <a class="dropdown-item" href="team.html">Team</a> <a class="dropdown-item" href="testimonial.html">Testimonial</a> <a class="dropdown-item" href="traveler-information.html">Traveler Information</a> <a class="dropdown-item" href="payment-information.html">Payment Information</a> <a class="dropdown-item" href="faq.html">Faq</a> </div> -->
-<!-- <!--               </li> --> -->
-<!--             </ul> -->
-<!--           </div> -->
-          <!-- header right link end --> 
-        </div>
-      </div>
-    </div>
-  </div>
-
-          <!-- header call us end --> 
-        
-     
- 
   
   <!-- header lover end --> 
 </header>
@@ -197,12 +129,19 @@
     <!-- section title -->
     <c:if test="${not empty checkinInput}">
     <c:if test="${not empty checkoutInput}">
+    <c:if test="${ordNights > 0}">
     <div class="section-title text-center">
 		<h4>訂房日期 : ${checkinInput}</h4>
       	<h4>退房日期 : ${checkoutInput}</h4>
       	<h4>入住天數 : ${ordNights}天</h4>   
      </div>
      </c:if>
+     </c:if>
+     </c:if>
+     <c:if test="${ordNights < 0}">
+      <div class="section-title text-center">
+      	<h4>入住日期(${checkinInput})不得晚於退房日期(${checkoutInput})</h4>   
+     </div>
      </c:if>
 <div class="row">
 <c:if test="${hotelCountyInput=='台北市'}">
@@ -365,6 +304,7 @@
 <!-- 	</tbody> -->
 <!-- </table> -->
 <%-- <%-- </c:if>	 --%>
+<%@ include file="/footer.jsp" %>
 </body>
 <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 
@@ -380,111 +320,5 @@
 <!-- ================ Partner area ================ --> 
 
 <!-- ================ Footer area ================ -->
-<footer class="pt-50">
-  <div class="footer-top">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 mb-30"> 
-          <!-- title -->
-          <div class="title mb-10">
-            <h3>關於我們</h3>
-          </div>
-          <!-- title end --> 
-          <!-- text -->
-          <div class="text">
-            <p>Lorem ipsum dolor sit amet sectetur adipiscing elit amet consectetur scing elit amet consectetur adipiscing elit sed et eletum.</p>
-            <p>Lorem ipsum dolor sit amet sectetur adipiscing elit amet consectetur scing elit amet.</p>
-          </div>
-          <!-- end text --> 
-          <!-- footer social -->
-          <!-- <div class="footer-social"> <a href=""><i class="fab fa-facebook-square"></i></a> <a href=""><i class="fab fa-twitter-square"></i></a> <a href=""><i class="fab fa-linkedin"></i></a> <a href=""><i class="fab fa-pinterest-square"></i></a> <a href=""><i class="fab fa-google-plus-square"></i></a> </div> -->
-          <!-- footer social end --> 
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 mb-30"> 
-          <!-- title -->
-          <div class="title mb-10">
-            <h3>指南</h3>
-          </div>
-          <!-- title end --> 
-          <!-- footer link -->
-          <ul class="footer-link">
-            <li><i class="fas fa-caret-right"></i> <a href="#">首頁</a> </li>
-            <li><i class="fas fa-caret-right"></i> <a href="#">比價</a> </li>
-            <li><i class="fas fa-caret-right"></i> <a href="#">美食</a> </li>
-            <li><i class="fas fa-caret-right"></i> <a href="#">關於我們</a> </li>
-            <li><i class="fas fa-caret-right"></i> <a href="#">服務條款</a> </li>
-            <li><i class="fas fa-caret-right"></i> <a href="#">客服支援</a> </li>
-          </ul>
-          <!-- footer link end --> 
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 mb-30"> 
-          <!-- title -->
-          <div class="title mb-10">
-            <h3>服務項目</h3>
-          </div>
-          <!-- title end --> 
-          <!-- recent-posts -->
-          <div class="footer-recent-post"> 
-            <!-- footer recent post item -->
-            <div class="footer-recent-post-item"> <a href="">
-              <p>租車服務</p>
-              <small><!-- <i> i class="far fa-calendar-alt pr-6"></i> --> </small></a> </div>
-            <!-- footer recent post item end --> 
-            <!-- footer recent post item -->
-            <div class="footer-recent-post-item"> <a href="">
-              <p>訂機票</p>
-              <small><!-- class="far fa-calendar-alt pr-6"></i> --> </small></a> </div>
-            <!-- footer recent post item end --> 
-            <!-- footer recent post item -->
-            <div class="footer-recent-post-item"> <a href="">
-              <p>餐廳訂位</p>
-              <small><!-- <i class="far fa-calendar-alt pr-6"></i> --> </small></a> </div>
-            <!-- footer recent post item end --> 
-          </div>
-          <!-- recent-posts end --> 
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 mb-30"> 
-          <!-- title -->
-          <div class="title mb-10">
-            <h3>郵件聯絡</h3>
-          </div>
-          <!-- title end --> 
-          <!-- footer newsletter text -->
-          <div class="footer-newsletter-text">
-            <p>Lorem ipsum dolor sit amet sectetur adipiscing elit amet consectetur scing elit sed et eletum.</p>
-          </div>
-          <!-- footer newsletter text end --> 
-          <!-- footer newsletter form -->
-          <div class="footer-newsletter-form">
-            <form>
-              <input placeholder="Email Adress..." type="text" required>
-              <button type="submit">Subscribe</button>
-            </form>
-          </div>
-         </div>
-       </div>
-      </div>
-    </div>
-          <!-- footer newsletter form end -->
 
-<!-- js files --> 
-<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script> 
-<script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script> 
-<!-- counter js --> 
-<script src="${pageContext.request.contextPath}/js/jquery-1.10.2.min.js"></script> 
-<script src="${pageContext.request.contextPath}/js/waypoints.min.js"></script> 
-<script src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script> 
-<!-- venobox js --> 
-<script src="${pageContext.request.contextPath}/js/venobox.min.js"></script> 
-<!-- owl carousel --> 
-<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script> 
-<!-- portfolio js --> 
-<script src="${pageContext.request.contextPath}/js/jquery.mixitup.min.js"></script> 
-<!-- datepicker js --> 
-<script src="${pageContext.request.contextPath}/js/datepicker.min.js"></script> 
-<!-- script js --> 
-<script src="${pageContext.request.contextPath}/js/abu-js/abu.js"></script>
-<!-- header right link js by aga -->
-<script src="${pageContext.request.contextPath}/js/member/memberHeader.js"></script>
-</footer>
 </html>

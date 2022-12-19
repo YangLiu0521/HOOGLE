@@ -3,7 +3,12 @@ package tw.com.hoogle.search.model;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import tw.com.hoogle.util.HibernateUtil;
 
 //public class SearchDAOHibernate implements SearchDAO{
 //	private SessionFactory sessionFactory;

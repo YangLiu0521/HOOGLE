@@ -16,8 +16,8 @@ import javax.servlet.http.HttpSession;
 import tw.com.hoogle.orddetail.model.OrdDetailService;
 import tw.com.hoogle.orddetail.model.OrdDetailVO;
 
-//@WebServlet("/OrddetailServlet")
-@WebServlet(name="OrddetailServlet",urlPatterns="/orddetail/orddetail.do")
+@WebServlet("/OrddetailServlet")
+//@WebServlet(name="OrddetailServlet",urlPatterns="/orddetail/orddetail.do")
 public class OrdDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -102,7 +102,7 @@ public class OrdDetailServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/orddetail/select_orddetail_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/user/ordSearch.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -116,7 +116,7 @@ public class OrdDetailServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/orddetail/select_orddetail_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/user/ordSearch.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -130,7 +130,7 @@ public class OrdDetailServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/orddetail/select_orddetail_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/user/ordSearch.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -139,7 +139,7 @@ public class OrdDetailServlet extends HttpServlet {
 			
 			session.setAttribute("orddetailVO", orddetailVO); // 資料庫取出的orddetailVO物件,存入req
 			
-			String url = "/orddetail/listAllOrdDetailByOrdId.jsp";
+			String url = "/user/ordPakage/listAllOrdDetailByOrdId.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneOrdDetail.jsp
 			successView.forward(req, res);
 		}
