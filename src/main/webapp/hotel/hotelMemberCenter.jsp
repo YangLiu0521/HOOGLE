@@ -13,7 +13,7 @@ if (session.getAttribute("userVO") == null && session.getAttribute("hotelVO") ==
 	dispatcher.forward(request, response);
 	return;
 }
-HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //UserServlet.java(Controller)
+HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //HotelServlet.java(Controller)
 %>
 <!DOCTYPE html>
 <html>
@@ -189,17 +189,17 @@ HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //User
 								<div class="card-header  bg-warning sm-3">
 									<h3 class="text-white">飯店介紹</h3>
 								</div>
-								<form action="" method="post" enctype="multipart/form-data">
+								<form action="<%=request.getContextPath()%>/otherhotel/OtherHotelServlet" method="post" enctype="multipart/form-data">
 									<div class="card-body bg-transparents">
 
 										<div class="form-row">
 
 											<div class="form-group col-md-6">
-												<select id="inputState" class="form-control" required>
+												<select id="inputState" class="form-control" required name="hotelType">
 													<option selected hidden value="">類型*</option>
-													<option value="1">飯店</option>
-													<option value="0">民宿</option>
-													<option value="2">商旅</option>
+													<option value="飯店">飯店</option>
+													<option value="民宿">民宿</option>
+													<option value="商旅">商旅</option>
 												</select>
 											</div>
 										</div>
@@ -207,17 +207,16 @@ HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //User
 
 											<div class="form-group col-md-12">
 												<label for="exampleFormControlTextarea1" class="form-label">飯店介紹</label>
-												<textarea class="form-control"
-													id="exampleFormControlTextarea1" rows="2"></textarea>
+												<textarea class="form-control" name="hotelIntroduction" id="exampleFormControlTextarea1" rows="2"></textarea>
 											</div>
 											<div class="form-group col-md-12">
 												<label for="exampleFormControlTextarea1" class="form-label">飯店須知</label>
-												<textarea class="form-control"
+												<textarea class="form-control" name="hotelNotice"
 													id="exampleFormControlTextarea1" rows="2"></textarea>
 											</div>
 											<div class="form-group col-md-12">
 												<label for="exampleFormControlTextarea1" class="form-label">常見問答</label>
-												<textarea class="form-control"
+												<textarea class="form-control" name="hotelQa"
 													id="exampleFormControlTextarea1" rows="2"></textarea>
 											</div>
 
@@ -261,18 +260,20 @@ HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //User
 
 
 
-											<select id="city" name="city">
-												<option value="">請選擇</option>
-											</select> <select id="area" name="area" style="display: none;">
+											<select id="city" name="hotelCounty">
+												<option value="<%=hotelVO.getHotelCounty()%>"><%=hotelVO.getHotelCounty()%></option>
+											</select> 
+											<select id="area" name="area" style="display: none;">
 												<option value="">請選擇</option>
 											</select>
 
 
 
 											<div class="form-group col-md-12">
-												<input type="text" class="form-control" id="inputAddress2"
-													placeholder="飯店地址">
+												<input type="text" class="form-control" id="inputAddress2" name="hotelAddress"
+													placeholder="飯店地址" value="${hotelVO.hotelAddress}">
 											</div>
+											<span class="error" style="color: red">${errors.hotelAddress}</span>
 
 											<div class="form-group col-md-9">
 												<label for="formFile" class="form-label">圖片</label>
@@ -289,6 +290,7 @@ HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //User
                                     <input class="btn btn-primary" type="reset" value="Reset"> -->
 												<button type="submit"
 													class="btn btn-primary btn-lg btn-block mt-3">送出</button>
+												<input type="hidden" name="otherhotelservlet" value="otherhotelupdate">
 												<button type="reset"
 													class="btn btn-dark btn-lg btn-block mt-3">重置</button>
 											</div>
