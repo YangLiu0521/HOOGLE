@@ -1,21 +1,27 @@
 package tw.com.hoogle.search.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+@Service
+@Transactional
 public class SearchService {
+	@Autowired
 	private SearchDAO searchDao;
-	public SearchService(SearchDAO searchDao) {
-		super();
-		this.searchDao = searchDao;
-	}
-	
+//	public SearchService(SearchDAO searchDao) {
+//		super();
+//		this.searchDao = searchDao;
+//	}
+
 //	public static void main(String[] args) {
 //		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 //		Session session = sessionFactory.getCurrentSession();
 //		Transaction transaction = session.beginTransaction();
 //
 //		SearchService searchService = new SearchService(new SearchDAOHibernate(sessionFactory));
-////		List<SearchBean> selects = productService.select(null);
-////		System.out.println("selects="+selects);
-////		
+//		List<SearchBean> selects = productService.select(null);
+//		System.out.println("selects="+selects);
+//		
 //		transaction.commit();
 //		session.close();
 //		HibernateUtil.closeSessionFactory();

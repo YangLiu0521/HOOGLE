@@ -1,6 +1,7 @@
 package tw.com.hoogle.administrator.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import tw.com.hoogle.administrator.model.AdministratorService;
 import tw.com.hoogle.administrator.model.AdministratorVO;
 
-@WebServlet(name = "/AdministratorServlet", urlPatterns= {"/back_end/administrator/AdministratorServlet"})
+@WebServlet("/AdministratorServlet")
 
 public class AdministratorServlet extends HttpServlet {
 
@@ -357,24 +358,6 @@ req.setAttribute("administratorVO", administratorVO); // 含有輸入格式錯�
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-//				String str = req.getParameter("administratorAccount");
-//				if (str == null || (str.trim()).length() == 0) {
-//					errorMsgs.add("請輸入帳號");
-//				}
-//				
-//				String str1 = req.getParameter("administratorPassword");
-//				if (str1 == null || (str1.trim()).length() == 0) {
-//					errorMsgs.add("請輸入密碼");
-//				}
-//				
-//				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/back_end/login/login.jsp");
-//					failureView.forward(req, res);
-//					return;//程式中斷
-//				}
 			
 			String administratorAccount = req.getParameter("administratorAccount");
 			String administratorPassword = req.getParameter("administratorPassword");
@@ -386,7 +369,7 @@ req.setAttribute("administratorVO", administratorVO); // 含有輸入格式錯�
 			String password = administratorSvc1.match(administratorAccount);
 			// 【檢查該帳號 , 密碼是否有效】
 		    if (account == null) {  //【驗證是否有此帳號】
-		    	errorMsgs.add("帳號無效");
+		    	errorMsgs.add("帳號或密碼錯誤");
 		    }
 		    if (account != null) {  
 			    if (account.equals(administratorAccount) && !(password.equals(administratorPassword))) {
@@ -402,17 +385,18 @@ req.setAttribute("administratorVO", administratorVO); // 含有輸入格式錯�
 				HttpSession session = req.getSession();
 			    session.setAttribute("account", account);   //*工作1: 才在session內做已經登入過的標識
 			      
-//			     try {                                                        
-//			       String location = (String) session.getAttribute("location");
-//			       if (location != null) {
-//			         session.removeAttribute("location");   //*工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
-//			         res.sendRedirect(location);            
-//			         return;
-//			       }
-//			     }catch (Exception ignored) { }
-	//
-			    res.sendRedirect(req.getContextPath()+"/back_end/administrator/admin_page.jsp");  //*工作3: (-->如無來源網頁:則重導至login_success.jsp)
+			    res.sendRedirect(req.getContextPath()+"/back_end/administrator/adminIndex.jsp");  //*工作3: (-->如無來源網頁:則重導至login_success.jsp)
 			}
 		}
+		
+		if ("logout".equals(action)) {		
+			RequestDispatcher failureView = req
+					.getRequestDispatcher("/back_end/administrator/logoutAlert.jsp");
+			failureView.forward(req, res);
+			//清除session
+			HttpSession session = req.getSession();
+			session.invalidate();
+		}
+		
 	}
 }

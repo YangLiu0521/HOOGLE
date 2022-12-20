@@ -14,7 +14,28 @@ public class OrdVO implements java.io.Serializable {
 	private Date ordCheckout;
 	private Integer ordNights;
 	private String ordRemark;
+	private Integer orddetailId;
+	private Integer roomAuto;
+	private Integer roomNumber;
 	
+	public Integer getOrddetailId() {
+		return orddetailId;
+	}
+	public void setOrddetailId(Integer orddetailId) {
+		this.orddetailId = orddetailId;
+	}
+	public Integer getRoomAuto() {
+		return roomAuto;
+	}
+	public void setRoomAuto(Integer roomAuto) {
+		this.roomAuto = roomAuto;
+	}
+	public Integer getRoomNumber() {
+		return roomNumber;
+	}
+	public void setRoomNumber(Integer roomNumber) {
+		this.roomNumber = roomNumber;
+	}
 	public Integer getOrdId() {
 		return ordId;
 	}
@@ -75,6 +96,7 @@ public class OrdVO implements java.io.Serializable {
 	public void setOrdRemark(String ordRemark) {
 		this.ordRemark = ordRemark;
 	}
+
 	
 	
 	

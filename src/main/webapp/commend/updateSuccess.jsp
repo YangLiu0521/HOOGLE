@@ -17,6 +17,10 @@
 	transform: translate(-50%, -50%);
 }
 </style>
+<link
+      rel="stylesheet"
+      href="<%=request.getContextPath()%>/css/commend/commend.css"
+    />
 </head>
 <body>
 <a href="<%=request.getContextPath() %>/commend/listAllCommend.jsp">回評價列表</a>

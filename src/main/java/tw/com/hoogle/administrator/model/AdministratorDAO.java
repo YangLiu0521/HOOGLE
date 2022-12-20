@@ -57,6 +57,10 @@ public class AdministratorDAO implements AdministratorDAO_interface {
 		private static final String DISABLE = "UPDATE administrator set administratorDominate = ?, "
 				+ "newsDominate = ?, hotelDominate = ?, userDominate = ? "
 				+ "where administratorId = ?;";
+		
+		private static final String SEARCH_PERMISSIONS = "SELECT administratorAccount, administratorDominate, "
+				+ "newsDominate, hotelDominate, userDominate FROM administrator "
+				+ "where administratorAccount = ?";
 
 		
 		
@@ -478,6 +482,64 @@ public class AdministratorDAO implements AdministratorDAO_interface {
 				}
 			}
 			return list;
+		}
+		
+		@Override
+		public AdministratorVO searchPermissionsByAccount(String administratorAccount) {
+
+			AdministratorVO administratorVO = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			try {
+
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(SEARCH_PERMISSIONS);
+
+				pstmt.setString(1, administratorAccount);
+
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					// empVo 也稱為 Domain objects
+					administratorVO = new AdministratorVO();
+					administratorVO.setAdministratorAccount(rs.getString("administratorAccount"));
+					administratorVO.setAdministratorDominate(rs.getBoolean("administratorDominate"));
+					administratorVO.setNewsDominate(rs.getBoolean("newsDominate"));
+					administratorVO.setHotelDominate(rs.getBoolean("hotelDominate"));
+					administratorVO.setUserDominate(rs.getBoolean("userDominate"));
+				}
+
+				// Handle any driver errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return administratorVO;
 		}
 
 }

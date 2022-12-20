@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>新增評價成功</title>
 <style type="text/css">
+
 .center-in-center {
 	position: absolute;
 	top: 50%;
@@ -17,6 +18,10 @@
 	transform: translate(-50%, -50%);
 }
 </style>
+<link
+      rel="stylesheet"
+      href="<%=request.getContextPath()%>/css/commend/commend.css"
+    />
 </head>
 <body>
 <a href="<%=request.getContextPath() %>/commend/select_page.jsp">回首頁</a>

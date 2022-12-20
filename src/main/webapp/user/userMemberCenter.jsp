@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="tw.com.hoogle.user.model.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="tw.com.hoogle.ord.model.*" %>
 
 <%
 	if (session.getAttribute("userVO") == null && session.getAttribute("hotelVO") == null ) {
@@ -15,6 +16,12 @@
 		return;
 	}
 	UserVO userVO = (UserVO) request.getSession().getAttribute("userVO"); //UserServlet.java(Controller)
+
+	OrdVO ordVO = (OrdVO) request.getSession().getAttribute("ordVO");
+	
+	OrdService ordSvc = new OrdService();
+    List<OrdVO> list = ordSvc.getAll();
+    pageContext.setAttribute("list",list);
 %>
 
 <!DOCTYPE html>
@@ -265,56 +272,114 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dashed-border"></span>
             <br><br>
             <h3>訂單搜尋</h3>
-            <input type="text">
             
-
+            <!-- -----------------------------Yang修改區-----------------------------  -->
             <div class="nav-pills mb-30">
               <br>
               <div class="table-responsive">
                 <table class="table table-bordered">
                   <thead class="thead-dark">
                     <tr class="text-center">
-                      <th>項次</th>
                       <th>訂單編號</th>
                       <th>飯店名稱</th>
                       <th>訂單日期</th>
-                      <th>金額</th>
-                      <th>狀態</th>
-                      <th>訂單明細</th>
+                      <th>入住天數</th>
+                      <th>入住日期</th>
+                      <th>退房日期</th>
+<!--                       <th>查看明細</th> -->
                     </tr>
                   </thead>
+                  
+            <c:forEach var="ordVO" items="${list}">
+            <c:if test="${ userVO.userId == ordVO.userId }">
                   <tbody>
                     <tr class="text-center">
-                      <td>1</td>
-                      <td>xxxx</td>
-                      <td>圓X飯店</td>
-                      <td>2022-12-01</td>
-                      <td>3000</td>
-                      <td>已取消</td>
-                      <td><button class="btn" style="color:red;">查看明細</button></td>
-                    </tr>
-                    <tr class="text-center">
-                      <td>2</td>
-                      <td>xxxx</td>
-                      <td>福X飯店</td>
-                      <td>2022-12-02</td>
-                      <td>5000</td>
-                      <td>已付款</td>
-                      <td><button class="btn" style="color:red;">查看明細</button></td>
-                    </tr>
-                    <tr class="text-center">
-                      <td>3</td>
-                      <td>xxxx</td>
-                      <td>Hoogle飯店</td>
-                      <td>2022-12-03</td>
-                      <td>10000</td>
-                      <td>已付款</td>
-                      <td><button class="btn" style="color:red;">查看明細</button></td>
+                      <td>${ordVO.ordId}</td>
+                      <td>${ordVO.hotelName}</td>
+                      <td>${ordVO.ordDate}</td>
+                      <td>${ordVO.ordNights}</td>
+                      <td>${ordVO.ordCheckin}</td>
+                      <td>${ordVO.ordCheckin}</td>
+<!--                       <td> -->
+<%--                     	<form METHOD="post" action="${pageContext.request.contextPath}/OrdServlet"> --%>
+<!-- 						<input type="hidden" name="action" value="getOrddetail_For_Display"> -->
+<%-- 						<input type="hidden" name="ordId" value="${ordVO.ordId}"> --%>
+<!-- 						<input name="action" type="submit" id="button" value="查看明細"> -->
+<!-- 						</form> -->
+<!--                     	</td> -->
                     </tr>
                   </tbody>
+                  </c:if>
+                  </c:forEach>
                 </table>
               </div>
             </div>
+            <h3>訂單明細查尋</h3>
+            <li>
+     		<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/OrddetailServlet" >
+       		<b>選擇訂單編號:</b>
+       		<select size="1" name="ordId">
+         		<c:forEach var="ordVO" items="${list}"> 
+         		      <c:if test="${ userVO.userId == ordVO.userId }">
+         		 <option value="${ordVO.ordId}">${ordVO.ordId}
+        		      </c:if>
+        		 </c:forEach>   
+      		 </select>
+     		  <input type="hidden" name="action" value="OrdId_getOne_For_Display">
+     		 <input type="submit" value="送出">
+   		 	</FORM>
+  			</li>
+<!-- -----------------------------Yang修改區-----------------------------  -->
+<!--             <input type="text"> -->
+            
+
+<!--             <div class="nav-pills mb-30"> -->
+<!--               <br> -->
+<!--               <div class="table-responsive"> -->
+<!--                 <table class="table table-bordered"> -->
+<!--                   <thead class="thead-dark"> -->
+<!--                     <tr class="text-center"> -->
+<!--                       <th>項次</th> -->
+<!--                       <th>訂單編號</th> -->
+<!--                       <th>飯店名稱</th> -->
+<!--                       <th>訂單日期</th> -->
+<!--                       <th>金額</th> -->
+<!--                       <th>狀態</th> -->
+<!--                       <th>訂單明細</th> -->
+<!--                     </tr> -->
+<!--                   </thead> -->
+<!--                   <tbody> -->
+<!--                     <tr class="text-center"> -->
+<!--                       <td>1</td> -->
+<!--                       <td>xxxx</td> -->
+<!--                       <td>圓X飯店</td> -->
+<!--                       <td>2022-12-01</td> -->
+<!--                       <td>3000</td> -->
+<!--                       <td>已取消</td> -->
+<!--                       <td><button class="btn" style="color:red;">查看明細</button></td> -->
+<!--                     </tr> -->
+<!--                     <tr class="text-center"> -->
+<!--                       <td>2</td> -->
+<!--                       <td>xxxx</td> -->
+<!--                       <td>福X飯店</td> -->
+<!--                       <td>2022-12-02</td> -->
+<!--                       <td>5000</td> -->
+<!--                       <td>已付款</td> -->
+<!--                       <td><button class="btn" style="color:red;">查看明細</button></td> -->
+<!--                     </tr> -->
+<!--                     <tr class="text-center"> -->
+<!--                       <td>3</td> -->
+<!--                       <td>xxxx</td> -->
+<!--                       <td>Hoogle飯店</td> -->
+<!--                       <td>2022-12-03</td> -->
+<!--                       <td>10000</td> -->
+<!--                       <td>已付款</td> -->
+<!--                       <td><button class="btn" style="color:red;">查看明細</button></td> -->
+<!--                     </tr> -->
+<!--                   </tbody> -->
+<!--                 </table> -->
+<!--               </div> -->
+<!--             </div> -->
           </div>
 
 

@@ -2,6 +2,7 @@ package tw.com.hoogle.searchHotel.model;
 
 import java.util.List;
 
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -9,24 +10,18 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
+import org.springframework.stereotype.Repository;
+@Repository
 public class SearchHotelDAOHibernate implements SearchHotelDAO{
-	private SessionFactory sessionFactory;
-	public SearchHotelDAOHibernate(SessionFactory sessionFactory) {
-		super();
-		this.sessionFactory = sessionFactory;
-	}
-	
-	//...............
-	public SearchHotelDAOHibernate() {
-		// TODO Auto-generated constructor stub
-	}
-	//...............
-	
-	
+	@PersistenceContext
+	private Session session;	
 	public Session getSession() {
-		return this.sessionFactory.getCurrentSession();
+		return this.session;
 	}
+//	public SearchHotelDAOHibernate(SessionFactory sessionFactory) {
+//		super();
+//		this.sessionFactory = sessionFactory;
+//	}
 //	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 //	Session session = sessionFactory.getCurrentSession();
 //	Transaction transaction = session.beginTransaction();
