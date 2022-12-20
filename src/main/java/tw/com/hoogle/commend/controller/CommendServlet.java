@@ -122,13 +122,10 @@ public class CommendServlet extends HttpServlet {
 			String gradeStr = req.getParameter("stars");
 			Integer commendGrade = null;
 			if (gradeStr == null || gradeStr.isEmpty()) {
-				errorMsgs.add("評價等級請勿空白");
+				errorMsgs.add("請選擇評價等級");
 			} else {
 				commendGrade = Integer.valueOf(gradeStr);
-				if (!(commendGrade > 0 && commendGrade < 6)) {
-					errorMsgs.add("評價等級請填1-5");
 				}
-			}
 			
 			String commendContent = req.getParameter("commendContent");
 			if (commendContent == null || commendContent.trim().length() == 0) {
@@ -199,13 +196,10 @@ public class CommendServlet extends HttpServlet {
 			String gradeStr = req.getParameter("stars");
 			Integer commendGrade = null;
 			if (gradeStr == null || gradeStr.isEmpty()) {
-				errorMsgs.add("評價等級請勿空白");
+				errorMsgs.add("請選擇評價等級");
 			} else {
 				commendGrade = Integer.valueOf(gradeStr);
-				if (!(commendGrade > 0 && commendGrade < 6)) {
-					errorMsgs.add("評價等級請填1-5");
 				}
-			}
 
 			String commendContent = req.getParameter("commendContent");
 			if (commendContent == null || commendContent.trim().length() == 0) {
