@@ -19,9 +19,7 @@
 
 <body>
 	<div class="img">
-		<img src="<%=request.getContextPath()%>/images/logo_removebg.png" alt="#" width="120" height="120">
-	</div>
-	<div class="system_name">
+		<img src="<%=request.getContextPath()%>/images/logo_removebg.png" alt="#" width="140" height="140">
 		<h2>管理者專區</h2>
 	</div>
 
@@ -32,7 +30,7 @@
 
 				<h3>管理者登入</h3>
 				<form method="post"
-					action="<%=request.getContextPath()%>/back_end/administrator/AdministratorServlet">
+					action="<%=request.getContextPath()%>/AdministratorServlet">
 					<input type="text" id="username" name="administratorAccount" 
 <%-- 						value="<%=(administratorVO == null) ? "" : administratorVO.getAdministratorAccount()%>" --%>
 						placeholder="帳號" required oninvalid="setCustomValidity('帳號不能為空')">

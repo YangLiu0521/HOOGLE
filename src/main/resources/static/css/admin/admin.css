@@ -180,25 +180,6 @@ a{
     vertical-align: middle;
 }
 
-div.test_radius{
-    /* 此設定作為上下左右置中的依據 */
-    display: flex;
-    /* 左右置中 */
-    justify-content: center;
-    /* 上下置中 */
-    align-items: center;
-    width: 200px;
-    height: 36px;
-    /* border:3px solid var(--first-color); */
-    color: var(--white-color);
-    font-weight: 700; 
-    font-size: 16px;
-    background-color: var(--bg-color);
-    /* border: solid 2px var(--sub-color); */
-    border-radius: 14px; /* 左上、右上、右下、左下，四個角，都會變成 10px 的圓角 */
-    margin: 20px 0 30px 40px;
-  }
-
   .text_h1{
     height: 150px;
     display: flex;
@@ -209,41 +190,79 @@ div.test_radius{
     color: var(--sub-color);
   }
   
-  /*========= 右上角icon =========*/
+  /*========= header =========*/
   
-  .logout_icon{
+  .func_list{
+    height: 80px;
+    position: relative;
+/*     top: 0; */
+    border-bottom: 1.7px solid var(--first-color);
+/*     padding-bottom: 10px; */
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;  
+  }
+  
+  div.test_radius{
+    /* 此設定作為上下左右置中的依據 */
+    display: flex;
+/*     左右置中 */
+    justify-content: center;
+/*     上下置中 */
+    align-items: center;
+    width: 200px;
+    height: 36px;
+    /* border:3px solid var(--first-color); */
+    color: var(--white-color);
+    font-weight: 700; 
+    font-size: 16px;
+    background-color: var(--bg-color);
+    /* border: solid 2px var(--sub-color); */
+    border-radius: 14px; /* 左上、右上、右下、左下，四個角，都會變成 10px 的圓角 */
+    margin: 0 0 0 40px;
+  }
+  
+ 
+  a.logout_link{
+    font-size: 12px;
     color: var(--first-color);
     background-color: var(--thir-color);
     position: absolute;
-    right: 60px;
-    width: 20px;
-    height: 20px;
+    right: 40px;
+    width: 77px;
+    height: 34px;
     padding: 0.3rem;
     grid-template-columns: max-content max-content;
+    display: flex;
     align-items: center;
     column-gap: 0.75rem;
-    border-radius: 1rem;
-    margin-bottom: 0.5rem;
+    border-radius: .6rem;
+/*     margin-bottom: 0.5rem; */
     transition: .3s;
     cursor: pointer;
+  }
+  .logout_icon{
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
   }
 
-  .notification_icon{
-    color: var(--first-color);
-    background-color: var(--thir-color);
-    position: absolute;
-    right: 100px;
-    width: 20px;
-    height: 20px;
-    padding: 0.3rem;
-    grid-template-columns: max-content max-content;
-    align-items: center;
-    column-gap: 0.75rem;
-    border-radius: 1rem;
-    margin-bottom: 0.5rem;
-    transition: .3s;
-    cursor: pointer;
-  }
+/*   .notification_icon{ */
+/*     color: var(--first-color); */
+/*     background-color: var(--thir-color); */
+/*     position: absolute; */
+/*     right: 100px; */
+/*     width: 20px; */
+/*     height: 20px; */
+/*     padding: 0.3rem; */
+/*     grid-template-columns: max-content max-content; */
+/*     align-items: center; */
+/*     column-gap: 0.75rem; */
+/*     border-radius: 1rem; */
+/*     margin-bottom: 0.5rem; */
+/*     transition: .3s; */
+/*     cursor: pointer; */
+/*   } */
   /*
   .person_icon{
     color: var(--first-color);
@@ -264,15 +283,16 @@ div.test_radius{
   }
   */
 
-  .logout_icon:hover{
+  .logout_link:hover{
     color: var(--white-color);
     background-color: var(--first-color);
+    transform: scale(1.1);
   }
 
-  .notification_icon:hover{
-    color: var(--white-color);
-    background-color: var(--first-color);
-  }
+/*   .notification_icon:hover{ */
+/*     color: var(--white-color); */
+/*     background-color: var(--first-color); */
+/*   } */
 
   /* .person_icon:hover{
     color: var(--white-color);
@@ -285,15 +305,22 @@ div.test_radius{
     font-size: small;
     margin-left: 7px;
   }
-
-  .func_list{
-    height: 50px;
-    position: relative;
-    top: 0;
-    border-bottom: 1.7px solid var(--first-color);
-    padding-bottom: 10px;
-    margin-bottom: 50px;
+  
+  div.login_mark{
+	background-color: #d9ebfb;
+    font-size: 12px;
+    width: 200px;
+    height: 30px;
+    position: absolute;
+    right: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+       
   }
+
+
+
 
   /*============ 查詢飯店 ===============*/
  
@@ -377,6 +404,23 @@ div.test_radius{
   /* background-color: var(--white-color); */
   position: relative;
   left: 10px;
+}
+
+.count_register_hotel{
+  width: auto;
+  /* font-size: 14px; */
+  color: var(--bg-color);
+  display: inline-block;
+  border: solid 1.2px var(--bg-color);
+  /* background-color: var(--white-color); */
+  position: relative;
+  left: 10px;
+}
+.link_hotel_list{
+  position: relative;
+  left: 630px;
+  color: #4221de;
+  border-bottom: solid 1.2px #4221de;
 
 }
 
@@ -401,4 +445,20 @@ a.admin_create{
 .input_update, .input_add{
 	position: absolute;
 	right: 150px;
+}
+
+
+/*============ 登出Alert ===============*/
+div.logout_alert{
+	position: relative;
+	left: calc(100% / 3);
+	top: 150px;
+	width: 200px;
+	height: 100px;
+	border: solid 1px var(--bg-color);
+	background-color: var(--thir-color);
+	border-radius: 14px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
