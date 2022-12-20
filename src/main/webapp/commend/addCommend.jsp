@@ -1,128 +1,110 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page
-import="tw.com.hoogle.commend.model.*"%> <% CommendVO commendVO = (CommendVO)
-request.getAttribute("commendVO"); %>
+<%@ page import="tw.com.hoogle.commend.model.*"%>
+<%
+CommendVO commendVO = (CommendVO) request.getAttribute("commendVO");
+%>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="<%=request.getContextPath()%>/css/commend/commend.css"
-    />
-    <title>住宿經驗評價</title>
-  </head>
-  <body>
-    <FORM METHOD="post" ACTION="commend.do" name="form1">
-      <!--header upper start-->
-      <header class="header">
-        <div class="header-up-bar">住宿經驗評價</div>
-      </header>
-      <!--header upper end-->
-      <!-- 評價編號&訂單編號開始 -->
-      <div class="commend">
-        <div class="commendAutoAndOrdId">
-          <!--         <div class="commendAuto"> -->
-          <!--           <h2>評價編號:</h2> -->
-          <%--
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/commend/commend.css" />
+<title>住宿經驗評價</title>
+</head>
+<body>
+	<FORM METHOD="post" ACTION="commend.do" name="form1">
+		<!--header upper start-->
+		<header class="header">
+			<div class="header-up-bar">住宿經驗評價</div>
+		</header>
+		<!--header upper end-->
+		<!-- 評價編號&訂單編號開始 -->
+		<div class="commend">
+			<div class="commendAutoAndOrdId">
+				<!--         <div class="commendAuto"> -->
+				<!--           <h2>評價編號:</h2> -->
+				<%--
           <p>${commendVO.commendAuto}</p>
           --%>
-          <!--         </div> -->
-          <div class="ordId">
-            <h2>訂單編號:</h2>
-            <input type="TEXT" class="ordId" name="ordId" />
-          </div>
-        </div>
-        <!-- 評價編號&訂單編號結束 -->
-        <!-- 評價等級開始 -->
-        <div class="commendGrade">
-          <div>
-            <h2>評價等級:</h2>
-          </div>
-          <form class="rating">
-          <div id="stars" class="left">
-            <img
-              name="stars"
-              src="<%=request.getContextPath()%>/images/commend/ostar.png"
-              alt=""
-              data-rating="1"
-            />
-            <img
-              name="stars"
-              src="<%=request.getContextPath()%>/images/commend/ostar.png"
-              alt=""
-              data-rating="2"
-            />
-            <img
-              name="stars"
-              src="<%=request.getContextPath()%>/images/commend/ostar.png"
-              alt=""
-              data-rating="3"
-            />
-            <img
-              name="stars"
-              src="<%=request.getContextPath()%>/images/commend/ostar.png"
-              alt=""
-              data-rating="4"
-            />
-            <img
-              name="stars"
-              src="<%=request.getContextPath()%>/images/commend/ostar.png"
-              alt=""
-              data-rating="5"
-            />
-          </div>
-          </form>
-<!--           <tr> -->
-<!--             <td>評價等級:</td> -->
-<!--             <td> -->
-<!--               <input type="TEXT" name="commendGrade" size="45" -->
-<%--               value="<%=commendVO == null? "" : commendVO.getCommendGrade()%>" --%>
-<!--               /> -->
-<!--             </td> -->
-<!--           </tr> -->
-          <div class="starInt"><input type="hidden" value="1" /></div>
-          <div id="comment" class="left"></div>
-        </div>
-        <!-- 評價等級結束 -->
-        <!-- 評價內容開始 -->
-        <div>
-          <div class="commendContent">
-            <h2>評價內容:</h2>
-            <textarea name="commendContent" id="commendContent"></textarea>
-          </div>
-        </div>
-        <!-- 評價內容結束 -->
-        <!-- 評價日期開始 -->
-        <div class="commendDate">
-          <!-- <h2>評價日期：</h2> -->
-          <!--         <div class="dateandsubmit"> -->
-          <!-- <input id="date" type="Date" value="${commendVO.commendAuto}" /> -->
-          <input type="hidden" name="action" value="insert" />
-          <input type="hidden" name="stars" value="" id="myStars" />
-          <input id="submit" type="submit" value="送出評價" />
-          <!--         </div> -->
-        </div>
-        <!-- 評價日期結束 -->
-      </div>
-    </FORM>
-    <%-- 錯誤表列 --%>
-    <c:if test="${not empty errorMsgs}">
-      <font style="color: red">請修正以下錯誤:</font>
-      <ul>
-        <c:forEach var="message" items="${errorMsgs}">
-          <li style="color: red">${message}</li>
-        </c:forEach>
-      </ul>
-    </c:if>
-    <%--
+				<!--         </div> -->
+				<div class="ordId">
+					<h2>訂單編號:</h2>
+					<input type="TEXT" class="ordId" name="ordId" />
+				</div>
+			</div>
+			<!-- 評價編號&訂單編號結束 -->
+			<!-- 評價等級開始 -->
+			<div class="commendGrade">
+				<div>
+					<h2>評價等級:</h2>
+				</div>
+				<form class="rating">
+					<div id="stars" class="left">
+						<img name="stars"
+							src="<%=request.getContextPath()%>/images/commend/ostar.png"
+							alt="" data-rating="1" /> <img name="stars"
+							src="<%=request.getContextPath()%>/images/commend/ostar.png"
+							alt="" data-rating="2" /> <img name="stars"
+							src="<%=request.getContextPath()%>/images/commend/ostar.png"
+							alt="" data-rating="3" /> <img name="stars"
+							src="<%=request.getContextPath()%>/images/commend/ostar.png"
+							alt="" data-rating="4" /> <img name="stars"
+							src="<%=request.getContextPath()%>/images/commend/ostar.png"
+							alt="" data-rating="5" />
+					</div>
+				</form>
+				<!--           <tr> -->
+				<!--             <td>評價等級:</td> -->
+				<!--             <td> -->
+				<!--               <input type="TEXT" name="commendGrade" size="45" -->
+				<%--               value="<%=commendVO == null? "" : commendVO.getCommendGrade()%>" --%>
+				<!--               /> -->
+				<!--             </td> -->
+				<!--           </tr> -->
+				<div class="starInt">
+					<input type="hidden" value="1" />
+				</div>
+				<div id="comment" class="left"></div>
+			</div>
+			<!-- 評價等級結束 -->
+			<!-- 評價內容開始 -->
+			<div>
+				<div class="commendContent">
+					<h2>評價內容:</h2>
+					<textarea name="commendContent" id="commendContent"></textarea>
+				</div>
+			</div>
+			<!-- 評價內容結束 -->
+			<!-- 評價日期開始 -->
+			<div class="commendDate">
+				<!-- <h2>評價日期：</h2> -->
+				<!--         <div class="dateandsubmit"> -->
+				<!-- <input id="date" type="Date" value="${commendVO.commendAuto}" /> -->
+				<input type="hidden" name="action" value="insert" /> <input
+					type="hidden" name="stars" value="" id="myStars" /> <input
+					id="submit" type="submit" value="送出評價" />
+				<!--         </div> -->
+			</div>
+			<!-- 評價日期結束 -->
+		</div>
+	</FORM>
+	<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
+	<%--
     <script src="<%=request.getContextPath()%>/js/commend/commend.js"></script>
     --%>
-    <script>
+	<script>
       //製作一個星星評分
       var divStars = document.getElementById("stars");
       var divComment = document.getElementById("comment");
@@ -188,10 +170,10 @@ request.getAttribute("commendVO"); %>
           for (var i = 0; i < divStars.children.length; i++) {
             divStars.children[i].src =
               "<%=request.getContextPath()%>/images/commend/ostar.png";
-          }
-          divComment.innerHTML = ""; //不顯示評論
-        }
-      };
-    </script>
-  </body>
+				}
+				divComment.innerHTML = ""; //不顯示評論
+			}
+		};
+	</script>
+</body>
 </html>
