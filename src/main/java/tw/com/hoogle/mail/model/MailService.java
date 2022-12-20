@@ -29,8 +29,8 @@ public class MailService {
 			props.put("mail.smtp.port", "465");
 		
 
-			final String myGmail = "tibameaga1013@gmail.com";
-			final String myGmail_password = "knuptqwapweademo";
+			final String myGmail = "tga104g1@gmail.com";
+			final String myGmail_password = "clxefkovstvhuzod";
 
 			Session session = Session.getInstance(props, new Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
@@ -89,18 +89,18 @@ public class MailService {
 	
 	
 	
-//	public static void main(String[] args) {
-//		// 自訂收件地址
-//		String to = "yang521521521@gmail.com";
-//
-//		String subject = "yang還敢搞R";
-//
-//		String ch_name = "peter1";
-//		String passRandom = "111";
-//		String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)";
-//
-//		MailService mailService = new MailService();
-//		mailService.sendMail(to, subject, messageText);
-//
-//	}
+	public static void main(String[] args) {
+		// 自訂收件地址
+		String to = "wen821107@gmail.com";
+
+		String subject = "wendy還敢搞R";
+
+		String ch_name = "peter1";
+		String passRandom = "111";
+		String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)";
+
+		MailService mailService = new MailService();
+		mailService.sendMail(to, subject, messageText);
+
+	}
 }
