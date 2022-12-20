@@ -34,6 +34,7 @@ public class HotelController extends HttpServlet {
 		if (req.getParameter("action") != null) {
 			action = req.getParameter("action");
 		}
+		System.out.println(action);
 
 // ===================================================單一查詢=========================================================//
 
@@ -68,7 +69,7 @@ public class HotelController extends HttpServlet {
 			// 3.查詢完成，準備轉交
 
 			req.setAttribute("hotelVO", hotelVO); // 資料庫取出hotelVO物件，存入req
-			String url = "/hotel/listOneHotel.jsp";
+			String url = "/back_end/hotelAndUser/hotelDetail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交給listOneHotel.jsp
 			successView.forward(req, res);
 		}
@@ -77,23 +78,41 @@ public class HotelController extends HttpServlet {
 
 		// 先取得單一飯店資訊 hotelVO物件
 		if ("getOne_For_Update".equals(action)) { // 來自listAllHotel.jsp的請求
-
+			System.out.println("===");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 
 			/*************************** 1.接收請求參數 ****************************************/
-			Integer hotelId = Integer.valueOf(req.getParameter("hotelId"));
+//			Integer hotelId = Integer.valueOf(req.getParameter("hotelId"));
+			String hotelEmail = req.getParameter("hotelEmail");
+			
 
 			/*************************** 2.開始查詢資料 ****************************************/
 			HotelService hotelSvc = new HotelService();
-			HotelVO hotelVO = hotelSvc.getOneHotel(hotelId);
+			HotelVO hotelVO = hotelSvc.findByHotelEmail(hotelEmail);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-			req.setAttribute("hotelVO", hotelVO);
-			String url = "對該飯店修改資料頁面";
-			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, res);
+//			req.setAttribute("hotelVO", hotelVO);
+			System.out.println("getOne_For_Update");
+			
+			if(hotelVO.getHotelState()==1) {  // 停權：狀態由1變成0
+				hotelVO.setHotelState(0);
+				hotelVO = hotelSvc.updateHotel(hotelVO);
+				System.out.println("狀態由1變成0");
+				
+				String url = "/back_end/hotelAndUser/hotelList.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			} else if(hotelVO.getHotelState()==2) {  // 飯店審核通過：狀態由2變成1
+				hotelVO.setHotelState(1);
+				hotelVO = hotelSvc.updateHotel(hotelVO);
+				System.out.println("狀態由2變成1");
+				
+				String url = "/back_end/approval/approveRegisterHotel.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			}			
 		}
 		
 		// 修改資料頁面

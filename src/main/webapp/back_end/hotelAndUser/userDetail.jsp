@@ -3,8 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="tw.com.hoogle.userForBackEnd.model.*"%>
+<%@ page import="tw.com.hoogle.administrator.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
+<jsp:useBean id="administratorSvc" scope="page" class="tw.com.hoogle.administrator.model.AdministratorService"/>
 <jsp:useBean id="userForBackEndSvc" scope="page" class="tw.com.hoogle.userForBackEnd.model.UserForBackEndService"/>
 <%
 // AdministratorService administratorSvc = new AdministratorService();
@@ -13,6 +15,11 @@ pageContext.setAttribute("list", list);
 %>
 <%
 UserVO userVO = (UserVO) request.getAttribute("userId");
+%>
+<%
+String account = (String)session.getAttribute("account");
+AdministratorVO permissionsVO = administratorSvc.getPermissionsByAccount(account);
+pageContext.setAttribute("permissionsVO", permissionsVO);
 %>
 <!DOCTYPE html>
 <html>
@@ -31,7 +38,7 @@ UserVO userVO = (UserVO) request.getAttribute("userId");
 		<nav class="nav">
 			<div>
 				<div class="nav_link">
-					<a href="<%=request.getContextPath()%>/back_end/administrator/admin_page.jsp" class="nav_logo"> <img
+					<a href="<%=request.getContextPath()%>/back_end/administrator/adminIndex.jsp" class="nav_logo"> <img
 						src="<%=request.getContextPath()%>/images/logo_small_removebg.png" class="pic"> <span
 						class="nav_name aaa">HOOGLE</span>
 					</a>
@@ -51,48 +58,72 @@ UserVO userVO = (UserVO) request.getAttribute("userId");
 						<span class="nav_name">報表查詢</span>
 					</a>
 					
-					<div class="nav_link collapse">
+					<div class="nav_link collapse" 
+						style="display:${permissionsVO.hotelDominate==false && permissionsVO.userDominate==false?"none":""}">
 						<ion-icon name="search-outline" class="nav_icon"></ion-icon>
 						<span class="nav_name">飯店及旅客資訊</span>
 						<ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 						<ul class="collapse_menu">
-							<a href="#" class="collapse__sublink"><pre>飯店</pre></a>
-							<a href="<%=request.getContextPath()%>/back_end/hotelAndUser/userList.jsp" class="collapse__sublink"><pre>旅客</pre></a>
+							<div style="display:${permissionsVO.hotelDominate==true?"":"none"}">
+								<a href="<%=request.getContextPath()%>/back_end/hotelAndUser/hotelList.jsp" class="collapse__sublink">
+									<pre>飯店</pre>
+								</a>
+							</div>
+							<div style="display:${permissionsVO.userDominate==true?"":"none"}">
+								<a href="<%=request.getContextPath()%>/back_end/hotelAndUser/userList.jsp" class="collapse__sublink">
+									<pre>旅客</pre>
+								</a>
+							</div>	
 						</ul>
 					</div>
 					
-					<div class="nav_link collapse">
+					<div class="nav_link collapse" style="display:${permissionsVO.hotelDominate==true?"":"none"}">
 						<ion-icon name="checkmark-done-outline" class="nav_icon"></ion-icon>
 						<span class="nav_name">審核</span>
 						<ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 						<ul class="collapse_menu">
-							<a href="#" class="collapse__sublink"><pre>飯店註冊</pre></a>
-							<a href="#" class="collapse__sublink"><pre>房間上架</pre></a>
+							<a href="<%=request.getContextPath()%>/back_end/approval/approveRegisterHotel.jsp" class="collapse__sublink">
+								<pre>飯店註冊</pre>
+							</a>
+							<a href="#" class="collapse__sublink">
+								<pre>房間上架</pre>
+							</a>
 						</ul>
 					</div>
+					<div style="display:${permissionsVO.administratorDominate==true?"":"none"}">
+						<a href="<%=request.getContextPath()%>/back_end/administrator/admin_page.jsp" 
+							class="nav_link">
+							<ion-icon name="people-outline" class="nav_icon"></ion-icon>
+							<span class="nav_name">管理者資料</span>
+						</a>
+					</div>
 					
-					<a href="<%=request.getContextPath()%>/back_end/administrator/admin_page.jsp"
-						class="nav_link"> <ion-icon name="people-outline" class="nav_icon"></ion-icon>
-						<span class="nav_name">管理者資料</span>
-					</a>
-					
-					<div class="nav_link collapse">
+					<div class="nav_link collapse" 
+						style="display:${permissionsVO.hotelDominate==false && permissionsVO.userDominate==false?"none":""}">
 						<ion-icon name="mail-outline" class="nav_icon"></ion-icon>
 						<span class="nav_name">系統訊息管理</span>
 						<ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 						<ul class="collapse_menu">
-							<a href="#" class="collapse__sublink"><pre>飯店訊息</pre></a>
-							<a href="#" class="collapse__sublink"><pre>旅客訊息</pre></a>
+							<div style="display:${permissionsVO.hotelDominate==true?"":"none"}">
+								<a href="#" class="collapse__sublink"><pre>飯店訊息</pre></a>
+							</div>
+							<div style="display:${permissionsVO.userDominate==true?"":"none"}">
+								<a href="#" class="collapse__sublink"><pre>旅客訊息</pre></a>
+							</div>
 						</ul>
 					</div>
 					
-					<a href="#" class="nav_link"> <ion-icon	name="newspaper-outline" class="nav_icon"></ion-icon>
-						<span class="nav_name">最新消息上架</span>
-					</a>
-					
-					<a href="#" class="nav_link"> <ion-icon name="game-controller-outline" class="nav_icon"></ion-icon>
-						<span class="nav_name">飯店設施管理</span>
-					</a>
+					<div style="display:${permissionsVO.newsDominate==true?"":"none"}">
+						<a href="#" class="nav_link"> <ion-icon	name="newspaper-outline" class="nav_icon"></ion-icon>
+							<span class="nav_name">最新消息上架</span>
+						</a>
+					</div>
+										
+					<div style="display:${permissionsVO.hotelDominate==true?"":"none"}">
+						<a href="#" class="nav_link"> <ion-icon name="game-controller-outline" class="nav_icon"></ion-icon>
+							<span class="nav_name">飯店設施管理</span>
+						</a>
+					</div>
 				</div>
 			</div>
 			<!-- <a href="#" class="nav_link">
@@ -103,14 +134,26 @@ UserVO userVO = (UserVO) request.getAttribute("userId");
 	</div>
 	
 	<div class="func_list">
-		<a href="#" class="logout_link"> <ion-icon name="log-out-outline"
-				class="logout_icon"></ion-icon>
-		</a>
-		<a href="#" class="logout_link">
-			<ion-icon name="notifications-outline" class="notification_icon"></ion-icon>
-		</a>
 
-		<div class="test_radius">旅客明細</div>
+		<a href="<%=request.getContextPath()%>/AdministratorServlet?action=logout" class="logout_link">
+ 			<ion-icon name="log-out-outline" class="logout_icon"></ion-icon>
+ 			<label class="logout_text">登出</label>
+ 		</a>
+<%-- 		<form href="<%=request.getContextPath()%>/AdministratorServlet" class="logout_link"> --%>
+<!-- 			<input id="logout_icon" type="hidden" name="action" value="logout"> -->
+<!-- 			<ion-icon type="submit" for="logout_icon" name="log-out-outline" class="logout_icon"> -->
+<!-- 			</ion-icon> -->
+<!-- 		</form> -->
+		
+<!-- 		<a href="#" class="logout_link"> -->
+<!-- 			<ion-icon name="notifications-outline" class="notification_icon"></ion-icon> -->
+<!-- 		</a> -->
+		
+
+		<div class="test_radius">旅客詳細資料</div>
+		<div class="login_mark">
+			<%=account%> 登入中...
+		</div>
 	</div>
 
 

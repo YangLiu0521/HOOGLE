@@ -83,4 +83,8 @@ public class AdministratorService {
 	public String match(String administratorAccount) {
 		return dao.matchAccountPassword(administratorAccount);
 	}
+	
+	public AdministratorVO getPermissionsByAccount(String administratorAccount) {
+		return dao.searchPermissionsByAccount(administratorAccount);
+	}
 }
