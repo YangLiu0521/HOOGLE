@@ -2,19 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="tw.com.hoogle.userForBackEnd.model.*"%>
+<%@ page import="tw.com.hoogle.hotel.model.*"%>
 <%@ page import="tw.com.hoogle.administrator.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
+<jsp:useBean id="hotelForBackEndSvc" scope="page" class="tw.com.hoogle.hotel.backEndModel.HotelForBackEndService"/>
 <jsp:useBean id="administratorSvc" scope="page" class="tw.com.hoogle.administrator.model.AdministratorService"/>
-<jsp:useBean id="userForBackEndSvc" scope="page" class="tw.com.hoogle.userForBackEnd.model.UserForBackEndService"/>
+
 <%
-// AdministratorService administratorSvc = new AdministratorService();
-List<UserVO> list = userForBackEndSvc.getAll();
-pageContext.setAttribute("list", list);
-%>
-<%
-UserVO userVO = (UserVO) request.getAttribute("userId");
+List<HotelVO> hotelList = hotelForBackEndSvc.findRegisterHotel();
+pageContext.setAttribute("hotelList", hotelList);
 %>
 <%
 String account = (String)session.getAttribute("account");
@@ -150,75 +147,66 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 <!-- 		</a> -->
 		
 
-		<div class="test_radius">旅客詳細資料</div>
+		<div class="test_radius">飯店註冊待審核</div>
 		<div class="login_mark">
 			<%=account%> 登入中...
 		</div>
 	</div>
 
-
 	<div class="features">
 		<div class="features_search">
-			<FORM METHOD="post" ACTION="UserForBackEndServlet" class="searchbyid">
-				搜尋旅客
-				<select size="1" name="userId">
-					<c:forEach var="userVO" items="${userForBackEndSvc.all}">
-						<option value="${userVO.userId}">${userVO.userId}：${userVO.userName}
-					</c:forEach>
-				</select>
-				<input type="hidden" name="action" value="getOne_For_User">
-				<input type="submit" class="csearchbyid" value="送出">
-			</FORM>
+			<label class="count_register_hotel">尚未審核：共有 ${hotelList.size()} 筆</label>
+			<a class="link_hotel_list" href="<%=request.getContextPath()%>/back_end/hotelAndUser/hotelList.jsp">查看飯店列表</a>
 		</div>
 	</div>
 	<div class="div_table">
 	<table>
 		<tr class="td_head">
-			<th width="20">旅客<br>編號</th>
-			<th width="55">旅客信箱</th>
-			<th width="50">旅客密碼</th>
-			<th width="30">旅客姓名</th>
-			<th width="40">旅客電話</th>
-			<th width="40">旅客身分證</th>
-			<th width="22">旅客<br>生日</th>
-			<th width="22">旅客<br>註冊日</th>
-			<th width="20">訂單<br>查詢</th>
+			<th width="40">飯店<br>編號</th>
+			<th width="110">飯店信箱</th>
+			<th width="100">飯店密碼</th>
+			<th width="60">飯店名稱</th>
+			<th width="80">飯店電話</th>
+			<th width="50">飯店<br>負責人</th>
+			<th width="70">飯店<br>統一編號</th>
+			<th width="45">狀態</th>
+			<th width="65">待審核</th>
+			
 		</tr>
-		<tr class="td_body">
-			<td>${userVO.userId}</td>
-			<td>${userVO.userEmail}</td>
-			<td>${userVO.userPassword}</td>
-			<td>${userVO.userName}</td>
-			<td>${userVO.userPhone}</td>
-			<td>${userVO.userIdentity}</td>
-			<td>${userVO.userBirthday}</td>
-			<td>${userVO.userRegistration}</td>
-			<td><a href="#">訂單<br>查詢</a></td>
-
-<!-- 					<FORM METHOD="post"	ACTION="AdministratorServlet" style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="修改" -->
-<%-- 						${(administratorVO.administratorDominate==false &&  --%>
-<%-- 						administratorVO.newsDominate==false &&  --%>
-<%-- 						administratorVO.hotelDominate==false &&  --%>
-<%-- 						administratorVO.userDominate==false)?"disabled":""}> --%>
-<%-- 						<input type="hidden" name="administratorId" value="${administratorVO.administratorId}"> --%>
+		<%-- 	<%@ include file="page1.file" %>  --%>
+		<%-- 	<c:forEach var="administratorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
+		<c:forEach var="hotelVO" items="${hotelList}">
+			<tr class="td_body">
+				<td>${hotelVO.hotelId}</td>
+				<td>${hotelVO.hotelEmail}</td>
+				<td>${hotelVO.hotelPassword}</td>
+				<td>${hotelVO.hotelName}</td>
+				<td>${hotelVO.hotelPhone}</td>
+				<td>${hotelVO.hotelPrincipal}</td>
+				<td>${hotelVO.hotelTaxid}</td>
+				<td>
+					${hotelVO.hotelState==0?"停權":""}
+					${hotelVO.hotelState==1?"正常":""}
+					${hotelVO.hotelState==2?"待審核":""}
+				</td>
+				
+				<td>
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/HotelController">
+						<input type="hidden" name="hotelEmail" value="${hotelVO.hotelEmail}">
+						<input type="hidden" name="action" value="getOne_For_Update">
+						<input style="margin:1px" type="submit" name="action" value="核准">
+					</FORM>
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/HotelController" 
+					style="margin-bottom: 0px;">
+						<input style="margin:1px" type="submit" value="資料不符">
+<%-- 						<input type="hidden" name="hotelEmail" value="${hotelVO.hotelEmail}"> --%>
 <!-- 						<input type="hidden" name="action" value="getOne_For_Update"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post"	ACTION="AdministratorServlet" style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="停權" -->
-<%-- 						${(administratorVO.administratorDominate==false &&  --%>
-<%-- 						administratorVO.newsDominate==false &&  --%>
-<%-- 						administratorVO.hotelDominate==false &&  --%>
-<%-- 						administratorVO.userDominate==false)?"disabled":""}> --%>
-<%-- 						<input type="hidden" name="administratorId" value="${administratorVO.administratorId}"> --%>
-<!-- 						<input type="hidden" name="action" value="disable"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
-		</tr>
+					</FORM>
+				</td>
+			</tr>
+		</c:forEach>
 	</table>
-</div>
+	</div>
 	<%-- <%@ include file="page2.file" %> --%>
 
 	<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
