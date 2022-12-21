@@ -297,11 +297,6 @@ public class OrdServlet extends HttpServlet {
 			}
 			
 			String userName = req.getParameter("userName");
-//			if(userName==null) {
-//				userName = "0000";
-//			}
-//			System.out.println("servlet userName="+userName);
-
 			String userNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,10}$";
 			if (userName == null || userName.trim().length() == 0) {
 				errorMsgs.put("userName","旅客名稱: 請勿空白");

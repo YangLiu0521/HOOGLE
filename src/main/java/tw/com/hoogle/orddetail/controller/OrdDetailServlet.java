@@ -235,22 +235,53 @@ public class OrdDetailServlet extends HttpServlet {
 				errorMsgs.put("ordId","請填數字");
 			}
 			
-			Integer roomAuto = null;
+			Integer roomAuto1 = null;
 			try {
-				roomAuto = Integer.valueOf(req.getParameter("roomAuto").trim());
-				System.out.println("roomAuto="+roomAuto);
+				roomAuto1 = Integer.valueOf(req.getParameter("roomAuto1").trim());
+				System.out.println("roomAuto1="+roomAuto1);
 			} catch (NumberFormatException e) {
-				errorMsgs.put("roomAuto","請填數字");
+				errorMsgs.put("roomAuto1","請填數字");
 			}
 			
-			Integer roomNumber = null;
+			Integer roomAuto2 = null;
 			try {
-				roomNumber = Integer.valueOf(req.getParameter("roomNumber").trim());
-				System.out.println("roomNumber="+roomNumber);
+				roomAuto2 = Integer.valueOf(req.getParameter("roomAuto2").trim());
+				System.out.println("roomAuto2="+roomAuto2);
 			} catch (NumberFormatException e) {
-				errorMsgs.put("roomNumber","請填數字");
+				errorMsgs.put("roomAuto2","請填數字");
 			}
 			
+			Integer roomAuto3 = null;
+			try {
+				roomAuto3 = Integer.valueOf(req.getParameter("roomAuto3").trim());
+				System.out.println("roomAuto3="+roomAuto1);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("roomAuto3","請填數字");
+			}
+			
+			Integer roomNumber1 = null;
+			try {
+				roomNumber1 = Integer.valueOf(req.getParameter("roomNumber1").trim());
+				System.out.println("roomNumber1="+roomNumber1);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("roomNumber1","請填數字");
+			}
+			
+			Integer roomNumber2 = null;
+			try {
+				roomNumber2 = Integer.valueOf(req.getParameter("roomNumber2").trim());
+				System.out.println("roomNumber2="+roomNumber2);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("roomNumber2","請填數字");
+			}
+			
+			Integer roomNumber3 = null;
+			try {
+				roomNumber3 = Integer.valueOf(req.getParameter("roomNumber3").trim());
+				System.out.println("roomNumber3="+roomNumber3);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("roomNumber3","請填數字");
+			}
 			
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -262,16 +293,25 @@ public class OrdDetailServlet extends HttpServlet {
 				
 				/***************************2.開始新增資料***************************************/
 				OrdDetailService orddetailSvc = new OrdDetailService();
-				orddetailSvc.addOrddetail(ordId, roomAuto, roomNumber);
-				int money;
+				orddetailSvc.addOrddetail(ordId, roomAuto1, roomNumber1);
+				orddetailSvc.addOrddetail(ordId, roomAuto2, roomNumber2);
+				orddetailSvc.addOrddetail(ordId, roomAuto3, roomNumber3);
+
 				int ordNights = Integer.valueOf(req.getParameter("ordNights").trim());
-				if(roomAuto == 4001) {
-					money = 1200*roomNumber*ordNights;
+				int money1=0, money2=0, money3=0;
+				if(roomAuto1 == 4001) {
+					money1 = 2000*roomNumber1*ordNights;
 				}
-				else {
-					money = 9999;
+				if(roomAuto2 == 4002) {
+					money2 = 3500*roomNumber2*ordNights;
 				}
-				session.setAttribute("roomNumber", roomNumber);
+				if(roomAuto3 == 4003) {
+					money3 = 6000*roomNumber3*ordNights;
+				}
+				int money =money1 + money2 + money3;
+				session.setAttribute("roomNumber1", roomNumber1);
+				session.setAttribute("roomNumber2", roomNumber2);
+				session.setAttribute("roomNumber3", roomNumber3);
 				session.setAttribute("money", money);
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/ord/ord_page.jsp";

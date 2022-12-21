@@ -234,7 +234,11 @@
                           </tr>
                           <tr>
                             <td>房數</td>
-                            <td>每晚<sapn>${roomNumber}</sapn>間</td>
+                            <td>
+                            單人房每晚<sapn>${roomNumber1}</sapn>間<br>
+                            雙人房每晚<sapn>${roomNumber2}</sapn>間<br>
+                            四人房每晚<sapn>${roomNumber3}</sapn>間
+                            </td>
                           </tr>
                           <tr>
                             <td>金額</td>

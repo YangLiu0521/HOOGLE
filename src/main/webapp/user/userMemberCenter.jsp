@@ -299,7 +299,7 @@
                       <td>${ordVO.ordDate}</td>
                       <td>${ordVO.ordNights}</td>
                       <td>${ordVO.ordCheckin}</td>
-                      <td>${ordVO.ordCheckin}</td>
+                      <td>${ordVO.ordCheckout}</td>
 <!--                       <td> -->
 <%--                     	<form METHOD="post" action="${pageContext.request.contextPath}/OrdServlet"> --%>
 <!-- 						<input type="hidden" name="action" value="getOrddetail_For_Display"> -->

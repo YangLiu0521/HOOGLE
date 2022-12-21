@@ -157,6 +157,7 @@ pageContext.setAttribute("list",list);
       	<h4>入住日期(${checkinInput})不得晚於退房日期(${checkoutInput})</h4>   
      </div>
      </c:if>
+<c:if test="${ordNights > 0}">
 <div class="row">
 <c:if test="${hotelCountyInput=='台北市'}">
       <div class="col-lg-4 col-md-6 col-sm-6 mb-30">     
@@ -268,6 +269,7 @@ pageContext.setAttribute("list",list);
       </div>
      </c:if>
     </div>
+    </c:if>
   </div>
 </div>
 
