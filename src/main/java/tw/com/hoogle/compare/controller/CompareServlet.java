@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import tw.com.hoogle.compare.model.CompareService;
+import tw.com.hoogle.compare.model.CompareVO;
 import tw.com.hoogle.hotel.model.HotelService;
 import tw.com.hoogle.hotel.model.HotelVO;
 import tw.com.hoogle.ord.model.OrdService;
@@ -37,21 +39,21 @@ public class CompareServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-			String str = req.getParameter("ordId");
+			String str = req.getParameter("hotelName");
 			if (str == null || (str.trim()).length() == 0) {
 //				errorMsgs.put("ordID", "請輸入訂單編號");
-				errorMsgs.add("請輸入訂單編號");
+				errorMsgs.add("請選擇飯店");
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/ord/select_ord_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/compare/compare.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
 
-			Integer hotelId = null;
+			Integer hotelName = null;
 			try {
-				hotelId = Integer.valueOf(str);
+				hotelName = Integer.valueOf(str);
 			} catch (Exception e) {
 //				errorMsgs.put("ordId", "訂單編號格式不正確");
 				errorMsgs.add("請選擇飯店");
@@ -64,9 +66,9 @@ public class CompareServlet extends HttpServlet {
 //			}
 
 			/*************************** 2.開始查詢資料 *****************************************/
-			HotelService ordSvc = new HotelService();
-			HotelVO hotelVO = ordSvc.getOneHotel(hotelId);
-			if (hotelVO == null) {
+			CompareService compareSvc = new CompareService();
+			CompareVO compareVO = compareSvc.getOneHotel(str);
+			if (hotelName == null) {
 //				errorMsgs.put("ordId", "查無資料");
 				errorMsgs.add("查無資料");
 			}
@@ -81,7 +83,7 @@ public class CompareServlet extends HttpServlet {
 			
 			
 //要轉交到哪!!!!??	
-			req.setAttribute("hotelVO", hotelVO); // 資料庫取出的ordVO物件,存入req
+			req.setAttribute("compareVO", compareVO); // 資料庫取出的ordVO物件,存入req
 			String url = "/compare/compare.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneOrd.jsp
 			successView.forward(req, res);
