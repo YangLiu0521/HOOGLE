@@ -310,8 +310,9 @@ public class OrdDAO implements OrdDAO_interface {
 	}
 
 	@Override
-	public OrdVO findByUserId(Integer userId) {
+	public  List<OrdVO> findByUserId(Integer userId) {
 		OrdVO ordVO = null;
+		List<OrdVO> list = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -338,6 +339,7 @@ public class OrdDAO implements OrdDAO_interface {
 				ordVO.setOrdNights(rs.getInt("ordNights"));
 				ordVO.setOrdRemark(rs.getString("ordRemark"));
 				ordVO.setOrdId(rs.getInt("ordId"));
+				list.add(ordVO);
 
 			}
 
@@ -371,7 +373,7 @@ public class OrdDAO implements OrdDAO_interface {
 				}
 			}
 		}
-		return ordVO;
+		return list;
 	}
 
 //	@Override
