@@ -8,7 +8,7 @@ public interface OrdDAO_interface {
 	public void update(OrdVO ordVO);
 	public void delete(Integer ordId);
 	public OrdVO findByPrimaryKey(Integer ordId);
-	public OrdVO findByUserId(Integer userId);
+	public  List<OrdVO> findByUserId(Integer userId);
 //	public List<OrdVO> findOrddetail(Integer ordId);
 	public List<OrdVO> getAll();
 
