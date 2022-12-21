@@ -148,37 +148,12 @@
 								</div>
 								<div class="row">
 									<div class="col-lg-6 col-md-6 col-sm-6 col-6">
-										<!-- <div class="form-group">
-                    <select class="form-control">
-                      <option>Adult(s)(18+)</option>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                    </select>
-                  </div> -->
 									</div>
 									<div class="col-lg-6 col-md-6 col-sm-6 col-6">
 										<div class="form-group">
-											<!-- <select class="form-control">
-                      <option>Children(0-17)</option>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                    </select> -->
 										</div>
 									</div>
 								</div>
-								<!-- 								<div class="form-group"> -->
-								<!-- <select class="form-control"> -->
-								<!-- <option>Rooms</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option> -->
-								<!-- 									</select> -->
-								<!-- 								</div> -->
 								<button type="submit" class="btn-style-1 w-100"
 									name="searchHotel" value="Select">搜尋飯店</button>
 							</form>

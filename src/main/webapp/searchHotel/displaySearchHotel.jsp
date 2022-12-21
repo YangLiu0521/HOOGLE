@@ -2,7 +2,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="tw.com.hoogle.searchHotel.model.*"%>
 <%@ page import="java.util.*" %>
+<%@ page import="tw.com.hoogle.ord.model.*" %>
+<%@ page import="tw.com.hoogle.user.model.*" %>
+<%@ page import="tw.com.hoogle.searchHotel.model.*" %>
 
+
+<% 
+// if (session.getAttribute("userVO") == null && session.getAttribute("hotelVO") == null ) {
+// 	RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+// 	dispatcher.forward(request, response);
+// 	return;
+// }else if(session.getAttribute("copVO") != null){
+// 	RequestDispatcher dispatcher = request.getRequestDispatcher("/hotel/hotelMemberCenter.jsp");
+// 	dispatcher.forward(request, response);
+// 	return;
+// }
+UserVO userVO = (UserVO) request.getSession().getAttribute("userVO"); //UserServlet.java(Controller)
+
+OrdVO ordVO = (OrdVO) request.getSession().getAttribute("ordVO");
+
+OrdService ordSvc = new OrdService();
+List<OrdVO> list = ordSvc.getAll();
+pageContext.setAttribute("list",list);
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,15 +89,6 @@
                   <div class="form-group"></div>
                 </div>
               </div>
-<!--               <div class="form-group"> -->
-<!--                  <select class="form-control">  -->
-<!--                	<option>Rooms</option> -->
-<!--                 <option>1</option>  -->
-<!--                 <option>2</option>  -->
-<!--                 <option>3</option>  -->
-<!--                   <option>4</option>  -->
-<!--                 </select> -->
-<!--               </div> -->
               <button type="submit" class="btn-style-1 w-100" name="searchHotel" value="Select">搜尋飯店</button>
             </form>
           </div>
@@ -152,8 +166,22 @@
             <div class="img-holder"><img src="${pageContext.request.contextPath}/images/popular-destination/1.jpg" alt=""></div>
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>        
-          <div class="title">
-            <h3><a href="">${hotelCountyInput}</a></h3>
+          
+        <div class="title text-center">
+<%--             <h3><a href="${pageContext.request.contextPath}/hotelDetail/hotelDetail.jsp">${hotelCountyInput}</a></h3> --%>
+					<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/OrdServlet" >
+						<input type="hidden" name="userId" value="${userVO.userId}"><font color=red>${errorMsgs.userId}</font>
+						<input type="hidden" name="hotelId" value="${3001}"><font color=red>${errorMsgs.hotelId}</font>
+						<input type="hidden" name="userName" value="${userVO.userName}"><font color=red>${errorMsgs.userName}</font>
+						<input type="hidden" name="hotelName" value="hotel1"><font color=red>${errorMsgs.hotelName}</font>
+						<input type="hidden" name="ordDate" value="${ordDate}"><font color=red>${errorMsgs.ordDate}</font>
+						<input type="hidden" name="ordCheckin" value="${checkinInput}"><font color=red>${errorMsgs.checkinInput}</font>
+						<input type="hidden" name="ordCheckout" value="${checkoutInput}"><font color=red>${errorMsgs.checkoutInput}</font>
+						<input type="hidden" name="ordNights" value="${ordNights}"><font color=red>${errorMsgs.ordNights}</font>
+						<input type="hidden" name="ordRemark" value="無特別註記"><font color=red>${errorMsgs.ordNights}</font>
+						<input type="hidden" name="action" value="insert">
+						<input type="submit" value="hotel1">
+					</FORM>
           </div>
         </div>
         <!-- popular destination box end --> 
@@ -233,7 +261,7 @@
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
-            <h3><a href="">${hotelCountyInput}</a></h3>
+            <h3><a href="${pageContext.request.contextPath}/hotelDetail/hotelDetail.jsp">${hotelCountyInput}</a></h3>
           </div>
         </div>
 <!--         popular destination box end  -->

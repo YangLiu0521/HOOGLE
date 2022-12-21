@@ -17,6 +17,7 @@
     <title>
       Stetho - Hotel Multipage Clean Bootstrap HTML5 Website Template
     </title>
+    <%@ include file="/header.jsp" %>
     <!-- favicon -->
     <link rel="icon" href="favicon.ico" />
     <!-- bootstrap core CSS -->
@@ -46,198 +47,6 @@
     <!-- ================ Preloader end ================ -->
 
     <!-- ================ Header ================ -->
-    <header class="header">
-      <!-- header upper -->
-      <div class="header-upper-bar">
-        <div class="container">
-          <div class="row d-flex align-items-center">
-            <div class="col-lg-8 col-md-6 col-sm-4 col-2">
-              <!-- header navigation -->
-              <nav class="navbar header-navigation navbar-expand-lg p-0">
-                <!-- mobile Toggle -->
-                <button
-                  class="navbar-toggler"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#navbarTheme"
-                  aria-controls="navbarTheme"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                  <span></span> <span></span> <span></span>
-                </button>
-                <!-- mobile toggle end -->
-                <!-- top Menu -->
-                <div class="collapse navbar-collapse" id="navbarTheme">
-                  <ul
-                    class="navbar-nav align-items-start align-items-lg-center"
-                  >
-                    <li><a class="nav-link" href="index.jsp">Home</a></li>
-                    <li><a class="nav-link" href="about.jsp">About Us</a></li>
-                    <li><a class="nav-link" href="gallery.jsp">Gallery</a></li>
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        id="dropdown02"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        >Destinations</a
-                      >
-                      <div class="dropdown-menu" aria-labelledby="dropdown02">
-                        <a class="dropdown-item" href="destinations.jsp"
-                          >Destinations</a
-                        >
-                        <a class="dropdown-item" href="destination-detail.jsp"
-                          >Destination Detail</a
-                        >
-                      </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        id="dropdown04"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        >Blog</a
-                      >
-                      <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="blog.jsp">Blog</a>
-                        <a class="dropdown-item" href="blog-single.jsp"
-                          >Blog Singal</a
-                        >
-                      </div>
-                    </li>
-                    <li class="nav-item dropdown active">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        id="dropdown05"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        >Pages</a
-                      >
-                      <div class="dropdown-menu" aria-labelledby="dropdown05">
-                        <a class="dropdown-item" href="listing.jsp"
-                          >Hotel Listing</a
-                        >
-                        <a class="dropdown-item" href="hotel-detail.jsp"
-                          >Hotel Detail</a
-                        >
-                        <a class="dropdown-item" href="signin.jsp">Login</a>
-                        <a class="dropdown-item" href="register.jsp"
-                          >Register</a
-                        >
-                        <a class="dropdown-item" href="team.jsp">Team</a>
-                        <a class="dropdown-item" href="testimonial.jsp"
-                          >Testimonial</a
-                        >
-                        <a
-                          class="dropdown-item"
-                          href="traveler-information.jsp"
-                          >Traveler Information</a
-                        >
-                        <a class="dropdown-item" href="ord_page.jsp"
-                          >Payment Information</a
-                        >
-                        <a class="dropdown-item" href="faq.jsp">Faq</a>
-                      </div>
-                    </li>
-                    <li>
-                      <a class="nav-link" href="contact-us.jsp">Contact Us</a>
-                    </li>
-                  </ul>
-                </div>
-                <!-- top menu end -->
-              </nav>
-              <!-- header navigation end -->
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-8 col-10 text-right">
-              <!-- header right link -->
-              <div class="header-right-link">
-                <ul>
-                  <li>
-                    <a href="signin.jsp"
-                      ><i class="fas fa-chevron-right"></i> Sign in</a
-                    >
-                  </li>
-                  <li>
-                    <a href="register.jsp"
-                      ><i class="fas fa-chevron-right"></i> Register</a
-                    >
-                  </li>
-                  <li>
-                    <a href="contact-us.jsp" class="header-request"
-                      >Request a Quote</a
-                    >
-                  </li>
-                </ul>
-              </div>
-              <!-- header right link end -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- header upper end -->
-      <!-- header lover -->
-      <div class="header-lover">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-lg-3 col-md-12">
-              <!-- brand -->
-              <div class="logo">
-                <a class="navbar-brand p-0" href="index.jsp"
-                  ><img src="images/logo.png" alt=""
-                /></a>
-              </div>
-              <!-- brand end -->
-            </div>
-            <div class="col-lg-9 col-md-12">
-              <!-- header call us -->
-              <div class="header-call-us">
-                <ul>
-                  <li>
-                    <div class="iocn-holder"><i class="far fa-clock"></i></div>
-                    <div class="text-holder">
-                      <h6>Working Hours</h6>
-                      <p class="mb-0">Monday - Sunday: 9.00am to 6.00pm</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="iocn-holder">
-                      <i class="fas fa-phone-volume"></i>
-                    </div>
-                    <div class="text-holder">
-                      <h6>Call Us</h6>
-                      <p class="mb-0">
-                        <a href="tel:123456789">+011 123 4567</a>
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="iocn-holder">
-                      <i class="far fa-envelope"></i>
-                    </div>
-                    <div class="text-holder">
-                      <h6>Mail Us</h6>
-                      <p class="mb-0">
-                        <a href="mailto:info@exampal.com">info@exampal.com</a>
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <!-- header call us end -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- header lover end -->
-    </header>
     <!-- ================ Header end ================ -->
 
     <!-- ================ Inner banner ================ -->
@@ -386,8 +195,7 @@
                       id="collapseOne4-m"
                       class="collapse show mt-10"
                       aria-labelledby="headingOne4-d"
-                      data-parent="#filter-widget-accordion4-d"
-                    >
+                      data-parent="#filter-widget-accordion4-d">
                       <div class="card-body">
                         <ul class="list-inline select-all mb-10">
                           <li class="list-inline-item">
@@ -395,78 +203,61 @@
                           </li>
                         </ul>
                         <div class="table-responsive">
-                          <table
-                            class="table table-bordered bg-gray w-100 border-0"
-                          >
-                            <tr>
-                              <!-- <td>Check In</td> -->
-                              <td>入住時間</td>
-                              <td>Nov 16,2022 (三)</td>
-                            </tr>
-                            <tr>
-                              <!-- <td>Check Out</td> -->
-                              <td>退房時間</td>
-                              <td>Nov 17,2022 (四)</td>
-                            </tr>
-                            <!-- <tr>
-                              <td>Room 1</td>
-                              <td>1 Adult(s)</td>
-                            </tr> -->
-                            <tr>
-                              <!-- <td>
-                                <form class="form-style-1">
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Coupon Code"
-                                  />
-                                </form>
-                              </td> -->
-                              <!-- <td>
-                                <button type="submit" class="btn-style-1">
-                                  Apply
-                                </button>
-                              </td> -->
-                            </tr>
+                          <table class="table table-bordered bg-gray w-100 border-0">
+                           <tr>
+                            <td>旅客姓名</td>
+                            <td>${userVO.userName}</td>
+                          </tr>
+<!--                           <tr> -->
+<!--                             <td>飯店編號</td> -->
+<%--                             <td>${ordVO.hotelId}</td> --%>
+<!--                           </tr> -->
+<!--                           <tr> -->
+                            <td>飯店名稱</td>
+                            <td>${ordVO.hotelName}</td>
+                          </tr>
+                          <tr>
+                            <td>訂單日期</td>
+                            <td>${ordDate}</td>
+                          </tr>
+                          <tr>
+                            <td>入住日期</td>
+                            <td>${checkinInput}</td>
+                          </tr>
+                          <tr>
+                            <td>退房日期</td>
+                            <td>${checkoutInput}</td>
+                          </tr>
+                          <tr>
+                            <td>天數</td>
+                            <td>共計<sapn>${ordNights}</sapn>晚</td>
+                          </tr>
+                          <tr>
+                            <td>房數</td>
+                            <td>每晚<sapn>${roomNumber}</sapn>間</td>
+                          </tr>
+                          <tr>
+                            <td>金額</td>
+                            <td>共計<sapn>${money}</sapn>元</td>
+                          </tr>
                           </table>
                         </div>
                         <div class="table-responsive">
                           <table
-                            class="table table-bordered bg-gray mb-0 w-100 border-0"
-                          >
-                            <!-- <tr>
-                              <td>Adult Price</td>
-                              <td>$900</td>
-                            </tr>
-                            <tr>
-                              <td>Children Price</td>
-                              <td>$0</td>
-                            </tr>
-                            <tr>
-                              <td>Infant Price</td>
-                              <td>$0</td>
-                            </tr>
-                            <tr>
-                              <td>Subtotal</td>
-                              <td>$0</td>
-                            </tr>
-                            <tr>
-                              <td>Tex</td>
-                              <td>0%</td>
-                            </tr> -->
-                            <tr>
-                              <th>房型種類</th>
-                              <th>雙人房</th>
-                            </tr>
-                            <tr>
-                              <th>訂房數</th>
-                              <th>1間</th>
-                            </tr>
-                            <tr>
-                              <!-- <th>Pay Amount</th> -->
-                              <th>金額</th>
-                              <th>$900</th>
-                            </tr>
+                            class="table table-bordered bg-gray mb-0 w-100 border-0">
+<!--                             <tr> -->
+<!--                               <th>房型種類</th> -->
+<!--                               <th>雙人房</th> -->
+<!--                             </tr> -->
+<!--                             <tr> -->
+<!--                               <th>訂房數</th> -->
+<!--                               <th>1間</th> -->
+<!--                             </tr> -->
+<!--                             <tr> -->
+<!--                               <th>Pay Amount</th> -->
+<!--                               <th>金額</th> -->
+<!--                               <th>$900</th> -->
+<!--                             </tr> -->
                           </table>
                         </div>
                       </div>
@@ -494,151 +285,9 @@
     </div>
     <!-- ================ Payment Information page end ================ -->
 
-    <!-- ================ Footer area ================ -->
-    <footer class="pt-50">
-      <div class="footer-top">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6 mb-30">
-              <!-- title -->
-              <div class="title mb-10">
-                <h3>About Us</h3>
-              </div>
-              <!-- title end -->
-              <!-- text -->
-              <div class="text">
-                <p>
-                  Lorem ipsum dolor sit amet sectetur adipiscing elit amet
-                  consectetur scing elit amet consectetur adipiscing elit sed et
-                  eletum.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet sectetur adipiscing elit amet
-                  consectetur scing elit amet.
-                </p>
-              </div>
-              <!-- end text -->
-              <!-- footer social -->
-              <div class="footer-social">
-                <a href=""><i class="fab fa-facebook-square"></i></a>
-                <a href=""><i class="fab fa-twitter-square"></i></a>
-                <a href=""><i class="fab fa-linkedin"></i></a>
-                <a href=""><i class="fab fa-pinterest-square"></i></a>
-                <a href=""><i class="fab fa-google-plus-square"></i></a>
-              </div>
-              <!-- footer social end -->
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 mb-30">
-              <!-- title -->
-              <div class="title mb-10">
-                <h3>Navigation</h3>
-              </div>
-              <!-- title end -->
-              <!-- footer link -->
-              <ul class="footer-link">
-                <li><i class="fas fa-caret-right"></i> <a href="#">Home</a></li>
-                <li>
-                  <i class="fas fa-caret-right"></i> <a href="#">About Us</a>
-                </li>
-                <li>
-                  <i class="fas fa-caret-right"></i> <a href="#">Services</a>
-                </li>
-                <li>
-                  <i class="fas fa-caret-right"></i> <a href="#">Projects</a>
-                </li>
-                <li><i class="fas fa-caret-right"></i> <a href="#">Blog</a></li>
-                <li><i class="fas fa-caret-right"></i> <a href="#">Faq</a></li>
-                <li>
-                  <i class="fas fa-caret-right"></i> <a href="#">Contact</a>
-                </li>
-              </ul>
-              <!-- footer link end -->
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 mb-30">
-              <!-- title -->
-              <div class="title mb-10">
-                <h3>Recent posts</h3>
-              </div>
-              <!-- title end -->
-              <!-- recent-posts -->
-              <div class="footer-recent-post">
-                <!-- footer recent post item -->
-                <div class="footer-recent-post-item">
-                  <a href="">
-                    <p>
-                      Lorem ipsum dolor sit amet sectetur adipiscing elit amet
-                    </p>
-                    <small
-                      ><i class="far fa-calendar-alt pr-6"></i> 01 Oct
-                      2020</small
-                    ></a
-                  >
-                </div>
-                <!-- footer recent post item end -->
-                <!-- footer recent post item -->
-                <div class="footer-recent-post-item">
-                  <a href="">
-                    <p>
-                      Lorem ipsum dolor sit amet sectetur adipiscing elit amet
-                    </p>
-                    <small
-                      ><i class="far fa-calendar-alt pr-6"></i> 01 Oct
-                      2020</small
-                    ></a
-                  >
-                </div>
-                <!-- footer recent post item end -->
-                <!-- footer recent post item -->
-                <div class="footer-recent-post-item">
-                  <a href="">
-                    <p>
-                      Lorem ipsum dolor sit amet sectetur adipiscing elit amet
-                    </p>
-                    <small
-                      ><i class="far fa-calendar-alt pr-6"></i> 01 Oct
-                      2020</small
-                    ></a
-                  >
-                </div>
-                <!-- footer recent post item end -->
-              </div>
-              <!-- recent-posts end -->
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 mb-30">
-              <!-- title -->
-              <div class="title mb-10">
-                <h3>Newsletter</h3>
-              </div>
-              <!-- title end -->
-              <!-- footer newsletter text -->
-              <div class="footer-newsletter-text">
-                <p>
-                  Lorem ipsum dolor sit amet sectetur adipiscing elit amet
-                  consectetur scing elit sed et eletum.
-                </p>
-              </div>
-              <!-- footer newsletter text end -->
-              <!-- footer newsletter form -->
-              <div class="footer-newsletter-form">
-                <form>
-                  <input placeholder="Email Adress..." type="text" required />
-                  <button type="submit">Subscribe</button>
-                </form>
-              </div>
-              <!-- footer newsletter form end -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- footer copyright -->
-      <div class="copyright text-center mt-20">
-        © <span class="current-year"></span> All Rights Reserved.
-      </div>
-      <!-- footer copyright end -->
-    </footer>
-    <!-- ================ Footer area end ================ -->
 
     <!-- ================ Top scroll ================ -->
+     <%@ include file="/footer.jsp" %> 
     <a href="#" class="scroll-top">Top</a>
     <!-- ================ Top scroll end ================ -->
 

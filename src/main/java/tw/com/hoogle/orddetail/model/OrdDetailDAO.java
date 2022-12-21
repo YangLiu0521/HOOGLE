@@ -65,7 +65,6 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 			pstmt.setInt(3, orddetailVO.getRoomNumber());
 
 			pstmt.executeUpdate();
-
 		} 
 		catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());

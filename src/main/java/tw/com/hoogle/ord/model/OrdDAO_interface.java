@@ -11,6 +11,7 @@ public interface OrdDAO_interface {
 	public  List<OrdVO> findByUserId(Integer userId);
 //	public List<OrdVO> findOrddetail(Integer ordId);
 	public List<OrdVO> getAll();
+	public OrdVO findNewordId(Integer userId);
 
 }
 	

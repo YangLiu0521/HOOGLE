@@ -230,6 +230,7 @@ public class OrdDetailServlet extends HttpServlet {
 			Integer ordId = null;
 			try {
 				ordId = Integer.valueOf(req.getParameter("ordId").trim());
+				System.out.println("ordId="+ordId);
 			} catch (NumberFormatException e) {
 				errorMsgs.put("ordId","請填數字");
 			}
@@ -237,6 +238,7 @@ public class OrdDetailServlet extends HttpServlet {
 			Integer roomAuto = null;
 			try {
 				roomAuto = Integer.valueOf(req.getParameter("roomAuto").trim());
+				System.out.println("roomAuto="+roomAuto);
 			} catch (NumberFormatException e) {
 				errorMsgs.put("roomAuto","請填數字");
 			}
@@ -244,6 +246,7 @@ public class OrdDetailServlet extends HttpServlet {
 			Integer roomNumber = null;
 			try {
 				roomNumber = Integer.valueOf(req.getParameter("roomNumber").trim());
+				System.out.println("roomNumber="+roomNumber);
 			} catch (NumberFormatException e) {
 				errorMsgs.put("roomNumber","請填數字");
 			}
@@ -252,7 +255,7 @@ public class OrdDetailServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/orddetail/addOrdDetail.jsp");
+							.getRequestDispatcher("/index.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -260,9 +263,18 @@ public class OrdDetailServlet extends HttpServlet {
 				/***************************2.開始新增資料***************************************/
 				OrdDetailService orddetailSvc = new OrdDetailService();
 				orddetailSvc.addOrddetail(ordId, roomAuto, roomNumber);
-				
+				int money;
+				int ordNights = Integer.valueOf(req.getParameter("ordNights").trim());
+				if(roomAuto == 4001) {
+					money = 1200*roomNumber*ordNights;
+				}
+				else {
+					money = 9999;
+				}
+				session.setAttribute("roomNumber", roomNumber);
+				session.setAttribute("money", money);
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/orddetail/listAllOrdDetail.jsp";
+				String url = "/ord/ord_page.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllOrd.jsp
 				successView.forward(req, res);				
 		}

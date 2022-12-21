@@ -1,23 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="tw.com.hoogle.ord.model.*" %>
-<%@ page import="tw.com.hoogle.user.model.*" %>
-<%@ page import="tw.com.hoogle.searchHotel.model.*" %>   
-<%@ page import="java.util.*" %>
-
-<% 
-UserVO userVO = (UserVO) request.getSession().getAttribute("userVO"); //UserServlet.java(Controller)
-
-OrdVO ordVO = (OrdVO) request.getSession().getAttribute("ordVO");
-
-OrdService ordSvc = new OrdService();
-List<OrdVO> list = ordSvc.getAll();
-pageContext.setAttribute("list",list);
-
-// SearchHotelBean checkinInput = (SearchHotelBean) request.getSession().getAttribute("checkinInput");
-
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -229,30 +211,16 @@ pageContext.setAttribute("list",list);
                         <li><span><i class="fas fa-home"></i> 每日客房清潔服務</span></li>
                         <li><span><i class="fas fa-swimming-pool"></i> 游泳池</span></li>
                       </ul>
-                      
-                      <ul class="hotel-featured">
-                       	<li>
-						    <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/OrddetailServlet" >
-						        <b>輸入訂單房數 :</b>
-						        <input type="text" name="roomNumber" value="${param.roomNumber}"><font color=red>${errorMsgs.roomNumber}</font>
-						        <input type="hidden" name="ordId" value="${newOrdId.ordId}"><font color=red>${errorMsgs.ordId}</font>
-						        <input type="hidden" name="roomAuto" value="${4001}"><font color=red>${errorMsgs.roomAuto}</font>
-						        <input type="hidden" name="ordNights" value="${ordNights}"><font color=red>${errorMsgs.roomAuto}</font>
-						        <input type="hidden" name="action" value="insert">
-						        <input type="submit" value="送出">
-						    </FORM>
-						</li>
-                      </ul>
-<!--                       <div class="btn-wrapper mt-20 d-inline-block w-100"> -->
-<!--                         在 HTML 文件中創建兩個按鈕，分別顯示 + 和 - 符號 -->
-<!--                         <button class="plus-button" onclick="showPlus1()">+</button>&nbsp; -->
-<!--                         創建一個文本區域，用於顯示計數器的值 -->
-<!--                         <span id="counter1">0</span> -->
-<!--                         &nbsp; -->
-<!--                         <button class="minus-button" onclick="showMinus1()">-</button> -->
-<!--                         &nbsp; -->
-<!--                         <button type="button" class="check-order ml-6" onclick="addToCart()">選擇</button> -->
-<!--                       </div> -->
+                      <div class="btn-wrapper mt-20 d-inline-block w-100">
+                        <!-- 在 HTML 文件中創建兩個按鈕，分別顯示 + 和 - 符號 -->
+                        <button class="plus-button" onclick="showPlus1()">+</button>&nbsp;
+                        <!-- 創建一個文本區域，用於顯示計數器的值 -->
+                        <span id="counter1">0</span>
+                        &nbsp;
+                        <button class="minus-button" onclick="showMinus1()">-</button>
+                        &nbsp;
+                        <button type="button" class="check-order ml-6" onclick="addToCart()">選擇</button>
+                      </div>
                     </div>
                   </div>
                   <!-- list box end -->
@@ -277,8 +245,6 @@ pageContext.setAttribute("list",list);
                         <li><span><i class="fas fa-home"></i> 每日客房清潔服務</span></li>
                         <li><span><i class="fas fa-swimming-pool"></i> 游泳池</span></li>
                       </ul>
-                      
-<%--                <form METHOD="post" ACTION="${pageContext.request.contextPath}/OrddetailServlet"> --%>
                       <div class="btn-wrapper mt-20 d-inline-block w-100">
                         <!-- 在 HTML 文件中創建兩個按鈕，分別顯示 + 和 - 符號 -->
                         <button class="plus-button" onclick="showPlus2()">+</button>&nbsp;
@@ -289,17 +255,6 @@ pageContext.setAttribute("list",list);
                         &nbsp;
                         <button type="button" class="check-order ml-6" onclick="addToCart()">選擇</button>
                       </div>
-                      <script type="text/javascript">
-                      const counter2 = document.getElementById('counter2');
-                      console.log(counter2);
-                      const counter2Value = counter2.value;
-                      function addToCart(){
-                    	  console.log(counter2);
-                      }
-                    </script> 
-<!-- 						<input type="hidden" name="action" value="insert"> -->
-<!-- 						<input type="submit" value="送出"> -->
-<!--              	</form> -->
                     </div>
                   </div>
                   <!-- list box end -->
@@ -400,7 +355,7 @@ pageContext.setAttribute("list",list);
                       aria-controls="collapseOne4-m">
                       <!-- title widget -->
                       <div class="filter-title-widget">
-                        <h3>飯店訂單 <i class="fas fa-plus-square float-right"></i> <i
+                        <h3>飯店明細 <i class="fas fa-plus-square float-right"></i> <i
                             class="fas fa-minus-square float-right"></i></h3>
                       </div>
                       <!-- title widget end -->
@@ -413,37 +368,17 @@ pageContext.setAttribute("list",list);
                       </ul>
                       <div class="table-responsive">
                         <table class="table table-bordered bg-gray w-100 border-0">
-<!--                           <tr> -->
-<!--                             <td>旅客編號</td> -->
-<%--                             <td>${userVO.userId}</td> --%>
-<!--                           </tr> -->
-                          <tr>
-                            <td>旅客姓名</td>
-                            <td>${userVO.userName}</td>
-                          </tr>
-<!--                           <tr> -->
-<!--                             <td>飯店編號</td> -->
-<%--                             <td>${ordVO.hotelId}</td> --%>
-<!--                           </tr> -->
-<!--                           <tr> -->
-                            <td>飯店名稱</td>
-                            <td>${ordVO.hotelName}</td>
-                          </tr>
-                          <tr>
-                            <td>訂單日期</td>
-                            <td>${ordDate}</td>
-                          </tr>
                           <tr>
                             <td>入住日期</td>
-                            <td>${checkinInput}</td>
+                            <td>2022年12月16日 - 週五</td>
                           </tr>
                           <tr>
                             <td>退房日期</td>
-                            <td>${checkoutInput}</td>
+                            <td>2022年12月18日 - 週日</td>
                           </tr>
                           <tr>
                             <td>天數</td>
-                            <td>共計<sapn>${ordNights}</sapn>晚</td>
+                            <td>共計<sapn>2</sapn>晚</td>
                           </tr>
                         </table>
                       </div>

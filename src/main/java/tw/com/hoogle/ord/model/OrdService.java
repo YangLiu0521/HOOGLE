@@ -30,19 +30,8 @@ public class OrdService {
 		return ordVO;
 	}
 	
-	public OrdVO 
-	reserveOrd(Integer userId, Integer hotelId, String userName, String hotelName, Date ordDate,
-			String ordRemark) {
-
-		OrdVO ordVO = new OrdVO();
-
-		ordVO.setUserId(userId);
-		ordVO.setHotelId(hotelId);
-		ordVO.setUserName(userName);
-		ordVO.setHotelName(hotelName);
-		ordVO.setOrdDate(ordDate);
-		ordVO.setOrdRemark(ordRemark);
-		return ordVO;
+	public OrdVO getNewOrdId(Integer userId) {
+		return dao.findNewordId(userId);
 	}
 
 	public void addOrd(OrdVO ordVO) {
