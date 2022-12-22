@@ -29,6 +29,21 @@ public class OrdService {
 
 		return ordVO;
 	}
+	
+	public OrdVO 
+	reserveOrd(Integer userId, Integer hotelId, String userName, String hotelName, Date ordDate,
+			String ordRemark) {
+
+		OrdVO ordVO = new OrdVO();
+
+		ordVO.setUserId(userId);
+		ordVO.setHotelId(hotelId);
+		ordVO.setUserName(userName);
+		ordVO.setHotelName(hotelName);
+		ordVO.setOrdDate(ordDate);
+		ordVO.setOrdRemark(ordRemark);
+		return ordVO;
+	}
 
 	public void addOrd(OrdVO ordVO) {
 		dao.insert(ordVO);
@@ -70,7 +85,7 @@ public class OrdService {
 //		return dao.findOrddetail(ordId);
 //	}
 		
-	public OrdVO getOneUser(Integer userId) {
+	public List<OrdVO> getOneUser(Integer userId) {
 		return dao.findByUserId(userId);
 	}
 

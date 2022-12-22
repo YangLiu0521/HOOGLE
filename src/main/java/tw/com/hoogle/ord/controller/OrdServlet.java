@@ -1,6 +1,7 @@
 package tw.com.hoogle.ord.controller;
 
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -118,7 +119,7 @@ public class OrdServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 *****************************************/
 			OrdService ordSvc = new OrdService();
-			OrdVO ordVO = ordSvc.getOneUser(userId);
+			List<OrdVO> ordVO = ordSvc.getOneUser(userId);
 			if (ordVO == null) {
 				errorMsgs.put("userId", "查無資料");
 //				errorMsgs.add("查無資料");
@@ -278,6 +279,9 @@ public class OrdServlet extends HttpServlet {
 				java.sql.Date ordCheckin = null;
 				try {
 					ordCheckin = java.sql.Date.valueOf(req.getParameter("ordCheckin").trim());
+					System.out.println("ordCheckin = "+ordCheckin);
+//					ordCheckin = req.getParameter("ordCheckin").trim();
+
 				} catch (IllegalArgumentException e) {
 					errorMsgs.put("ordCheckin","請輸入日期");
 				}
@@ -318,36 +322,166 @@ public class OrdServlet extends HttpServlet {
 				successView.forward(req, res);
 		}
 
+		 if ("reserve".equals(action)) { // 來自addOrd.jsp的請求  
+				
+				Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
+				req.setAttribute("errorMsgs", errorMsgs);
+
+					/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
+
+				Integer userId = null;
+				try {
+					userId = Integer.valueOf(req.getParameter("userId").trim());
+					System.out.println("servlet userId="+userId);
+				} 
+					catch (NumberFormatException e) {
+//					errorMsgs.put("userId","請填數字");
+//					errorMsgs.put("請先登入 ",">> 填寫Email與密碼");
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/user/loginForUser.jsp");
+					failureView.forward(req, res);
+					return;
+					}
+				
+				Integer hotelId = null;
+				try {
+					hotelId = Integer.valueOf(req.getParameter("hotelId").trim());
+					System.out.println("servlet hotelId="+hotelId);
+				} catch (NumberFormatException e) {
+					errorMsgs.put("hotelId","請填數字");
+				}
+				
+				String userName = req.getParameter("userName");
+				if(userName==null) {
+					userName = "0000";
+				}
+				System.out.println("servlet userName="+userName);
+
+//				String userNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,10}$";
+//				if (userName == null || userName.trim().length() == 0) {
+//					errorMsgs.put("userName","旅客名稱: 請勿空白");
+	//
+//				} else if(!userName.trim().matches(userNameReg)) { //以下練習正則(規)表示式(regular-expression)
+//					errorMsgs.put("userName","旅客名稱: 只能是中、英文字母、數字和_ , 且長度必需在10字以內");
+//	            }
+				
+				String hotelName = req.getParameter("hotelName");
+				System.out.println("servlet hotelName="+hotelName);
+
+				String hotelNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,10}$";
+				if (hotelName == null || hotelName.trim().length() == 0) {
+					errorMsgs.put("hotelName","飯店名稱: 請勿空白");
+				} else if(!hotelName.trim().matches(hotelNameReg)) { //以下練習正則(規)表示式(regular-expression)
+					errorMsgs.put("hotelName","飯店名稱: 只能是中、英文字母、數字和_ , 且長度必需在10字以內");
+	            }
+				
+				java.sql.Date ordDate = null;
+				try {
+					ordDate = java.sql.Date.valueOf(req.getParameter("ordDate").trim());
+					System.out.println("servlet ordDate="+ordDate);
+
+				} catch (IllegalArgumentException e) {
+					errorMsgs.put("ordDate","請輸入日期");
+				}
+				
+				java.sql.Date ordCheckin = null;
+				try {
+					ordCheckin = java.sql.Date.valueOf(req.getParameter("ordCheckin").trim());
+					System.out.println("servlet ordCheckin="+ordCheckin);
+
+				} catch (IllegalArgumentException e) {
+					errorMsgs.put("ordCheckin","請輸入日期");
+				}
+				
+				java.sql.Date ordCheckout = null;
+				try {
+					ordCheckout = java.sql.Date.valueOf(req.getParameter("ordCheckout").trim());
+					System.out.println("servlet ordCheckout="+ordCheckout);
+
+				} catch (IllegalArgumentException e) {
+					errorMsgs.put("ordCheckout","請輸入日期");
+				}
+				
+				Integer ordNights = null;
+				try {
+					ordNights = Integer.valueOf(req.getParameter("ordNights").trim());
+					System.out.println("servlet ordNights="+ordNights);
+
+				} catch (NumberFormatException e) {
+					errorMsgs.put("ordNights","入住天數請填數字");
+				}
+				
+				String ordRemark = req.getParameter("ordRemark").trim();
+				System.out.println("servlet ordRemark="+ordRemark);
+
+				
+					// Send the use back to the form, if there were errors
+					if (!errorMsgs.isEmpty()) {
+						RequestDispatcher failureView = req
+								.getRequestDispatcher("/user/loginForUser.jsp");
+						failureView.forward(req, res);
+						return;
+					}
+					
+					/***************************2.開始新增資料***************************************/
+					OrdService ordSvc = new OrdService();
+					OrdVO ordVO = ordSvc.reserveOrd(userId ,hotelId ,userName ,hotelName ,ordDate,ordRemark);
+					req.setAttribute("ordVO", ordVO);
+					session.setAttribute("ordVO", ordVO);
+					/***************************3.新增完成,準備轉交(Send the Success view)***********/
+					String url = "/hotelDetail/hotelDetail.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllOrd.jsp
+					successView.forward(req, res);				
+			
+				}
+		
+		
         if ("insert".equals(action)) { // 來自addOrd.jsp的請求  
 			
 			Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-			
+
 			Integer userId = null;
 			try {
 				userId = Integer.valueOf(req.getParameter("userId").trim());
-			} catch (NumberFormatException e) {
-				errorMsgs.put("userId","請填數字");
-			}
+				System.out.println("servlet userId="+userId);
+			} 
+				catch (NumberFormatException e) {
+//				errorMsgs.put("userId","請填數字");
+//				errorMsgs.put("請先登入 ",">> 填寫Email與密碼");
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/user/loginForUser.jsp");
+				failureView.forward(req, res);
+				return;
+				}
 			
 			Integer hotelId = null;
 			try {
 				hotelId = Integer.valueOf(req.getParameter("hotelId").trim());
+				System.out.println("servlet hotelId="+hotelId);
 			} catch (NumberFormatException e) {
 				errorMsgs.put("hotelId","請填數字");
 			}
 			
 			String userName = req.getParameter("userName");
-			String userNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,10}$";
-			if (userName == null || userName.trim().length() == 0) {
-				errorMsgs.put("userName","旅客名稱: 請勿空白");
-			} else if(!userName.trim().matches(userNameReg)) { //以下練習正則(規)表示式(regular-expression)
-				errorMsgs.put("userName","旅客名稱: 只能是中、英文字母、數字和_ , 且長度必需在10字以內");
-            }
+			if(userName==null) {
+				userName = "0000";
+			}
+			System.out.println("servlet userName="+userName);
+
+//			String userNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,10}$";
+//			if (userName == null || userName.trim().length() == 0) {
+//				errorMsgs.put("userName","旅客名稱: 請勿空白");
+//
+//			} else if(!userName.trim().matches(userNameReg)) { //以下練習正則(規)表示式(regular-expression)
+//				errorMsgs.put("userName","旅客名稱: 只能是中、英文字母、數字和_ , 且長度必需在10字以內");
+//            }
 			
 			String hotelName = req.getParameter("hotelName");
+			System.out.println("servlet hotelName="+hotelName);
+
 			String hotelNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,10}$";
 			if (hotelName == null || hotelName.trim().length() == 0) {
 				errorMsgs.put("hotelName","飯店名稱: 請勿空白");
@@ -358,6 +492,8 @@ public class OrdServlet extends HttpServlet {
 			java.sql.Date ordDate = null;
 			try {
 				ordDate = java.sql.Date.valueOf(req.getParameter("ordDate").trim());
+				System.out.println("servlet ordDate="+ordDate);
+
 			} catch (IllegalArgumentException e) {
 				errorMsgs.put("ordDate","請輸入日期");
 			}
@@ -365,6 +501,8 @@ public class OrdServlet extends HttpServlet {
 			java.sql.Date ordCheckin = null;
 			try {
 				ordCheckin = java.sql.Date.valueOf(req.getParameter("ordCheckin").trim());
+				System.out.println("servlet ordCheckin="+ordCheckin);
+
 			} catch (IllegalArgumentException e) {
 				errorMsgs.put("ordCheckin","請輸入日期");
 			}
@@ -372,6 +510,8 @@ public class OrdServlet extends HttpServlet {
 			java.sql.Date ordCheckout = null;
 			try {
 				ordCheckout = java.sql.Date.valueOf(req.getParameter("ordCheckout").trim());
+				System.out.println("servlet ordCheckout="+ordCheckout);
+
 			} catch (IllegalArgumentException e) {
 				errorMsgs.put("ordCheckout","請輸入日期");
 			}
@@ -379,29 +519,35 @@ public class OrdServlet extends HttpServlet {
 			Integer ordNights = null;
 			try {
 				ordNights = Integer.valueOf(req.getParameter("ordNights").trim());
+				System.out.println("servlet ordNights="+ordNights);
+
 			} catch (NumberFormatException e) {
 				errorMsgs.put("ordNights","入住天數請填數字");
 			}
 			
 			String ordRemark = req.getParameter("ordRemark").trim();
+			System.out.println("servlet ordRemark="+ordRemark);
+
 			
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/ord/addOrd.jsp");
+							.getRequestDispatcher("/user/loginForUser.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 				
 				/***************************2.開始新增資料***************************************/
 				OrdService ordSvc = new OrdService();
-				ordSvc.addOrd(userId ,hotelId ,userName ,hotelName ,ordDate ,ordCheckin ,ordCheckout ,ordNights ,ordRemark);
-				
+				OrdVO ordVO = ordSvc.addOrd(userId ,hotelId ,userName ,hotelName ,ordDate ,ordCheckin ,ordCheckout ,ordNights ,ordRemark);
+				req.setAttribute("ordVO", ordVO);
+				session.setAttribute("ordVO", ordVO);
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/user/ordPakage/ord/listAllOrd.jsp";
+				String url = "/hotelDetail/hotelDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllOrd.jsp
 				successView.forward(req, res);				
-		}
+		
+			}
 		
 		
 		if ("delete".equals(action)) { // 來自listAllOrd.jsp

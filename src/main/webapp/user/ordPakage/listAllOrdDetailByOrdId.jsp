@@ -55,8 +55,8 @@
 <!-- <h4>此頁暫練習採用 Script 的寫法取值:</h4> -->
 <table id="table-1">
 	<tr><td>
-		 <h4><a href="${pageContext.request.contextPath}/user/ordSearch.jsp"><img src="${pageContext.request.contextPath}/images/logo_removebg.png" width="100"  border="0"></a></h4>
-		 <h4><a href="${pageContext.request.contextPath}/user/ordSearch.jsp">回會員中心</a></h4>	</td></tr>
+		 <h4><a href="${pageContext.request.contextPath}/user/userMemberCenter.jsp"><img src="${pageContext.request.contextPath}/images/logo_removebg.png" width="100"  border="0"></a></h4>
+		 <h4><a href="${pageContext.request.contextPath}/user/userMemberCenter.jsp">回會員中心</a></h4>	</td></tr>
 </td></tr>
 </table>
 
