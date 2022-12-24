@@ -124,11 +124,19 @@
 						<div class="center-search">
 							<h1 class="text-white">Go once, living anywhere</h1>
 							<!-- <p class="text-white">living anywhere</p> -->
-							<form class="form-style-1" method="get"
+							<form id="searchHotelForm" class="form-style-1" method="get"
 								action="${pageContext.request.contextPath}/searchHotel/searchHotel.controller">
 								<div class="form-group">
-									<input type="text" class="form-control" name="hotelCounty"
-										value="${param.hotelCounty}" placeholder="目的地">
+<!-- 									<input type="text" class="form-control" id="destination" name="hotelCounty" -->
+<%-- 										value="${param.hotelCounty}" placeholder="目的地"> --%>
+										<select class="form-control" id="destination" name="hotelCounty">
+										<option value="台北市"> 台北市 </option> 
+										<option value="新北市"> 新北市 </option>
+										<option value="台中市"> 台中市 </option> 
+										<option value="台南市"> 台南市 </option>
+										<option value="高雄市"> 高雄市 </option>
+										</select>
+										 
 								</div>
 								<div class="row pt-20">
 									<div class="col-lg-6 col-md-6 col-sm-6 col-6">
@@ -155,7 +163,7 @@
 									</div>
 								</div>
 								<button type="submit" class="btn-style-1 w-100"
-									name="searchHotel" value="Select">搜尋飯店</button>
+									name="searchHotel" id="index_search" value="Select">搜尋飯店</button>
 							</form>
 						</div>
 					</div>
@@ -580,7 +588,58 @@
 
 	<!-- ================ Partner area ================ -->
 
-	<!-- ================ Footer area ================ -->
+	
+	<!-- ================ Footer area end================ -->
+
+	<!-- ================ js area================ -->
+	<!-- js files -->
+	<script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
+	<!-- counter js -->
+	<script src="<%=request.getContextPath()%>/js/jquery-1.10.2.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/waypoints.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery.counterup.min.js"></script>
+	<!-- venobox js -->
+	<script src="<%=request.getContextPath()%>/js/venobox.min.js"></script>
+	<!-- owl carousel -->
+	<script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
+	<!-- portfolio js -->
+	<script src="<%=request.getContextPath()%>/js/jquery.mixitup.min.js"></script>
+	<!-- datepicker js -->
+	<script src="<%=request.getContextPath()%>/js/datepicker.min.js"></script>
+	<!-- script js -->
+	<script src="<%=request.getContextPath()%>/js/abu-js/abu.js"></script>
+	<!-- header right link js by aga -->
+	<script src="<%=request.getContextPath()%>/js/member/memberHeader.js"></script>
+	<!-- ================ js area end================ -->
+<!--<script>
+     function show() {
+         document.getElementById("searchHotelForm").submit();
+     } 
+     var button = document.getElementById("index_search").addEventListener("click", function () {
+    	 var destination = document.getElementById("destination").value;
+    	 var checkIn = document.getElementById("check-in").value;
+    	 var checkOut = document.getElementById("check-out").value;
+    	 
+    	 if (destination=="") {
+        	 window.alert("未輸入目的地");
+
+       	}else if (checkIn=="") {
+        	 window.alert("未輸入入住日期");
+
+       	}else if (checkOut=="") {
+       		 window.alert("未輸入退房日期");
+       		
+       	}
+    	 else {
+       		show();	
+       	}
+     });console.log(destination);
+    </script>-->
+
+
+</body>
+<!-- ================ Footer area ================ -->
 	<footer class="pt-50">
 		<div class="footer-top">
 			<div class="container">
@@ -623,33 +682,4 @@
 			</div>
 		</div>
 	</footer>
-	<!-- ================ Footer area end================ -->
-
-	<!-- ================ js area================ -->
-	<!-- js files -->
-	<script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
-	<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
-	<!-- counter js -->
-	<script src="<%=request.getContextPath()%>/js/jquery-1.10.2.min.js"></script>
-	<script src="<%=request.getContextPath()%>/js/waypoints.min.js"></script>
-	<script src="<%=request.getContextPath()%>/js/jquery.counterup.min.js"></script>
-	<!-- venobox js -->
-	<script src="<%=request.getContextPath()%>/js/venobox.min.js"></script>
-	<!-- owl carousel -->
-	<script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
-	<!-- portfolio js -->
-	<script src="<%=request.getContextPath()%>/js/jquery.mixitup.min.js"></script>
-	<!-- datepicker js -->
-	<script src="<%=request.getContextPath()%>/js/datepicker.min.js"></script>
-	<!-- script js -->
-	<script src="<%=request.getContextPath()%>/js/abu-js/abu.js"></script>
-	<!-- header right link js by aga -->
-	<script src="<%=request.getContextPath()%>/js/member/memberHeader.js"></script>
-	<!-- ================ js area end================ -->
-</body>
-
-<script>
-	
-</script>
-
 </html>

@@ -62,22 +62,26 @@ private static final long serialVersionUID = 1L;
 		
 		
 		java.util.Date date1 = null ,date2 = null;
-		String checkInTrans ,checkOutTrans;
+		String checkInTrans=null  ,checkOutTrans=null;
 		long ordNights = 0;
-		try {
-			date1 = sFormat.parse(checkinInput);
-			date2 = sFormat.parse(checkoutInput);
-			System.out.println("checkinInput="+date1);
-			System.out.println("checkinoutput="+date2);
-		} catch (ParseException e1) {
-			e1.printStackTrace();
+		if(checkinInput!=null && checkoutInput!=null) {
+			try {
+				date1 = sFormat.parse(checkinInput);
+				date2 = sFormat.parse(checkoutInput);
+				System.out.println("checkinInput="+date1);
+				System.out.println("checkinoutput="+date2);
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+			try {
+				checkInTrans = dateFormat.format(date1);
+				System.out.println("checkInTrans is "+ checkInTrans);
+				checkOutTrans = dateFormat.format(date2);
+				System.out.println("checkOutTrans is "+ checkOutTrans);
+			}catch(NullPointerException e1) {
+				e1.printStackTrace();
+			}
 		}
-		
-		checkInTrans = dateFormat.format(date1);
-		System.out.println("checkInTrans is "+ checkInTrans);
-		checkOutTrans = dateFormat.format(date2);
-		System.out.println("checkOutTrans is "+ checkOutTrans);
-			
 		Calendar cal = Calendar.getInstance();
 		
 		if(date1!=null && date2!=null) {
@@ -103,6 +107,36 @@ private static final long serialVersionUID = 1L;
 				errors.put("hotelCountyInput", "hotelCountyInput must be a String");
 			}
 		}
+//		if(errors!=null && !errors.isEmpty()) {
+//			System.out.println("error");
+//			request.getRequestDispatcher(
+//					"${pageContext.request.contextPath}/index.jsp").forward(request, response);
+//			return;
+//		}
+		String checkInTransInput = "";
+		if(checkInTrans!=null && checkInTrans.length()!=0 && checkInTrans!="") {
+			try {
+				checkInTransInput = checkInTrans;
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				errors.put("checkInTrans", "checkInTrans must be a String");
+			}
+		}
+//		if(errors!=null && !errors.isEmpty()) {
+//			System.out.println("error");
+//			request.getRequestDispatcher(
+//					"${pageContext.request.contextPath}/index.jsp").forward(request, response);
+//			return;
+//		}
+		String checkOutTransInput = "";
+		if(checkOutTrans!=null && checkOutTrans.length()!=0 && checkOutTrans!="") {
+			try {
+				checkOutTransInput = checkOutTrans;
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				errors.put("checkInTrans", "checkInTrans must be a String");
+			}
+		}
 		if(errors!=null && !errors.isEmpty()) {
 			System.out.println("error");
 			request.getRequestDispatcher(
@@ -116,8 +150,8 @@ private static final long serialVersionUID = 1L;
 //		List results = query.list();
 		
 		System.out.println("hotelCountyInput = "+hotelCountyInput);
-		System.out.println("checkinInput ="+checkInTrans);
-		System.out.println("checkoutInput ="+checkOutTrans);
+		System.out.println("checkinInput ="+checkInTransInput);
+		System.out.println("checkoutInput ="+checkOutTransInput);
 		
 		if(searchHotel!=null && searchHotel.equals("Select")) {
 			session.setAttribute("ordDate", ordDate);

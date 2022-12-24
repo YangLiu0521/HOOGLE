@@ -173,10 +173,6 @@
           </aside>
         </div>
         
-		
-        
-        
-        
         <div class="tab-content col-lg-9 col-md-8">
           <div class="tab-pane fade show active p-15" id="tab5" role="tabpanel" aria-labelledby="tab5-tab">
 
@@ -286,10 +282,10 @@
                       <th>入住天數</th>
                       <th>入住日期</th>
                       <th>退房日期</th>
-<!--                       <th>查看明細</th> -->
+<!--                       <th>今日日期</th> -->
+                      <th>我要評價</th>
                     </tr>
                   </thead>
-                  
             <c:forEach var="ordVO" items="${list}">
             <c:if test="${ userVO.userId == ordVO.userId }">
                   <tbody>
@@ -300,6 +296,12 @@
                       <td>${ordVO.ordNights}</td>
                       <td>${ordVO.ordCheckin}</td>
                       <td>${ordVO.ordCheckout}</td>
+<%--                       <td>${ordVO.nowDate}</td> --%>
+<!--                       <td><a href="">點我評價</a></td> -->
+					<c:if test="${ordVO.ordCheckout < ordVO.nowDate}">
+                      <td>
+                      <button style="color: red" id="btn" type="button" value="" >點我評價</button>
+                      </td></c:if>
 <!--                       <td> -->
 <%--                     	<form METHOD="post" action="${pageContext.request.contextPath}/OrdServlet"> --%>
 <!-- 						<input type="hidden" name="action" value="getOrddetail_For_Display"> -->
@@ -411,6 +413,35 @@
   <script src="https://kit.fontawesome.com/4ce3b6b697.js" crossorigin="anonymous"></script>
   <script src="<%=request.getContextPath()%>/js/member/memberHeader.js"></script>
   <script src="<%=request.getContextPath()%>/js/member/memberChangePassword.js"></script>
-  
+<!-- 	<script type="text/javascript"> 
+	 	$("button#submit").on("click", function () {
+	  if (new Date($("input.start_date").val().trim()) < new Date()) {
+ 	    alert("開始日期不可小於今日");
+ 	    return;
+	  }
+	  if ($("input.end_date").val().trim() < $("input.start_date").val().trim()) {
+	    alert("結束日期不可小於開始日期");
+ 	    return;
+ 	  }
+  	</script> -->
+ 	<script>
+ 	var today = new Date();
+//  var someday = new Date(2022,12,31);
+// 	var someday = "${ordVO.ordCheckout}";
+     var button = document.getElementById("btn").addEventListener("click", function () {
+    	 
+//     	 if (someday > today) {
+//         	 window.alert("請完成退房後再進行評價，感謝您~");
+
+//        	}         
+//     	 else {
+    		 window.alert("歡迎您進行評價~");	
+//        	}
+     });
+     console.log(today);
+//      console.log(someday);
+     
+    </script>
+ 	
 </body>
 </html>

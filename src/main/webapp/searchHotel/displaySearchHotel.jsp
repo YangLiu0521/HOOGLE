@@ -67,19 +67,26 @@ pageContext.setAttribute("list",list);
           <div class="center-search">
             <h1 class="text-white">Go once, living anywhere</h1>
             <!-- <p class="text-white">living anywhere</p> -->
-            <form class="form-style-1" method="get" action="${pageContext.request.contextPath}/searchHotel/searchHotel.controller">
+            <form id="searchHotelForm" class="form-style-1" method="get" action="${pageContext.request.contextPath}/searchHotel/searchHotel.controller">
               <div class="form-group">
-                <input type="text" class="form-control" name="hotelCounty" value="${param.hotelCounty}" placeholder="目的地">
+<%--                 <input type="text" class="form-control" id="destination" name="hotelCounty" value="${param.hotelCounty}" placeholder="目的地"> --%>
+              	<select class="form-control" id="destination" name="hotelCounty">
+					<option value="台北市"> 台北市 </option> 
+					<option value="新北市"> 新北市 </option>
+					<option value="台中市"> 台中市 </option> 
+					<option value="台南市"> 台南市 </option>
+					<option value="高雄市"> 高雄市 </option> 
+				</select>
               </div>
               <div class="row pt-20">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" name="checkinInput" value="${param.checkinInput}"  id="check-in" placeholder="訂房日期">
+                    <input type="text" class="form-control" id="check-in" name="checkinInput" value="${param.checkinInput}"  id="check-in" placeholder="訂房日期">
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" name="checkoutInput" value="${param.checkoutInput}" id="check-out" placeholder="退房日期">
+                    <input type="text" class="form-control" id="check-out" name="checkoutInput" value="${param.checkoutInput}" id="check-out" placeholder="退房日期">
                   </div>
                 </div>
               </div>
@@ -89,7 +96,7 @@ pageContext.setAttribute("list",list);
                   <div class="form-group"></div>
                 </div>
               </div>
-              <button type="submit" class="btn-style-1 w-100" name="searchHotel" value="Select">搜尋飯店</button>
+              <button type="submit" class="btn-style-1 w-100" id="display_search" name="searchHotel" value="Select">搜尋飯店</button>
             </form>
           </div>
         </div>
@@ -141,13 +148,25 @@ pageContext.setAttribute("list",list);
     <h2>各式飯店，任君挑選</h2>
     <span class="dashed-border"></span> </div>
     <!-- section title -->
+    <c:if test="${empty hotelCountyInput}">
+      	<h5 style="color: red " class="text-center">請輸入目的地(縣市)</h5>   
+     </c:if>
+    
+    <c:if test="${empty checkinInput}">
+      	<h5 style="color: red " class="text-center">請選擇入住日期</h5>   
+     </c:if>
+     
+    <c:if test="${empty checkoutInput}">
+      	<h5 style="color: red " class="text-center">請選擇退房日期</h5>   
+    </c:if>
+    
     <c:if test="${not empty checkinInput}">
     <c:if test="${not empty checkoutInput}">
     <c:if test="${ordNights > 0}">
     <div class="section-title text-center">
-		<h4>訂房日期 : ${checkinInput}</h4>
-      	<h4>退房日期 : ${checkoutInput}</h4>
-      	<h4>入住天數 : ${ordNights}天</h4>   
+		<h5>入住日期 : ${checkinInput}</h5>
+      	<h5>退房日期 : ${checkoutInput}</h5>
+      	<h5>入住天數 : ${ordNights}天</h5>   
      </div>
      </c:if>
      </c:if>
@@ -174,14 +193,14 @@ pageContext.setAttribute("list",list);
 						<input type="hidden" name="userId" value="${userVO.userId}"><font color=red>${errorMsgs.userId}</font>
 						<input type="hidden" name="hotelId" value="${3001}"><font color=red>${errorMsgs.hotelId}</font>
 						<input type="hidden" name="userName" value="${userVO.userName}"><font color=red>${errorMsgs.userName}</font>
-						<input type="hidden" name="hotelName" value="hotel1"><font color=red>${errorMsgs.hotelName}</font>
+						<input type="hidden" name="hotelName" value="HOOGLE"><font color=red>${errorMsgs.hotelName}</font>
 						<input type="hidden" name="ordDate" value="${ordDate}"><font color=red>${errorMsgs.ordDate}</font>
 						<input type="hidden" name="ordCheckin" value="${checkinInput}"><font color=red>${errorMsgs.checkinInput}</font>
 						<input type="hidden" name="ordCheckout" value="${checkoutInput}"><font color=red>${errorMsgs.checkoutInput}</font>
 						<input type="hidden" name="ordNights" value="${ordNights}"><font color=red>${errorMsgs.ordNights}</font>
 						<input type="hidden" name="ordRemark" value="無特別註記"><font color=red>${errorMsgs.ordNights}</font>
 						<input type="hidden" name="action" value="insert">
-						<input type="submit" value="hotel1">
+						<input type="submit" value="HOOGLE">
 					</FORM>
           </div>
         </div>
@@ -198,7 +217,7 @@ pageContext.setAttribute("list",list);
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
-            <h3><a href="">${hotelCountyInput}</a></h3>
+            <h3><a href="">hotel2</a></h3>
           </div>
         </div>
         <!-- popular destination box end --> 
@@ -214,7 +233,7 @@ pageContext.setAttribute("list",list);
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
-            <h3><a href="">${hotelCountyInput}</a></h3>
+            <h3><a href="">hotel3</a></h3>
           </div>
         </div>
         <!-- popular destination box end --> 
@@ -230,7 +249,7 @@ pageContext.setAttribute("list",list);
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
-            <h3><a href="">${hotelCountyInput}</a></h3>
+            <h3><a href="">hotel4</a></h3>
           </div>
         </div>
         <!-- popular destination box end --> 
@@ -246,7 +265,7 @@ pageContext.setAttribute("list",list);
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
-            <h3><a href="">${hotelCountyInput}</a></h3>
+            <h3><a href="">hotel5</a></h3>
           </div>
         </div>
         <!-- popular destination box end --> 
@@ -262,7 +281,7 @@ pageContext.setAttribute("list",list);
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
-            <h3><a href="${pageContext.request.contextPath}/hotelDetail/hotelDetail.jsp">${hotelCountyInput}</a></h3>
+            <h3><a href="${pageContext.request.contextPath}/hotelDetail/hotelDetail.jsp">測試用飯店</a></h3>
           </div>
         </div>
 <!--         popular destination box end  -->
@@ -335,6 +354,31 @@ pageContext.setAttribute("list",list);
 <!-- </table> -->
 <%-- <%-- </c:if>	 --%>
 <%@ include file="/footer.jsp" %>
+
+<%--<script>
+     function show() {
+         document.getElementById("searchHotelForm").submit();
+     } 
+     var button = document.getElementById("display_search").addEventListener("click", function () {
+    	 var destination = document.getElementById("destination").value;
+    	 var checkIn = document.getElementById("check-in").value;
+    	 var checkOut = document.getElementById("check-out").value;
+    	 
+    	 if (destination=="") {
+        	 window.alert("未輸入目的地");
+
+       	}else if (checkIn=="") {
+        	 window.alert("未輸入入住日期");
+
+       	}else if (checkOut=="") {
+       		 window.alert("未輸入退房日期");
+       		
+       	}
+    	 else {
+       		show();	
+       	}
+     });console.log(destination);
+</script>--%>
 </body>
 <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 

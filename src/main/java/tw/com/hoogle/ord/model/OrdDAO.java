@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -268,7 +270,11 @@ public class OrdDAO implements OrdDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
-
+			
+			 String nowDate = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+	                    .format(LocalDateTime.now());
+			 System.out.println("nowDate"+nowDate);
+			
 			while (rs.next()) {
 				ordVO = new OrdVO();
 				ordVO.setOrdId(rs.getInt("ordId"));
@@ -281,6 +287,7 @@ public class OrdDAO implements OrdDAO_interface {
 				ordVO.setOrdCheckout(rs.getDate("ordCheckout"));
 				ordVO.setOrdNights(rs.getInt("ordNights"));
 				ordVO.setOrdRemark(rs.getString("ordRemark"));
+				ordVO.setNowDate(nowDate);
 				list.add(ordVO);
 
 			}

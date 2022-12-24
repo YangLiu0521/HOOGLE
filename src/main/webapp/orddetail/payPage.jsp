@@ -15,7 +15,7 @@
 
     <!-- page title -->
     <title>
-      Stetho - Hotel Multipage Clean Bootstrap HTML5 Website Template
+      Pay For Order
     </title>
     <%@ include file="/header.jsp" %>
     <!-- favicon -->
@@ -78,7 +78,6 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-8 mb-30">
-            <form class="form-style-1">
               <h4 class="mb-15">信用卡資訊</h4>
               <div class="card-type">
                 <div class="row">
@@ -157,9 +156,21 @@
                 <label class="form-check-label font-size-14" for="exampleCheck1"
                   >我已閱讀並接受 <a href="">本網站付款條款</a></label
                 >
-              </div>
+              </div>            
+            <form class="form-style-1" METHOD="post" ACTION="${pageContext.request.contextPath}/OrddetailServlet" >
               <button type="submit" class="btn-style-1">確認付款</button>
+              		<input type="hidden" name="ordId" value="${newOrdId.ordId}"><font color=red>${errorMsgs.ordId}</font>
+					<input type="hidden" name="roomAuto1" value="${4001}"><font color=red>${errorMsgs.roomAuto}</font>
+					<input type="hidden" name="roomNumber1" value="${roomNumber1}"><font color=red>${errorMsgs.roomAuto}</font>
+					<input type="hidden" name="roomAuto2" value="${4002}"><font color=red>${errorMsgs.roomAuto}</font>
+              		<input type="hidden" name="roomNumber2" value="${roomNumber2}"><font color=red>${errorMsgs.roomAuto}</font>
+					<input type="hidden" name="roomAuto3" value="${4003}"><font color=red>${errorMsgs.roomAuto}</font>
+              		<input type="hidden" name="roomNumber3" value="${roomNumber3}"><font color=red>${errorMsgs.roomAuto}</font>
+              		<input type="hidden" name="ordNights" value="${ordNights}"><font color=red>${errorMsgs.roomAuto}</font>
+
+              <input type="hidden" name="action" value="insert">
             </form>
+            
           </div>
           <div class="col-lg-4 col-md-4">
             <aside>
@@ -212,9 +223,13 @@
 <!--                             <td>飯店編號</td> -->
 <%--                             <td>${ordVO.hotelId}</td> --%>
 <!--                           </tr> -->
-<!--                           <tr> -->
+                          <tr>
                             <td>飯店名稱</td>
                             <td>${ordVO.hotelName}</td>
+                          </tr>
+                          <tr>
+                            <td>訂單編號</td>
+                            <td>${ordId}</td>
                           </tr>
                           <tr>
                             <td>訂單日期</td>
