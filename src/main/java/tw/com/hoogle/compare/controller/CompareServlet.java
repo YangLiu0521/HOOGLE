@@ -20,7 +20,7 @@ public class CompareServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		System.out.println(123);
+//		System.out.println(123);
 		doPost(req, res);
 	}
 
@@ -29,7 +29,7 @@ public class CompareServlet extends HttpServlet {
 		String action = req.getParameter("action");
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
-			System.out.println("getOne_For_Display##1");
+//			System.out.println("getOne_For_Display##1");
 
 //			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			List<String> errorMsgs = new LinkedList<String>();
@@ -50,7 +50,9 @@ public class CompareServlet extends HttpServlet {
 			List<CompareVO> list2 = compareSvc.getOneHotel(hotelName2);
 			List<CompareVO> list3 = compareSvc.getOneHotel(hotelName3);
 			System.out.println(list1);
-			System.out.println("getOne_For_Display##2");
+			System.out.println(list2);
+			System.out.println(list3);
+//			System.out.println("getOne_For_Display##2");
 //			if (hotelName == null) {
 //				errorMsgs.add("查無資料");
 //			}
@@ -68,7 +70,7 @@ public class CompareServlet extends HttpServlet {
 			String url = "/compare/compare.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneOrd.jsp
 			successView.forward(req, res);
-			System.out.println("getOne_For_Display##3");
+//			System.out.println("getOne_For_Display##3");
 		}
 
 		
