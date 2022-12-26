@@ -124,11 +124,19 @@
 						<div class="center-search">
 							<h1 class="text-white">Go once, living anywhere</h1>
 							<!-- <p class="text-white">living anywhere</p> -->
-							<form class="form-style-1" method="get"
+							<form id="searchHotelForm" class="form-style-1" method="get"
 								action="${pageContext.request.contextPath}/searchHotel/searchHotel.controller">
 								<div class="form-group">
-									<input type="text" class="form-control" name="hotelCounty"
-										value="${param.hotelCounty}" placeholder="目的地">
+<!-- 									<input type="text" class="form-control" id="destination" name="hotelCounty" -->
+<%-- 										value="${param.hotelCounty}" placeholder="目的地"> --%>
+										<select class="form-control" id="destination" name="hotelCounty">
+										<option value="台北市"> 台北市 </option> 
+										<option value="新北市"> 新北市 </option>
+										<option value="台中市"> 台中市 </option> 
+										<option value="台南市"> 台南市 </option>
+										<option value="高雄市"> 高雄市 </option>
+										</select>
+										 
 								</div>
 								<div class="row pt-20">
 									<div class="col-lg-6 col-md-6 col-sm-6 col-6">
@@ -148,39 +156,14 @@
 								</div>
 								<div class="row">
 									<div class="col-lg-6 col-md-6 col-sm-6 col-6">
-										<!-- <div class="form-group">
-                    <select class="form-control">
-                      <option>Adult(s)(18+)</option>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                    </select>
-                  </div> -->
 									</div>
 									<div class="col-lg-6 col-md-6 col-sm-6 col-6">
 										<div class="form-group">
-											<!-- <select class="form-control">
-                      <option>Children(0-17)</option>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                    </select> -->
 										</div>
 									</div>
 								</div>
-								<!-- 								<div class="form-group"> -->
-								<!-- <select class="form-control"> -->
-								<!-- <option>Rooms</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option> -->
-								<!-- 									</select> -->
-								<!-- 								</div> -->
 								<button type="submit" class="btn-style-1 w-100"
-									name="searchHotel" value="Select">搜尋飯店</button>
+									name="searchHotel" id="index_search" value="Select">搜尋飯店</button>
 							</form>
 						</div>
 					</div>
@@ -349,7 +332,7 @@
 						<div class="imege mb-10">
 							<img src="images/popular-hotel/1.jpg" alt="">
 							<div class="black-bg">
-								<a href=""><i class="fas fa-map-marker-alt"></i> Thailand</a>
+								<a href=""><i class="fas fa-map-marker-alt"></i> 台北市</a>
 							</div>
 						</div>
 						<div class="reting">
@@ -358,10 +341,10 @@
 								class="fas fa-star"></i>
 						</div>
 						<h4>
-							<a href="">Ansan Hotel</a>
+							<a href="">HOOGLE</a>
 						</h4>
 						<div class="price">
-							$100.00 / <span>Per night</span>
+							$2,000元 / <span>每晚最低</span>
 						</div>
 					</div>
 					<!-- popular hotel box end -->
@@ -372,7 +355,7 @@
 						<div class="imege mb-10">
 							<img src="images/popular-hotel/2.jpg" alt="">
 							<div class="black-bg">
-								<a href=""><i class="fas fa-map-marker-alt"></i> Vietnam</a>
+								<a href=""><i class="fas fa-map-marker-alt"></i> 新北市</a>
 							</div>
 						</div>
 						<div class="reting">
@@ -381,10 +364,10 @@
 								class="far fa-star"></i>
 						</div>
 						<h4>
-							<a href="">Fawlty Towers</a>
+							<a href="">hotel2</a>
 						</h4>
 						<div class="price">
-							$200.00 / <span>Per night</span>
+							$3,000元 / <span>每晚最低</span>
 						</div>
 					</div>
 					<!-- popular hotel box end -->
@@ -395,7 +378,7 @@
 						<div class="imege mb-10">
 							<img src="images/popular-hotel/3.jpg" alt="">
 							<div class="black-bg">
-								<a href=""><i class="fas fa-map-marker-alt"></i> Italy</a>
+								<a href=""><i class="fas fa-map-marker-alt"></i> 台中市</a>
 							</div>
 						</div>
 						<div class="reting">
@@ -404,10 +387,10 @@
 								class="far fa-star"></i>
 						</div>
 						<h4>
-							<a href="">Hotel Valle</a>
+							<a href="">hotel3</a>
 						</h4>
 						<div class="price">
-							$300.00 / <span>Per night</span>
+							$2,500元 / <span>每晚最低</span>
 						</div>
 					</div>
 					<!-- popular hotel box end -->
@@ -418,7 +401,7 @@
 						<div class="imege mb-10">
 							<img src="images/popular-hotel/4.jpg" alt="">
 							<div class="black-bg">
-								<a href=""><i class="fas fa-map-marker-alt"></i> Mexico</a>
+								<a href=""><i class="fas fa-map-marker-alt"></i> 台南市</a>
 							</div>
 						</div>
 						<div class="reting">
@@ -427,10 +410,10 @@
 								class="far fa-star"></i>
 						</div>
 						<h4>
-							<a href="">Hotel Las Trojes</a>
+							<a href="">hotel4</a>
 						</h4>
 						<div class="price">
-							$400.00 / <span>Per night</span>
+							$1,000元 / <span>每晚最低</span>
 						</div>
 					</div>
 					<!-- popular hotel box end -->
@@ -441,8 +424,7 @@
 						<div class="imege mb-10">
 							<img src="images/popular-hotel/5.jpg" alt="">
 							<div class="black-bg">
-								<a href=""><i class="fas fa-map-marker-alt"></i> United
-									States</a>
+								<a href=""><i class="fas fa-map-marker-alt"></i> 高雄市</a>
 							</div>
 						</div>
 						<div class="reting">
@@ -451,10 +433,33 @@
 								class="far fa-star"></i>
 						</div>
 						<h4>
-							<a href="">Rosen Shingle Creek</a>
+							<a href="">hotel5</a>
 						</h4>
 						<div class="price">
-							$500.00 / <span>Per night</span>
+							$1,200元 / <span>每晚最低</span>
+						</div>
+					</div>
+					<!-- popular hotel box end -->
+				</div>
+				<div class="item">
+					<!-- popular hotel box -->
+					<div class="popular-hotel-box">
+						<div class="imege mb-10">
+							<img src="images/popular-hotel/2.jpg" alt="">
+							<div class="black-bg">
+								<a href=""><i class="fas fa-map-marker-alt"></i> 台北市</a>
+							</div>
+						</div>
+						<div class="reting">
+							<i class="fas fa-star"></i> <i class="far fa-star"></i> <i
+								class="far fa-star"></i> <i class="far fa-star"></i> <i
+								class="far fa-star"></i>
+						</div>
+						<h4>
+							<a href="">hotel6</a>
+						</h4>
+						<div class="price">
+							$1,800元 / <span>每晚最低</span>
 						</div>
 					</div>
 					<!-- popular hotel box end -->
@@ -490,7 +495,7 @@
 						</div>
 						<div class="title">
 							<h3>
-								<a href="">Orlando</a>
+								<a href="">HOOGLE</a>
 							</h3>
 						</div>
 					</div>
@@ -509,7 +514,7 @@
 						</div>
 						<div class="title">
 							<h3>
-								<a href="">Miami</a>
+								<a href="">hotel2</a>
 							</h3>
 						</div>
 					</div>
@@ -528,7 +533,7 @@
 						</div>
 						<div class="title">
 							<h3>
-								<a href="">Los Angeles</a>
+								<a href="">hotel3</a>
 							</h3>
 						</div>
 					</div>
@@ -547,7 +552,7 @@
 						</div>
 						<div class="title">
 							<h3>
-								<a href="">San Diego</a>
+								<a href="">hotel4</a>
 							</h3>
 						</div>
 					</div>
@@ -566,7 +571,7 @@
 						</div>
 						<div class="title">
 							<h3>
-								<a href="">Houston</a>
+								<a href="">hotel5</a>
 							</h3>
 						</div>
 					</div>
@@ -585,7 +590,7 @@
 						</div>
 						<div class="title">
 							<h3>
-								<a href="">New York</a>
+								<a href="">hotel6</a>
 							</h3>
 						</div>
 					</div>
@@ -605,7 +610,58 @@
 
 	<!-- ================ Partner area ================ -->
 
-	<!-- ================ Footer area ================ -->
+	
+	<!-- ================ Footer area end================ -->
+
+	<!-- ================ js area================ -->
+	<!-- js files -->
+	<script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
+	<!-- counter js -->
+	<script src="<%=request.getContextPath()%>/js/jquery-1.10.2.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/waypoints.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery.counterup.min.js"></script>
+	<!-- venobox js -->
+	<script src="<%=request.getContextPath()%>/js/venobox.min.js"></script>
+	<!-- owl carousel -->
+	<script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
+	<!-- portfolio js -->
+	<script src="<%=request.getContextPath()%>/js/jquery.mixitup.min.js"></script>
+	<!-- datepicker js -->
+	<script src="<%=request.getContextPath()%>/js/datepicker.min.js"></script>
+	<!-- script js -->
+	<script src="<%=request.getContextPath()%>/js/abu-js/abu.js"></script>
+	<!-- header right link js by aga -->
+	<script src="<%=request.getContextPath()%>/js/member/memberHeader.js"></script>
+	<!-- ================ js area end================ -->
+<!--<script>
+     function show() {
+         document.getElementById("searchHotelForm").submit();
+     } 
+     var button = document.getElementById("index_search").addEventListener("click", function () {
+    	 var destination = document.getElementById("destination").value;
+    	 var checkIn = document.getElementById("check-in").value;
+    	 var checkOut = document.getElementById("check-out").value;
+    	 
+    	 if (destination=="") {
+        	 window.alert("未輸入目的地");
+
+       	}else if (checkIn=="") {
+        	 window.alert("未輸入入住日期");
+
+       	}else if (checkOut=="") {
+       		 window.alert("未輸入退房日期");
+       		
+       	}
+    	 else {
+       		show();	
+       	}
+     });console.log(destination);
+    </script>-->
+
+
+</body>
+<!-- ================ Footer area ================ -->
 	<footer class="pt-50">
 		<div class="footer-top">
 			<div class="container">
@@ -648,33 +704,4 @@
 			</div>
 		</div>
 	</footer>
-	<!-- ================ Footer area end================ -->
-
-	<!-- ================ js area================ -->
-	<!-- js files -->
-	<script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
-	<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
-	<!-- counter js -->
-	<script src="<%=request.getContextPath()%>/js/jquery-1.10.2.min.js"></script>
-	<script src="<%=request.getContextPath()%>/js/waypoints.min.js"></script>
-	<script src="<%=request.getContextPath()%>/js/jquery.counterup.min.js"></script>
-	<!-- venobox js -->
-	<script src="<%=request.getContextPath()%>/js/venobox.min.js"></script>
-	<!-- owl carousel -->
-	<script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
-	<!-- portfolio js -->
-	<script src="<%=request.getContextPath()%>/js/jquery.mixitup.min.js"></script>
-	<!-- datepicker js -->
-	<script src="<%=request.getContextPath()%>/js/datepicker.min.js"></script>
-	<!-- script js -->
-	<script src="<%=request.getContextPath()%>/js/abu-js/abu.js"></script>
-	<!-- header right link js by aga -->
-	<script src="<%=request.getContextPath()%>/js/member/memberHeader.js"></script>
-	<!-- ================ js area end================ -->
-</body>
-
-<script>
-	
-</script>
-
 </html>

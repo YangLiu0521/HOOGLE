@@ -1,6 +1,7 @@
 package tw.com.hoogle.orddetail.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,7 @@ public class OrdDetailServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
+
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -220,6 +222,103 @@ public class OrdDetailServlet extends HttpServlet {
 				successView.forward(req, res);
 		}
 
+if ("reserve".equals(action)) { // 來自addOrd.jsp的請求  
+			
+			Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
+			
+			Integer ordId = null;
+			try {
+				ordId = Integer.valueOf(req.getParameter("ordId").trim());
+				System.out.println("ordId="+ordId);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("ordId","請填數字");
+			}
+			
+			Integer roomAuto1 = null;
+			try {
+				roomAuto1 = Integer.valueOf(req.getParameter("roomAuto1").trim());
+				System.out.println("roomAuto1="+roomAuto1);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("roomAuto1","請填數字");
+			}
+			
+			Integer roomAuto2 = null;
+			try {
+				roomAuto2 = Integer.valueOf(req.getParameter("roomAuto2").trim());
+				System.out.println("roomAuto2="+roomAuto2);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("roomAuto2","請填數字");
+			}
+			
+			Integer roomAuto3 = null;
+			try {
+				roomAuto3 = Integer.valueOf(req.getParameter("roomAuto3").trim());
+				System.out.println("roomAuto3="+roomAuto1);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("roomAuto3","請填數字");
+			}
+			
+			Integer roomNumber1 = null;
+			try {
+				roomNumber1 = Integer.valueOf(req.getParameter("roomNumber1").trim());
+				System.out.println("roomNumber1="+roomNumber1);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("roomNumber1","請填數字");
+			}
+			
+			Integer roomNumber2 = null;
+			try {
+				roomNumber2 = Integer.valueOf(req.getParameter("roomNumber2").trim());
+				System.out.println("roomNumber2="+roomNumber2);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("roomNumber2","請填數字");
+			}
+			
+			Integer roomNumber3 = null;
+			try {
+				roomNumber3 = Integer.valueOf(req.getParameter("roomNumber3").trim());
+				System.out.println("roomNumber3="+roomNumber3);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("roomNumber3","請填數字");
+			}
+			
+			
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/hotelDetail/hotelDetail.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				/***************************2.開始新增資料***************************************/
+				int ordNights = Integer.valueOf(req.getParameter("ordNights").trim());
+				int money1=0, money2=0, money3=0;
+				if(roomAuto1 == 4001) {
+					money1 = 2000*roomNumber1*ordNights;
+				}
+				if(roomAuto2 == 4002) {
+					money2 = 3500*roomNumber2*ordNights;
+				}
+				if(roomAuto3 == 4003) {
+					money3 = 6000*roomNumber3*ordNights;
+				}
+				int money =money1 + money2 + money3;
+				session.setAttribute("ordId", ordId);
+				session.setAttribute("roomNumber1", roomNumber1);
+				session.setAttribute("roomNumber2", roomNumber2);
+				session.setAttribute("roomNumber3", roomNumber3);
+				session.setAttribute("money", money);
+				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				
+				String url = "/orddetail/payPage.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllOrd.jsp
+				successView.forward(req, res);	
+		}
+		
         if ("insert".equals(action)) { // 來自addOrd.jsp的請求  
 			
 			Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
@@ -230,41 +329,80 @@ public class OrdDetailServlet extends HttpServlet {
 			Integer ordId = null;
 			try {
 				ordId = Integer.valueOf(req.getParameter("ordId").trim());
+				System.out.println("ordId="+ordId);
 			} catch (NumberFormatException e) {
 				errorMsgs.put("ordId","請填數字");
 			}
 			
-			Integer roomAuto = null;
+			Integer roomAuto1 = null;
 			try {
-				roomAuto = Integer.valueOf(req.getParameter("roomAuto").trim());
+				roomAuto1 = Integer.valueOf(req.getParameter("roomAuto1").trim());
+				System.out.println("roomAuto1="+roomAuto1);
 			} catch (NumberFormatException e) {
-				errorMsgs.put("roomAuto","請填數字");
+				errorMsgs.put("roomAuto1","請填數字");
 			}
 			
-			Integer roomNumber = null;
+			Integer roomAuto2 = null;
 			try {
-				roomNumber = Integer.valueOf(req.getParameter("roomNumber").trim());
+				roomAuto2 = Integer.valueOf(req.getParameter("roomAuto2").trim());
+				System.out.println("roomAuto2="+roomAuto2);
 			} catch (NumberFormatException e) {
-				errorMsgs.put("roomNumber","請填數字");
+				errorMsgs.put("roomAuto2","請填數字");
+			}
+			
+			Integer roomAuto3 = null;
+			try {
+				roomAuto3 = Integer.valueOf(req.getParameter("roomAuto3").trim());
+				System.out.println("roomAuto3="+roomAuto1);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("roomAuto3","請填數字");
+			}
+			
+			Integer roomNumber1 = null;
+			try {
+				roomNumber1 = Integer.valueOf(req.getParameter("roomNumber1").trim());
+				System.out.println("roomNumber1="+roomNumber1);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("roomNumber1","請填數字");
+			}
+			
+			Integer roomNumber2 = null;
+			try {
+				roomNumber2 = Integer.valueOf(req.getParameter("roomNumber2").trim());
+				System.out.println("roomNumber2="+roomNumber2);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("roomNumber2","請填數字");
+			}
+			
+			Integer roomNumber3 = null;
+			try {
+				roomNumber3 = Integer.valueOf(req.getParameter("roomNumber3").trim());
+				System.out.println("roomNumber3="+roomNumber3);
+			} catch (NumberFormatException e) {
+				errorMsgs.put("roomNumber3","請填數字");
 			}
 			
 			
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/orddetail/addOrdDetail.jsp");
+							.getRequestDispatcher("/hotelDetail/hotelDetail.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 				
 				/***************************2.開始新增資料***************************************/
 				OrdDetailService orddetailSvc = new OrdDetailService();
-				orddetailSvc.addOrddetail(ordId, roomAuto, roomNumber);
-				
+				orddetailSvc.addOrddetail(ordId, roomAuto1, roomNumber1);
+				orddetailSvc.addOrddetail(ordId, roomAuto2, roomNumber2);
+				orddetailSvc.addOrddetail(ordId, roomAuto3, roomNumber3);
+
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/orddetail/listAllOrdDetail.jsp";
+				
+				String url = "/orddetail/thanks.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllOrd.jsp
-				successView.forward(req, res);				
+				successView.forward(req, res);	
+				
 		}
 		
 		

@@ -1,15 +1,23 @@
 package tw.com.hoogle.searchHotel.model;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import tw.com.hoogle.ord.model.OrdDAO;
+import tw.com.hoogle.ord.model.OrdVO;
 @Service
 @Transactional
 public class SearchHotelService {
 	@Autowired
 	private SearchHotelDAO searchHotelDao;
+	
+	public SearchHotelService() {
+		searchHotelDao = new SearchHotelDAOHibernate();
+	}
 //	public SearchHotelService(SearchHotelDAO searchHotelDao) {
 //		super();
 //		this.searchHotelDao = searchHotelDao;
