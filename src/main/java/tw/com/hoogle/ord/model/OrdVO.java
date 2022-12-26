@@ -18,7 +18,7 @@ public class OrdVO implements java.io.Serializable {
 	private Integer orddetailId;
 	private Integer roomAuto;
 	private Integer roomNumber;
-	private String setNowDate;
+	private String nowDate;
 	
 	
 	public Integer getOrddetailId() {
@@ -100,10 +100,10 @@ public class OrdVO implements java.io.Serializable {
 		this.ordRemark = ordRemark;
 	}
 	public String getNowDate() {
-		return setNowDate;
+		return nowDate;
 	}
-	public void setNowDate(String setNowDate) {
-		this.setNowDate = setNowDate;
+	public void setNowDate(String nowDate) {
+		this.nowDate = nowDate;
 	}
 
 	
