@@ -3,9 +3,14 @@
 
 <%@ page import="java.util.*"%>
 <%@ page import="tw.com.hoogle.ord.model.*" %>
+<%@ page import="tw.com.hoogle.user.model.*" %>
+
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
+OrdVO ordVO = (OrdVO) request.getSession().getAttribute("ordVO");
+
+
 OrdService ordSvc = new OrdService();
     List<OrdVO> list = ordSvc.getAll();
     pageContext.setAttribute("list",list);
@@ -56,8 +61,8 @@ OrdService ordSvc = new OrdService();
 <table id="table-1">
 	<tr><td>
 		 <h3>所有訂單資料 - listAllEmp.jsp</h3>
-		 <h4><a href="${pageContext.request.contextPath}/user/ordSearch.jsp"><img src="${pageContext.request.contextPath}/images/logo_removebg.png" width="100"  border="0"></a></h4>
-		 <h4><a href="${pageContext.request.contextPath}/user/ordSearch.jsp">回會員中心</a></h4>
+		 <h4><a href="${pageContext.request.contextPath}/user/userMemberCenter.jsp"><img src="${pageContext.request.contextPath}/images/logo_removebg.png" width="100"  border="0"></a></h4>
+		 <h4><a href="${pageContext.request.contextPath}/user/userMemberCenter.jsp">回會員中心</a></h4>
 	</td></tr>
 </table>
 
@@ -77,7 +82,7 @@ OrdService ordSvc = new OrdService();
 		<th>刪除</th>
 	</tr>
 	<%@ include file="page1.file" %> 
-	<c:if test="">
+<%-- 	<c:if test=""> --%>
 	<c:forEach var="ordVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
@@ -92,20 +97,20 @@ OrdService ordSvc = new OrdService();
 			<td>${ordVO.ordNights}</td>
 			<td>${ordVO.ordRemark}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ord/ord.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/OrdServlet" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="ordId"  value="${ordVO.ordId}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ord/ord.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/OrdServlet" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
 			     <input type="hidden" name="ordId"  value="${ordVO.ordId}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>
 	</c:forEach>
-	</c:if>
+<%-- 	</c:if> --%>
 </table>
 <%@ include file="page2.file" %>
 
