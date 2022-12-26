@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class OrdVO implements java.io.Serializable {
 	
+	
 	private Integer ordId;
 	private Integer userId;
 	private Integer hotelId;
@@ -17,6 +18,8 @@ public class OrdVO implements java.io.Serializable {
 	private Integer orddetailId;
 	private Integer roomAuto;
 	private Integer roomNumber;
+	private String setNowDate;
+	
 	
 	public Integer getOrddetailId() {
 		return orddetailId;
@@ -95,6 +98,12 @@ public class OrdVO implements java.io.Serializable {
 	}
 	public void setOrdRemark(String ordRemark) {
 		this.ordRemark = ordRemark;
+	}
+	public String getNowDate() {
+		return setNowDate;
+	}
+	public void setNowDate(String setNowDate) {
+		this.setNowDate = setNowDate;
 	}
 
 	

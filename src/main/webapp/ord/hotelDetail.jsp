@@ -1,23 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="tw.com.hoogle.ord.model.*" %>
-<%@ page import="tw.com.hoogle.user.model.*" %>
-<%@ page import="tw.com.hoogle.searchHotel.model.*" %>   
-<%@ page import="java.util.*" %>
-
-<% 
-UserVO userVO = (UserVO) request.getSession().getAttribute("userVO"); //UserServlet.java(Controller)
-
-OrdVO ordVO = (OrdVO) request.getSession().getAttribute("ordVO");
-
-OrdService ordSvc = new OrdService();
-List<OrdVO> list = ordSvc.getAll();
-pageContext.setAttribute("list",list);
-
-// SearchHotelBean checkinInput = (SearchHotelBean) request.getSession().getAttribute("checkinInput");
-
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,8 +18,8 @@ pageContext.setAttribute("list",list);
       <div class="row">
         <div class="col-lg-12 col-md-8">
           <div class="title">
-            <h1>飯店 : HOOGLE</h1>
-            <address><i class="fas fa-map-marker-alt"></i>台北市大安區信義路3段</address>
+            <h1>HOOGLE飯店</h1>
+            <address><i class="fas fa-map-marker-alt"></i> 台北市中正區濟南路一段321號</address>
           </div>
           <!-- 飯店照片輪播圖 -->
           <div class="owl-carousel detail-page-gallery-carousel mb-20">
@@ -69,7 +51,7 @@ pageContext.setAttribute("list",list);
                   <div class="list-box mb-30">
                     <div class="list-box-content">
                       <div class="list-box-rating">
-                        <h2 class="mb-6">飯店 : HOOGLE</h2>
+                        <h2 class="mb-6">HOOGLE飯店</h2>
                         <span class="at-stars"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
                             class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="far fa-star"></i> </span>
                       </div>
@@ -77,7 +59,7 @@ pageContext.setAttribute("list",list);
                       <div class="list-box-title">
                         <br>
                         <address class="green-line">
-                          <i class="fas fa-map-marker-alt"></i>台北市大安區信義路3段
+                          <i class="fas fa-map-marker-alt"></i> 台北市中正區濟南路一段321號
                         </address>
                       </div>
                       <span>
@@ -207,7 +189,6 @@ pageContext.setAttribute("list",list);
                 <!-- rooms -->
 <!--                 ----------------------------------Yang以下區域---------------------------------- -->
                 <h2 class="mb-6">房型介紹</h2>
-                <FORM id="roomAuto" METHOD="post" ACTION="${pageContext.request.contextPath}/OrddetailServlet" >
                 <div class="room-type-wrapper">
                   <!-- list box -->
                   <div class="list-box mb-30">
@@ -230,30 +211,16 @@ pageContext.setAttribute("list",list);
                         <li><span><i class="fas fa-home"></i> 每日客房清潔服務</span></li>
                         <li><span><i class="fas fa-swimming-pool"></i> 游泳池</span></li>
                       </ul>
-                      
-                      <ul class="hotel-featured">
-                       	<li>
-<%-- 						    <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/OrddetailServlet" > --%>
-						        <b>輸入房數 :</b>
-						        <input type="text" name="roomNumber1" id="r1" value="${0}"><font color=red>${errorMsgs.roomNumber}</font>
-						        <input type="hidden" name="ordId" value="${newOrdId.ordId}"><font color=red>${errorMsgs.ordId}</font>
-						        <input type="hidden" name="roomAuto1" value="${4001}"><font color=red>${errorMsgs.roomAuto}</font>
-						        <input type="hidden" name="ordNights" value="${ordNights}"><font color=red>${errorMsgs.roomAuto}</font>
-<!-- 						        <input type="hidden" name="action" value="insert"> -->
-<!-- 						        <input type="submit" value="送出"> -->
-<!-- 						    </FORM> -->
-						</li>
-                      </ul>
-<!--                       <div class="btn-wrapper mt-20 d-inline-block w-100"> -->
-<!--                         在 HTML 文件中創建兩個按鈕，分別顯示 + 和 - 符號 -->
-<!--                         <button class="plus-button" onclick="showPlus1()">+</button>&nbsp; -->
-<!--                         創建一個文本區域，用於顯示計數器的值 -->
-<!--                         <span id="counter1">0</span> -->
-<!--                         &nbsp; -->
-<!--                         <button class="minus-button" onclick="showMinus1()">-</button> -->
-<!--                         &nbsp; -->
-<!--                         <button type="button" class="check-order ml-6" onclick="addToCart()">選擇</button> -->
-<!--                       </div> -->
+                      <div class="btn-wrapper mt-20 d-inline-block w-100">
+                        <!-- 在 HTML 文件中創建兩個按鈕，分別顯示 + 和 - 符號 -->
+                        <button class="plus-button" onclick="showPlus1()">+</button>&nbsp;
+                        <!-- 創建一個文本區域，用於顯示計數器的值 -->
+                        <span id="counter1">0</span>
+                        &nbsp;
+                        <button class="minus-button" onclick="showMinus1()">-</button>
+                        &nbsp;
+                        <button type="button" class="check-order ml-6" onclick="addToCart()">選擇</button>
+                      </div>
                     </div>
                   </div>
                   <!-- list box end -->
@@ -267,7 +234,7 @@ pageContext.setAttribute("list",list);
                     </div>
                     <div class="list-box-content">
                       <div class="list-box-title">
-                        <h3>精緻雙人房 <span>$3500 <em>/ night</em></span></h3>
+                        <h3>精緻雙人房 <span>$3000 <em>/ night</em></span></h3>
                         <address>
                           Max : 3 Persons
                         </address>
@@ -278,34 +245,16 @@ pageContext.setAttribute("list",list);
                         <li><span><i class="fas fa-home"></i> 每日客房清潔服務</span></li>
                         <li><span><i class="fas fa-swimming-pool"></i> 游泳池</span></li>
                       </ul>
-                       <ul class="hotel-featured">
-                       	<li>
-<%-- 						    <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/OrddetailServlet" > --%>
-						        <b>輸入房數 :</b>
-						        <input type="text" name="roomNumber2" id="r2" value="${0}"><font color=red>${errorMsgs.roomNumber}</font>
-						        <input type="hidden" name="ordId" value="${newOrdId.ordId}"><font color=red>${errorMsgs.ordId}</font>
-						        <input type="hidden" name="roomAuto2" value="${4002}"><font color=red>${errorMsgs.roomAuto}</font>
-						        <input type="hidden" name="ordNights" value="${ordNights}"><font color=red>${errorMsgs.roomAuto}</font>
-<!-- 						        <input type="hidden" name="action" value="insert"> -->
-<!-- 						        <input type="submit" value="送出"> -->
-<!-- 						    </FORM> -->
-						</li>
-                      </ul>
-                      
-<%--                <form METHOD="post" ACTION="${pageContext.request.contextPath}/OrddetailServlet"> --%>
-<!--                       <div class="btn-wrapper mt-20 d-inline-block w-100"> -->
-<!--                         在 HTML 文件中創建兩個按鈕，分別顯示 + 和 - 符號 -->
-<!--                         <button class="plus-button" onclick="showPlus2()">+</button>&nbsp; -->
-<!--                         創建一個文本區域，用於顯示計數器的值 -->
-<!--                         <span id="counter2">0</span> -->
-<!--                         &nbsp; -->
-<!--                         <button class="minus-button" onclick="showMinus2()">-</button> -->
-<!--                         &nbsp; -->
-<!--                         <button type="button" class="check-order ml-6" onclick="addToCart()">選擇</button> -->
-<!--                       </div> -->
-<!-- 						<input type="hidden" name="action" value="insert"> -->
-<!-- 						<input type="submit" value="送出"> -->
-<!--              	</form> -->
+                      <div class="btn-wrapper mt-20 d-inline-block w-100">
+                        <!-- 在 HTML 文件中創建兩個按鈕，分別顯示 + 和 - 符號 -->
+                        <button class="plus-button" onclick="showPlus2()">+</button>&nbsp;
+                        <!-- 創建一個文本區域，用於顯示計數器的值 -->
+                        <span id="counter2">0</span>
+                        &nbsp;
+                        <button class="minus-button" onclick="showMinus2()">-</button>
+                        &nbsp;
+                        <button type="button" class="check-order ml-6" onclick="addToCart()">選擇</button>
+                      </div>
                     </div>
                   </div>
                   <!-- list box end -->
@@ -319,7 +268,7 @@ pageContext.setAttribute("list",list);
                     </div>
                     <div class="list-box-content">
                       <div class="list-box-title">
-                        <h3>豪華四人房 <span>$6000 <em>/ night</em></span></h3>
+                        <h3>豪華四人房 <span>$5000 <em>/ night</em></span></h3>
                         <address>
                           Max : 4 Persons
                         </address>
@@ -330,40 +279,19 @@ pageContext.setAttribute("list",list);
                         <li><span><i class="fas fa-home"></i> 每日客房清潔服務</span></li>
                         <li><span><i class="fas fa-swimming-pool"></i> 游泳池</span></li>
                       </ul>
-                       <ul class="hotel-featured">
-                       	<li>
-<%-- 						    <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/OrddetailServlet" > --%>
-						        <b>輸入房數 :</b>
-						        <input type="text" name="roomNumber3" id="r3" value="${0}"><font color=red>${errorMsgs.roomNumber}</font>
-						        <input type="hidden" name="ordId" value="${newOrdId.ordId}"><font color=red>${errorMsgs.ordId}</font>
-						        <input type="hidden" name="roomAuto3" value="${4003}"><font color=red>${errorMsgs.roomAuto}</font>
-						        <input type="hidden" name="ordNights" value="${ordNights}"><font color=red>${errorMsgs.roomAuto}</font>
-<!-- 						        <input type="hidden" name="action" value="insert"> -->
-<!-- 						        <input type="submit" value="送出"> -->
-<!-- 						    </FORM> -->
-						</li>
-                      </ul>
-<!--                       <div class="btn-wrapper mt-20 d-inline-block w-100"> -->
-<!--                         在 HTML 文件中創建兩個按鈕，分別顯示 + 和 - 符號 -->
-<!--                         <button class="plus-button" onclick="showPlus3()">+</button>&nbsp; -->
-<!--                         創建一個文本區域，用於顯示計數器的值 -->
-<!--                         <span id="counter3">0</span> -->
-<!--                         &nbsp; -->
-<!--                         <button class="minus-button" onclick="showMinus3()">-</button> -->
-<!--                         &nbsp; -->
-<!--                         <button type="button" class="check-order ml-6" onclick="addToCart()">選擇</button> -->
-<!--                       </div> -->
+                      <div class="btn-wrapper mt-20 d-inline-block w-100">
+                        <!-- 在 HTML 文件中創建兩個按鈕，分別顯示 + 和 - 符號 -->
+                        <button class="plus-button" onclick="showPlus3()">+</button>&nbsp;
+                        <!-- 創建一個文本區域，用於顯示計數器的值 -->
+                        <span id="counter3">0</span>
+                        &nbsp;
+                        <button class="minus-button" onclick="showMinus3()">-</button>
+                        &nbsp;
+                        <button type="button" class="check-order ml-6" onclick="addToCart()">選擇</button>
+                      </div>
                     </div>
                   </div>
-                
-                <div class="list-box mb-30 text-center" style="font-size:18px ;text-align:center ">
-                		<input type="hidden" name="action" value="reserve">
-						<input style="color: red" id="btn" class="list-box-content" type="button" value="前往結帳" >
-               </div>
-               </div>
-               </FORM>
-               
-                
+                </div>
                 <!-- rooms -->
 <!-- ----------------------------------Yang以上區域---------------------------------- -->
 
@@ -427,7 +355,7 @@ pageContext.setAttribute("list",list);
                       aria-controls="collapseOne4-m">
                       <!-- title widget -->
                       <div class="filter-title-widget">
-                        <h3>飯店訂單 <i class="fas fa-plus-square float-right"></i> <i
+                        <h3>飯店明細 <i class="fas fa-plus-square float-right"></i> <i
                             class="fas fa-minus-square float-right"></i></h3>
                       </div>
                       <!-- title widget end -->
@@ -436,41 +364,21 @@ pageContext.setAttribute("list",list);
                     data-parent="#filter-widget-accordion4-d">
                     <div class="card-body">
                       <ul class="list-inline select-all mb-10">
-                        <li class="list-inline-item">飯店 : HOOGLE</li>
+                        <li class="list-inline-item">HOOGLE飯店</li>
                       </ul>
                       <div class="table-responsive">
                         <table class="table table-bordered bg-gray w-100 border-0">
-<!--                           <tr> -->
-<!--                             <td>旅客編號</td> -->
-<%--                             <td>${userVO.userId}</td> --%>
-<!--                           </tr> -->
-                          <tr>
-                            <td>旅客姓名</td>
-                            <td>${userVO.userName}</td>
-                          </tr>
-<!--                           <tr> -->
-<!--                             <td>飯店編號</td> -->
-<%--                             <td>${ordVO.hotelId}</td> --%>
-<!--                           </tr> -->
-<!--                           <tr> -->
-                            <td>飯店名稱</td>
-                            <td>${ordVO.hotelName}</td>
-                          </tr>
-                          <tr>
-                            <td>訂單日期</td>
-                            <td>${ordDate}</td>
-                          </tr>
                           <tr>
                             <td>入住日期</td>
-                            <td>${checkinInput}</td>
+                            <td>2022年12月16日 - 週五</td>
                           </tr>
                           <tr>
                             <td>退房日期</td>
-                            <td>${checkoutInput}</td>
+                            <td>2022年12月18日 - 週日</td>
                           </tr>
                           <tr>
                             <td>天數</td>
-                            <td>共計<sapn>${ordNights}</sapn>晚</td>
+                            <td>共計<sapn>2</sapn>晚</td>
                           </tr>
                         </table>
                       </div>
@@ -485,48 +393,48 @@ pageContext.setAttribute("list",list);
 
             <!-- 計算總額開始 -->
 
-<!--             <div class="nav-pills mb-30"> -->
-<!--               <br> -->
-<!--               <div class="table-responsive"> -->
-<!--                 <table class="table table-bordered"> -->
-<!--                   <thead class="thead-dark"> -->
-<!--                     <tr class="text-center"> -->
-<!--                       <th>房型</th> -->
-<!--                       <th>價格</th> -->
-<!--                       <th>數量</th> -->
-<!--                       <th>天數</th> -->
-<!--                       <th>小計</th> -->
-<!--                     </tr> -->
-<!--                   </thead> -->
-<!--                   <tbody> -->
-<!--                     <tr class="text-center"> -->
-<!--                       <td>單人房</td> -->
-<!--                       <td>2000</td> -->
-<!--                       <td>抓到選擇數量</td> -->
-<!--                       <td>抓到選擇天數</td> -->
-<!--                       <td>價格*數量*天數</td> -->
-<!--                     </tr> -->
-<!--                     <tr class="text-center"> -->
-<!--                       <td>雙人房</td> -->
-<!--                       <td>3000</td> -->
-<!--                       <td>抓到選擇數量</td> -->
-<!--                       <td>抓到選擇天數</td> -->
-<!--                       <td>價格*數量*天數</td> -->
-<!--                     </tr> -->
-<!--                     <tr class="text-center"> -->
-<!--                       <td>四人房</td> -->
-<!--                       <td>5000</td> -->
-<!--                       <td>抓到選擇數量</td> -->
-<!--                       <td>抓到選擇天數</td> -->
-<!--                       <td>價格*數量*天數</td> -->
-<!--                     </tr> -->
-<!--                     <tr class="text-center"> -->
-<!--                       <td colspan="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;總金額：X+X+X <button>確認付款</button></td> -->
-<!--                     </tr> -->
-<!--                   </tbody> -->
-<!--                 </table> -->
-<!--               </div> -->
-<!--             </div>      -->
+            <div class="nav-pills mb-30">
+              <br>
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead class="thead-dark">
+                    <tr class="text-center">
+                      <th>房型</th>
+                      <th>價格</th>
+                      <th>數量</th>
+                      <th>天數</th>
+                      <th>小計</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="text-center">
+                      <td>單人房</td>
+                      <td>2000</td>
+                      <td>抓到選擇數量</td>
+                      <td>抓到選擇天數</td>
+                      <td>價格*數量*天數</td>
+                    </tr>
+                    <tr class="text-center">
+                      <td>雙人房</td>
+                      <td>3000</td>
+                      <td>抓到選擇數量</td>
+                      <td>抓到選擇天數</td>
+                      <td>價格*數量*天數</td>
+                    </tr>
+                    <tr class="text-center">
+                      <td>四人房</td>
+                      <td>5000</td>
+                      <td>抓到選擇數量</td>
+                      <td>抓到選擇天數</td>
+                      <td>價格*數量*天數</td>
+                    </tr>
+                    <tr class="text-center">
+                      <td colspan="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;總金額：X+X+X <button>確認付款</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>     
         </div>
         </aside>
       </div>
@@ -539,29 +447,6 @@ pageContext.setAttribute("list",list);
  
  <!-- hotel-detail js by aga-->
   <script src="<%=request.getContextPath()%>/js/hotel-detail/hotel-detail.js"></script>
-     <script>
-     function show() {
-         document.getElementById("roomAuto").submit();
-     } 
-     var button = document.getElementById("btn").addEventListener("click", function () {
-    	 var r1 = parseInt(document.getElementById("r1").value);
-    	 var r2 = parseInt(document.getElementById("r2").value);
-    	 var r3 = parseInt(document.getElementById("r3").value);
-    	 
-    	 if (r1==0 && r2==0 && r3==0) {
-        	 window.alert("無任何房型被下訂，請確認下訂房數");
-
-       	}else if(r1>=10 || r2>=10 || r3>=10){
-//             window.confirm("下訂房數大於10間，數量是否正確");
-            if(confirm("下訂房數大於10間，數量是否正確") == true){
-            	show();	
-            }
-            
-       	}
-    	 else {
-       		show();	
-       	}
-     });
-    </script>
+  
 </body>
 </html>
