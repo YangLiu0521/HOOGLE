@@ -332,7 +332,7 @@
 						<div class="imege mb-10">
 							<img src="images/popular-hotel/1.jpg" alt="">
 							<div class="black-bg">
-								<a href=""><i class="fas fa-map-marker-alt"></i> Thailand</a>
+								<a href=""><i class="fas fa-map-marker-alt"></i> 台北市</a>
 							</div>
 						</div>
 						<div class="reting">
@@ -341,10 +341,10 @@
 								class="fas fa-star"></i>
 						</div>
 						<h4>
-							<a href="">Ansan Hotel</a>
+							<a href="">HOOGLE</a>
 						</h4>
 						<div class="price">
-							$100.00 / <span>Per night</span>
+							$2,000元 / <span>每晚最低</span>
 						</div>
 					</div>
 					<!-- popular hotel box end -->
@@ -355,7 +355,7 @@
 						<div class="imege mb-10">
 							<img src="images/popular-hotel/2.jpg" alt="">
 							<div class="black-bg">
-								<a href=""><i class="fas fa-map-marker-alt"></i> Vietnam</a>
+								<a href=""><i class="fas fa-map-marker-alt"></i> 新北市</a>
 							</div>
 						</div>
 						<div class="reting">
@@ -364,10 +364,10 @@
 								class="far fa-star"></i>
 						</div>
 						<h4>
-							<a href="">Fawlty Towers</a>
+							<a href="">hotel2</a>
 						</h4>
 						<div class="price">
-							$200.00 / <span>Per night</span>
+							$3,000元 / <span>每晚最低</span>
 						</div>
 					</div>
 					<!-- popular hotel box end -->
@@ -378,7 +378,7 @@
 						<div class="imege mb-10">
 							<img src="images/popular-hotel/3.jpg" alt="">
 							<div class="black-bg">
-								<a href=""><i class="fas fa-map-marker-alt"></i> Italy</a>
+								<a href=""><i class="fas fa-map-marker-alt"></i> 台中市</a>
 							</div>
 						</div>
 						<div class="reting">
@@ -387,10 +387,10 @@
 								class="far fa-star"></i>
 						</div>
 						<h4>
-							<a href="">Hotel Valle</a>
+							<a href="">hotel3</a>
 						</h4>
 						<div class="price">
-							$300.00 / <span>Per night</span>
+							$2,500元 / <span>每晚最低</span>
 						</div>
 					</div>
 					<!-- popular hotel box end -->
@@ -401,7 +401,7 @@
 						<div class="imege mb-10">
 							<img src="images/popular-hotel/4.jpg" alt="">
 							<div class="black-bg">
-								<a href=""><i class="fas fa-map-marker-alt"></i> Mexico</a>
+								<a href=""><i class="fas fa-map-marker-alt"></i> 台南市</a>
 							</div>
 						</div>
 						<div class="reting">
@@ -410,10 +410,10 @@
 								class="far fa-star"></i>
 						</div>
 						<h4>
-							<a href="">Hotel Las Trojes</a>
+							<a href="">hotel4</a>
 						</h4>
 						<div class="price">
-							$400.00 / <span>Per night</span>
+							$1,000元 / <span>每晚最低</span>
 						</div>
 					</div>
 					<!-- popular hotel box end -->
@@ -424,8 +424,7 @@
 						<div class="imege mb-10">
 							<img src="images/popular-hotel/5.jpg" alt="">
 							<div class="black-bg">
-								<a href=""><i class="fas fa-map-marker-alt"></i> United
-									States</a>
+								<a href=""><i class="fas fa-map-marker-alt"></i> 高雄市</a>
 							</div>
 						</div>
 						<div class="reting">
@@ -434,10 +433,33 @@
 								class="far fa-star"></i>
 						</div>
 						<h4>
-							<a href="">Rosen Shingle Creek</a>
+							<a href="">hotel5</a>
 						</h4>
 						<div class="price">
-							$500.00 / <span>Per night</span>
+							$1,200元 / <span>每晚最低</span>
+						</div>
+					</div>
+					<!-- popular hotel box end -->
+				</div>
+				<div class="item">
+					<!-- popular hotel box -->
+					<div class="popular-hotel-box">
+						<div class="imege mb-10">
+							<img src="images/popular-hotel/2.jpg" alt="">
+							<div class="black-bg">
+								<a href=""><i class="fas fa-map-marker-alt"></i> 台北市</a>
+							</div>
+						</div>
+						<div class="reting">
+							<i class="fas fa-star"></i> <i class="far fa-star"></i> <i
+								class="far fa-star"></i> <i class="far fa-star"></i> <i
+								class="far fa-star"></i>
+						</div>
+						<h4>
+							<a href="">hotel6</a>
+						</h4>
+						<div class="price">
+							$1,800元 / <span>每晚最低</span>
 						</div>
 					</div>
 					<!-- popular hotel box end -->
@@ -473,7 +495,7 @@
 						</div>
 						<div class="title">
 							<h3>
-								<a href="">Orlando</a>
+								<a href="">HOOGLE</a>
 							</h3>
 						</div>
 					</div>
@@ -492,7 +514,7 @@
 						</div>
 						<div class="title">
 							<h3>
-								<a href="">Miami</a>
+								<a href="">hotel2</a>
 							</h3>
 						</div>
 					</div>
@@ -511,7 +533,7 @@
 						</div>
 						<div class="title">
 							<h3>
-								<a href="">Los Angeles</a>
+								<a href="">hotel3</a>
 							</h3>
 						</div>
 					</div>
@@ -530,7 +552,7 @@
 						</div>
 						<div class="title">
 							<h3>
-								<a href="">San Diego</a>
+								<a href="">hotel4</a>
 							</h3>
 						</div>
 					</div>
@@ -549,7 +571,7 @@
 						</div>
 						<div class="title">
 							<h3>
-								<a href="">Houston</a>
+								<a href="">hotel5</a>
 							</h3>
 						</div>
 					</div>
@@ -568,7 +590,7 @@
 						</div>
 						<div class="title">
 							<h3>
-								<a href="">New York</a>
+								<a href="">hotel6</a>
 							</h3>
 						</div>
 					</div>

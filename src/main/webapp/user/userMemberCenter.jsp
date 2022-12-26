@@ -298,10 +298,13 @@
                       <td>${ordVO.ordCheckout}</td>
 <%--                       <td>${ordVO.nowDate}</td> --%>
 <!--                       <td><a href="">點我評價</a></td> -->
-					<c:if test="${ordVO.ordCheckout < ordVO.nowDate}">
+					<c:if test="${ordVO.ordCheckout <= ordVO.nowDate}">
                       <td>
                       <button style="color: red" id="btn" type="button" value="" >點我評價</button>
                       </td></c:if>
+                    <c:if test="${ordVO.ordCheckout > ordVO.nowDate}">
+                    <td>
+                    </td></c:if>
 <!--                       <td> -->
 <%--                     	<form METHOD="post" action="${pageContext.request.contextPath}/OrdServlet"> --%>
 <!-- 						<input type="hidden" name="action" value="getOrddetail_For_Display"> -->
