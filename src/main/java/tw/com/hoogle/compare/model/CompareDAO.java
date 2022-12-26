@@ -12,6 +12,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.hibernate.internal.build.AllowSysOut;
+
 public class CompareDAO implements CompareDAO_interface {
 
 	String driver = "com.mysql.cj.jdbc.Driver";
@@ -29,8 +31,9 @@ public class CompareDAO implements CompareDAO_interface {
 		}
 	}
 
-	private static final String GET_ONE_STMT = "SELECT hotelName, hotelAddress, roomType, roomPrice FROM v_hotel_room where hotelName = ?";
-	private static final String GET_ALL_STMT = "SELECT DISTINCT hotelName FROM v_hotel_room ";
+	private static final String GET_ONE_STMT = "SELECT * FROM v_hotel_room_pic where hotelName = ?";
+	private static final String GET_ALL_STMT = "SELECT DISTINCT hotelName FROM v_hotel_room_pic ";
+	private static final String GET_ONEROOM_STMT = "SELECT roomName FROM v_hotel_room_pic where hotelName = ?";
 	
 	@Override
 	public List<CompareVO> findByHotelName(String hotelName) {
@@ -52,11 +55,14 @@ public class CompareDAO implements CompareDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
+				
 				compareVO = new CompareVO();
 				compareVO.setHotelName(rs.getString("hotelName"));
 				compareVO.setHotelAddress(rs.getString("hotelAddress"));
-				compareVO.setRoomType(rs.getString("roomType"));
+				compareVO.setRoomName(rs.getString("roomName"));
 				compareVO.setRoomPrice(rs.getInt("roomPrice"));
+				compareVO.setHotelpicNo(rs.getBytes("hotelpicNo"));
+				
 				list.add(compareVO);
 
 			}
@@ -114,12 +120,68 @@ public class CompareDAO implements CompareDAO_interface {
 				compareVO = new CompareVO();
 				compareVO.setHotelName(rs.getString("hotelName"));
 //				compareVO.setHotelAddress(rs.getString("hotelAddress"));
-//				compareVO.setRoomType(rs.getString("roomType"));
+//				compareVO.setRoomType(rs.getString("roomName"));
 //				compareVO.setRoomPrice(rs.getInt("roomPrice"));
 				list.add(compareVO);
 			}
 
 		} 
+		catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<CompareVO> getRoomType(String hotelName) {
+		List<CompareVO> list = new ArrayList<CompareVO>();
+		CompareVO compareVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONEROOM_STMT);
+			
+			pstmt.setString(1, hotelName);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				compareVO = new CompareVO();
+				compareVO.setRoomName(rs.getString("roomName"));
+				list.add(compareVO);
+
+			}
+
+		} 
+
 		catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {

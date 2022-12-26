@@ -10,12 +10,15 @@ public class CompareService {
 		dao = new CompareDAO();
 	}
 
-	public CompareVO getOneHotel(String hotelName) {
-		return (CompareVO) dao.findByHotelName(hotelName);
+	public List<CompareVO> getOneHotel(String hotelName) {
+		return dao.findByHotelName(hotelName);
 	}
 	
 	public List<CompareVO> getAll() {
 		return dao.getAll();
 	}
 
+//	public List<CompareVO> getRoomType(String hotelName) {
+//		return dao.getRoomType(hotelName);
+//	}
 }

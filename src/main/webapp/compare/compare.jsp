@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="tw.com.hoogle.compare.model.*"%> 
+<%@ page import="tw.com.hoogle.compare.model.*"%>
+<%@ page import="java.util.*"%>
 <%
 CompareVO compareVO = (CompareVO) request.getAttribute("compareVO");
+// CompareService compareSvc = new CompareService();
+// List<CompareVO> listpic = compareSvc.getAll();
+// pageContext.setAttribute("listpic", listpic);
 %>
 
 <!DOCTYPE html>
@@ -17,26 +21,35 @@ CompareVO compareVO = (CompareVO) request.getAttribute("compareVO");
 <%@ include file="/header.jsp"%>
 
 <style>
-p#detail {
-	height: 600px;
-	width: 80%;
-	background: lightgray;
-	margin-inline: auto;
-	overflow-x: hidden;
-	overflow-y: scroll;
-	font-size: 20px;
-	white-space: pre-wrap;
-	font-weight: bolder;
-}
+/* p#detail { */
+/* 	height: 500px; */
+/* 	width: 80%; */
+/* 	background: lightgray; */
+/* 	margin-inline: auto; */
+/* 	overflow-x: hidden; */
+/* 	overflow-y: scroll; */
+/* 	font-size: 20px; */
+/* 	white-space: pre-wrap; */
+/* 	font-weight: bolder; */
+/* } */
 
 textarea.type {
 	display: inline-block;
 	margin: 10px 20px 20px 20px;
-	width: calc(( 100% - 132px)/3);
+	width: calc(( 100% - 150px)/3);
 	font-size: 20px;
-	border: 2px solid black;
 	background-color: lightblue;
 	text-rendering: auto;
+}
+
+h1 {
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+b {
+	font-size: 20px;
 }
 </style>
 </head>
@@ -71,149 +84,184 @@ textarea.type {
 	<!-- 搜尋日期房型 結束 -->
 
 	<!-- 比較數量 開始 -->
-	<div class="blog-area pt-70 pb-40 position-relative">
-		<div class="bg-style-1"></div>
-		<div class="container">
-			<!-- section title -->
-			<div class="section-title text-center"></div>
-			<!-- section title -->
-			<div class="row">
-				<div class="col-lg-4 col-md-6 mb-30">
-					<!-- blog box -->
-					<div class="blog-box shadow1">
-						<div class="blog_img mb-20">
-							<img
-								src="<%=request.getContextPath()%>/images/compare/blog/blog-1.jpg"
-								alt="" />
-						</div>
-						<div class="blog-des">
-							<div class="form-group">
-								<ul>
-									<jsp:useBean id="compareSvc" scope="page"
-										class="tw.com.hoogle.compare.model.CompareService"></jsp:useBean>
-									<li>
-										<FORM METHOD="post" ACTION="compare.do">
-											<b>選擇飯店：</b> <select size="1" name="hotelName" style="font-size: 20px">
+	<FORM METHOD="post"
+		ACTION="<%=request.getContextPath()%>/compare/CompareServlet"
+		enctype="multipart/form-data">
+		<h1>比較飯店</h1>
+		<div class="blog-area pt-70 pb-40 position-relative"
+			style="padding-top: 0px">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-md-6 mb-30">
+						<!-- blog box -->
+						<div class="blog-box shadow1">
+							<div class="blog_img mb-20">
+								<!-- 								<img -->
+								<%-- 									src="<%=request.getContextPath()%>/images/compare/blog/blog-1.jpg" --%>
+								<!-- 									alt="" /> -->
+
+							</div>
+							<div class="blog-des">
+								<div class="form-group">
+									<ul>
+										<jsp:useBean id="compareSvc" scope="page"
+											class="tw.com.hoogle.compare.model.CompareService"></jsp:useBean>
+										<li>
+											<%-- 										<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/compare/CompareServlet"> --%>
+											<b>飯店1：</b> <select size="1" name="hotelName1"
+											style="font-size: 20px">
 												<c:forEach var="compareVO" items="${compareSvc.all}">
 													<option value="${compareVO.hotelName}">${compareVO.hotelName}
 												</c:forEach>
-											</select> <input type="hidden" name="action"
-												value="getOne_For_Display">
-												<input type="submit" value="送出">
-										</FORM>
-									</li>
-								</ul>
-								<!-- 								<select class="form-control"> -->
-								<!-- 									<option>飯店名稱</option> -->
-								<!-- 									<option>hotle1</option> -->
-								<!-- 									<option>hotle2</option> -->
-								<!-- 									<option>hotle3</option> -->
-								<!-- 								</select>  -->
-								<select class="form-control">
-									<option>房型</option>
-									<option>雙人房</option>
-									<option>四人房</option>
-									<option>六人房</option>
-								</select>
-								<p>價格：</p>
-								<p class="price1" type="text" value="取得房間價格，要改標籤"></p>
+										</select> <!-- 												<input type="hidden" name="action" value="getOne_For_Display">  -->
+											<!-- 	<input type="submit" value="查看詳情" class="btn-style-1"> -->
+											<!-- 										</FORM> -->
+										</li>
+									</ul>
+								</div>
 							</div>
-							<!-- 							<button type="submit" class="btn-style-1">立即下訂</button> -->
-							<button type="submit" id="detail1" class="btn-style-1">查看詳情</button>
-							<!-- <input id="Mybutton" style="margin-left:230px;margin-bottom:0px" type=button color="red" value="下訂" οnclick="window.open('sub1.html')"> -->
 						</div>
+						<!-- blog box end -->
 					</div>
-					<!-- blog box end -->
-				</div>
-				<div class="col-lg-4 col-md-6 mb-30">
-					<!-- blog box -->
-					<div class="blog-box shadow2">
-						<div class="blog_img mb-20">
-							<img
-								src="<%=request.getContextPath()%>/images/compare/blog/blog-1.jpg"
-								alt="" />
-						</div>
-						<div class="blog-des">
-							<div class="form-group">
-								<select class="form-control">
-									<option>房型</option>
-									<option>雙人房</option>
-									<option>四人房</option>
-									<option>六人房</option>
-								</select>
-								<p>價格：</p>
-								<p class="price1" type="text" value="取得房間價格，要改標籤"></p>
+					<div class="col-lg-4 col-md-6 mb-30">
+						<!-- blog box -->
+						<div class="blog-box shadow1">
+							<div class="blog_img mb-20">
+								<!-- 								<img -->
+								<%-- 									src="<%=request.getContextPath()%>/images/compare/blog/blog-1.jpg" --%>
+								<!-- 									alt="" /> -->
 							</div>
-							<button type="submit" class="btn-style-1">立即下訂</button>
-							<button type="submit" id="detail2" class="btn-style-1">查看詳情</button>
-							<!-- <input id="Mybutton" style="margin-left:230px;margin-bottom:0px" type=button color="red" value="下訂" οnclick="window.open('sub1.html')"> -->
-						</div>
-					</div>
-					<!-- blog box end -->
-				</div>
-				<div class="col-lg-4 col-md-6 mb-30">
-					<!-- blog box -->
-					<div class="blog-box shadow3">
-						<div class="blog_img mb-20">
-							<img
-								src="<%=request.getContextPath()%>/images/compare/blog/blog-1.jpg"
-								alt="" />
-						</div>
-						<div class="blog-des">
-							<div class="form-group">
-								<select class="form-control">
-									<option>房型</option>
-									<option>雙人房</option>
-									<option>四人房</option>
-									<option>六人房</option>
-								</select>
-								<p>價格：</p>
-								<p class="price1" type="text" value="取得房間價格，要改標籤"></p>
+							<div class="blog-des">
+								<div class="form-group">
+									<ul>
+										<li>
+											<%-- 										<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/compare/CompareServlet"> --%>
+											<b>飯店2：</b> <select size="1" name="hotelName2"
+											style="font-size: 20px">
+												<c:forEach var="compareVO" items="${compareSvc.all}">
+													<option value="${compareVO.hotelName}">${compareVO.hotelName}
+												</c:forEach>
+										</select> <!-- 												<input type="hidden" name="action" value="getOne_For_Display">  -->
+											<!-- 	<input type="submit" value="查看詳情" class="btn-style-1"> -->
+											<!-- 										</FORM> -->
+										</li>
+									</ul>
+								</div>
 							</div>
-							<button type="submit" class="btn-style-1">立即下訂</button>
-							<button type="submit" id="detail3" class="btn-style-1">查看詳情</button>
-							<!-- <input id="Mybutton" style="margin-left:230px;margin-bottom:0px" type=button color="red" value="下訂" οnclick="window.open('sub1.html')"> -->
 						</div>
-					</div>
-					<!-- blog box end -->
+						<!-- blog box end -->
+						<!-- 送出比較按鈕 -->
+						<br>
+						<div style="text-align: center">
+							<input type="hidden" name="action" value="getOne_For_Display">
+							<input type="submit" name="action" value="送出比較"
+								class="btn-style-1">
+						</div>
+						<!-- 送出比較按鈕 結束 -->
 
+					</div>
+					<div class="col-lg-4 col-md-6 mb-30">
+						<!-- blog box -->
+						<div class="blog-box shadow1">
+							<div class="blog_img mb-20">
+								<!-- 								<img -->
+								<%-- 									src="<%=request.getContextPath()%>/images/compare/blog/blog-1.jpg" --%>
+								<!-- 									alt="" /> -->
 
+							</div>
+							<div class="blog-des">
+								<div class="form-group">
+									<ul>
+										<li><b>飯店3：</b> <select size="1" name="hotelName3"
+											style="font-size: 20px">
+												<c:forEach var="compareVO" items="${compareSvc.all}">
+													<option value="${compareVO.hotelName}">${compareVO.hotelName}
+												</c:forEach>
+										</select> <!-- 												<input type="hidden" name="action" value="getOne_For_Display">  -->
+											<!-- 	<input type="submit" value="查看詳情" class="btn-style-1"> -->
+											<!-- 										</FORM> --></li>
+
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- blog box end -->
+					</div>
+					<!-- blog box end -->
 				</div>
 			</div>
 		</div>
-	</div>
+	</FORM>
 	<!-- 比較數量 結束 -->
 
 	<!-- 介紹內文 開始 -->
-	<div class="detail">
-		<p id="detail" style="word-wrap: break-word;">這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸
-			這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸
-			這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸
-			這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸
-			這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸
-			這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸
-			這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸
-			這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸
-			這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸
-			這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸 這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸
-			這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸 這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸
-			這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸 這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸
-			這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸 這裡的內容來自於上面三個"查看詳情"，且內容過多會有卷軸</p>
-	</div>
+	<!-- 	<div class="detail"> -->
+	<!-- 		<p id="detail" style="word-wrap: break-word;"> -->
+	<%-- 			<c:if test="${not empty list}"> --%>
+	<%-- 				飯店:${list[0].hotelName}  --%>
+	<%-- 				地址:${list[0].hotelAddress} --%>
+	<%-- 				<c:forEach var="compareVO" items="${list}"> --%>
+	<%-- 				房型:${compareVO.roomName}	價格:${compareVO.roomPrice} --%>
+	<%-- 				</c:forEach> --%>
+	<%-- 			</c:if> --%>
+	<!-- 		</p> -->
+	<!-- 	</div> -->
 	<!-- <textarea class="detila" name="mytext"  placeholder="飯店介紹" readonly></textarea> -->
 	<!-- 介紹內文 結束 -->
 
 	<!-- 自助黏貼區 開始 -->
 	<!-- blog box -->
+	<div class="images">
+		<span class="images"> <!-- 		<img --> <%-- 			src="<%=request.getContextPath()%>/images/compare/blog/blog-1.jpg" --%>
+			<!-- 			alt="" style="margin-left:4px;margin-right:20px;border-radius: 10px;"/> -->
+			<c:if test="${not empty list1}">
+				<img
+					style="margin-left: 20px; margin-right: 20px; border-radius: 10px; width: calc(( 100% - 150px)/3);"
+					src="${pageContext.request.contextPath}/compare/HotelpicReader?hotelName=${list1[0].hotelName}">
+			</c:if> <!-- 		<img --> <%-- 			src="<%=request.getContextPath()%>/images/compare/blog/blog-1.jpg" --%>
+			<!-- 			alt="" style="margin-left:20px;margin-right:20px;border-radius: 10px;"/>  -->
+			<c:if test="${not empty list2}">
+				<img
+					style="margin-left: 20px; margin-right: 20px; border-radius: 10px; width: calc(( 100% - 150px)/3);"
+					src="${pageContext.request.contextPath}/compare/HotelpicReader?hotelName=${list2[0].hotelName}">
+			</c:if> <!-- 		<img --> <%-- 			src="<%=request.getContextPath()%>/images/compare/blog/blog-1.jpg" --%>
+			<!-- 			alt="" style="margin-left:20px;margin-right:21px;border-radius: 10px;"/> -->
+			<c:if test="${not empty list3}">
+				<img
+					style="margin-left: 20px; margin-right: 20px; border-radius: 10px; width: calc(( 100% - 150px)/3);"
+					src="${pageContext.request.contextPath}/compare/HotelpicReader?hotelName=${list3[0].hotelName}">
+			</c:if>
+		</span>
+	</div>
 	<div class="self-typying">
-		<div class="typ1">
-			<textarea class="type" name="mytext" rows="20" cols="35"
-				placeholder="此處可輸入或貼上內容"></textarea>
-			<textarea class="type" name="mytext" rows="20" cols="35"
-				placeholder="此處可輸入或貼上內容"></textarea>
-			<textarea class="type" name="mytext" rows="20" cols="35"
-				placeholder="此處可輸入或貼上內容"></textarea>
-		</div>
+		<textarea class="type" name="mytext" rows="10" cols="20"
+			placeholder="" style="border-radius: 10px;">
+<c:if test="${not empty list1}">
+飯店:${list1[0].hotelName}
+地址:${list1[0].hotelAddress}<c:forEach var="compareVO" items="${list1}">
+房型:${compareVO.roomName}	價格:${compareVO.roomPrice}</c:forEach>
+==================================================
+</c:if>
+</textarea>
+		<textarea class="type" name="mytext" rows="10" cols="20"
+			placeholder="" style="border-radius: 10px;">
+	<c:if test="${not empty list2}">
+飯店:${list2[0].hotelName} 
+地址:${list2[0].hotelAddress}<c:forEach var="compareVO" items="${list2}">
+房型:${compareVO.roomName}	價格:${compareVO.roomPrice}</c:forEach>
+==================================================
+	</c:if>
+</textarea>
+		<textarea class="type" name="mytext" rows="10" cols="20"
+			placeholder="" style="border-radius: 10px;">
+			<c:if test="${not empty list3}">
+飯店:${list3[0].hotelName} 
+地址:${list3[0].hotelAddress}<c:forEach var="compareVO" items="${list3}">
+房型:${compareVO.roomName}	價格:${compareVO.roomPrice}</c:forEach>
+==================================================			
+			</c:if>
+		</textarea>
 	</div>
 	<!-- blog box end -->
 	<!-- 自助黏貼區 結束 -->
