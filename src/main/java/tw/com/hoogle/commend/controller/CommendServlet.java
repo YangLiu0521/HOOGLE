@@ -27,7 +27,7 @@ public class CommendServlet extends HttpServlet {
 
 //=======================================================================================
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
-			System.out.println("***** into getOne_For_Display *******");
+//			System.out.println("***** into getOne_For_Display *******");
 //			Map<String, String> errorMsgs = new Linkedne_For_DHashMap<String, String>();
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -38,7 +38,7 @@ public class CommendServlet extends HttpServlet {
 //				errorMsgs.put("ordID", "請輸入訂單編號");
 				errorMsgs.add("請輸入評價編號");
 			}
-			System.out.println(str);
+//			System.out.println(str);
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req.getRequestDispatcher("/commend/select_page.jsp");

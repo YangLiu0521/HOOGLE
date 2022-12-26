@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="tw.com.hoogle.commend.model.*"%>
+<%@ page import="tw.com.hoogle.orddetail.model.*"%>
 <%
 CommendVO commendVO = (CommendVO) request.getAttribute("commendVO");
 %>
@@ -33,7 +34,9 @@ CommendVO commendVO = (CommendVO) request.getAttribute("commendVO");
 				<!--         </div> -->
 				<div class="ordId">
 					<h2>訂單編號:</h2>
-					<input type="TEXT" class="ordId" name="ordId" />
+					<p><input type="TEXT" class="ordId" name="ordId"
+						value="${ordDetailVO.ordId}" /></p> 
+<!-- 						如果要讓使用者不能更改訂單編號，要改成type="TEXT" disabled -->
 				</div>
 			</div>
 			<!-- 評價編號&訂單編號結束 -->
