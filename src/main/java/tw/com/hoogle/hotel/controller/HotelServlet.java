@@ -122,7 +122,7 @@ public class HotelServlet extends HttpServlet {
 				// 開始新增資料
 
 				hotelVO = hotelSvc.addHotel(hotelVO);
-				session.setAttribute("hotelVO", hotelVO);
+				req.setAttribute("hotelVO", hotelVO);
 
 				// 新增完成，準備轉交
 //						String url = "/user/loginForUser.jsp";

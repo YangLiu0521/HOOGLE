@@ -1299,7 +1299,7 @@ footer {
 	z-index: 0;
 }
 .inner-banner-bg:after {
-	position: absolute;
+/* 	position: absolute; */
 	content: "";
 	width: 100%;
 	height: 100%;

@@ -196,7 +196,7 @@ HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //Hote
 
 											<div class="form-group col-md-6">
 												<select id="inputState" class="form-control" required name="hotelType">
-													<option selected hidden value="">類型*</option>
+													<option selected hidden value="${hotelVO.hotelType}">${hotelVO.hotelType}</option>
 													<option value="飯店">飯店</option>
 													<option value="民宿">民宿</option>
 													<option value="商旅">商旅</option>
@@ -207,17 +207,18 @@ HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //Hote
 
 											<div class="form-group col-md-12">
 												<label for="exampleFormControlTextarea1" class="form-label">飯店介紹</label>
-												<textarea class="form-control" name="hotelIntroduction" id="exampleFormControlTextarea1" rows="2"></textarea>
+												<textarea class="form-control" name="hotelIntroduction" id="exampleFormControlTextarea1" rows="2">${hotelVO.hotelIntroduction}</textarea>
 											</div>
+											
 											<div class="form-group col-md-12">
 												<label for="exampleFormControlTextarea1" class="form-label">飯店須知</label>
 												<textarea class="form-control" name="hotelNotice"
-													id="exampleFormControlTextarea1" rows="2"></textarea>
+													id="exampleFormControlTextarea1" rows="2">${hotelVO.hotelNotice}</textarea>
 											</div>
 											<div class="form-group col-md-12">
 												<label for="exampleFormControlTextarea1" class="form-label">常見問答</label>
 												<textarea class="form-control" name="hotelQa"
-													id="exampleFormControlTextarea1" rows="2"></textarea>
+													id="exampleFormControlTextarea1" rows="2">${hotelVO.hotelQa}</textarea>
 											</div>
 
 											<div class="form-check">
@@ -261,7 +262,7 @@ HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //Hote
 
 
 											<select id="city" name="hotelCounty">
-												<option value="<%=hotelVO.getHotelCounty()%>"><%=hotelVO.getHotelCounty()%></option>
+												<option value="臺北市">臺北市</option>
 											</select> 
 											<select id="area" name="area" style="display: none;">
 												<option value="">請選擇</option>

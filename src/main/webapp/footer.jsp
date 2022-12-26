@@ -20,7 +20,7 @@
 								</div>
 								<ul class="footer-link">
 									<li><i class="fas fa-caret-right"></i> <a href="#">首頁</a></li>
-									<li><i class="fas fa-caret-right"></i> <a href="#">比價</a></li>
+									<li><i class="fas fa-caret-right"></i> <a href="#">比較</a></li>
 									<li><i class="fas fa-caret-right"></i> <a href="#">美食</a></li>
 									<li><i class="fas fa-caret-right"></i> <a href="#">關於我們</a>
 									</li>

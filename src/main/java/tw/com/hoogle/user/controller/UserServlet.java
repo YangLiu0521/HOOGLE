@@ -134,7 +134,7 @@ public class UserServlet extends HttpServlet {
 				// 開始新增資料
 
 				userVO = userSvc.addUser(userVO);
-				session.setAttribute("userVO", userVO);
+				req.setAttribute("userVO", userVO);
 
 				// 新增完成，準備轉交
 
