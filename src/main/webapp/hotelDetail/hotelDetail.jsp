@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="tw.com.hoogle.ord.model.*" %>
+<%@ page import="tw.com.hoogle.orddetail.model.*" %>
 <%@ page import="tw.com.hoogle.user.model.*" %>
 <%@ page import="tw.com.hoogle.searchHotel.model.*" %>   
 <%@ page import="java.util.*" %>
@@ -13,6 +14,14 @@ OrdVO ordVO = (OrdVO) request.getSession().getAttribute("ordVO");
 OrdService ordSvc = new OrdService();
 List<OrdVO> list = ordSvc.getAll();
 pageContext.setAttribute("list",list);
+
+OrdDetailService orddetailSvc = new OrdDetailService();
+OrdDetailVO nonreserved4001 = orddetailSvc.getNonreserved(4001);
+pageContext.setAttribute("nonreserved4001",nonreserved4001);
+OrdDetailVO nonreserved4002 = orddetailSvc.getNonreserved(4002);
+pageContext.setAttribute("nonreserved4002",nonreserved4002);
+OrdDetailVO nonreserved4003 = orddetailSvc.getNonreserved(4003);
+pageContext.setAttribute("nonreserved4003",nonreserved4003);
 
 // SearchHotelBean checkinInput = (SearchHotelBean) request.getSession().getAttribute("checkinInput");
 
@@ -227,9 +236,24 @@ pageContext.setAttribute("list",list);
                       <ul class="hotel-featured">
                         <li><span><i class="fas fa-car"></i> 代客叫車服務</span></li>
                         <li><span><i class="fas fa-bath"></i> 浴缸</span></li>
-                        <li><span><i class="fas fa-home"></i> 每日客房清潔服務</span></li>
+                        <li><span><i class="fas fa-home"></i> 每日客房清潔</span></li>
                         <li><span><i class="fas fa-swimming-pool"></i> 游泳池</span></li>
                       </ul>
+                      
+                      <ul class="hotel-featured">
+                      	<li>
+                      	<input type="hidden" name="nonreserved4001" id="nr4001" value="${nonreserved4001}"><font color=red>${errorMsgs.ordId}</font>
+                      	<div style="color:blue;"> 剩餘房數 : ${nonreserved4001}</div>
+                      	</li>                     
+                      </ul>
+                      
+                      
+<!-- 						<ul class="hotel-featured"> -->
+<!-- 							<li> -->
+<!-- 									<b>剩餘房數 :</b> -->
+<%-- 									<b>${ordDetailVO4001}</b> --%>
+<!-- 							</li> -->
+<!-- 						</ul> -->
                       
                       <ul class="hotel-featured">
                        	<li>
@@ -275,8 +299,11 @@ pageContext.setAttribute("list",list);
                       <ul class="hotel-featured">
                         <li><span><i class="fas fa-car"></i> 代客叫車服務</span></li>
                         <li><span><i class="fas fa-bath"></i> 浴缸</span></li>
-                        <li><span><i class="fas fa-home"></i> 每日客房清潔服務</span></li>
+                        <li><span><i class="fas fa-home"></i> 每日客房清潔</span></li>
                         <li><span><i class="fas fa-swimming-pool"></i> 游泳池</span></li>
+                      </ul>
+                      <ul class="hotel-featured">
+                      	<li><div style="color:blue;"> 剩餘房數 : ${nonreserved4002}</div></li>                     
                       </ul>
                        <ul class="hotel-featured">
                        	<li>
@@ -327,8 +354,11 @@ pageContext.setAttribute("list",list);
                       <ul class="hotel-featured">
                         <li><span><i class="fas fa-car"></i> 代客叫車服務</span></li>
                         <li><span><i class="fas fa-bath"></i> 浴缸</span></li>
-                        <li><span><i class="fas fa-home"></i> 每日客房清潔服務</span></li>
+                        <li><span><i class="fas fa-home"></i> 每日客房清潔</span></li>
                         <li><span><i class="fas fa-swimming-pool"></i> 游泳池</span></li>
+                      </ul>
+                      <ul class="hotel-featured">
+                      	<li><div style="color:blue;"> 剩餘房數 : ${nonreserved4003}</div></li>                     
                       </ul>
                        <ul class="hotel-featured">
                        	<li>
@@ -456,10 +486,10 @@ pageContext.setAttribute("list",list);
                             <td>飯店名稱</td>
                             <td>${ordVO.hotelName}</td>
                           </tr>
-                          <tr>
-                            <td>訂單日期</td>
-                            <td>${ordDate}</td>
-                          </tr>
+<!--                           <tr> -->
+<!--                             <td>訂單日期</td> -->
+<%--                             <td>${ordDate}</td> --%>
+<!--                           </tr> -->
                           <tr>
                             <td>入住日期</td>
                             <td>${checkinInput}</td>

@@ -6,7 +6,15 @@ public class OrdDetailVO implements java.io.Serializable{
 	private Integer ordId;
 	private Integer roomAuto;
 	private Integer roomNumber;
+	private Integer nonreserved;
 	
+	
+	
+	@Override
+	public String toString() {
+//		return  "["+nonreserved+"]" ;
+		return  ""+nonreserved+"間" ;
+	}
 	public Integer getOrddetailId() {
 		return orddetailId;
 	}
@@ -31,6 +39,13 @@ public class OrdDetailVO implements java.io.Serializable{
 	public void setRoomNumber(Integer roomNumber) {
 		this.roomNumber = roomNumber;
 	}
+	public Integer getNonreserved() {
+		return nonreserved;
+	}
+	public void setNonreserved(Integer nonreserved) {
+		this.nonreserved = nonreserved;
+	}
+
 	
 	
 	

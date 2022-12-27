@@ -4,6 +4,8 @@
 <%@ page import="tw.com.hoogle.user.model.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="tw.com.hoogle.ord.model.*" %>
+<%@ page import="tw.com.hoogle.commend.model.*" %>
+
 
 <%
 	if (session.getAttribute("userVO") == null && session.getAttribute("hotelVO") == null ) {
@@ -209,6 +211,7 @@
             <c:forEach var="ordVO" items="${list}">
             <c:if test="${ userVO.userId == ordVO.userId }">
                   <tbody>
+                  <form METHOD="post" action="<%=request.getContextPath() %>/commend/commend.do">
                     <tr class="text-center">
                       <td>${ordVO.ordId}</td>
                       <td>${ordVO.hotelName}</td>
@@ -220,7 +223,9 @@
 <!--                       <td><a href="">點我評價</a></td> -->
 					<c:if test="${ordVO.ordCheckout <= ordVO.nowDate}">
                       <td>
-                      <button style="color: red" id="btn" type="button" value="" >點我評價</button>
+                      <button style="color: red" id="btn" type="submit" value="" >點我評價</button>
+                      <input type="hidden" name="ordId" value="${ordVO.ordId}">
+                     	<input type="hidden" name="action" value="insert">
                       </td></c:if>
                     <c:if test="${ordVO.ordCheckout > ordVO.nowDate}">
                     <td>
@@ -233,6 +238,9 @@
 <!-- 						</form> -->
 <!--                     	</td> -->
                     </tr>
+                    </form>
+                     
+                    
                   </tbody>
                   </c:if>
                   </c:forEach>
