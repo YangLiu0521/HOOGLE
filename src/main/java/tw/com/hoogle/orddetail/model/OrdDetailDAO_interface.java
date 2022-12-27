@@ -10,5 +10,6 @@ public interface OrdDetailDAO_interface {
 	public List<OrdDetailVO> findByOrdId(Integer ordId);
 	public OrdDetailVO findByPrimaryKey(Integer orddetailId);
 	public List<OrdDetailVO> getAll();
+	public OrdDetailVO findByRoomAuto(Integer roomAuto);
 
 }

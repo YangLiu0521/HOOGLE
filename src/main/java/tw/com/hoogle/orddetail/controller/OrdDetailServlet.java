@@ -261,10 +261,20 @@ if ("reserve".equals(action)) { // 來自addOrd.jsp的請求
 				errorMsgs.put("roomAuto3","請填數字");
 			}
 			
+//			Integer nonreserved1 = null;
+//			try {
+//				nonreserved1 = Integer.valueOf(req.getParameter("nonreserved1").trim());
+//				System.out.println("nonreserved1="+nonreserved1);
+//			}catch(NumberFormatException e) {
+//				errorMsgs.put("nonreserved1","請填數字");
+//			}
+			
 			Integer roomNumber1 = null;
 			try {
 				roomNumber1 = Integer.valueOf(req.getParameter("roomNumber1").trim());
 				System.out.println("roomNumber1="+roomNumber1);
+				
+				
 			} catch (NumberFormatException e) {
 				errorMsgs.put("roomNumber1","請填數字");
 			}
@@ -312,6 +322,7 @@ if ("reserve".equals(action)) { // 來自addOrd.jsp的請求
 				session.setAttribute("roomNumber2", roomNumber2);
 				session.setAttribute("roomNumber3", roomNumber3);
 				session.setAttribute("money", money);
+				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				
 				String url = "/orddetail/payPage.jsp";
@@ -353,7 +364,7 @@ if ("reserve".equals(action)) { // 來自addOrd.jsp的請求
 			Integer roomAuto3 = null;
 			try {
 				roomAuto3 = Integer.valueOf(req.getParameter("roomAuto3").trim());
-				System.out.println("roomAuto3="+roomAuto1);
+				System.out.println("roomAuto3="+roomAuto3);
 			} catch (NumberFormatException e) {
 				errorMsgs.put("roomAuto3","請填數字");
 			}

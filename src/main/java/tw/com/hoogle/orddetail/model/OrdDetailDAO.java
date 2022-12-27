@@ -45,6 +45,8 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 			"DELETE FROM orddetail where orddetailId = ?";
 		private static final String UPDATE = 
 			"UPDATE orddetail set ordId=?, roomAuto=?, roomNumber=? where orddetailId=?";
+		private static final String GET_NONRESERVED=
+			"SELECT nonreserved FROM room where roomAuto=?";
 
 		
 	
@@ -378,6 +380,63 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 		return orddetailVO;
 	}
 
+	@Override
+	public OrdDetailVO findByRoomAuto(Integer roomAuto) {
+
+		OrdDetailVO orddetailVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+//			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_NONRESERVED);
+
+			pstmt.setInt(1, roomAuto);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				orddetailVO = new OrdDetailVO();
+				orddetailVO.setNonreserved(rs.getInt("nonreserved"));
+//				Integer nonreserved = rs.getInt("nonreserved");
+			}
+
+		} 
+		catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		}
+		catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return orddetailVO;
+	}
+	
 	@Override
 	public List<OrdDetailVO> getAll() {
 

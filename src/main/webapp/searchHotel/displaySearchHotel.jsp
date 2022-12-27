@@ -193,15 +193,17 @@ pageContext.setAttribute("list",list);
       	<h5>退房日期 : ${checkoutInput}</h5>
       	<h5>入住天數 : ${ordNights}天</h5>   
      </div>
-     </c:if></c:if></c:if></c:if></c:if></c:if>
      
      <c:if test="${ordNights < 0}">
       <div class="section-title text-center">
-      	<h4>入住日期(${checkinInput})不得晚於退房日期(${checkoutInput})</h4>   
+      	<h5 style="color: red ">入住日期(${checkinInput})不得晚於退房日期(${checkoutInput})</h5>   
      </div>
      </c:if>
+     </c:if></c:if></c:if></c:if></c:if></c:if>
+     
+     
 <c:if test="${ordNights > 0}">
-<c:if test="${checkinInput > ordDate}">
+<c:if test="${checkinInput >= ordDate}">
 <c:if test="${checkoutInput > ordDate}">
 <div class="row">
 <c:if test="${hotelCountyInput=='台北市'}">

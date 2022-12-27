@@ -51,6 +51,10 @@ public class OrdDetailService {
 	public OrdDetailVO getOneOrddetail(Integer orddetailId) {
 		return dao.findByPrimaryKey(orddetailId);
 	}
+	
+	public OrdDetailVO getNonreserved(Integer roomAuto) {
+		return dao.findByRoomAuto(roomAuto);
+	}
 
 	public List<OrdDetailVO> getOneOrd(Integer ordId) {
 		return dao.findByOrdId(ordId);
