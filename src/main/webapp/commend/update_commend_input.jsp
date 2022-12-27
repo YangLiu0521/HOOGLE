@@ -15,7 +15,7 @@ CommendVO commendVO = (CommendVO) request.getAttribute("commendVO");
 	href="<%=request.getContextPath()%>/css/commend/commend.css" />
 <title>住宿經驗評價</title>
 </head>
-<body>
+<body style="text-align:center">
 	<FORM METHOD="post" ACTION="commend.do" name="form1">
 		<!--header upper start-->
 		<header class="header">
