@@ -1,10 +1,13 @@
+<%@page import="org.hibernate.internal.build.AllowSysOut"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*" %>
 <%@ page import="tw.com.hoogle.commend.model.*"%>
-<%@ page import="tw.com.hoogle.orddetail.model.*"%>
+<%@ page import="tw.com.hoogle.ord.model.*"%>
 <%
 CommendVO commendVO = (CommendVO) request.getAttribute("commendVO");
+OrdVO ordVO = (OrdVO) request.getAttribute("ordVO");
 %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +19,7 @@ CommendVO commendVO = (CommendVO) request.getAttribute("commendVO");
 	href="<%=request.getContextPath()%>/css/commend/commend.css" />
 <title>住宿經驗評價</title>
 </head>
-<body>
+<body >
 	<FORM METHOD="post" ACTION="commend.do" name="form1">
 		<!--header upper start-->
 		<header class="header">
@@ -34,8 +37,10 @@ CommendVO commendVO = (CommendVO) request.getAttribute("commendVO");
 				<!--         </div> -->
 				<div class="ordId">
 					<h2>訂單編號:</h2>
-					<p><input type="TEXT" class="ordId" name="ordId"
-						value="${ordDetailVO.ordId}" /></p> 
+					<input type="TEXT" disabled class="ordId" name="ordId"
+						value="${ordId}" />
+						<input type="hidden" name="ordId" 
+							value="${ordId}"/>
 <!-- 						如果要讓使用者不能更改訂單編號，要改成type="TEXT" disabled -->
 				</div>
 			</div>

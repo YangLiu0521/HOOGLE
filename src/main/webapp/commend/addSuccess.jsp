@@ -66,13 +66,13 @@ th, td {
 <body>
 <%-- 	<a href="<%=request.getContextPath()%>/commend/select_page.jsp">回首頁</a> --%>
 	<div class="center-in-center">
-		<h1>新增資料成功，謝謝您的回饋</h1>
+		<h1 style="text-align:center">新增資料成功，謝謝您的回饋</h1>
 		<table id="table-1">
 			<tr>
 				<td>
 					<h2>所有評價資料</h2>
 					<h3>
-						<a href="select_page.jsp">回首頁</a>
+						<a href="<%=request.getContextPath()%>/user/userMemberCenter.jsp">回首頁</a>
 					</h3>
 				</td>
 			</tr>
