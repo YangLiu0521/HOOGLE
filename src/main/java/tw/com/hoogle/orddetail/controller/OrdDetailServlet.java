@@ -256,25 +256,16 @@ if ("reserve".equals(action)) { // 來自addOrd.jsp的請求
 			Integer roomAuto3 = null;
 			try {
 				roomAuto3 = Integer.valueOf(req.getParameter("roomAuto3").trim());
-				System.out.println("roomAuto3="+roomAuto1);
+				System.out.println("roomAuto3="+roomAuto3);
 			} catch (NumberFormatException e) {
 				errorMsgs.put("roomAuto3","請填數字");
 			}
 			
-//			Integer nonreserved1 = null;
-//			try {
-//				nonreserved1 = Integer.valueOf(req.getParameter("nonreserved1").trim());
-//				System.out.println("nonreserved1="+nonreserved1);
-//			}catch(NumberFormatException e) {
-//				errorMsgs.put("nonreserved1","請填數字");
-//			}
 			
 			Integer roomNumber1 = null;
 			try {
 				roomNumber1 = Integer.valueOf(req.getParameter("roomNumber1").trim());
 				System.out.println("roomNumber1="+roomNumber1);
-				
-				
 			} catch (NumberFormatException e) {
 				errorMsgs.put("roomNumber1","請填數字");
 			}
@@ -295,6 +286,30 @@ if ("reserve".equals(action)) { // 來自addOrd.jsp的請求
 				errorMsgs.put("roomNumber3","請填數字");
 			}
 			
+			Integer nonreserved4001 = null;
+			try {
+				nonreserved4001 = Integer.valueOf(req.getParameter("nonreserved4001").trim());
+				nonreserved4001 = nonreserved4001 - roomNumber1;
+				System.out.println("nonreserved4001="+nonreserved4001);
+			}catch(NumberFormatException e) {
+				errorMsgs.put("nonreserved4001","請填數字");
+			}
+			Integer nonreserved4002 = null;
+			try {
+				nonreserved4002 = Integer.valueOf(req.getParameter("nonreserved4002").trim());
+				nonreserved4002 = nonreserved4002 - roomNumber2;
+				System.out.println("nonreserved4002="+nonreserved4002);
+			}catch(NumberFormatException e) {
+				errorMsgs.put("nonreserved4002","請填數字");
+			}
+			Integer nonreserved4003 = null;
+			try {
+				nonreserved4003 = Integer.valueOf(req.getParameter("nonreserved4003").trim());
+				nonreserved4003 = nonreserved4003 - roomNumber3;
+				System.out.println("nonreserved4003="+nonreserved4003);
+			}catch(NumberFormatException e) {
+				errorMsgs.put("nonreserved4003","請填數字");
+			}
 			
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -393,11 +408,10 @@ if ("reserve".equals(action)) { // 來自addOrd.jsp的請求
 				errorMsgs.put("roomNumber3","請填數字");
 			}
 			
-			
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/hotelDetail/hotelDetail.jsp");
+							.getRequestDispatcher("/index.jsp");
 					failureView.forward(req, res);
 					return;
 				}

@@ -13,7 +13,7 @@ public class OrdDetailVO implements java.io.Serializable{
 	@Override
 	public String toString() {
 //		return  "["+nonreserved+"]" ;
-		return  ""+nonreserved+"間" ;
+		return  ""+nonreserved+"" ;
 	}
 	public Integer getOrddetailId() {
 		return orddetailId;

@@ -75,7 +75,7 @@
                 <li class="nav-item"> <a class="nav-link active" id="tab5-tab" data-toggle="tab" href="#tab5" role="tab"
                     aria-controls="tab5" aria-selected="true"><i class="fa-regular fa-circle-user"></i> 旅客基本資料</a> </li>
                 <li class="nav-item"> <a class="nav-link" id="order-paid-nav" data-toggle="tab" href="#order-paid" role="tab"
-                    aria-controls="tab6" aria-selected="false"><i class="fa-solid fa-clipboard"></i> 住宿訂單管理</a> </li>
+                    aria-controls="tab6" aria-selected="false"><i ></i> 住宿訂單管理</a> </li>
                 <li class="nav-item" id="Signout" style="cursor:pointer"><a class="nav-link"><i class="fa-solid fa-right-from-bracket"></i> 登出</a> </li>                  
               </ul>
             </div>
