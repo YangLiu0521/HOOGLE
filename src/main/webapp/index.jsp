@@ -2,6 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%@ page import="java.util.*"%>
+<%@ page import="tw.com.hoogle.news.model.*"%>
+
+<jsp:useBean id="newsSvc" scope="page" class="tw.com.hoogle.news.model.NewsService"/>
+
+<%
+List<NewsVO> newsList = newsSvc.showOnIndex();
+pageContext.setAttribute("newsList", newsList);
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,6 +47,8 @@
 <link href="<%=request.getContextPath()%>/css/responsive.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/helper.css"
+	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/admin/forIndex.css"
 	rel="stylesheet">
 <!-- Fontawesome -->
 <script src="https://kit.fontawesome.com/0cf2b86d93.js" crossorigin ="anonymous"></script>
@@ -236,78 +248,29 @@
 			</div>
 			<!-- section title -->
 			<div class="row">
+			<c:forEach var="newsVO" items="${newsList}">
 				<div class="col-lg-4 col-md-6 mb-30">
 					<!-- blog box -->
 					<div class="blog-box shadow">
 						<div class="blog_img mb-20">
-							<img src="images/blog/blog-1.jpg" alt="">
+							<img src="${pageContext.request.contextPath}/NewsPicReader?newsId=${newsVO.newsId}">
 						</div>
 						<div class="blog-des">
 							<h6 class="blog_date font-weight-normal text-muted">
-								<span>公告類型</span> January 01, 2020
+								${newsVO.newsDate}
 							</h6>
 							<h5 class="mt-10 mb-6">
-								<a href="#" class="text-dark">The Most Advance Business Plan</a>
+								${newsVO.newsSubject}
 							</h5>
-							<p class="text-muted">Lorem ipsum dolor sit amet consectetur
-								ipiscing elit amet consectetur piscing elit consectetur
-								adipiscing elit sed et eletum.</p>
-							<div class="read_more">
-								<div class="blog_border"></div>
-								<a href="#" class="text-dark text-uppercase"> Read More</a>
-							</div>
+							 	${newsVO.newsContent}
+<!-- 							<div class="read_more"> -->
+<!-- 								<div class="blog_border"></div> -->
+<!-- 								<a href="#" class="text-dark text-uppercase"> Read More</a> -->
+<!-- 							</div> -->
 						</div>
 					</div>
-					<!-- blog box end -->
 				</div>
-				<div class="col-lg-4 col-md-6 mb-30">
-					<!-- blog box -->
-					<div class="blog-box shadow">
-						<div class="blog_img mb-20">
-							<img src="images/blog/blog-2.jpg" alt="">
-						</div>
-						<div class="blog-des">
-							<h6 class="blog_date font-weight-normal text-muted">
-								<span>公告類型</span> January 01, 2020
-							</h6>
-							<h5 class="mt-10 mb-6">
-								<a href="#" class="text-dark">Beautiful Home Page</a>
-							</h5>
-							<p class="text-muted">Lorem ipsum dolor sit amet consectetur
-								ipiscing elit amet consectetur piscing elit consectetur
-								adipiscing elit sed et eletum.</p>
-							<div class="read_more">
-								<div class="blog_border"></div>
-								<a href="#" class="text-dark text-uppercase"> Read More</a>
-							</div>
-						</div>
-					</div>
-					<!-- blog box end -->
-				</div>
-				<div class="col-lg-4 col-md-6 mb-30">
-					<!-- blog box -->
-					<div class="blog-box shadow">
-						<div class="blog_img mb-20">
-							<img src="images/blog/blog-3.jpg" alt="">
-						</div>
-						<div class="blog-des">
-							<h6 class="blog_date font-weight-normal text-muted">
-								<span>公告類型</span> January 01, 2020
-							</h6>
-							<h5 class="mt-10 mb-6">
-								<a href="#" class="text-dark">Modern Design Concept</a>
-							</h5>
-							<p class="text-muted">Lorem ipsum dolor sit amet consectetur
-								ipiscing elit amet consectetur piscing elit consectetur
-								adipiscing elit sed et eletum.</p>
-							<div class="read_more">
-								<div class="blog_border"></div>
-								<a href="#" class="text-dark text-uppercase"> Read More</a>
-							</div>
-						</div>
-					</div>
-					<!-- blog box end -->
-				</div>
+			</c:forEach>
 			</div>
 		</div>
 	</div>
