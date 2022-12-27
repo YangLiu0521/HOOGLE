@@ -2,19 +2,22 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="tw.com.hoogle.hotel.model.*"%>
 <%@ page import="tw.com.hoogle.administrator.model.*"%>
+<%@ page import="tw.com.hoogle.news.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <jsp:useBean id="administratorSvc" scope="page" class="tw.com.hoogle.administrator.model.AdministratorService"/>
-<jsp:useBean id="hotelSvc" scope="page" class="tw.com.hoogle.hotel.model.HotelService"/>
+<jsp:useBean id="newsSvc" scope="page" class="tw.com.hoogle.news.model.NewsService"/>
 <%
-// AdministratorService administratorSvc = new AdministratorService();
-List<HotelVO> list = hotelSvc.getAll();
-pageContext.setAttribute("list", list);
+AdministratorVO administratorVO = (AdministratorVO) request.getAttribute("administratorVO");
 %>
 <%
-HotelVO hotelVO = (HotelVO) request.getAttribute("hotelEmail");
+AdministratorVO loginAdministratorVO = (AdministratorVO)session.getAttribute("loginAdministratorVO");
+Integer adminId = loginAdministratorVO.getAdministratorId();
+// String adminName = loginAdministratorVO.getAdministratorName();
+%>
+<%
+NewsVO newsVO = (NewsVO) request.getAttribute("newsVO");
 %>
 <%
 String account = (String)session.getAttribute("account");
@@ -151,146 +154,106 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 <!-- 		</a> -->
 		
 
-		<div class="test_radius">飯店詳細資料</div>
+		<div class="test_radius">新增最新消息</div>
 		<div class="login_mark">
 			<%=account%> 登入中...
 		</div>
 	</div>
-
-	<div class="features">
-		<div class="features_search">
-			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/HotelController" class="searchbyid">
-				搜尋飯店
-				<select size="1" name="hotelEmail">
-					<c:forEach var="hotelVO" items="${hotelSvc.all}">
-						<option value="${hotelVO.hotelEmail}">${hotelVO.hotelEmail}：${hotelVO.hotelName}
-					</c:forEach>
-				</select>
-				<input type="hidden" name="action" value="getOne_For_Hotel">
-				<input type="submit" class="csearchbyid" value="送出">
-			</FORM>
-		</div>
-	</div>
+	
+	<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
+	
+	
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/NewsServlet" name="form1" enctype="multipart/form-data">
 	<div class="div_table">
-	<table>
-		<tr class="td_head">
-			<th width="40">飯店<br>編號</th>
-			<th width="100">飯店信箱</th>
-			<th width="70">飯店密碼</th>
-			<th width="50">飯店名稱</th>
-			<th width="60">飯店電話</th>
-			<th width="50">飯店負責人</th>
-			<th width="50">飯店統一編號</th>
-<!-- 			<th width="30">飯店縣市</th> -->
-<!-- 			<th width="70">飯店地址</th> -->
-<!-- 			<th width="20">飯店類型</th> -->
-<!-- 			<th width="50">訂房須知</th> -->
-<!-- 			<th width="50">QA</th> -->
-<!-- 			<th width="50">飯店介紹</th> -->
-<!-- 			<th width="30">狀態</th> -->
-			
-		</tr>
-		<%-- 	<%@ include file="page1.file" %>  --%>
-		<%-- 	<c:forEach var="administratorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
-<%-- 		<c:forEach var="hotelVO" items="${list}"> --%>
-			<tr class="td_body">
-				<td>${hotelVO.hotelId}</td>
-				<td>${hotelVO.hotelEmail}</td>
-				<td>${hotelVO.hotelPassword}</td>
-				<td>${hotelVO.hotelName}</td>
-				<td>${hotelVO.hotelPhone}</td>
-				<td>${hotelVO.hotelPrincipal}</td>
-				<td>${hotelVO.hotelTaxid}</td>
-<%-- 				<td>${hotelVO.hotelCounty}</td> --%>
-<%-- 				<td>${hotelVO.hotelAddress}</td> --%>
-<%-- 				<td>${hotelVO.hotelType}</td> --%>
-<%-- 				<td>${hotelVO.hotelNotice}</td> --%>
-<%-- 				<td>${hotelVO.hotelQa}</td> --%>
-<%-- 				<td>${hotelVO.hotelIntroduction}</td> --%>
-<!-- 				<td> -->
-<%-- 					${hotelVO.hotelState==0?"停權":""} --%>
-<%-- 					${hotelVO.hotelState==1?"正常":""} --%>
-<%-- 					${hotelVO.hotelState==2?"待審核":""} --%>
-<!-- 				</td> -->
-	</table>
-	</div>
-	<br>
-	<div class="div_table">
-	<table>
-		<tr class="td_head">
-<!-- 			<th width="40">飯店<br>編號</th> -->
-<!-- 			<th width="100">飯店信箱</th> -->
-<!-- 			<th width="50">飯店密碼</th> -->
-<!-- 			<th width="50">飯店名稱</th> -->
-<!-- 			<th width="60">飯店電話</th> -->
-<!-- 			<th width="50">飯店負責人</th> -->
-<!-- 			<th width="50">飯店統一編號</th> -->
-<!-- 			<th width="30">飯店縣市</th> -->
-			<th width="70">飯店地址</th>
-			<th width="20">飯店<br>類型</th>
-			<th width="50">訂房須知</th>
-<!-- 			<th width="50">QA</th> -->
-			<th width="50">飯店介紹</th>
-			<th width="50">房型及數量</th>
-			<th width="30">狀態</th>
-			
-		</tr>
-
-			<tr class="td_body">
-<%-- 				<td>${hotelVO.hotelId}</td> --%>
-<%-- 				<td>${hotelVO.hotelEmail}</td> --%>
-<%-- 				<td>${hotelVO.hotelPassword}</td> --%>
-<%-- 				<td>${hotelVO.hotelName}</td> --%>
-<%-- 				<td>${hotelVO.hotelPhone}</td> --%>
-<%-- 				<td>${hotelVO.hotelPrincipal}</td> --%>
-<%-- 				<td>${hotelVO.hotelTaxid}</td> --%>
-<%-- 				<td>${hotelVO.hotelCounty}</td> --%>
-				<td>${hotelVO.hotelAddress}</td>
-				<td>${hotelVO.hotelType}</td>
-				<td>${hotelVO.hotelNotice}</td>
-<%-- 				<td>${hotelVO.hotelQa}</td> --%>
-				<td>${hotelVO.hotelIntroduction}</td>
-				<td>
-					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/RoomDetailServlet" class="">
-						<input type="hidden" name="hotelId" value="${hotelVO.hotelId}">
-						<input type="hidden" name="action" value="getRoomDetail">
-						<input type="submit" name="action" value="房型及數量">
-					</FORM>
-				</td>
-				<td>
-					${hotelVO.hotelState==0?"停權":""}
-					${hotelVO.hotelState==1?"正常":""}
-					${hotelVO.hotelState==2?"待審核":""}
-				</td>
-
-<%-- 				<td><a href="<%=request.getContextPath()%>/back_end/hotelAneUser/userDetail.jsp">詳細資料</a></td> --%>
-
-<!-- ==不修改旅客==	-->
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post" -->
-<%-- 						ACTION="<%=request.getContextPath()%>/back_end/userForBackEnd/UserForBackEndServlet" --%>
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="修改"> -->
-<%-- 						<input type="hidden" name="userId" value="${userVO.userId}"> --%>
-<!-- 						<input type="hidden" name="action" value="getOne_For_Update"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
-
-<!-- ==不停權== -->
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post" -->
-<%-- 						ACTION="<%=request.getContextPath()%>/back_end/userForBackEnd/UserForBackEndServlet" --%>
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="停權"> -->
-<%-- 						<input type="hidden" name="userId" value="${userVO.userId}"> --%>
-<!-- 						<input type="hidden" name="action" value="disable"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
+	
+		<table>
+			<tr class="td_head">
+				<td width="70">管理者編號</td>
+				<td width="80">上架日期</td>
 			</tr>
-<%-- 		</c:forEach> --%>
-	</table>
+			
+			<tr class="td_body">
+				
+<!-- Integer adminId = administratorVO.getAdministratorId(); -->
+<!-- String adminName = administratorVO.getAdministratorName(); -->
+<!-- pageContext.setAttribute("adminId", adminId); -->
+<!-- pageContext.setAttribute("adminName", adminName); -->
+					
+
+			  	<td><input type="text" name="administratorId" size="2" 
+			  		value="<%=adminId %>"/></td>
+			  
+				<td><input type="date" name="newsDate" size="10"
+					value="<%=(newsVO == null) ? "" : newsVO.getNewsDate()%>" /></td>
+	
+			</tr>
+		</table>
+	
 	</div>
+	
+	<br>
+
+	<div class="div_table">
+		<table>
+			
+			<%-- 	<%@ include file="page1.file" %>  --%>
+			<%-- 	<c:forEach var="administratorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
+			<tr class="td_body" style=${newsVO.newsState==0?"color:gray;":""}>	
+				<td>
+<!-- 					<ion-icon name="pin" width="30px" height="30px"></ion-icon> -->
+					<input type="TEXT" name="newsSubject" size="50" width="70" placeholder="請輸入主旨..."
+					value="<%=(newsVO == null) ? "" : newsVO.getNewsSubject()%>" />
+				</td>
+				<td rowspan="2">
+					<form action="/somewhere/to/upload" enctype="multipart/form-data">
+	   					<input type="file" name="newsPic" onchange="readURL(this)" targetID="preview_progressbarTW_img" accept="image/*"/>
+	   					<br>
+	   					<img id="preview_progressbarTW_img" src="#" width="300px" height="200px"/>
+					</form>
+										
+				</td>
+			</tr>
+			<tr class="td_body">
+				<td>
+					<textarea style="resize: none; width: 370px; height: 200px;" name="newsContent" placeholder="請輸入內容..." 
+						value="<%=(newsVO == null) ? "" : newsVO.getNewsContent()%>"></textarea>
+<!-- 				<input type="text" name="newsContent" size="200" -->
+<%-- 					value="<%=(newsVO == null) ? "" : newsVO.getNewsContent()%>" /> --%>
+				</td>
+
+			</tr>
+		</table>
+	</div>
+	
+
+	<br>
+	<input type="hidden" name="action" value="insert">
+	<input type="submit" value="確定新增" class="input_add">
+		
+	</FORM>
 	<%-- <%@ include file="page2.file" %> --%>
+	
+	<script>
+	function readURL(input){
+		  if(input.files && input.files[0]){
+		    var imageTagID = input.getAttribute("targetID");
+		    var reader = new FileReader();
+		    reader.onload = function (e) {
+		       var img = document.getElementById(imageTagID);
+		       img.setAttribute("src", e.target.result)
+		    }
+		    reader.readAsDataURL(input.files[0]);
+		  }
+		}
+	</script>
 
 	<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 	<script src="<%=request.getContextPath()%>/js/admin/admin.js"></script>
