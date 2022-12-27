@@ -89,18 +89,18 @@ public class MailService {
 	
 	
 	
-	public static void main(String[] args) {
-		// 自訂收件地址
-		String to = "wen821107@gmail.com";
-
-		String subject = "wendy還敢搞R";
-
-		String ch_name = "peter1";
-		String passRandom = "111";
-		String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)";
-
-		MailService mailService = new MailService();
-		mailService.sendMail(to, subject, messageText);
-
-	}
+//	public static void main(String[] args) {
+//		// 自訂收件地址
+//		String to = "wen821107@gmail.com";
+//
+//		String subject = "wendy還敢搞R";
+//
+//		String ch_name = "peter1";
+//		String passRandom = "111";
+//		String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)";
+//
+//		MailService mailService = new MailService();
+//		mailService.sendMail(to, subject, messageText);
+//
+//	}
 }

@@ -64,7 +64,7 @@ public class UserForBackEndServlet extends HttpServlet {
 			// 3.查詢完成，準備轉交
 
 			req.setAttribute("userVO", userVO); // 資料庫取出userVO物件，存入req
-			String url = "/back_end/hotelAndUser/listOneUser.jsp";
+			String url = "/back_end/hotelAndUser/userDetail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交給listOneUser.jsp
 			successView.forward(req, res);
 		}
@@ -101,7 +101,7 @@ public class UserForBackEndServlet extends HttpServlet {
 			// 3.查詢完成，準備轉交
 
 			req.setAttribute("userVO", userVO); // 資料庫取出userVO物件，存入req
-			String url = "/back_end/hotelAndUser/listOneUser.jsp";
+			String url = "/back_end/hotelAndUser/userDetail.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交給listOneUser.jsp
 			successView.forward(req, res);
 		}

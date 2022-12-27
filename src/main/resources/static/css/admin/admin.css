@@ -421,7 +421,20 @@ a{
   left: 630px;
   color: #4221de;
   border-bottom: solid 1.2px #4221de;
+}
 
+.link_user_list{
+  position: relative;
+  left: 570px;
+  color: #4221de;
+  border-bottom: solid 1.2px #4221de;
+}
+
+.link_news_list{
+  position: relative;
+  left: 510px;
+  color: #4221de;
+  border-bottom: solid 1.2px #4221de;
 }
 
 .csearchbyid{
@@ -436,6 +449,19 @@ a.admin_create{
   /* background-color: var(--white-color); */
   position: relative;
   left: calc(900px - 280px - 100px - 10px);
+  display: flex;
+  /* 左右置中 */
+  justify-content: center; 
+      
+}
+a.news_create{
+  width: 100px;
+  font-size: 14px;
+  /* color: var(--color-color); */
+  border-left: solid 1.5px var(--bg-color);
+  /* background-color: var(--white-color); */
+  position: relative;
+  left: 280px;
   display: flex;
   /* 左右置中 */
   justify-content: center; 

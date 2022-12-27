@@ -2,19 +2,25 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="tw.com.hoogle.hotel.model.*"%>
 <%@ page import="tw.com.hoogle.administrator.model.*"%>
+<%@ page import="tw.com.hoogle.news.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <jsp:useBean id="administratorSvc" scope="page" class="tw.com.hoogle.administrator.model.AdministratorService"/>
-<jsp:useBean id="hotelSvc" scope="page" class="tw.com.hoogle.hotel.model.HotelService"/>
+<jsp:useBean id="newsSvc" scope="page" class="tw.com.hoogle.news.model.NewsService"/>
 <%
-// AdministratorService administratorSvc = new AdministratorService();
-List<HotelVO> list = hotelSvc.getAll();
+List<AdministratorVO> list = administratorSvc.getAll();
 pageContext.setAttribute("list", list);
 %>
 <%
-HotelVO hotelVO = (HotelVO) request.getAttribute("hotelEmail");
+String dateFrom = ((Date)(request.getAttribute("dateFrom"))).toString();
+String dateEnd = ((Date)(request.getAttribute("dateEnd"))).toString();
+List<NewsVO> searchNews = newsSvc.findNewsByDate(java.sql.Date.valueOf(dateFrom), 
+		                                         java.sql.Date.valueOf(dateEnd));
+System.out.println("日期轉型成功");
+pageContext.setAttribute("dateFrom", dateFrom);
+pageContext.setAttribute("dateEnd", dateEnd);
+pageContext.setAttribute("searchNews", searchNews);
 %>
 <%
 String account = (String)session.getAttribute("account");
@@ -151,143 +157,53 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 <!-- 		</a> -->
 		
 
-		<div class="test_radius">飯店詳細資料</div>
+		<div class="test_radius">最新消息搜尋結果</div>
 		<div class="login_mark">
 			<%=account%> 登入中...
 		</div>
 	</div>
 
+
 	<div class="features">
 		<div class="features_search">
-			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/HotelController" class="searchbyid">
-				搜尋飯店
-				<select size="1" name="hotelEmail">
-					<c:forEach var="hotelVO" items="${hotelSvc.all}">
-						<option value="${hotelVO.hotelEmail}">${hotelVO.hotelEmail}：${hotelVO.hotelName}
-					</c:forEach>
-				</select>
-				<input type="hidden" name="action" value="getOne_For_Hotel">
-				<input type="submit" class="csearchbyid" value="送出">
-			</FORM>
+			<label class="count_register_hotel"><%=dateFrom%>~<%=dateEnd%>：共有 ${searchNews.size()} 筆</label>
+			<a class="link_news_list" href="<%=request.getContextPath()%>/back_end/news/newsList.jsp">最新消息列表</a>
 		</div>
+		
 	</div>
 	<div class="div_table">
 	<table>
 		<tr class="td_head">
-			<th width="40">飯店<br>編號</th>
-			<th width="100">飯店信箱</th>
-			<th width="70">飯店密碼</th>
-			<th width="50">飯店名稱</th>
-			<th width="60">飯店電話</th>
-			<th width="50">飯店負責人</th>
-			<th width="50">飯店統一編號</th>
-<!-- 			<th width="30">飯店縣市</th> -->
-<!-- 			<th width="70">飯店地址</th> -->
-<!-- 			<th width="20">飯店類型</th> -->
-<!-- 			<th width="50">訂房須知</th> -->
-<!-- 			<th width="50">QA</th> -->
-<!-- 			<th width="50">飯店介紹</th> -->
-<!-- 			<th width="30">狀態</th> -->
-			
+			<th width="45">編號</th>
+			<th width="40">管理者<br>編號</th>
+			<th width="80">最新消息主旨</th>
+			<th width="140">最新消息內容</th>
+			<th width="60">上架日期</th>
+			<th width="80">照片</th>
+			<th width="40">狀態</th>
+			<th width="40">下架</th>
 		</tr>
 		<%-- 	<%@ include file="page1.file" %>  --%>
 		<%-- 	<c:forEach var="administratorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
-<%-- 		<c:forEach var="hotelVO" items="${list}"> --%>
-			<tr class="td_body">
-				<td>${hotelVO.hotelId}</td>
-				<td>${hotelVO.hotelEmail}</td>
-				<td>${hotelVO.hotelPassword}</td>
-				<td>${hotelVO.hotelName}</td>
-				<td>${hotelVO.hotelPhone}</td>
-				<td>${hotelVO.hotelPrincipal}</td>
-				<td>${hotelVO.hotelTaxid}</td>
-<%-- 				<td>${hotelVO.hotelCounty}</td> --%>
-<%-- 				<td>${hotelVO.hotelAddress}</td> --%>
-<%-- 				<td>${hotelVO.hotelType}</td> --%>
-<%-- 				<td>${hotelVO.hotelNotice}</td> --%>
-<%-- 				<td>${hotelVO.hotelQa}</td> --%>
-<%-- 				<td>${hotelVO.hotelIntroduction}</td> --%>
-<!-- 				<td> -->
-<%-- 					${hotelVO.hotelState==0?"停權":""} --%>
-<%-- 					${hotelVO.hotelState==1?"正常":""} --%>
-<%-- 					${hotelVO.hotelState==2?"待審核":""} --%>
-<!-- 				</td> -->
-	</table>
-	</div>
-	<br>
-	<div class="div_table">
-	<table>
-		<tr class="td_head">
-<!-- 			<th width="40">飯店<br>編號</th> -->
-<!-- 			<th width="100">飯店信箱</th> -->
-<!-- 			<th width="50">飯店密碼</th> -->
-<!-- 			<th width="50">飯店名稱</th> -->
-<!-- 			<th width="60">飯店電話</th> -->
-<!-- 			<th width="50">飯店負責人</th> -->
-<!-- 			<th width="50">飯店統一編號</th> -->
-<!-- 			<th width="30">飯店縣市</th> -->
-			<th width="70">飯店地址</th>
-			<th width="20">飯店<br>類型</th>
-			<th width="50">訂房須知</th>
-<!-- 			<th width="50">QA</th> -->
-			<th width="50">飯店介紹</th>
-			<th width="50">房型及數量</th>
-			<th width="30">狀態</th>
-			
-		</tr>
-
-			<tr class="td_body">
-<%-- 				<td>${hotelVO.hotelId}</td> --%>
-<%-- 				<td>${hotelVO.hotelEmail}</td> --%>
-<%-- 				<td>${hotelVO.hotelPassword}</td> --%>
-<%-- 				<td>${hotelVO.hotelName}</td> --%>
-<%-- 				<td>${hotelVO.hotelPhone}</td> --%>
-<%-- 				<td>${hotelVO.hotelPrincipal}</td> --%>
-<%-- 				<td>${hotelVO.hotelTaxid}</td> --%>
-<%-- 				<td>${hotelVO.hotelCounty}</td> --%>
-				<td>${hotelVO.hotelAddress}</td>
-				<td>${hotelVO.hotelType}</td>
-				<td>${hotelVO.hotelNotice}</td>
-<%-- 				<td>${hotelVO.hotelQa}</td> --%>
-				<td>${hotelVO.hotelIntroduction}</td>
+		<c:forEach var="newsVO" items="${searchNews}">
+			<tr class="td_body" style=${newsVO.newsState==0?"color:gray;":""}>
+						
+				<td>${newsVO.newsId}</td>
+				<td>${newsVO.administratorId}</td>
+				<td>${newsVO.newsSubject}</td>
+				<td>${newsVO.newsContent}</td>
+				<td>${newsVO.newsDate}</td>
 				<td>
-					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/RoomDetailServlet" class="">
-						<input type="hidden" name="hotelId" value="${hotelVO.hotelId}">
-						<input type="hidden" name="action" value="getRoomDetail">
-						<input type="submit" name="action" value="房型及數量">
-					</FORM>
+					<img src="${pageContext.request.contextPath}/NewsPicReader?newsId=${newsVO.newsId}" height="100" width="100">
 				</td>
+				<td>${newsVO.newsState==0?"已下架":"上架中"}</td>
 				<td>
-					${hotelVO.hotelState==0?"停權":""}
-					${hotelVO.hotelState==1?"正常":""}
-					${hotelVO.hotelState==2?"待審核":""}
+					<form>
+					</form>
 				</td>
 
-<%-- 				<td><a href="<%=request.getContextPath()%>/back_end/hotelAneUser/userDetail.jsp">詳細資料</a></td> --%>
-
-<!-- ==不修改旅客==	-->
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post" -->
-<%-- 						ACTION="<%=request.getContextPath()%>/back_end/userForBackEnd/UserForBackEndServlet" --%>
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="修改"> -->
-<%-- 						<input type="hidden" name="userId" value="${userVO.userId}"> --%>
-<!-- 						<input type="hidden" name="action" value="getOne_For_Update"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
-
-<!-- ==不停權== -->
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post" -->
-<%-- 						ACTION="<%=request.getContextPath()%>/back_end/userForBackEnd/UserForBackEndServlet" --%>
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="停權"> -->
-<%-- 						<input type="hidden" name="userId" value="${userVO.userId}"> --%>
-<!-- 						<input type="hidden" name="action" value="disable"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
 			</tr>
-<%-- 		</c:forEach> --%>
+		</c:forEach>
 	</table>
 	</div>
 	<%-- <%@ include file="page2.file" %> --%>

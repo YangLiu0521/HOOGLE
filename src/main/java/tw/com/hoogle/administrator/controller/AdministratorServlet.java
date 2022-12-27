@@ -29,6 +29,8 @@ public class AdministratorServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = res.getWriter();
 		String action = req.getParameter("action");
 		
 		//==================== 單一查詢 ====================
@@ -272,6 +274,10 @@ String administratorPassword = req.getParameter("administratorPassword").trim();
 	            } else {
 		            userDominate = false;
 	            }
+	            
+	            if (administratorDominate == false && newsDominate == false && hotelDominate == false && userDominate == false ) {
+					errorMsgs.add("請至少勾選一種管理者權限");
+				} 
 
 				AdministratorVO administratorVO = new AdministratorVO();
 				administratorVO.setAdministratorName(administratorName);
@@ -299,9 +305,13 @@ req.setAttribute("administratorVO", administratorVO); // 含有輸入格式錯�
 						                                            administratorDominate, newsDominate, hotelDominate, userDominate, administratorHiredate);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/back_end/administrator/admin_page.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllAdmin.jsp
-				successView.forward(req, res);				
+				out.println("<meta http-equiv='refresh' content='1;URL=" + req.getContextPath()
+				+ "/back_end/administrator/admin_page.jsp'>");
+				out.println("<script> alert('新增成功！');</script>");
+				
+//				String url = "/back_end/administrator/admin_page.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllAdmin.jsp
+//				successView.forward(req, res);				
 		}
 		
 		
@@ -351,41 +361,93 @@ req.setAttribute("administratorVO", administratorVO); // 含有輸入格式錯�
 			successView.forward(req, res);
 		}
 		
+//		if ("login".equals(action)) { // 來自login.jsp
+//			
+//			List<String> errorMsgs = new LinkedList<String>();
+//			// Store this set in the request scope, in case we need to
+//			// send the ErrorPage view.
+//			req.setAttribute("errorMsgs", errorMsgs);
+//
+//			
+//			String administratorAccount = req.getParameter("administratorAccount");
+//			String administratorPassword = req.getParameter("administratorPassword");
+//
+//			AdministratorService administratorSvc = new AdministratorService();
+//			String account = administratorSvc.loginAccount(administratorAccount);
+//			
+//			AdministratorService administratorSvc1 = new AdministratorService();
+//			String password = administratorSvc1.match(administratorAccount);
+//			// 【檢查該帳號 , 密碼是否有效】
+//		    if (account == null) {  //【驗證是否有此帳號】
+//		    	errorMsgs.add("帳號或密碼錯誤");
+//		    }
+//		    if (account != null) {  
+//			    if (account.equals(administratorAccount) && !(password.equals(administratorPassword))) {
+//			    	errorMsgs.add("帳號或密碼錯誤");
+//			    }
+//		    }
+//		    if (!errorMsgs.isEmpty()) {
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("/back_end/login/login.jsp");
+//					failureView.forward(req, res);
+//					return;//程式中斷
+//			} else {   //【帳號 , 密碼有效時, 才做以下工作】
+//				HttpSession session = req.getSession();
+//			    session.setAttribute("account", account);   //*工作1: 才在session內做已經登入過的標識
+//			      
+//			    res.sendRedirect(req.getContextPath()+"/back_end/administrator/adminIndex.jsp");  //*工作3: (-->如無來源網頁:則重導至login_success.jsp)
+//			}
+//		}
 		if ("login".equals(action)) { // 來自login.jsp
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			
 			
 			String administratorAccount = req.getParameter("administratorAccount");
 			String administratorPassword = req.getParameter("administratorPassword");
-
+			
 			AdministratorService administratorSvc = new AdministratorService();
 			String account = administratorSvc.loginAccount(administratorAccount);
 			
 			AdministratorService administratorSvc1 = new AdministratorService();
 			String password = administratorSvc1.match(administratorAccount);
+			
+			AdministratorService administratorSvc2 = new AdministratorService();
+			AdministratorVO permissionsVO = administratorSvc2.getPermissionsByAccount(administratorAccount);
+			
 			// 【檢查該帳號 , 密碼是否有效】
-		    if (account == null) {  //【驗證是否有此帳號】
-		    	errorMsgs.add("帳號或密碼錯誤");
-		    }
-		    if (account != null) {  
-			    if (account.equals(administratorAccount) && !(password.equals(administratorPassword))) {
-			    	errorMsgs.add("帳號或密碼錯誤");
-			    }
-		    }
-		    if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back_end/login/login.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
+			if (account == null) {  //【驗證是否有此帳號】
+				errorMsgs.add("帳號或密碼錯誤");
+			}
+			if (account != null) {  
+				if (permissionsVO.getAdministratorDominate()==false && permissionsVO.getNewsDominate()==false
+						&& permissionsVO.getHotelDominate()==false && permissionsVO.getUserDominate()==false) {
+					errorMsgs.add("此帳號已停權");
+					
+				} else if (account.equals(administratorAccount) && !(password.equals(administratorPassword))) {
+					errorMsgs.add("帳號或密碼錯誤");
+				}
+			}
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/back_end/login/login.jsp");
+				failureView.forward(req, res);
+				return;//程式中斷
 			} else {   //【帳號 , 密碼有效時, 才做以下工作】
 				HttpSession session = req.getSession();
-			    session.setAttribute("account", account);   //*工作1: 才在session內做已經登入過的標識
-			      
-			    res.sendRedirect(req.getContextPath()+"/back_end/administrator/adminIndex.jsp");  //*工作3: (-->如無來源網頁:則重導至login_success.jsp)
+				session.setAttribute("account", account);   //*工作1: 才在session內做已經登入過的標識
+				
+				AdministratorService administratorSvc3 = new AdministratorService();
+				List<AdministratorVO> allList = administratorSvc3.getAll();
+				for(AdministratorVO loginAdministratorVO : allList) {
+					if(loginAdministratorVO.getAdministratorAccount().equals(administratorAccount))
+						session.setAttribute("loginAdministratorVO", loginAdministratorVO);
+				}
+				
+				res.sendRedirect(req.getContextPath()+"/back_end/administrator/adminIndex.jsp");  //*工作3: (-->如無來源網頁:則重導至login_success.jsp)
 			}
 		}
 		

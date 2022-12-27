@@ -4,14 +4,15 @@
 <%@ page import="java.util.*"%>
 <%@ page import="tw.com.hoogle.hotel.model.*"%>
 <%@ page import="tw.com.hoogle.administrator.model.*"%>
+<%@ page import="tw.com.hoogle.roomForBackEnd.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <jsp:useBean id="administratorSvc" scope="page" class="tw.com.hoogle.administrator.model.AdministratorService"/>
-<jsp:useBean id="hotelSvc" scope="page" class="tw.com.hoogle.hotel.model.HotelService"/>
+<jsp:useBean id="roomForBackEndSvc" scope="page" class="tw.com.hoogle.roomForBackEnd.model.RoomForBackEndService"/>
 <%
-// AdministratorService administratorSvc = new AdministratorService();
-List<HotelVO> list = hotelSvc.getAll();
-pageContext.setAttribute("list", list);
+Integer hotelId = (Integer)request.getAttribute("hotelId");
+List<RoomForBackEndVO> roomDetailList = roomForBackEndSvc.findRoomByHotelId(hotelId);
+pageContext.setAttribute("roomDetailList", roomDetailList);
 %>
 <%
 HotelVO hotelVO = (HotelVO) request.getAttribute("hotelEmail");
@@ -159,136 +160,39 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 
 	<div class="features">
 		<div class="features_search">
-			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/HotelController" class="searchbyid">
-				搜尋飯店
-				<select size="1" name="hotelEmail">
-					<c:forEach var="hotelVO" items="${hotelSvc.all}">
-						<option value="${hotelVO.hotelEmail}">${hotelVO.hotelEmail}：${hotelVO.hotelName}
-					</c:forEach>
-				</select>
-				<input type="hidden" name="action" value="getOne_For_Hotel">
-				<input type="submit" class="csearchbyid" value="送出">
-			</FORM>
+			<label class="count_register_hotel">飯店編號<%=hotelId%> 已上架 ${roomDetailList.size()} 種房型</label>
+			<a class="link_user_list" href="<%=request.getContextPath()%>/back_end/hotelAndUser/hotelList.jsp">返回飯店列表</a>
 		</div>
 	</div>
 	<div class="div_table">
-	<table>
+	  <table>
 		<tr class="td_head">
 			<th width="40">飯店<br>編號</th>
-			<th width="100">飯店信箱</th>
-			<th width="70">飯店密碼</th>
 			<th width="50">飯店名稱</th>
-			<th width="60">飯店電話</th>
-			<th width="50">飯店負責人</th>
-			<th width="50">飯店統一編號</th>
-<!-- 			<th width="30">飯店縣市</th> -->
-<!-- 			<th width="70">飯店地址</th> -->
-<!-- 			<th width="20">飯店類型</th> -->
-<!-- 			<th width="50">訂房須知</th> -->
-<!-- 			<th width="50">QA</th> -->
-<!-- 			<th width="50">飯店介紹</th> -->
-<!-- 			<th width="30">狀態</th> -->
+			<th width="40">房型編號</th>
+			<th width="60">房型名稱</th>
+			<th width="60">房型種類</th>
+			<th width="50">房型價格</th>
+			<th width="50">房間總數</th>
+			<th width="50">剩餘數量</th>
 			
 		</tr>
 		<%-- 	<%@ include file="page1.file" %>  --%>
 		<%-- 	<c:forEach var="administratorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
-<%-- 		<c:forEach var="hotelVO" items="${list}"> --%>
+		<c:forEach var="roomForBackEndVO" items="${roomDetailList}">
 			<tr class="td_body">
-				<td>${hotelVO.hotelId}</td>
-				<td>${hotelVO.hotelEmail}</td>
-				<td>${hotelVO.hotelPassword}</td>
-				<td>${hotelVO.hotelName}</td>
-				<td>${hotelVO.hotelPhone}</td>
-				<td>${hotelVO.hotelPrincipal}</td>
-				<td>${hotelVO.hotelTaxid}</td>
-<%-- 				<td>${hotelVO.hotelCounty}</td> --%>
-<%-- 				<td>${hotelVO.hotelAddress}</td> --%>
-<%-- 				<td>${hotelVO.hotelType}</td> --%>
-<%-- 				<td>${hotelVO.hotelNotice}</td> --%>
-<%-- 				<td>${hotelVO.hotelQa}</td> --%>
-<%-- 				<td>${hotelVO.hotelIntroduction}</td> --%>
-<!-- 				<td> -->
-<%-- 					${hotelVO.hotelState==0?"停權":""} --%>
-<%-- 					${hotelVO.hotelState==1?"正常":""} --%>
-<%-- 					${hotelVO.hotelState==2?"待審核":""} --%>
-<!-- 				</td> -->
-	</table>
-	</div>
-	<br>
-	<div class="div_table">
-	<table>
-		<tr class="td_head">
-<!-- 			<th width="40">飯店<br>編號</th> -->
-<!-- 			<th width="100">飯店信箱</th> -->
-<!-- 			<th width="50">飯店密碼</th> -->
-<!-- 			<th width="50">飯店名稱</th> -->
-<!-- 			<th width="60">飯店電話</th> -->
-<!-- 			<th width="50">飯店負責人</th> -->
-<!-- 			<th width="50">飯店統一編號</th> -->
-<!-- 			<th width="30">飯店縣市</th> -->
-			<th width="70">飯店地址</th>
-			<th width="20">飯店<br>類型</th>
-			<th width="50">訂房須知</th>
-<!-- 			<th width="50">QA</th> -->
-			<th width="50">飯店介紹</th>
-			<th width="50">房型及數量</th>
-			<th width="30">狀態</th>
-			
-		</tr>
-
-			<tr class="td_body">
-<%-- 				<td>${hotelVO.hotelId}</td> --%>
-<%-- 				<td>${hotelVO.hotelEmail}</td> --%>
-<%-- 				<td>${hotelVO.hotelPassword}</td> --%>
-<%-- 				<td>${hotelVO.hotelName}</td> --%>
-<%-- 				<td>${hotelVO.hotelPhone}</td> --%>
-<%-- 				<td>${hotelVO.hotelPrincipal}</td> --%>
-<%-- 				<td>${hotelVO.hotelTaxid}</td> --%>
-<%-- 				<td>${hotelVO.hotelCounty}</td> --%>
-				<td>${hotelVO.hotelAddress}</td>
-				<td>${hotelVO.hotelType}</td>
-				<td>${hotelVO.hotelNotice}</td>
-<%-- 				<td>${hotelVO.hotelQa}</td> --%>
-				<td>${hotelVO.hotelIntroduction}</td>
-				<td>
-					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/RoomDetailServlet" class="">
-						<input type="hidden" name="hotelId" value="${hotelVO.hotelId}">
-						<input type="hidden" name="action" value="getRoomDetail">
-						<input type="submit" name="action" value="房型及數量">
-					</FORM>
-				</td>
-				<td>
-					${hotelVO.hotelState==0?"停權":""}
-					${hotelVO.hotelState==1?"正常":""}
-					${hotelVO.hotelState==2?"待審核":""}
-				</td>
-
-<%-- 				<td><a href="<%=request.getContextPath()%>/back_end/hotelAneUser/userDetail.jsp">詳細資料</a></td> --%>
-
-<!-- ==不修改旅客==	-->
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post" -->
-<%-- 						ACTION="<%=request.getContextPath()%>/back_end/userForBackEnd/UserForBackEndServlet" --%>
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="修改"> -->
-<%-- 						<input type="hidden" name="userId" value="${userVO.userId}"> --%>
-<!-- 						<input type="hidden" name="action" value="getOne_For_Update"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
-
-<!-- ==不停權== -->
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post" -->
-<%-- 						ACTION="<%=request.getContextPath()%>/back_end/userForBackEnd/UserForBackEndServlet" --%>
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="停權"> -->
-<%-- 						<input type="hidden" name="userId" value="${userVO.userId}"> --%>
-<!-- 						<input type="hidden" name="action" value="disable"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
+				<td>${roomForBackEndVO.hotelId}</td>
+				<td>${roomForBackEndVO.hotelName}</td>
+				<td>${roomForBackEndVO.roomAuto}</td>
+				<td>${roomForBackEndVO.roomName}</td>
+				<td>${roomForBackEndVO.roomType}</td>
+				<td>$${roomForBackEndVO.roomPrice}</td>
+				<td>${roomForBackEndVO.roomTotal}</td>
+				<td>${roomForBackEndVO.nonreserved}</td>
 			</tr>
-<%-- 		</c:forEach> --%>
-	</table>
+		</c:forEach>
+	
+	  </table>
 	</div>
 	<%-- <%@ include file="page2.file" %> --%>
 
