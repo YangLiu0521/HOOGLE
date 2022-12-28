@@ -167,7 +167,10 @@
 					<input type="hidden" name="roomAuto3" value="${4003}"><font color=red>${errorMsgs.roomAuto}</font>
               		<input type="hidden" name="roomNumber3" value="${roomNumber3}"><font color=red>${errorMsgs.roomAuto}</font>
               		<input type="hidden" name="ordNights" value="${ordNights}"><font color=red>${errorMsgs.roomAuto}</font>
-
+					<input type="hidden" name="nonreserved4001" value="${nonreserved4001}"><font color=red>${errorMsgs.roomAuto}</font>
+					<input type="hidden" name="nonreserved4002" value="${nonreserved4002}"><font color=red>${errorMsgs.roomAuto}</font>
+					<input type="hidden" name="nonreserved4003" value="${nonreserved4003}"><font color=red>${errorMsgs.roomAuto}</font>
+					
               <input type="hidden" name="action" value="insert">
             </form>
             

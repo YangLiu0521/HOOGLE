@@ -9,7 +9,8 @@ public interface OrdDetailDAO_interface {
 	public void delete(Integer orddetailId);
 	public List<OrdDetailVO> findByOrdId(Integer ordId);
 	public OrdDetailVO findByPrimaryKey(Integer orddetailId);
-	public List<OrdDetailVO> getAll();
 	public OrdDetailVO findByRoomAuto(Integer roomAuto);
+	public List<OrdDetailVO> getAll();
+	public void updateNonreserved(OrdDetailVO orddetailVO);
 
 }

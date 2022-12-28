@@ -40,10 +40,21 @@ public class OrdDetailService {
 		return dao.findByPrimaryKey(orddetailId);
 	}
 	
+	public OrdDetailVO updateNonreserved(Integer nonreserved, Integer roomAuto) {
+
+		OrdDetailVO orddetailVO = new OrdDetailVO();
+
+		orddetailVO.setNonreserved(nonreserved);
+		orddetailVO.setRoomAuto(roomAuto);
+		dao.updateNonreserved(orddetailVO);
+
+		return dao.findByRoomAuto(roomAuto);
+	}
+	
 	public void updateOrddetail(OrdDetailVO orddetailVO) {
 		dao.update(orddetailVO);
 	}
-
+	
 	public void deleteOrddetail(Integer orddetailId) {
 		dao.delete(orddetailId);
 	}

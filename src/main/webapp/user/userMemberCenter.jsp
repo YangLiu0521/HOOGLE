@@ -208,7 +208,8 @@
                       <th>我要評價</th>
                     </tr>
                   </thead>
-            <c:forEach var="ordVO" items="${list}">
+            <%@ include file="page1.file" %>
+            <c:forEach var="ordVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
             <c:if test="${ userVO.userId == ordVO.userId }">
                   <tbody>
                   <form METHOD="post" action="<%=request.getContextPath() %>/commend/commend.do">
@@ -220,7 +221,6 @@
                       <td>${ordVO.ordCheckin}</td>
                       <td>${ordVO.ordCheckout}</td>
 <%--                       <td>${ordVO.nowDate}</td> --%>
-<!--                       <td><a href="">點我評價</a></td> -->
 					<c:if test="${ordVO.ordCheckout <= ordVO.nowDate}">
                       <td>
                       <button style="color: red" id="btn" type="submit" value="" >點我評價</button>
@@ -245,6 +245,7 @@
                   </c:if>
                   </c:forEach>
                 </table>
+                <%@ include file="page2.file" %>
               </div>
             </div>
             <h3>訂單明細查尋</h3>
@@ -256,7 +257,7 @@
          		      <c:if test="${ userVO.userId == ordVO.userId }">
          		 <option value="${ordVO.ordId}">${ordVO.ordId}
         		      </c:if>
-        		 </c:forEach>   
+        		 </c:forEach>  
       		 </select>
      		  <input type="hidden" name="action" value="OrdId_getOne_For_Display">
      		 <input type="submit" value="送出">
