@@ -47,6 +47,8 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 			"UPDATE orddetail set ordId=?, roomAuto=?, roomNumber=? where orddetailId=?";
 		private static final String GET_NONRESERVED=
 			"SELECT nonreserved FROM room where roomAuto=?";
+		private static final String UPDATE_NONRESERVED = 
+			"UPDATE room set nonreserved=? where roomAuto=?";
 
 		
 	
@@ -108,6 +110,50 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 			pstmt.setInt(2, orddetailVO.getRoomAuto());
 			pstmt.setInt(3, orddetailVO.getRoomNumber());
 			pstmt.setInt(4, orddetailVO.getOrddetailId());
+
+//			pstmt.executeUpdate();
+			java.sql.Statement stmt=con.createStatement();
+			stmt.executeUpdate("set auto_increment_increment=1;");
+			pstmt.executeUpdate();
+		} 
+		catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		}
+		catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "+ se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void updateNonreserved(OrdDetailVO orddetailVO) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+//			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_NONRESERVED );
+
+			pstmt.setInt(1, orddetailVO.getNonreserved());
+			pstmt.setInt(2, orddetailVO.getRoomAuto());
 
 //			pstmt.executeUpdate();
 			java.sql.Statement stmt=con.createStatement();

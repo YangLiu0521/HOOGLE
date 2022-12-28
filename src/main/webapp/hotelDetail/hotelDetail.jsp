@@ -243,7 +243,7 @@ pageContext.setAttribute("nonreserved4003",nonreserved4003);
                       <ul class="hotel-featured">
                       	<li>
                       	<input type="hidden" name="nonreserved4001" id="nr4001" value="${nonreserved4001}"><font color=red>${errorMsgs.ordId}</font>
-                      	<div style="color:blue;"> 剩餘房數 : ${nonreserved4001}</div>
+                      	<div style="color:blue;"> 剩餘房數 : ${nonreserved4001}間</div>
                       	</li>                     
                       </ul>
                       
@@ -303,7 +303,10 @@ pageContext.setAttribute("nonreserved4003",nonreserved4003);
                         <li><span><i class="fas fa-swimming-pool"></i> 游泳池</span></li>
                       </ul>
                       <ul class="hotel-featured">
-                      	<li><div style="color:blue;"> 剩餘房數 : ${nonreserved4002}</div></li>                     
+                      	<li>
+                      	<input type="hidden" name="nonreserved4002" id="nr4002" value="${nonreserved4002}"><font color=red>${errorMsgs.ordId}</font>
+                      	<div style="color:blue;"> 剩餘房數 : ${nonreserved4002}</div>
+                      	</li>                     
                       </ul>
                        <ul class="hotel-featured">
                        	<li>
@@ -358,7 +361,10 @@ pageContext.setAttribute("nonreserved4003",nonreserved4003);
                         <li><span><i class="fas fa-swimming-pool"></i> 游泳池</span></li>
                       </ul>
                       <ul class="hotel-featured">
-                      	<li><div style="color:blue;"> 剩餘房數 : ${nonreserved4003}</div></li>                     
+                      	<li>
+                      	<input type="hidden" name="nonreserved4003" id="nr4003" value="${nonreserved4003}"><font color=red>${errorMsgs.ordId}</font>
+                      	<div style="color:blue;"> 剩餘房數 : ${nonreserved4003}</div>
+                      	</li>                     
                       </ul>
                        <ul class="hotel-featured">
                        	<li>
@@ -577,20 +583,61 @@ pageContext.setAttribute("nonreserved4003",nonreserved4003);
     	 var r1 = parseInt(document.getElementById("r1").value);
     	 var r2 = parseInt(document.getElementById("r2").value);
     	 var r3 = parseInt(document.getElementById("r3").value);
+    	 var nr4001 = parseInt(document.getElementById("nr4001").value);
+    	 var nr4002 = parseInt(document.getElementById("nr4002").value);
+    	 var nr4003 = parseInt(document.getElementById("nr4003").value);
+
     	 
     	 if (r1==0 && r2==0 && r3==0) {
         	 window.alert("無任何房型被下訂，請確認下訂房數");
 
        	}else if(r1>=10 || r2>=10 || r3>=10){
 //             window.confirm("下訂房數大於10間，數量是否正確");
-            if(confirm("下訂房數大於10間，數量是否正確") == true){
-            	show();	
+            if(confirm("下訂房數大於10間，請確認數量是否正確") == true){
+            	
+            	if(nr4001<r1 ){
+            		if(alert("標準單人房房數不足，麻煩修改訂房房數") == true){
+            			
+            		}
+            	}
+            	else if(nr4002<r2 ){
+            		if(alert("精緻雙人房房數不足，麻煩修改訂房房數") == true){
+            			
+            		}
+            	}
+            	else if(nr4002<r3 ){
+            		if(alert("豪華四人房房數不足，麻煩修改訂房房數") == true){
+            			
+            		}
+            	}
+            	else{
+            		show();
+            	}
+            		
             }
             
        	}
-    	 else {
-       		show();	
-       	}
+    	 else if(nr4001<r1){
+         		if(alert("標準單人房房數不足，麻煩修改訂房房數") == true){
+         			
+         		}
+         	}
+    		else if(nr4002<r2){
+         		if(alert("精緻雙人房房數不足，麻煩修改訂房房數") == true){
+         			
+         		}
+         	}
+    		 else if(nr4002<r3){
+         		if(alert("豪華四人房房數不足，麻煩修改訂房房數") == true){
+         			
+         		}
+         	}
+    	 
+    		 else{
+    			 show();	
+    		 }
+       		
+       	
      });
     </script>
 </body>
