@@ -50,9 +50,9 @@ pageContext.setAttribute("nonreserved4003",nonreserved4003);
           </div>
           <!-- 飯店照片輪播圖 -->
           <div class="owl-carousel detail-page-gallery-carousel mb-20">
-            <figure class="item mb-0"> <img src="<%=request.getContextPath()%>/images/hotel-detail/img-01.jpg" alt="img description"> </figure>
-            <figure class="item mb-0"><img src="<%=request.getContextPath()%>/images/hotel-detail/img-02.jpg" alt="img description"> </figure>
-            <figure class="item mb-0"><img src="<%=request.getContextPath()%>/images/hotel-detail/img-03.jpg" alt="img description"> </figure>
+            <figure class="item mb-0"><img src="<%=request.getContextPath()%>/images/hotelPic/picHOOGLE.jpg" alt="img description"> </figure>
+<%--             <figure class="item mb-0"><img src="<%=request.getContextPath()%>/images/hotel-detail/img-02.jpg" alt="img description"> </figure> --%>
+<%--             <figure class="item mb-0"><img src="<%=request.getContextPath()%>/images/hotel-detail/img-03.jpg" alt="img description"> </figure> --%>
           </div>
           <!-- 飯店照片輪播圖 end -->
         </div>
@@ -221,7 +221,7 @@ pageContext.setAttribute("nonreserved4003",nonreserved4003);
                   <!-- list box -->
                   <div class="list-box mb-30">
                     <div class="list-box-img"> <a href="<%=request.getContextPath()%>/images/rooms/img-big-01.jpg" class="venobox" data-gall="gallery1">
-                        <img src="<%=request.getContextPath()%>/images/rooms/img-thum-01.jpg" alt=""> </a> <a href="<%=request.getContextPath()%>/images/rooms/img-big-02.jpg"
+                        <img src="<%=request.getContextPath()%>/images/roomHOOGLE/HOOGLEsin.jpg" alt=""> </a> <a href="<%=request.getContextPath()%>/images/rooms/img-big-02.jpg"
                         class="venobox" data-gall="gallery1"></a> <a href="<%=request.getContextPath()%>/images/rooms/img-big-03.jpg" class="venobox"
                         data-gall="gallery1"></a>
                       <a href="<%=request.getContextPath()%>/images/rooms/img-big-04.jpg" class="venobox" data-gall="gallery1"></a>
@@ -284,7 +284,7 @@ pageContext.setAttribute("nonreserved4003",nonreserved4003);
                   <!-- list box -->
                   <div class="list-box mb-30">
                     <div class="list-box-img"> <a href="<%=request.getContextPath()%>/images/rooms/img-big-01.jpg" class="venobox" data-gall="gallery2">
-                        <img src="<%=request.getContextPath()%>/images/rooms/img-thum-01.jpg" alt=""></a> <a href="<%=request.getContextPath()%>/images/rooms/img-big-02.jpg"
+                        <img src="<%=request.getContextPath()%>/images/roomHOOGLE/HOOGLEdou.jpg" alt=""></a> <a href="<%=request.getContextPath()%>/images/rooms/img-big-02.jpg"
                         class="venobox" data-gall="gallery2"></a> <a href="<%=request.getContextPath()%>/images/rooms/img-big-03.jpg" class="venobox"
                         data-gall="gallery2"></a>
                       <a href="<%=request.getContextPath()%>/images/rooms/img-big-04.jpg" class="venobox" data-gall="gallery2"></a>
@@ -342,7 +342,7 @@ pageContext.setAttribute("nonreserved4003",nonreserved4003);
                   <!-- list box -->
                   <div class="list-box mb-30">
                     <div class="list-box-img"> <a href="<%=request.getContextPath()%>/images/rooms/img-big-01.jpg" class="venobox" data-gall="gallery3">
-                        <img src="<%=request.getContextPath()%>/images/rooms/img-thum-01.jpg" alt=""> </a><a href="<%=request.getContextPath()%>/images/rooms/img-big-02.jpg"
+                        <img src="<%=request.getContextPath()%>/images/roomHOOGLE/HOOGLEqua.jpg" alt=""> </a><a href="<%=request.getContextPath()%>/images/rooms/img-big-02.jpg"
                         class="venobox" data-gall="gallery3"></a> <a href="<%=request.getContextPath()%>/images/rooms/img-big-03.jpg" class="venobox"
                         data-gall="gallery3"></a>
                       <a href="<%=request.getContextPath()%>/images/rooms/img-big-04.jpg" class="venobox" data-gall="gallery3"></a>

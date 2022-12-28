@@ -293,7 +293,7 @@ pageContext.setAttribute("newsList", newsList);
 					<!-- popular hotel box -->
 					<div class="popular-hotel-box">
 						<div class="imege mb-10">
-							<img src="images/popular-hotel/1.jpg" alt="">
+							<img src="images/hotelPic/picHOOGLE.jpg" alt="">
 							<div class="black-bg">
 								<a href=""><i class="fas fa-map-marker-alt"></i> 台北市</a>
 							</div>
@@ -316,7 +316,7 @@ pageContext.setAttribute("newsList", newsList);
 					<!-- popular hotel box -->
 					<div class="popular-hotel-box">
 						<div class="imege mb-10">
-							<img src="images/popular-hotel/2.jpg" alt="">
+							<img src="images/hotelPic/picHotel2.jpg" alt="">
 							<div class="black-bg">
 								<a href=""><i class="fas fa-map-marker-alt"></i> 新北市</a>
 							</div>
@@ -339,7 +339,7 @@ pageContext.setAttribute("newsList", newsList);
 					<!-- popular hotel box -->
 					<div class="popular-hotel-box">
 						<div class="imege mb-10">
-							<img src="images/popular-hotel/3.jpg" alt="">
+							<img src="images/hotelPic/picHotel3.jpg" alt="">
 							<div class="black-bg">
 								<a href=""><i class="fas fa-map-marker-alt"></i> 台中市</a>
 							</div>
@@ -362,7 +362,7 @@ pageContext.setAttribute("newsList", newsList);
 					<!-- popular hotel box -->
 					<div class="popular-hotel-box">
 						<div class="imege mb-10">
-							<img src="images/popular-hotel/4.jpg" alt="">
+							<img src="images/hotelPic/picHotel4.jpg" alt="">
 							<div class="black-bg">
 								<a href=""><i class="fas fa-map-marker-alt"></i> 台南市</a>
 							</div>
@@ -385,7 +385,7 @@ pageContext.setAttribute("newsList", newsList);
 					<!-- popular hotel box -->
 					<div class="popular-hotel-box">
 						<div class="imege mb-10">
-							<img src="images/popular-hotel/5.jpg" alt="">
+							<img src="images/hotelPic/picHotel5.jpg" alt="">
 							<div class="black-bg">
 								<a href=""><i class="fas fa-map-marker-alt"></i> 高雄市</a>
 							</div>
@@ -408,7 +408,7 @@ pageContext.setAttribute("newsList", newsList);
 					<!-- popular hotel box -->
 					<div class="popular-hotel-box">
 						<div class="imege mb-10">
-							<img src="images/popular-hotel/2.jpg" alt="">
+							<img src="images/hotelPic/picHotel6.jpg" alt="">
 							<div class="black-bg">
 								<a href=""><i class="fas fa-map-marker-alt"></i> 台北市</a>
 							</div>
@@ -450,7 +450,7 @@ pageContext.setAttribute("newsList", newsList);
 					<div class="popular-destination-box">
 						<div class="img-holder-overlay">
 							<div class="img-holder">
-								<img class="myImg" src="images/popular-destination/1.jpg" alt="">
+								<img class="myImg" src="images/hotelPic/picHOOGLE.jpg" alt="">
 							</div>
 							<div class="overlay">
 								<a href="#"><i class="fas fa-share"></i></a>
@@ -469,7 +469,7 @@ pageContext.setAttribute("newsList", newsList);
 					<div class="popular-destination-box">
 						<div class="img-holder-overlay">
 							<div class="img-holder">
-								<img class="myImg" src="images/popular-destination/1.jpg" alt="">
+								<img class="myImg" src="images/hotelPic/picHotel2.jpg" alt="">
 							</div>
 							<div class="overlay">
 								<a href="#"><i class="fas fa-share"></i></a>
@@ -488,7 +488,7 @@ pageContext.setAttribute("newsList", newsList);
 					<div class="popular-destination-box">
 						<div class="img-holder-overlay">
 							<div class="img-holder">
-								<img class="myImg" src="images/popular-destination/1.jpg" alt="">
+								<img class="myImg" src="images/hotelPic/picHotel3.jpg" alt="">
 							</div>
 							<div class="overlay">
 								<a href="#"><i class="fas fa-share"></i></a>
@@ -507,7 +507,7 @@ pageContext.setAttribute("newsList", newsList);
 					<div class="popular-destination-box">
 						<div class="img-holder-overlay">
 							<div class="img-holder">
-								<img class="myImg" src="images/popular-destination/1.jpg" alt="">
+								<img class="myImg" src="images/hotelPic/picHotel4.jpg" alt="">
 							</div>
 							<div class="overlay">
 								<a href="#"><i class="fas fa-share"></i></a>
@@ -526,7 +526,7 @@ pageContext.setAttribute("newsList", newsList);
 					<div class="popular-destination-box">
 						<div class="img-holder-overlay">
 							<div class="img-holder">
-								<img class="myImg" src="images/popular-destination/1.jpg" alt="">
+								<img class="myImg" src="images/hotelPic/picHotel5.jpg" alt="">
 							</div>
 							<div class="overlay">
 								<a href="#"><i class="fas fa-share"></i></a>
@@ -545,7 +545,7 @@ pageContext.setAttribute("newsList", newsList);
 					<div class="popular-destination-box">
 						<div class="img-holder-overlay">
 							<div class="img-holder">
-								<img class="myImg" src="images/popular-destination/1.jpg" alt="">
+								<img class="myImg" src="images/hotelPic/picHotel6.jpg" alt="">
 							</div>
 							<div class="overlay">
 								<a href="#"><i class="fas fa-share"></i></a>
