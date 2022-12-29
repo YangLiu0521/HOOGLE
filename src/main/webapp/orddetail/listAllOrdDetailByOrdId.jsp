@@ -68,7 +68,7 @@
 		<th>訂房房數</th>
 	</tr>
 
-		<c:forEach var="orddetailVO" items="${orddetailVO}" >	
+		<c:forEach var="orddetailVO" items="${orddetailVO}" >
 	<tr>
 		<td>${orddetailVO.orddetailId}</td>
 		<td>${orddetailVO.ordId}</td>

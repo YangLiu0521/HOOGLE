@@ -3,7 +3,8 @@
 <%@ page import="tw.com.hoogle.ord.model.*" %>
 <%@ page import="tw.com.hoogle.orddetail.model.*" %>
 <%@ page import="tw.com.hoogle.user.model.*" %>
-<%@ page import="tw.com.hoogle.searchHotel.model.*" %>   
+<%@ page import="tw.com.hoogle.searchHotel.model.*" %> 
+<%@ page import="tw.com.hoogle.commend.model.*" %> 
 <%@ page import="java.util.*" %>
 
 <% 
@@ -14,6 +15,10 @@ OrdVO ordVO = (OrdVO) request.getSession().getAttribute("ordVO");
 OrdService ordSvc = new OrdService();
 List<OrdVO> list = ordSvc.getAll();
 pageContext.setAttribute("list",list);
+
+CommendService commendSvc = new CommendService();
+List<CommendVO> listCommend = commendSvc.getAll();
+pageContext.setAttribute("listCommend",listCommend);
 
 OrdDetailService orddetailSvc = new OrdDetailService();
 OrdDetailVO nonreserved4001 = orddetailSvc.getNonreserved(4001);
@@ -410,40 +415,21 @@ pageContext.setAttribute("nonreserved4003",nonreserved4003);
                 <hr>
                 <div class="reviews-wrapper">
                   <!-- review item -->
+                   <c:forEach var="commendVO" items="${listCommend}">
                   <div class="media review-item">
                     <div class="media-body">
-                      <h5 class="mt-0">評價人姓名 <span>評價日期在這</span></h5>
-                      <span>星星顯示在這</span>
-                      <br><br>
-                      <p class="mb-0">
-                        評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這
+                      <h5 class="mt-0">匿名使用者<span>${commendVO.commendDate}</span></h5>
+                    	<h4 style="color:red" >分數:${commendVO.commendGrade} </h4>
+                      <p class="mb-0" style="font-size:16px; color:black" >
+                        ${commendVO.commendContent}
                       </p>
                     </div>
                   </div>
+               </c:forEach>
                   <!-- review item end -->
                   <!-- review item -->
-                  <div class="media review-item">
-                    <div class="media-body">
-                      <h5 class="mt-0">評價人姓名 <span>評價日期在這</span></h5>
-                      <span>星星顯示在這</span>
-                      <br><br>
-                      <p class="mb-0">
-                        評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這
-                      </p>
-                    </div>
-                  </div>
                   <!-- review item end -->
                   <!-- review item -->
-                  <div class="media review-item">
-                    <div class="media-body">
-                      <h5 class="mt-0">評價人姓名 <span>評價日期在這</span></h5>
-                      <span>星星顯示在這</span>
-                      <br><br>
-                      <p class="mb-0">
-                        評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這評價內容寫在這
-                      </p>
-                    </div>
-                  </div>
                   <!-- review item end -->
                 </div>
                 <!-- reviews end -->
@@ -627,7 +613,7 @@ pageContext.setAttribute("nonreserved4003",nonreserved4003);
          			
          		}
          	}
-    		 else if(nr4002<r3){
+    		 else if(nr4003<r3){
          		if(alert("豪華四人房房數不足，麻煩修改訂房房數") == true){
          			
          		}

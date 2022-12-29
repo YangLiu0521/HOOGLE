@@ -4,14 +4,18 @@
 
 <%@ page import="java.util.*"%>
 <%@ page import="tw.com.hoogle.news.model.*"%>
-
+<%@ page import="java.text.Format"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <jsp:useBean id="newsSvc" scope="page" class="tw.com.hoogle.news.model.NewsService"/>
 
 <%
 List<NewsVO> newsList = newsSvc.showOnIndex();
 pageContext.setAttribute("newsList", newsList);
 %>
-
+<%
+Format sfm = new SimpleDateFormat("yyyy/MM/dd");
+pageContext.setAttribute("sfm", sfm);
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -257,7 +261,7 @@ pageContext.setAttribute("newsList", newsList);
 						</div>
 						<div class="blog-des">
 							<h6 class="blog_date font-weight-normal text-muted">
-								${newsVO.newsDate}
+								${sfm.format(newsVO.newsDate)}
 							</h6>
 							<h5 class="mt-10 mb-6">
 								${newsVO.newsSubject}
@@ -304,7 +308,7 @@ pageContext.setAttribute("newsList", newsList);
 								class="fas fa-star"></i>
 						</div>
 						<h4>
-							<a href="">HOOGLE</a>
+							<a href="${pageContext.request.contextPath}/hotelDetail/hotelDetail.jsp">HOOGLE</a>
 						</h4>
 						<div class="price">
 							$2,000元 / <span>每晚最低</span>
@@ -458,7 +462,7 @@ pageContext.setAttribute("newsList", newsList);
 						</div>
 						<div class="title">
 							<h3>
-								<a href="">HOOGLE</a>
+								<a href="${pageContext.request.contextPath}/hotelDetail/hotelDetail.jsp">HOOGLE</a>
 							</h3>
 						</div>
 					</div>

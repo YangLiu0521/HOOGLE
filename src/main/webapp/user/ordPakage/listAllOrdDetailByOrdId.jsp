@@ -91,7 +91,8 @@
 					<tr>
 						<td>${orddetailVO.orddetailId}</td>
 						<td>${orddetailVO.ordId}</td>
-						<td>${orddetailVO.roomAuto}人房</td>
+<%-- 						<td>${orddetailVO.roomAuto}人房</td> --%>
+						<td>${orddetailVO.roomName}</td>
 						<td>${orddetailVO.roomNumber}</td>
 					</tr>
 					</c:forEach>

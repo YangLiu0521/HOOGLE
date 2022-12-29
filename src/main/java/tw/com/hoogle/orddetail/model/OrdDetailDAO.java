@@ -247,30 +247,39 @@ public class OrdDetailDAO implements OrdDetailDAO_interface{
 
 			while (rs.next()) {
 				orddetailVO = new OrdDetailVO();
-				orddetailVO.setOrddetailId(rs.getInt("orddetailId"));
-				orddetailVO.setOrdId(rs.getInt("ordId"));
 				
-				switch(rs.getInt("roomAuto")%10) {
-				case 1 :
-					orddetailVO.setRoomAuto(1);
-					break;
-				case 2 :
-					orddetailVO.setRoomAuto(1);
-					break;
-				case 3 :
-					orddetailVO.setRoomAuto(2);
-				case 4 :
-					orddetailVO.setRoomAuto(2);
-					break;
-				case 5 :
-					orddetailVO.setRoomAuto(2);
-					break;
-					default :
-					break;
+				
+				if(rs.getInt("roomNumber") != 0) {
+					orddetailVO.setOrddetailId(rs.getInt("orddetailId"));
+					orddetailVO.setOrdId(rs.getInt("ordId"));
+				if(rs.getInt("roomAuto") == 4001) {
+					orddetailVO.setRoomName("單人房");
 				}
+				if(rs.getInt("roomAuto") == 4002) {
+					orddetailVO.setRoomName("雙人房");
+				}
+				if(rs.getInt("roomAuto") ==4003) {
+					orddetailVO.setRoomName("四人房");
+				}
+				
+//				switch(rs.getInt("roomAuto")%10) {
+//				case 1 :
+//					orddetailVO.setRoomAuto(1);
+//					break;
+//				case 2 :
+//					orddetailVO.setRoomAuto(2);
+//					break;
+//				case 3 :
+//					orddetailVO.setRoomAuto(4);
+//					break;
+//					
+//					default :
+//					break;
+//				}
 				
 				orddetailVO.setRoomNumber(rs.getInt("roomNumber"));
 				list.add(orddetailVO);
+				}
 			}
 
 		} 
