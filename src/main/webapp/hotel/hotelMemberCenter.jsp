@@ -16,22 +16,15 @@ if (session.getAttribute("userVO") == null && session.getAttribute("hotelVO") ==
 	return;
 }
 
-
 HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //UserServlet.java(Controller)
 Integer hotelId = hotelVO.getHotelId();
 System.out.println(hotelId);
 %>
 
 <%
-// RoomService roomSvc = new RoomService();
-//     List<RoomVO> list = roomSvc.getAll();
-//     pageContext.setAttribute("list",list);
-	RoomService roomSvc = new RoomService();
-	List<RoomVO> list = roomSvc.getByHotelId(hotelId);
-	pageContext.setAttribute("list",list);
-	
-	
-
+RoomService roomSvc = new RoomService();
+List<RoomVO> list = roomSvc.getByHotelId(hotelId);
+pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE html>
 <html>
@@ -129,35 +122,11 @@ System.out.println(hotelId);
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
 												class="dashed-border"></span>
 
-<<<<<<< HEAD
-
-						<div class="tab-pane fade show" id="introduce-tab" role="tabpanel"
-							aria-labelledby="dashboard-nav">
-
-
-							<div class="card border-warning w-20">
-								<div class="card-header  bg-warning sm-3">
-									<h3 class="text-white">飯店介紹</h3>
-								</div>
-								<form action="<%=request.getContextPath()%>/otherhotel/OtherHotelServlet" method="post" enctype="multipart/form-data">
-									<div class="card-body bg-transparents">
-
-										<div class="form-row">
-
-											<div class="form-group col-md-6">
-												<select id="inputState" class="form-control" required name="hotelType">
-													<option selected hidden value="${hotelVO.hotelType}">${hotelVO.hotelType}</option>
-													<option value="飯店">飯店</option>
-													<option value="民宿">民宿</option>
-													<option value="商旅">商旅</option>
-												</select>
-=======
 											<div class="form-group">
 												<h6>信箱</h6>
 												<br> <input type="email" class="form-control" disabled
 													name="hotelEmail"
 													value="<%=(hotelVO == null) ? "" : hotelVO.getHotelEmail()%>">
->>>>>>> JOY
 											</div>
 
 
@@ -216,62 +185,6 @@ System.out.println(hotelId);
 											<button type="submit" class="btn-style-1 w-100">確認修改</button>
 											<input type="hidden" name="hotelservlet" value="hotelupdate">
 										</div>
-<<<<<<< HEAD
-										<div class="form-row">
-
-											<div class="form-group col-md-12">
-												<label for="exampleFormControlTextarea1" class="form-label">飯店介紹</label>
-												<textarea class="form-control" name="hotelIntroduction" id="exampleFormControlTextarea1" rows="2">${hotelVO.hotelIntroduction}</textarea>
-											</div>
-											
-											<div class="form-group col-md-12">
-												<label for="exampleFormControlTextarea1" class="form-label">飯店須知</label>
-												<textarea class="form-control" name="hotelNotice"
-													id="exampleFormControlTextarea1" rows="2">${hotelVO.hotelNotice}</textarea>
-											</div>
-											<div class="form-group col-md-12">
-												<label for="exampleFormControlTextarea1" class="form-label">常見問答</label>
-												<textarea class="form-control" name="hotelQa"
-													id="exampleFormControlTextarea1" rows="2">${hotelVO.hotelQa}</textarea>
-											</div>
-
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value=""
-													id="flexCheckDefault"> <label
-													class="form-check-label" for="flexCheckDefault">
-													停車場 </label>
-											</div>
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value=""
-													id="flexCheckChecked" checked> <label
-													class="form-check-label" for="flexCheckChecked">
-													可攜帶寵物 </label>
-											</div>
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value=""
-													id="flexCheckDefault"> <label
-													class="form-check-label" for="flexCheckDefault">
-													24小時接待櫃台 </label>
-											</div>
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value=""
-													id="flexCheckChecked" checked> <label
-													class="form-check-label" for="flexCheckChecked">
-													健身中心 </label>
-											</div>
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value=""
-													id="flexCheckDefault"> <label
-													class="form-check-label" for="flexCheckDefault">
-													無障礙設施 </label>
-											</div>
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value=""
-													id="flexCheckChecked" checked> <label
-													class="form-check-label" for="flexCheckChecked">
-													游泳池 </label>
-											</div>
-=======
 								</form>
 								<!-- 飯店資料修改結束 -->
 							</div>
@@ -279,49 +192,12 @@ System.out.println(hotelId);
 						<!-- tabs end -->
 					</div>
 					<div class="col-lg-4 col-md-4"></div>
->>>>>>> JOY
 
 
 
 					<div class="tab-pane fade show" id="introduce-tab" role="tabpanel"
 						aria-labelledby="dashboard-nav">
 
-<<<<<<< HEAD
-											<select id="city" name="hotelCounty">
-												<option value="臺北市">臺北市</option>
-											</select> 
-											<select id="area" name="area" style="display: none;">
-												<option value="">請選擇</option>
-											</select>
-
-
-
-											<div class="form-group col-md-12">
-												<input type="text" class="form-control" id="inputAddress2" name="hotelAddress"
-													placeholder="飯店地址" value="${hotelVO.hotelAddress}">
-											</div>
-											<span class="error" style="color: red">${errors.hotelAddress}</span>
-
-											<div class="form-group col-md-9">
-												<label for="formFile" class="form-label">圖片</label>
-												<!-- <input class="form-control" type="file" id="formFile"> -->
-											</div>
-
-
-											<input type="file" id="the_file" multiple>
-											<ul class="picture_list"></ul>
-
-
-											<div class="d-grid gap-2 col-6  mx-auto">
-												<!-- <input class="btn btn-primary" type="submit" value="Submit">
-                                    <input class="btn btn-primary" type="reset" value="Reset"> -->
-												<button type="submit"
-													class="btn btn-primary btn-lg btn-block mt-3">送出</button>
-												<input type="hidden" name="otherhotelservlet" value="otherhotelupdate">
-												<button type="reset"
-													class="btn btn-dark btn-lg btn-block mt-3">重置</button>
-											</div>
-=======
 
 						<div class="card border-warning w-20">
 							<div class="card-header  bg-warning sm-3">
@@ -337,12 +213,11 @@ System.out.println(hotelId);
 										<div class="form-group col-md-6">
 											<select id="inputState" class="form-control" required
 												name="hotelType">
-												<option selected hidden value="">類型*</option>
+												<option selected hidden value="${hotelVO.hotelType}">${hotelVO.hotelType}</option>
 												<option value="飯店">飯店</option>
 												<option value="民宿">民宿</option>
 												<option value="商旅">商旅</option>
 											</select>
->>>>>>> JOY
 										</div>
 									</div>
 									<div class="form-row">
@@ -350,17 +225,18 @@ System.out.println(hotelId);
 										<div class="form-group col-md-12">
 											<label for="exampleFormControlTextarea1" class="form-label">飯店介紹</label>
 											<textarea class="form-control" name="hotelIntroduction"
-												id="exampleFormControlTextarea1" rows="2"></textarea>
+												id="exampleFormControlTextarea1" rows="2">${hotelVO.hotelIntroduction}</textarea>
 										</div>
+
 										<div class="form-group col-md-12">
 											<label for="exampleFormControlTextarea1" class="form-label">飯店須知</label>
 											<textarea class="form-control" name="hotelNotice"
-												id="exampleFormControlTextarea1" rows="2"></textarea>
+												id="exampleFormControlTextarea1" rows="2">${hotelVO.hotelNotice}</textarea>
 										</div>
 										<div class="form-group col-md-12">
 											<label for="exampleFormControlTextarea1" class="form-label">常見問答</label>
 											<textarea class="form-control" name="hotelQa"
-												id="exampleFormControlTextarea1" rows="2"></textarea>
+												id="exampleFormControlTextarea1" rows="2">${hotelVO.hotelQa}</textarea>
 										</div>
 
 										<div class="form-check">
@@ -403,9 +279,8 @@ System.out.println(hotelId);
 
 
 
-
 										<select id="city" name="hotelCounty">
-											<option value="">請選擇縣市</option>
+											<option value="臺北市">臺北市</option>
 										</select> <select id="area" name="area" style="display: none;">
 											<option value="">請選擇</option>
 										</select>
@@ -414,8 +289,10 @@ System.out.println(hotelId);
 
 										<div class="form-group col-md-12">
 											<input type="text" class="form-control" id="inputAddress2"
-												name="hotelAddress" placeholder="飯店地址">
+												name="hotelAddress" placeholder="飯店地址"
+												value="${hotelVO.hotelAddress}">
 										</div>
+										<span class="error" style="color: red">${errors.hotelAddress}</span>
 
 										<div class="form-group col-md-9">
 											<label for="formFile" class="form-label">圖片</label>
@@ -423,7 +300,8 @@ System.out.println(hotelId);
 										</div>
 
 
-										<input type="file" id="the_file" name="the_file" multiple accept="image/*">
+										<input type="file" id="the_file" name="the_file" multiple
+											accept="image/*">
 										<ul class="picture_list">
 										</ul>
 
@@ -433,7 +311,8 @@ System.out.println(hotelId);
                                     <input class="btn btn-primary" type="reset" value="Reset"> -->
 											<button type="submit"
 												class="btn btn-primary btn-lg btn-block mt-3">送出</button>
-											<input type="hidden" name="action" value="updateHotel">
+											<input type="hidden" name="otherhotelservlet"
+												value="otherhotelupdate">
 											<button type="reset"
 												class="btn btn-dark btn-lg btn-block mt-3">重置</button>
 										</div>
@@ -443,114 +322,99 @@ System.out.println(hotelId);
 						</div>
 					</div>
 
-					<!-- ====================================房間管理================ -->
+					<!-- ====================================房間管理開始=============================== -->
 					<div class="tab-pane fade" id="room-tab" role="tabpanel"
 						aria-labelledby="payment-nav">
-						
 						<table id="table-1">
-	<tr><td>
-		 <h4>房間管理 </h4>
-				 <a href='<%=request.getContextPath()%>/room/newAddRoomFile.jsp' class="badge bg-warning text-dark">新增房型</a>
-	</td></tr>
-</table>
+							<tr>
+								<td>
+									<h4>房間管理</h4> <a
+									href='<%=request.getContextPath()%>/room/newAddRoomFile.jsp'
+									class="badge bg-warning text-dark">新增房型</a>
+								</td>
+							</tr>
+						</table>
+						<div class="col-md-12">
+							<div class="table-responsive">
+								<table class="table table-hover">
+									<thead class="thead-dark">
+										<tr>
+											<th>房型流水號</th>
+											<th>飯店編號</th>
+											<th>房間總數</th>
+											<th>房型名稱</th>
+											<th>房型狀態</th>
+											<th>房型單價</th>
+											<th>房型照片</th>
+											<th>修改</th>
+										</tr>
+									</thead>
+
+									<%@ include file="../room/page1.file"%>
+									<c:forEach var="roomVO" items="${list}" begin="<%=pageIndex%>"
+										end="<%=pageIndex+rowsPerPage-1%>">
 
 
-	                 <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>房型流水號</th>                                        
-                                        <th>飯店編號</th>
-                                        <th>房間總數</th>
-                                        <th>房型名稱</th>
-                                        <th>房型狀態</th>
-                                        <th>房型單價</th>
-                                        <th>房型照片</th>
-                                        <th>修改</th>
-<!--                                         <th>刪除</th> -->
-                                    </tr>
-                                </thead>
-                                
-	<%@ include file="../room/page1.file" %> 
-	<c:forEach var="roomVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-	
-		
-		<tr>
-			<td>${roomVO.roomAuto}</td>
-			<td>${roomVO.hotelId}</td>
-			<td>${roomVO.roomTotal}</td>
-			<td>${roomVO.roomName}</td>
-			<td><ion-icon
-						name=${roomVO.roomStatus==true?"checkbox-outline":"square-outline"}></ion-icon></td>
-			<td>${roomVO.roomPrice}</td> 
-			<td><img src="${pageContext.request.contextPath}/roompic/RoompicReader?roompicId=${roomVO.roomAuto}" height="50" width="50"></td>
-			
-			
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/room/RoomServlet" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="roomAuto"  value="${roomVO.roomAuto}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-			     
-			     
-			     
-			</td>
-			
-		</tr>
-	</c:forEach>
-	</table>
+										<tr>
+											<td>${roomVO.roomAuto}</td>
+											<td>${roomVO.hotelId}</td>
+											<td>${roomVO.roomTotal}</td>
+											<td>${roomVO.roomName}</td>
+											<td><ion-icon
+													name=${roomVO.roomStatus==true?"checkbox-outline":"square-outline"}></ion-icon></td>
+											<td>${roomVO.roomPrice}</td>
+											<td><img
+												src="${pageContext.request.contextPath}/roompic/RoompicReader?roompicId=${roomVO.roomAuto}"
+												height="50" width="50"></td>
 
-                </div>
-               </div>
-        
 
-<%@ include file="../room/page2.file" %>
-						
+											<td>
+												<FORM METHOD="post"
+													ACTION="<%=request.getContextPath()%>/room/RoomServlet"
+													style="margin-bottom: 0px;">
+													<input type="submit" value="修改"> <input
+														type="hidden" name="roomAuto" value="${roomVO.roomAuto}">
+													<input type="hidden" name="action"
+														value="getOne_For_Update">
+												</FORM>
+
+
+
+											</td>
+
+										</tr>
+									</c:forEach>
+								</table>
+
+							</div>
+						</div>
+
+
+						<%@ include file="../room/page2.file"%>
 					</div>
-					<!-- ====================================報表================ -->
+					<!-- ====================================房間管理結束=============================== -->
+
 					<div class="tab-pane fade" id="orders-tab" role="tabpanel"
 						aria-labelledby="orders-nav">
-						<div class="table-responsive">
-							<table class="table table-bordered">
-								<thead class="thead-dark">
 
-									<form action="<%=request.getContextPath()%>/room/ord"
-										style="margin-bottom: 50px;" method="POST">
-										<b>請輸入日期:</b> <input type="date" name="ordDateStart"
-											value="2022-01-01"> <input type="date"
-											name="ordDateEnd" value="2022-12-31"> <br> <b>房型名稱:</b>
-										<select size="1" name="roomName" required>
-											<option value="單人房">單人房
-											<option value="雙人房">雙人房
-											<option value="四人房">四人房
-										</select> <input type="hidden" name="action" value="getOne_For_Display">
-										<input type="submit" value="送出">
-									</form>
-									<table border="1">
-										<thead>
-											<tr>
-												<th>RoomName</th>
-												<th>RoomPrice</th>
-												<th>RoomCount</th>
-											</tr>
-										</thead>
-										<tbody>
-<%-- 											<c:forEach var="vo" items="${list}"> --%>
-<!-- 												<tr> -->
-<%-- 													<td>${vo.roomName}</td> --%>
-<%-- 													<td>${vo.roomPrice}</td> --%>
-<%-- 													<td>${vo.roomCount}</td> --%>
-<!-- 												</tr> -->
-<%-- 											</c:forEach> --%>
-										</tbody>
-									</table>
-						</div>
+						<form action="<%=request.getContextPath()%>/room/ord"
+							style="margin-bottom: 50px;" method="POST">
+							<b>請輸入日期:</b> <input type="date" name="ordDateStart"
+								value="2022-01-01"> <input type="date" name="ordDateEnd"
+								value="2022-12-31"> <br> <b>房型名稱:</b> <select
+								size="1" name="roomName" required>
+								<option value="單人房">單人房
+								<option value="雙人房">雙人房
+								<option value="四人房">四人房
+							</select> <input type="hidden" name="action" value="getOne_For_Display">
+							<input type="submit" value="送出">
+						</form>					
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<!-- My Account End -->
 	<!-- ================ MemberCenter page end ================ -->
 	<!-- ================ Top scroll ================ -->
@@ -562,7 +426,6 @@ System.out.println(hotelId);
 	<%@ include file="/footer.jsp"%>
 
 	<!-- hotelIntroduce js by Joy -->
-<%-- 	<script src="<%=request.getContextPath()%>/js/hotel/hotelMemberCenterFile.js"></script> --%>
 	<script src="<%=request.getContextPath()%>/js/hotel/hotelIntroduce.js"></script>
 	<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 </body>
