@@ -1,3 +1,4 @@
+<%@page import="java.util.stream.Collectors"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -5,9 +6,9 @@
 <%@ page import="java.util.*"%>
 <%
 CompareVO compareVO = (CompareVO) request.getAttribute("compareVO");
-// CompareService compareSvc = new CompareService();
-// List<CompareVO> listpic = compareSvc.getAll();
-// pageContext.setAttribute("listpic", listpic);
+CompareService compareSvcList = new CompareService();
+List<CompareVO> listService = compareSvcList.getAll();
+pageContext.setAttribute("listService", listService);
 %>
 
 <!DOCTYPE html>
@@ -32,7 +33,6 @@ CompareVO compareVO = (CompareVO) request.getAttribute("compareVO");
 /* 	white-space: pre-wrap; */
 /* 	font-weight: bolder; */
 /* } */
-
 textarea.type {
 	display: inline-block;
 	margin: 10px 20px 20px 20px;
@@ -154,8 +154,9 @@ b {
 						<br>
 						<div style="text-align: center">
 							<input type="hidden" name="action" value="getOne_For_Display">
-							<input type="submit" name="action" value="送出比較"
-								class="btn-style-1">
+							<input type="hidden" name="action"
+								value="getOneService_For_Display"> <input type="submit"
+								name="action" value="送出比較" class="btn-style-1">
 						</div>
 						<!-- 送出比較按鈕 結束 -->
 
@@ -235,33 +236,40 @@ b {
 		</span>
 	</div>
 	<div class="self-typying">
-		<textarea class="type" name="mytext" rows="10" cols="20"
+		<textarea class="type" name="mytext" rows="15" cols="20"
 			placeholder="" style="border-radius: 10px;">
 <c:if test="${not empty list1}">
-飯店:${list1[0].hotelName}
-地址:${list1[0].hotelAddress}<c:forEach var="compareVO" items="${list1}">
-房型:${compareVO.roomName}	價格:${compareVO.roomPrice}</c:forEach>
-==================================================
+飯店:${list1[0].hotelName} 
+地址:${list1[0].hotelAddress}
+服務設施:<c:forEach var="compareVO" items="${listservice1}">${compareVO.serviceName} </c:forEach>
+=================================================
+<c:forEach var="compareVO" items="${list1}">${compareVO.roomName}	價格:${compareVO.roomPrice}
+</c:forEach>
 </c:if>
 </textarea>
-		<textarea class="type" name="mytext" rows="10" cols="20"
+		<textarea class="type" name="mytext" rows="15" cols="20"
 			placeholder="" style="border-radius: 10px;">
-	<c:if test="${not empty list2}">
+<c:if test="${not empty list2}">
 飯店:${list2[0].hotelName} 
-地址:${list2[0].hotelAddress}<c:forEach var="compareVO" items="${list2}">
-房型:${compareVO.roomName}	價格:${compareVO.roomPrice}</c:forEach>
-==================================================
-	</c:if>
+地址:${list2[0].hotelAddress}
+服務設施:<c:forEach var="compareVO" items="${listservice2}">${compareVO.serviceName} </c:forEach>
+=================================================
+<c:forEach var="compareVO" items="${list2}">${compareVO.roomName}	價格:${compareVO.roomPrice}
+</c:forEach>
+
+</c:if>
 </textarea>
-		<textarea class="type" name="mytext" rows="10" cols="20"
+		<textarea class="type" name="mytext" rows="15" cols="20"
 			placeholder="" style="border-radius: 10px;">
-			<c:if test="${not empty list3}">
+<c:if test="${not empty list3}">
 飯店:${list3[0].hotelName} 
-地址:${list3[0].hotelAddress}<c:forEach var="compareVO" items="${list3}">
-房型:${compareVO.roomName}	價格:${compareVO.roomPrice}</c:forEach>
-==================================================			
-			</c:if>
-		</textarea>
+地址:${list3[0].hotelAddress}
+服務設施:<c:forEach var="compareVO" items="${listservice3}">${compareVO.serviceName} </c:forEach>
+=================================================
+<c:forEach var="compareVO" items="${list3}">${compareVO.roomName}	價格:${compareVO.roomPrice}
+</c:forEach>
+</c:if>
+</textarea>
 	</div>
 	<!-- blog box end -->
 	<!-- 自助黏貼區 結束 -->

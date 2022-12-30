@@ -1,5 +1,6 @@
 package tw.com.hoogle.compare.model;
 
+import java.util.Arrays;
 
 public class CompareVO implements java.io.Serializable {
 	private String hotelName;
@@ -7,7 +8,14 @@ public class CompareVO implements java.io.Serializable {
 	private String roomName;
 	private Integer roomPrice;
 	private byte[] hotelpicNo;
-
+	private String serviceName;
+	
+	@Override
+	public String toString() {
+		return "CompareVO [hotelName=" + hotelName + ", hotelAddress=" + hotelAddress + ", roomName=" + roomName
+				+ ", roomPrice=" + roomPrice + ", serviceName="	+ serviceName + "]";
+	}
+	
 	public String getHotelName() {
 		return hotelName;
 	}
@@ -46,6 +54,14 @@ public class CompareVO implements java.io.Serializable {
 
 	public void setHotelpicNo(byte[] hotelpicNo) {
 		this.hotelpicNo = hotelpicNo;
+	}
+
+	public String getServiceName() {
+		return serviceName;
+	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
 	}
 
 

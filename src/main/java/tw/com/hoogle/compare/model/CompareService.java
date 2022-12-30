@@ -18,6 +18,11 @@ public class CompareService {
 		return dao.getAll();
 	}
 
+
+	public List<CompareVO> compareSvcList(String hotelName) {
+		 return dao.findByHotelService(hotelName);
+	}
+	
 //	public List<CompareVO> getRoomType(String hotelName) {
 //		return dao.getRoomType(hotelName);
 //	}
