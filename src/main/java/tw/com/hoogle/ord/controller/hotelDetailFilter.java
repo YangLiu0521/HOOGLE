@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns = "/hotelDetail/hotelDetail.jsp")
+@WebFilter(urlPatterns = {"/hotelDetail/hotelDetail.jsp" ,"/commend/addCommend.jsp"})
 	public class hotelDetailFilter extends HttpFilter {
 	 
 
