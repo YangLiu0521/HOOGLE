@@ -10,10 +10,13 @@ List<CommendVO> list = comservice.getAll();
 pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>新增評價成功</title>
+<%@ include file="/header.jsp"%>
 <style type="text/css">
 .center-in-center {
 	position: absolute;
@@ -41,9 +44,7 @@ h4 {
 	color: blue;
 	display: inline;
 }
-</style>
 
-<style>
 table {
 	width: 1000px;
 	background-color: white;
@@ -117,5 +118,26 @@ th, td {
 			</c:forEach>
 		</table>
 	</div>
+<%-- 	<jsp:include page="/footer.jsp"/> --%>
+<%-- 	<%@ include file="/footer.jsp"%> --%>
+		<!-- js files -->
+		<script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
+		<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
+		<!-- counter js -->
+		<script src="<%=request.getContextPath()%>/js/jquery-1.10.2.min.js"></script>
+		<script src="<%=request.getContextPath()%>/js/waypoints.min.js"></script>
+		<script src="<%=request.getContextPath()%>/js/jquery.counterup.min.js"></script>
+		<!-- venobox js -->
+		<script src="<%=request.getContextPath()%>/js/venobox.min.js"></script>
+		<!-- owl carousel -->
+		<script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
+		<!-- portfolio js -->
+		<script src="<%=request.getContextPath()%>/js/jquery.mixitup.min.js"></script>
+		<!-- datepicker js -->
+		<script src="<%=request.getContextPath()%>/js/datepicker.min.js"></script>
+		<!-- script js -->
+		<script src="<%=request.getContextPath()%>/js/abu-js/abu.js"></script>
+		<!-- header right link js by aga -->
+		<script src="<%=request.getContextPath()%>/js/member/memberHeader.js"></script>
 </body>
 </html>
