@@ -223,9 +223,9 @@ String administratorName = req.getParameter("administratorName").trim();
 //	            }
 				String administratorNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z)]{2,15}$";
 				if (administratorName == null || administratorName.trim().length() == 0) {
-					errorMsgs.add("管理者姓名: 請勿空白");
+					errorMsgs.add("管理者姓名請勿空白");
 				} else if(!administratorName.trim().matches(administratorNameReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("管理者姓名: 只能是中、英文字母, 且長度必需在2到15之間");
+					errorMsgs.add("管理者姓名只能是中、英文字母, 且長度必需在2到15之間");
 				}
 				
 String administratorAccount = req.getParameter("administratorAccount").trim();
@@ -244,7 +244,7 @@ String administratorPassword = req.getParameter("administratorPassword").trim();
 					administratorHiredate = java.sql.Date.valueOf(req.getParameter("administratorHiredate").trim());
 				} catch (IllegalArgumentException e) {
 					administratorHiredate = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請選擇日期！");
+					errorMsgs.add("請選擇日期");
 				}
 //===== 字串轉成布林值 =====	
                 Boolean administratorDominate;

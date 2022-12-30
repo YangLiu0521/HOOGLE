@@ -3,22 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="tw.com.hoogle.administrator.model.*"%>
-<%@ page import="tw.com.hoogle.news.model.*"%>
+<%@ page import="tw.com.hoogle.finStm.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <jsp:useBean id="administratorSvc" scope="page" class="tw.com.hoogle.administrator.model.AdministratorService"/>
-<jsp:useBean id="newsSvc" scope="page" class="tw.com.hoogle.news.model.NewsService"/>
+<jsp:useBean id="finStmSvc" scope="page" class="tw.com.hoogle.finStm.model.FinStmService"/>
+
 <%
-AdministratorVO administratorVO = (AdministratorVO) request.getAttribute("administratorVO");
+List<FinStmVO> finStmList = finStmSvc.getAll();
+pageContext.setAttribute("finStmList", finStmList);
 %>
-<%
-AdministratorVO loginAdministratorVO = (AdministratorVO)session.getAttribute("loginAdministratorVO");
-Integer adminId = loginAdministratorVO.getAdministratorId();
-// String adminName = loginAdministratorVO.getAdministratorName();
-%>
-<%
-NewsVO newsVO = (NewsVO) request.getAttribute("newsVO");
-%>
+
 <%
 String account = (String)session.getAttribute("account");
 AdministratorVO permissionsVO = administratorSvc.getPermissionsByAccount(account);
@@ -155,106 +150,61 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 <!-- 		</a> -->
 		
 
-		<div class="test_radius">新增最新消息</div>
+		<div class="test_radius">報表查詢</div>
 		<div class="login_mark">
 			<%=account%> 登入中...
 		</div>
 	</div>
 	
-	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
-		<b style="color: #fa9797; font-size: 8px">請修正以下錯誤：</b>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: #fa9797; font-size: 8px">${message}</li>
+				<li style="color: #fa9797; font-size: 10px; position: relative; left: 150px;">${message}</li>
 			</c:forEach>
 		</ul>
 	</c:if>
-	
-	
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/NewsServlet" name="form1" enctype="multipart/form-data">
-	<div class="div_table">
-	
-		<table>
-			<tr class="td_head">
-				<td width="70">管理者編號</td>
-				<td width="80">上架日期</td>
-			</tr>
-			
-			<tr class="td_body">
-				
-<!-- Integer adminId = administratorVO.getAdministratorId(); -->
-<!-- String adminName = administratorVO.getAdministratorName(); -->
-<!-- pageContext.setAttribute("adminId", adminId); -->
-<!-- pageContext.setAttribute("adminName", adminName); -->
-					
 
-			  	<td><input type="text" name="administratorId" size="2" 
-			  		value="<%=adminId %>"/></td>
-			  
-				<td><input type="date" name="newsDate" size="10"
-					value="<%=(newsVO == null) ? "" : newsVO.getNewsDate()%>" /></td>
-	
-			</tr>
-		</table>
-	
-	</div>
-	
-	<br>
 
-	<div class="div_table">
-		<table>
-			
-			<%-- 	<%@ include file="page1.file" %>  --%>
-			<%-- 	<c:forEach var="administratorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
-			<tr class="td_body" style=${newsVO.newsState==0?"color:gray;":""}>	
-				<td>
-<!-- 					<ion-icon name="pin" width="30px" height="30px"></ion-icon> -->
-					<input type="TEXT" name="newsSubject" size="50" width="70" placeholder="請輸入主旨..."
-					value="<%=(newsVO == null) ? "" : newsVO.getNewsSubject()%>" />
-				</td>
-				<td rowspan="2">
-					<form action="/somewhere/to/upload" enctype="multipart/form-data">
-	   					<input type="file" name="newsPic" onchange="readURL(this)" targetID="preview_progressbarTW_img" accept="image/*"/>
-	   					<br>
-	   					<img id="preview_progressbarTW_img" src="#" width="300px" height="200px"/>
-					</form>
-										
-				</td>
-			</tr>
-			<tr class="td_body">
-				<td>
-					<textarea style="resize: none; width: 370px; height: 200px;" name="newsContent" placeholder="請輸入內容..." 
-						value="<%=(newsVO == null) ? "" : newsVO.getNewsContent()%>"></textarea>
-<!-- 				<input type="text" name="newsContent" size="200" -->
-<%-- 					value="<%=(newsVO == null) ? "" : newsVO.getNewsContent()%>" /> --%>
-				</td>
+	<div class="features">
+		<div class="features_search">
+			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/FinStmServlet" class="searchbyid">
+				搜尋：			
+				起始日<input type="date" size="10" name="dateFrom">
+				&nbsp結束日<input type="date" size="10" name="dateEnd">
+				<input type="hidden" name="action" value="getStmByDate">
+				<input type="submit" class="csearchbyid" value="送出">
+			</FORM>
 
-			</tr>
-		</table>
-	</div>
-	
 
-	<br>
-	<input type="hidden" name="action" value="insert">
-	<input type="submit" value="確定新增" class="input_add">
+		</div>
 		
-	</FORM>
+	</div>
+	<div class="div_table">
+	<table>
+		<tr class="td_head">
+			<th width="30">訂單日期</th>
+			<th width="20">飯店編號</th>
+			<th width="50">飯店名稱</th>
+			<th width="30">金額</th>
+			<th width="20">旅客編號</th>
+
+		</tr>
+		<%-- 	<%@ include file="page1.file" %>  --%>
+		<%-- 	<c:forEach var="administratorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
+		<c:forEach var="finStmVO" items="${finStmList}">
+			<tr class="td_body"}>
+						
+				<td>${finStmVO.ordDate}</td>
+				<td>${finStmVO.hotelId}</td>
+				<td>${finStmVO.hotelName}</td>
+				<td>$${finStmVO.roomPrice}</td>
+				<td>${finStmVO.userId}</td>
+
+			</tr>
+		</c:forEach>
+	</table>
+	</div>
 	<%-- <%@ include file="page2.file" %> --%>
-	
-	<script>
-	function readURL(input){
-		  if(input.files && input.files[0]){
-		    var imageTagID = input.getAttribute("targetID");
-		    var reader = new FileReader();
-		    reader.onload = function (e) {
-		       var img = document.getElementById(imageTagID);
-		       img.setAttribute("src", e.target.result)
-		    }
-		    reader.readAsDataURL(input.files[0]);
-		  }
-		}
-	</script>
 
 	<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 	<script src="<%=request.getContextPath()%>/js/admin/admin.js"></script>
