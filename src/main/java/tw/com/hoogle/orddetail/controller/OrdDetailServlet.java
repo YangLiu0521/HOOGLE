@@ -435,6 +435,7 @@ if ("reserve".equals(action)) { // 來自addOrd.jsp的請求
 			}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
+					System.out.println("123");
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/index.jsp");
 					failureView.forward(req, res);
