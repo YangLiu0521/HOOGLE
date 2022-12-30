@@ -223,7 +223,7 @@
 <%--                       <td>${ordVO.nowDate}</td> --%>
 					<c:if test="${ordVO.ordCheckout <= ordVO.nowDate}">
                       <td>
-                      <button style="color: red" class="btn" type="submit" value="" >點我評價</button>
+                      <button style="color: red" class="commendbtn" type="submit" value="" >點我評價</button>
                       <input type="hidden" name="ordId" value="${ordVO.ordId}">
                      	<input type="hidden" name="action" value="insert">
                       </td></c:if>
@@ -343,7 +343,7 @@
  	var today = new Date();
 //  var someday = new Date(2022,12,31);
 // 	var someday = "${ordVO.ordCheckout}";
-	var button = document.querySelectorAll(".btn").forEach(function(b){
+	var button = document.querySelectorAll(".commendbtn").forEach(function(b){
 		b.addEventListener("click", function () {
 			window.alert("歡迎您進行評價~");
 		});
