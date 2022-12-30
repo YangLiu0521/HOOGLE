@@ -55,7 +55,7 @@
             <div class="collapse navbar-collapse" id="navbarTheme">
               <ul class="navbar-nav align-items-start align-items-lg-center">
                 <li class="active"><a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo_small_removebg.png" style="width: 50px;" alt="" class="img-fluid"></a></li> 
-                <li><a class="nav-link" href="compare.jsp">比較</a></li>
+                <li><a class="nav-link" href="<%=request.getContextPath() %>/compare/compare.jsp">比較</a></li>
                 <li><a class="nav-link" href="gallery.html">美食</a></li>
                 <!--原pages-->
                 <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">關於我們</a>

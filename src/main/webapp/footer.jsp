@@ -19,8 +19,8 @@
 									<h3>指南</h3>
 								</div>
 								<ul class="footer-link">
-									<li><i class="fas fa-caret-right"></i> <a href="#">首頁</a></li>
-									<li><i class="fas fa-caret-right"></i> <a href="#">比較</a></li>
+									<li><i class="fas fa-caret-right"></i> <a href="<%=request.getContextPath() %>/index.jsp">首頁</a></li>
+									<li><i class="fas fa-caret-right"></i> <a href="<%=request.getContextPath() %>/compare/compare.jsp">比較</a></li>
 									<li><i class="fas fa-caret-right"></i> <a href="#">美食</a></li>
 									<li><i class="fas fa-caret-right"></i> <a href="#">關於我們</a>
 									</li>
