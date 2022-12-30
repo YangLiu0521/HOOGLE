@@ -148,17 +148,18 @@
                 </div>
               </div>
               <div class="form-group form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="exampleCheck1"
-                />
+<!--                 <input -->
+<!--                   type="checkbox" -->
+<!--                   class="form-check-input" -->
+<!--                   id="exampleCheck1" -->
+<!--                 /> -->
+				<input type="checkbox" id="terms" name="terms">
                 <label class="form-check-label font-size-14" for="exampleCheck1"
                   >我已閱讀並接受 <a href="">本網站付款條款</a></label
                 >
               </div>            
             <form class="form-style-1" METHOD="post" ACTION="${pageContext.request.contextPath}/OrddetailServlet" >
-              <button type="submit" class="btn-style-1">確認付款</button>
+              <button type="submit" class="btn-style-1" onclick="checkTerms()">確認付款</button>
               		<input type="hidden" name="ordId" value="${newOrdId.ordId}"><font color=red>${errorMsgs.ordId}</font>
 					<input type="hidden" name="roomAuto1" value="${4001}"><font color=red>${errorMsgs.roomAuto}</font>
 					<input type="hidden" name="roomNumber1" value="${roomNumber1}"><font color=red>${errorMsgs.roomAuto}</font>
@@ -330,5 +331,16 @@
     <script src="/HOOGLE/js/datepicker.min.js"></script>
 <!--     script js -->
     <script src="/HOOGLE/js/custom.js"></script>
+    
+    <script>
+  function checkTerms() {
+    if (document.getElementById('terms').checked) {
+      // Do something, submit form, etc.
+    } else {
+      alert('我已閱讀並接受 本網站付款條款');
+      event.preventDefault();
+    }
+  }
+</script>
   </body>
 </html>
