@@ -27,7 +27,7 @@ public class RoompicReader extends HttpServlet {
 			Statement stmt = con.createStatement();
 			Integer roompicId = Integer.valueOf(req.getParameter("roompicId"));
 			ResultSet rs = stmt.executeQuery(
-					"select roompicPic from roompic where roompicId =" + roompicId);
+					"select roompicPic from roompic where roomAuto =" + roompicId);
 
 			if (rs.next()) {
 				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("roompicPic"));

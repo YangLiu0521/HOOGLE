@@ -1,6 +1,7 @@
 package tw.com.hoogle.roompic.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,11 +24,11 @@ public class RoompicDAO implements RoompicDAO_interface{
 		}
 	}
 	
-	private static final String INSERT_STMT = "INSERT INTO roompic (roomAuto,roomType,roompicPic) VALUES (?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT roompicId,roomAuto,roomType,roompicPic FROM roompic";
-	private static final String GET_ONE_STMT = "SELECT roompicId,roomAuto,roomType,roompicPic FROM roompic where roompicId = ?";
+	private static final String INSERT_STMT = "INSERT INTO roompic (roomAuto,roompicPic) VALUES (?, ?, ?)";
+	private static final String GET_ALL_STMT = "SELECT roompicId,roomAuto,roompicPic FROM roompic";
+	private static final String GET_ONE_STMT = "SELECT roompicId,roomAuto,roompicPic FROM roompic where roompicId = ?";
 	private static final String DELETE = "DELETE FROM roompic where roompicId = ?";
-	private static final String UPDATE = "UPDATE roompic set roomAuto=?, roomType=?, roompicPic=? where roompicId = ?";
+	private static final String UPDATE = "UPDATE roompic set roomAuto=?, roompicPic=? where roompicId = ?";
 	@Override
 	public void insert(RoompicVO roompicVO) {
 		
@@ -164,7 +165,6 @@ public class RoompicDAO implements RoompicDAO_interface{
 				roompicVO = new RoompicVO();
 				roompicVO.setRoompicId(rs.getInt("roompicId"));
 				roompicVO.setRoomAuto(rs.getInt("roomAuto"));
-				roompicVO.setRoomType(rs.getString("roomType"));
 				roompicVO.setRoompicPic(rs.getBytes("roompicPic"));
 			}
 
@@ -221,7 +221,6 @@ public class RoompicDAO implements RoompicDAO_interface{
 				roompicVO = new RoompicVO();
 				roompicVO.setRoompicId(rs.getInt("roompicId"));
 				roompicVO.setRoomAuto(rs.getInt("roomAuto"));
-				roompicVO.setRoomType(rs.getString("roomType"));
 				roompicVO.setRoompicPic(rs.getBytes("roompicPic"));
 				
 				list.add(roompicVO); // Store the row in the list
@@ -257,5 +256,24 @@ public class RoompicDAO implements RoompicDAO_interface{
 		}
 		return list;
 	}
-	
+	@Override
+	public int updatePicByRoomAuto(RoompicVO vo) {
+		final String sql = "update roompic set roompicPic = ? where roomauto = ?";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(sql);
+				
+//			Connection conn = DriverManager.getConnection(url, userid, passwd);
+//			PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+			pstmt.setBytes(1, vo.getRoompicPic());
+			pstmt.setInt(2, vo.getRoomAuto());
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 }

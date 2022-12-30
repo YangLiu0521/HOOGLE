@@ -6,11 +6,9 @@ public class RoomVO implements java.io.Serializable{
 	private Integer roomAuto;
 	private Integer hotelId;
 	private Integer roomTotal;
-	private Integer nonreserved;
-	private String roomName;
-	private String roomType;
+	private String  roomName;
+	private Boolean roomStatus;
 	private Integer roomPrice;
-	
 	public Integer getRoomAuto() {
 		return roomAuto;
 	}
@@ -29,23 +27,17 @@ public class RoomVO implements java.io.Serializable{
 	public void setRoomTotal(Integer roomTotal) {
 		this.roomTotal = roomTotal;
 	}
-	public Integer getNonreserved() {
-		return nonreserved;
-	}
-	public void setNonreserved(Integer nonreserved) {
-		this.nonreserved = nonreserved;
-	}
 	public String getRoomName() {
 		return roomName;
 	}
 	public void setRoomName(String roomName) {
 		this.roomName = roomName;
 	}
-	public String getRoomType() {
-		return roomType;
+	public Boolean getRoomStatus() {
+		return roomStatus;
 	}
-	public void setRoomType(String roomType) {
-		this.roomType = roomType;
+	public void setRoomStatus(Boolean roomStatus) {
+		this.roomStatus = roomStatus;
 	}
 	public Integer getRoomPrice() {
 		return roomPrice;
@@ -53,9 +45,6 @@ public class RoomVO implements java.io.Serializable{
 	public void setRoomPrice(Integer roomPrice) {
 		this.roomPrice = roomPrice;
 	}
-	
-	
-	
-	
-
 }
+	
+	

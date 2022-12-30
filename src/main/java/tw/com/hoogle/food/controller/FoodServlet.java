@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +17,7 @@ import javax.servlet.http.Part;
 import tw.com.hoogle.food.model.FoodService;
 import tw.com.hoogle.food.model.FoodVO;
 
-//@WebServlet("/food/FoodServlet")
+@WebServlet("/food/FoodServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class FoodServlet extends HttpServlet {
 
@@ -214,9 +215,9 @@ System.out.println("IN INSERT");
 		String foodName = req.getParameter("foodName");
 		String foodNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 		if (foodName == null || foodName.trim().length() == 0) {
-			errorMsgs.put("restaurantId","欄位: 請勿空白");
+			errorMsgs.put("foodName","欄位: 請勿空白");
 		} else if(!foodName.trim().matches(foodNameReg)) { //以下練習正則(規)表示式(regular-expression)
-			errorMsgs.put("restaurantId","欄位: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+			errorMsgs.put("foodName","欄位: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
         }
 		
 		if (!errorMsgs.isEmpty()) {

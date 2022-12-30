@@ -10,7 +10,7 @@ window.addEventListener("load", function () {
         // 跑每個使用者選的檔案，留意 i 的部份
         for (let i = 0; i < this.files.length; i++) {
             let reader = new FileReader(); // 用來讀取檔案
-            reader.readAsDataURL(this.files[i]); // 讀取檔案
+//            reader.readAsDataURL(this.files[i]); // 讀取檔案
             reader.addEventListener("load", function () {
                 console.log(reader.result);
                 let li_html = `
@@ -35,7 +35,7 @@ $(document).ready(function () {
             console.log(data);
             $.each(data, function (key, value) {
                 console.log(key, value)
-                $('#city').append('<option value="' + key + '">' + data[key].CityName + '</option>')
+                $('#city').append('<option value="' + data[key].CityName + '">' + data[key].CityName + '</option>')
             })
         },
         error: function (data) {
@@ -53,8 +53,9 @@ $(document).ready(function () {
             type: "get",
             dataType: "json",
             success: function (data) {
-
-                eachval = data[cityvalue].AreaList; //鄉鎮
+	
+				const targetCity = data.find((city) => city.CityName === cityvalue);
+                eachval = targetCity.AreaList; //鄉鎮
 
                 $.each(eachval, function (key, value) {
                     $('#area').append('<option value="' + key + '">' + eachval[key].AreaName + '</option>')
@@ -76,7 +77,9 @@ $("#area").change(function () {
         type: "get",
         dataType: "json",
         success: function (data) {
-            $("#inputAddress2").val(data[cityvalue].CityName + data[cityvalue].AreaList[areavalue].AreaName)
+			const targetCity = data.find((city) => city.CityName === cityvalue);
+			const address = targetCity.CityName + targetCity.AreaList[areavalue].AreaName
+            $("#inputAddress2").val(address)
         },
         error: function () {
             alert("fail");

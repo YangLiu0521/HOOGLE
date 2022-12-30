@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class ServiceListDAO implements ServiceListDAO_interface {
 		private static final String GET_ONE_STMT = 
 			"SELECT serviceListId, hotelId, serviceId FROM serviceList where serviceListId = ?";
 		private static final String DELETE = 
-			"DELETE FROM serviceList where serviceListId = ?";
+			"DELETE FROM serviceList where hotelId = ?";
 		private static final String UPDATE = 
 			"UPDATE serviceList set hotelId=?, serviceId=? where serviceListId = ?";
 
@@ -118,9 +119,54 @@ public class ServiceListDAO implements ServiceListDAO_interface {
 			}
 
 		}
+		
+		public void insert2(ServiceListVO serviceListVO,Connection con) {
+
+			PreparedStatement pstmt = null;
+
+			try {
+
+				pstmt = con.prepareStatement(INSERT_STMT);
+
+				pstmt.setInt(1, serviceListVO.getHotelId());
+				pstmt.setInt(2, serviceListVO.getServiceId());
+//				pstmt.setInt(3, serviceListVO.getServiceListId());
+
+				Statement stmt=	con.createStatement();
+				
+				pstmt.executeUpdate();
+
+				// Handle any driver errors
+			} catch (SQLException se) {
+				if (con != null) {
+					try {
+						// 3●設定於當有exception發生時之catch區塊內
+						System.err.print("Transaction is being ");
+						System.err.println("rolled back-ServiceListDAO-");
+						con.rollback();
+					} catch (SQLException excep) {
+						throw new RuntimeException("rollback error occured. "
+								+ excep.getMessage());
+					}
+				}
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+			}
+
+		}
+
 
 		@Override
-		public void delete(Integer serviceListId) {
+		public void delete(Integer hotelId) {
 
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -130,7 +176,7 @@ public class ServiceListDAO implements ServiceListDAO_interface {
 				con = ds.getConnection();
 				pstmt = con.prepareStatement(DELETE);
 
-				pstmt.setInt(1, serviceListId);
+				pstmt.setInt(1, hotelId);
 
 				pstmt.executeUpdate();
 
