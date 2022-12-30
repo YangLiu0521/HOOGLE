@@ -15,12 +15,12 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 	String userid = "root";
 	String passwd = "password";
 
-	private static final String INSERT_STMT = "INSERT INTO roompic (roomAuto,roomType,roompicPic) VALUES (?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT roompicId,roomAuto,roomType,roompicPic FROM roompic";
-	private static final String GET_ONE_STMT = "SELECT roompicId,roomAuto,roomType,roompicPic FROM roompic where roompicId = ?";
+	private static final String INSERT_STMT = "INSERT INTO roompic (roomAuto,roompicPic) VALUES (?, ?)";
+	private static final String GET_ALL_STMT = "SELECT roompicId,roomAuto,roompicPic FROM roompic";
+	private static final String GET_ONE_STMT = "SELECT roompicId,roomAuto,roompicPic FROM roompic where roompicId = ?";
 	private static final String DELETE = "DELETE FROM roompic where roompicId = ?";
-	private static final String UPDATE = "UPDATE roompic set roomAuto=?, roomType=?, roompicPic=? where roompicId = ?";
-
+	private static final String UPDATE = "UPDATE roompic set roomAuto=?,  roompicPic=? where roompicId = ?";
+	
 	@Override
 	public void insert(RoompicVO roompicVO) {
 
@@ -33,8 +33,8 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setInt(1, roompicVO.getRoomAuto());
-			pstmt.setString(2, roompicVO.getRoomType());
-			pstmt.setBytes(3, roompicVO.getRoompicPic());
+			
+			pstmt.setBytes(2, roompicVO.getRoompicPic());
 
 			pstmt.executeUpdate();
 
@@ -77,9 +77,9 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setInt(1, roompicVO.getRoomAuto());
-			pstmt.setString(2, roompicVO.getRoomType());
-			pstmt.setBytes(3, roompicVO.getRoompicPic());
-			pstmt.setInt(4, roompicVO.getRoompicId());
+		
+			pstmt.setBytes(2, roompicVO.getRoompicPic());
+			pstmt.setInt(3, roompicVO.getRoompicId());
 
 			pstmt.executeUpdate();
 
@@ -173,7 +173,7 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 				roompicVO = new RoompicVO();
 				roompicVO.setRoompicId(rs.getInt("roompicId"));
 				roompicVO.setRoomAuto(rs.getInt("roomAuto"));
-				roompicVO.setRoomType(rs.getString("roomType"));
+			
 				roompicVO.setRoompicPic(rs.getBytes("roompicPic"));
 			}
 
@@ -227,7 +227,7 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 				roompicVO = new RoompicVO();
 				roompicVO.setRoompicId(rs.getInt("roompicId"));
 				roompicVO.setRoomAuto(rs.getInt("roomAuto"));
-				roompicVO.setRoomType(rs.getString("roomType"));
+				
 				roompicVO.setRoompicPic(rs.getBytes("roompicPic"));
 
 				list.add(roompicVO); // Store the row in the list
@@ -266,6 +266,23 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 		return list;
 	}
 
+	@Override
+	public int updatePicByRoomAuto(RoompicVO vo) {
+		final String sql = "update roompic set roompicPic = ? where roomauto = ?";
+		try (
+			Connection conn = DriverManager.getConnection(url, userid, passwd);
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+		) {
+			pstmt.setBytes(1, vo.getRoompicPic());
+			pstmt.setInt(2, vo.getRoomAuto());
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	
 	public static void main(String[] args) {
 
 		RoompicJDBCDAO dao = new RoompicJDBCDAO();
@@ -311,4 +328,5 @@ public class RoompicJDBCDAO implements RoompicDAO_interface {
 //		}
 
 	}
+
 }

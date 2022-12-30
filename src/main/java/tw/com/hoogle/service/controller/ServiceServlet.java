@@ -223,8 +223,6 @@ System.out.println("IN INSERT");
 
 
 
-//	private ServiceVO getOneService(Integer serviceId) {
-//		return null;
 	}
 	
 

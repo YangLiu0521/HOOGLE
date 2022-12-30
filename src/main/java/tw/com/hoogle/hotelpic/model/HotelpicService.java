@@ -1,5 +1,8 @@
 package tw.com.hoogle.hotelpic.model;
 
+import java.util.List;
+
+
 public class HotelpicService {
 	
 	private HotelpicDAO_interface dao;
@@ -24,13 +27,13 @@ public class HotelpicService {
 
 	
 
-	public HotelpicVO updateHotelpic( byte[] hotelpicNo, String hotelpicName) {
+	public HotelpicVO updateHotelpic( Integer hotelpicId,Integer hotelId,byte[] hotelpicNo, String hotelpicName) {
 
 
 		HotelpicVO hotelpicVO = new HotelpicVO();
 		
-//		hotelpicVO.setHotelpicId(hotelpicId);
-//		hotelpicVO.setHotelId(hotelId);
+		hotelpicVO.setHotelpicId(hotelpicId);
+		hotelpicVO.setHotelId(hotelId);
 		hotelpicVO.setHotelpicNo(hotelpicNo);
 		hotelpicVO.setHotelpicName(hotelpicName);
 		dao.update(hotelpicVO);
@@ -40,30 +43,25 @@ public class HotelpicService {
 	
 	public void deletehotelpic(Integer hotelpicId) {
 		dao.delete(hotelpicId);
-		
+	}
+	
+
+	
+
+	public HotelpicVO getOneHotelpic(Integer hotelpicId) {
+		return dao.findByPrimaryKey(hotelpicId);
 	}
 
-//	public FoodVO getOneFood(Integer foodPicid) {
-//		return dao.findByPrimaryKey(foodPicid);
-//	}
-//
-//	public List<FoodVO> getAll() {
-//		return dao.getAll();
-//	}
-	 }
-//	public void deleteHotelpic(Integer hotelpicId) {
-//		dao.delete(hotelpicId);
-//	}
-
-//	public HotelpicVO getOneHotelpic(Integer hotelpicId) {
-//		return dao.findByPrimaryKey(hotelpicId);
-//	}
-//
-//	public List<HotelpicVO> getAll() {
-//		return dao.getAll();
-//	}
+	public List<HotelpicVO> getAll() {
+		return dao.getAll();
+	}
 
 
+	// 預留給 Struts 2 用的
+	public void updateHotelpicVO(HotelpicVO hotelpicVO) {
+		dao.update(hotelpicVO);
+	}
+	}
 	// 預留給 Struts 2 用的
 //	public void updateHotelpic(HotelpicVO hotelpicVO) {
 //		dao.update(hotelpicVO);

@@ -313,4 +313,11 @@ public class ServiceListJDBCDAO implements ServiceListDAO_interface {
 			System.out.println();
 		}
 	}
+
+	@Override
+	public void insert2(ServiceListVO serviceListVO, Connection con) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

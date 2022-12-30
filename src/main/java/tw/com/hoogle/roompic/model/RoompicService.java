@@ -58,6 +58,20 @@ public class RoompicService {
 		return dao.getAll();
 	}
 
+
+
+	public RoompicVO updateRoompic(Object object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public RoompicVO updateRoompic(byte[] roompicPic) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 		
 	}
 
