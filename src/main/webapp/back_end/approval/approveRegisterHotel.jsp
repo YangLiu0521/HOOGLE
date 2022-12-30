@@ -51,7 +51,8 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 				<div class="nav_list">
 					<!-- <div class="nav_h2">管理者專區</div>  要調整字的顏色、字在縮起來時消失-->
 					
-					<a href="#" class="nav_link"> <ion-icon name="stats-chart-outline" class="nav_icon"></ion-icon>
+					<a href="<%=request.getContextPath()%>/back_end/finStm/stmList.jsp" class="nav_link">
+						<ion-icon name="stats-chart-outline" class="nav_icon"></ion-icon>
 						<span class="nav_name">報表查詢</span>
 					</a>
 					

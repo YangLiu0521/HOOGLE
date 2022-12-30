@@ -84,15 +84,19 @@ public class NewsServlet extends HttpServlet {
 				NewsService newsSvc = new NewsService();
 				List<NewsVO> searchNews = newsSvc.findNewsByDate(dateFrom, dateEnd);
 				if (searchNews.isEmpty()) {
-					errorMsgs.add("此區間無資料");
+//					errorMsgs.add("此區間無資料");
+					out.println("<meta http-equiv='refresh' content='1;URL=" + req.getContextPath()
+					+ "/back_end/news/newsList.jsp'>");
+					out.println("<script> alert('此區間無資料！');</script>");
+					return;
 				}
 				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back_end/news/newsList.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
+//				if (!errorMsgs.isEmpty()) {
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("/back_end/news/newsList.jsp");
+//					failureView.forward(req, res);
+//					return;//程式中斷
+//				}
 						
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("dateFrom", dateFrom); // 
