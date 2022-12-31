@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="tw.com.hoogle.administrator.model.*"%>
+<%@ page import="java.text.Format"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <jsp:useBean id="administratorSvc" scope="page" class="tw.com.hoogle.administrator.model.AdministratorService"/>
@@ -15,6 +17,10 @@ pageContext.setAttribute("list", list);
 String account = (String)session.getAttribute("account");
 AdministratorVO permissionsVO = administratorSvc.getPermissionsByAccount(account);
 pageContext.setAttribute("permissionsVO", permissionsVO);
+%>
+<%
+Format sfm = new SimpleDateFormat("yyyy/MM/dd");
+pageContext.setAttribute("sfm", sfm);
 %>
 
 <!DOCTYPE html>
@@ -208,7 +214,7 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 						name=${administratorVO.hotelDominate==true?"checkbox-outline":"square-outline"}></ion-icon></td>
 				<td><ion-icon
 						name=${administratorVO.userDominate==true?"checkbox-outline":"square-outline"}></ion-icon></td>
-				<td>${administratorVO.administratorHiredate}</td>
+				<td>${sfm.format(administratorVO.administratorHiredate)}</td>
 				<td>
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/AdministratorServlet"

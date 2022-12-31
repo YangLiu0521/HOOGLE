@@ -591,7 +591,7 @@ pageContext.setAttribute("nonreserved4003",nonreserved4003);
             			
             		}
             	}
-            	else if(nr4002<r3 ){
+            	else if(nr4003<r3 ){
             		if(alert("豪華四人房房數不足，麻煩修改訂房房數") == true){
             			
             		}

@@ -5,6 +5,8 @@
 <%@ page import="tw.com.hoogle.userForBackEnd.model.*"%>
 <%@ page import="tw.com.hoogle.administrator.model.*"%>
 <%@ page import="tw.com.hoogle.ord.model.*"%>
+<%@ page import="java.text.Format"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <jsp:useBean id="administratorSvc" scope="page" class="tw.com.hoogle.administrator.model.AdministratorService"/>
@@ -27,6 +29,11 @@ pageContext.setAttribute("ordList", ordList);
 String account = (String)session.getAttribute("account");
 AdministratorVO permissionsVO = administratorSvc.getPermissionsByAccount(account);
 pageContext.setAttribute("permissionsVO", permissionsVO);
+%>
+
+<%
+Format sfm = new SimpleDateFormat("yyyy/MM/dd");
+pageContext.setAttribute("sfm", sfm);
 %>
 <!DOCTYPE html>
 <html>
@@ -189,9 +196,9 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 				<td>${ordVO.userId}</td>
 				<td>${ordVO.userName}</td>
 				<td>${ordVO.hotelName}</td>
-				<td>${ordVO.ordDate}</td>
-				<td>${ordVO.ordCheckin}</td>
-				<td>${ordVO.ordCheckout}</td>
+				<td>${sfm.format(ordVO.ordDate)}</td>
+				<td>${sfm.format(ordVO.ordCheckin)}</td>
+				<td>${sfm.format(ordVO.ordCheckout)}</td>
 				<td>${ordVO.ordRemark}</td>
 			</tr>
 		</c:forEach>

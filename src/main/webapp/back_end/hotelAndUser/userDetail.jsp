@@ -4,6 +4,8 @@
 <%@ page import="java.util.*"%>
 <%@ page import="tw.com.hoogle.userForBackEnd.model.*"%>
 <%@ page import="tw.com.hoogle.administrator.model.*"%>
+<%@ page import="java.text.Format"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <jsp:useBean id="administratorSvc" scope="page" class="tw.com.hoogle.administrator.model.AdministratorService"/>
@@ -20,6 +22,10 @@ UserVO userVO = (UserVO) request.getAttribute("userId");
 String account = (String)session.getAttribute("account");
 AdministratorVO permissionsVO = administratorSvc.getPermissionsByAccount(account);
 pageContext.setAttribute("permissionsVO", permissionsVO);
+%>
+<%
+Format sfm = new SimpleDateFormat("yyyy/MM/dd");
+pageContext.setAttribute("sfm", sfm);
 %>
 <!DOCTYPE html>
 <html>
@@ -177,13 +183,13 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 		<tr class="td_head">
 			<th width="20">旅客<br>編號</th>
 			<th width="50">旅客信箱</th>
-			<th width="50">旅客密碼</th>
-			<th width="30">旅客姓名</th>
+			<th width="45">旅客密碼</th>
+			<th width="35">旅客姓名</th>
 			<th width="40">旅客電話</th>
 			<th width="40">旅客身分證</th>
-			<th width="22">旅客<br>生日</th>
-			<th width="22">旅客<br>註冊日</th>
-			<th width="20">訂單<br>查詢</th>
+			<th width="16">旅客<br>生日</th>
+			<th width="16">旅客<br>註冊日</th>
+			<th width="25">訂單<br>查詢</th>
 		</tr>
 		<tr class="td_body">
 			<td>${userVO.userId}</td>
@@ -192,8 +198,8 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 			<td>${userVO.userName}</td>
 			<td>${userVO.userPhone}</td>
 			<td>${userVO.userIdentity}</td>
-			<td>${userVO.userBirthday}</td>
-			<td>${userVO.userRegistration}</td>
+			<td>${sfm.format(userVO.userBirthday)}</td>
+			<td>${sfm.format(userVO.userRegistration)}</td>
 			<td>
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/OrdForBackEndServlet" class="">
 					<input type="hidden" name="action" value="getOne_For_Display">
