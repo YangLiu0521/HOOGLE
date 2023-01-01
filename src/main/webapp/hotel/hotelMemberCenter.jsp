@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="tw.com.hoogle.hotel.model.*"%>
 <%@ page import="tw.com.hoogle.room.model.*"%>
+<%@ page import="tw.com.hoogle.otherhotel.model.*"%>
 <%@ page import="java.util.*"%>
 <%
 if (session.getAttribute("userVO") == null && session.getAttribute("hotelVO") == null) {
@@ -15,10 +16,9 @@ if (session.getAttribute("userVO") == null && session.getAttribute("hotelVO") ==
 	dispatcher.forward(request, response);
 	return;
 }
-
+OtherHotelVO otherhotelVO = new OtherHotelVO();
 HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //UserServlet.java(Controller)
 Integer hotelId = hotelVO.getHotelId();
-System.out.println(hotelId);
 %>
 
 <%
@@ -312,7 +312,7 @@ pageContext.setAttribute("list", list);
 											<button type="submit"
 												class="btn btn-primary btn-lg btn-block mt-3">送出</button>
 											<input type="hidden" name="otherhotelservlet"
-												value="otherhotelupdate">
+												value="updateHotel">
 											<button type="reset"
 												class="btn btn-dark btn-lg btn-block mt-3">重置</button>
 										</div>

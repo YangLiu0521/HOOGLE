@@ -48,15 +48,15 @@ public class OtherHotelServlet extends HttpServlet {
 		String url = "/hotel/hotelMemberCenter.jsp";
 
 		String otherhotelservlet = null;
-		if (req.getParameter("action") != null) {
-			otherhotelservlet = req.getParameter("action");
+		if (req.getParameter("otherhotelservlet") != null) {
+			otherhotelservlet = req.getParameter("otherhotelservlet");
 		}
 		System.out.println("###### update into OtherHotelServlet  ######. otherhotelservlet is " + otherhotelservlet);
 
 // ===================================================飯店修改=========================================================//
 		if ("updateHotel".equals(otherhotelservlet)) { // 來自userMemberCenter的請求
 
-			System.out.println("otherhotelupdate");
+			System.out.println("updateHotel");
 
 			Map<String, String> errors = new HashMap<String, String>();
 			req.setAttribute("errors", errors);
@@ -65,8 +65,8 @@ public class OtherHotelServlet extends HttpServlet {
 
 //				OtherHotelService otherhotelSvc = new OtherHotelService();
 //				OtherHotelVO otherhotelVO = (OtherHotelVO) session.getAttribute("hotelVO"); // 表示已登入，取得userVO物件
-				HotelService hotelSvc = new HotelService();
-				HotelVO hotelVO = (HotelVO) session.getAttribute("hotelVO"); // 表示已登入，取得hotelVO物件
+//				HotelService hotelSvc = new HotelService();
+//				HotelVO hotelVO = (HotelVO) session.getAttribute("hotelVO"); // 表示已登入，取得hotelVO物件
 
 				OtherHotelService otherhotelSvc = new OtherHotelService();
 				HotelVO hotelvo = (HotelVO) session.getAttribute("hotelVO"); // 表示已登入，取得userVO物件
@@ -123,12 +123,12 @@ public class OtherHotelServlet extends HttpServlet {
 				hotelvo.getHotelState();
 
 
-				hotelVO.setHotelCounty(hotelCounty);
-				hotelVO.setHotelAddress(hotelAddress);
-				hotelVO.setHotelType(hotelType);
-				hotelVO.setHotelNotice(hotelNotice);
-				hotelVO.setHotelQa(hotelQa);
-				hotelVO.setHotelIntroduction(hotelIntroduction);
+//				hotelVO.setHotelCounty(hotelCounty);
+//				hotelVO.setHotelAddress(hotelAddress);
+//				hotelVO.setHotelType(hotelType);
+//				hotelVO.setHotelNotice(hotelNotice);
+//				hotelVO.setHotelQa(hotelQa);
+//				hotelVO.setHotelIntroduction(hotelIntroduction);
 
 				// 會被修改的內容
 				otherhotelVO.setHotelCounty(hotelCounty);
@@ -177,7 +177,7 @@ public class OtherHotelServlet extends HttpServlet {
 				// 開始修改資料
 
 
-				hotelVO = hotelSvc.updateHotel(hotelVO);
+//				hotelVO = hotelSvc.updateHotel(hotelVO);
 
 				otherhotelVO = otherhotelSvc.updateHotel(otherhotelVO,checkbox,Hotelpiclist);
 
