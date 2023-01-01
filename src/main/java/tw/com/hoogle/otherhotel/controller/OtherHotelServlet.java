@@ -69,8 +69,8 @@ public class OtherHotelServlet extends HttpServlet {
 //				HotelVO hotelVO = (HotelVO) session.getAttribute("hotelVO"); // 表示已登入，取得hotelVO物件
 
 				OtherHotelService otherhotelSvc = new OtherHotelService();
-				HotelVO hotelvo = (HotelVO) session.getAttribute("hotelVO"); // 表示已登入，取得userVO物件
-				System.out.println("SESSION VO=" + hotelvo.toString());
+				HotelVO hotelVO = (HotelVO) session.getAttribute("hotelVO"); // 表示已登入，取得userVO物件
+				System.out.println("SESSION VO=" + hotelVO.toString());
 
 				System.out.println("### update into otherhotel update ### 1");
 
@@ -105,38 +105,38 @@ public class OtherHotelServlet extends HttpServlet {
 					errors.put("hotelIntroduction", "請輸入飯店介紹");
 				}
 				// 將session 的HotelVO 轉存至自己的OtherHotelVO
-				OtherHotelVO otherhotelVO = new OtherHotelVO();
-				otherhotelVO.setHotelId(hotelvo.getHotelId());
-				otherhotelVO.setHotelEmail(hotelvo.getHotelEmail());
+//				OtherHotelVO otherhotelVO = new OtherHotelVO();
+//				otherhotelVO.setHotelId(hotelvo.getHotelId());
+//				otherhotelVO.setHotelEmail(hotelvo.getHotelEmail());
 
-				hotelvo.getHotelPassword();
-				hotelvo.getHotelName();
-				hotelvo.getHotelPhone();
-				hotelvo.getHotelPrincipal();
-				hotelvo.getHotelTaxid();
-				hotelvo.getHotelCounty();
-				hotelvo.getHotelAddress();
-				hotelvo.getHotelType();
-				hotelvo.getHotelNotice();
-				hotelvo.getHotelQa();
-				hotelvo.getHotelIntroduction();
-				hotelvo.getHotelState();
+//				hotelvo.getHotelPassword();
+//				hotelvo.getHotelName();
+//				hotelvo.getHotelPhone();
+//				hotelvo.getHotelPrincipal();
+//				hotelvo.getHotelTaxid();
+//				hotelvo.getHotelCounty();
+//				hotelvo.getHotelAddress();
+//				hotelvo.getHotelType();
+//				hotelvo.getHotelNotice();
+//				hotelvo.getHotelQa();
+//				hotelvo.getHotelIntroduction();
+//				hotelvo.getHotelState();
 
 
-//				hotelVO.setHotelCounty(hotelCounty);
-//				hotelVO.setHotelAddress(hotelAddress);
-//				hotelVO.setHotelType(hotelType);
-//				hotelVO.setHotelNotice(hotelNotice);
-//				hotelVO.setHotelQa(hotelQa);
-//				hotelVO.setHotelIntroduction(hotelIntroduction);
+				hotelVO.setHotelCounty(hotelCounty);
+				hotelVO.setHotelAddress(hotelAddress);
+				hotelVO.setHotelType(hotelType);
+				hotelVO.setHotelNotice(hotelNotice);
+				hotelVO.setHotelQa(hotelQa);
+				hotelVO.setHotelIntroduction(hotelIntroduction);
 
 				// 會被修改的內容
-				otherhotelVO.setHotelCounty(hotelCounty);
-				otherhotelVO.setHotelAddress(hotelAddress);
-				otherhotelVO.setHotelType(hotelType);
-				otherhotelVO.setHotelNotice(hotelNotice);
-				otherhotelVO.setHotelQa(hotelQa);
-				otherhotelVO.setHotelIntroduction(hotelIntroduction);
+//				otherhotelVO.setHotelCounty(hotelCounty);
+//				otherhotelVO.setHotelAddress(hotelAddress);
+//				otherhotelVO.setHotelType(hotelType);
+//				otherhotelVO.setHotelNotice(hotelNotice);
+//				otherhotelVO.setHotelQa(hotelQa);
+//				otherhotelVO.setHotelIntroduction(hotelIntroduction);
 
 //======================================= servicelist table
 				String[] checkbox = req.getParameterValues("serviceName");
@@ -161,7 +161,7 @@ public class OtherHotelServlet extends HttpServlet {
 						    in.read(buf);
 						    in.close();
 						    HotelpicVO hotelpicvo = new HotelpicVO();
-						    hotelpicvo.setHotelId(hotelvo.getHotelId());
+						    hotelpicvo.setHotelId(hotelVO.getHotelId());
 						    hotelpicvo.setHotelpicName(filename);
 						    hotelpicvo.setHotelpicNo(buf);
 						    Hotelpiclist.add(hotelpicvo);
@@ -179,7 +179,7 @@ public class OtherHotelServlet extends HttpServlet {
 
 //				hotelVO = hotelSvc.updateHotel(hotelVO);
 
-				otherhotelVO = otherhotelSvc.updateHotel(otherhotelVO,checkbox,Hotelpiclist);
+				hotelVO = otherhotelSvc.updateHotel(hotelVO,checkbox,Hotelpiclist);
 
 				System.out.println("修改成功");
 				req.getRequestDispatcher("../hotel/hotelMemberCenter.jsp").forward(req, res);

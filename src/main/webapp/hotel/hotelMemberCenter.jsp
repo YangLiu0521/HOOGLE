@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="tw.com.hoogle.hotel.model.*"%>
 <%@ page import="tw.com.hoogle.room.model.*"%>
-<%@ page import="tw.com.hoogle.otherhotel.model.*"%>
 <%@ page import="java.util.*"%>
 <%
 if (session.getAttribute("userVO") == null && session.getAttribute("hotelVO") == null) {
@@ -16,7 +15,7 @@ if (session.getAttribute("userVO") == null && session.getAttribute("hotelVO") ==
 	dispatcher.forward(request, response);
 	return;
 }
-OtherHotelVO otherhotelVO = new OtherHotelVO();
+
 HotelVO hotelVO = (HotelVO) request.getSession().getAttribute("hotelVO"); //UserServlet.java(Controller)
 Integer hotelId = hotelVO.getHotelId();
 %>
@@ -280,7 +279,7 @@ pageContext.setAttribute("list", list);
 
 
 										<select id="city" name="hotelCounty">
-											<option value="臺北市">臺北市</option>
+											<option value="${hotelVO.hotelCounty}">請選擇</option>
 										</select> <select id="area" name="area" style="display: none;">
 											<option value="">請選擇</option>
 										</select>

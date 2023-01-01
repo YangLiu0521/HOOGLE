@@ -9,6 +9,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import tw.com.hoogle.hotel.model.HotelVO;
 import tw.com.hoogle.hotelpic.model.HotelpicDAO;
 import tw.com.hoogle.hotelpic.model.HotelpicVO;
 import tw.com.hoogle.service.model.ServiceVO;
@@ -29,26 +30,26 @@ public class OtherHotelDAO implements OtherHotelDAO_interface{
 	private static final String UPDATE = "UPDATE hotel set hotelCounty=?, hotelAddress=?, hotelType=?, hotelNotice=?, hotelQa=?, hotelIntroduction=? where hotelId = ?";
 	
 	@Override
-	public void updateHotel(OtherHotelVO otherhotelVO,List<ServiceListVO> servicelist,List<HotelpicVO> Hotelpiclist) {
+	public void updateHotel(HotelVO hotelVO,List<ServiceListVO> servicelist,List<HotelpicVO> Hotelpiclist) {
 		try {
 			Connection con = ds.getConnection();
 			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement(UPDATE);			
 		
 			//OtherHotel table
-			pstmt.setString(1, otherhotelVO.getHotelCounty());
-			pstmt.setString(2, otherhotelVO.getHotelAddress());
-			pstmt.setString(3, otherhotelVO.getHotelType());
-			pstmt.setString(4, otherhotelVO.getHotelNotice());
-			pstmt.setString(5, otherhotelVO.getHotelQa());
-			pstmt.setString(6, otherhotelVO.getHotelIntroduction());
-			pstmt.setInt(7, otherhotelVO.getHotelId());
+			pstmt.setString(1, hotelVO.getHotelCounty());
+			pstmt.setString(2, hotelVO.getHotelAddress());
+			pstmt.setString(3, hotelVO.getHotelType());
+			pstmt.setString(4, hotelVO.getHotelNotice());
+			pstmt.setString(5, hotelVO.getHotelQa());
+			pstmt.setString(6, hotelVO.getHotelIntroduction());
+			pstmt.setInt(7, hotelVO.getHotelId());
 			pstmt.executeUpdate();
 			
 			//ServiceList table
 			ServiceListDAO servicelistdao = new ServiceListDAO(); 
 			int serviceId = 0;
-			servicelistdao.delete(otherhotelVO.getHotelId());
+			servicelistdao.delete(hotelVO.getHotelId());
 			for(ServiceListVO service:servicelist) {
 				servicelistdao.insert2(service,con);
 //				servicelistdao.update2(service,con);
@@ -57,7 +58,7 @@ public class OtherHotelDAO implements OtherHotelDAO_interface{
 			//HOTELPIC table
 			HotelpicDAO hotelpicdao = new HotelpicDAO();
 			if(Hotelpiclist.size() > 0) {
-				hotelpicdao.delete2(otherhotelVO.getHotelId(),con);
+				hotelpicdao.delete2(hotelVO.getHotelId(),con);
 				for(HotelpicVO aData:Hotelpiclist) {
 					hotelpicdao.insert2(aData,con);
 				}
