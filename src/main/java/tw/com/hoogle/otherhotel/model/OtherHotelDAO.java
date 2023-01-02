@@ -2,15 +2,21 @@ package tw.com.hoogle.otherhotel.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import tw.com.hoogle.hotel.model.HotelVO;
+import tw.com.hoogle.hotelpic.model.HotelpicDAO;
+import tw.com.hoogle.hotelpic.model.HotelpicVO;
+import tw.com.hoogle.service.model.ServiceVO;
+import tw.com.hoogle.servicelist.model.ServiceListDAO;
+import tw.com.hoogle.servicelist.model.ServiceListVO;
+
 public class OtherHotelDAO implements OtherHotelDAO_interface{
-	
 	private static DataSource ds = null;
 	static {
 		try {
@@ -21,59 +27,50 @@ public class OtherHotelDAO implements OtherHotelDAO_interface{
 		}
 	}
 
-	
-	private static final String UPDATE = "UPDATE hotel set hotelEmail=?, hotelPassword=?, hotelName=?, hotelPhone=?, hotelPrincipal=?, hotelTaxid=?, hotelCounty=?, hotelAddress=?, hotelType=?, hotelNotice=?, hotelQa=?, hotelIntroduction=?, hotelState=? where hotelId = ?";
-	
+	private static final String UPDATE = "UPDATE hotel set hotelCounty=?, hotelAddress=?, hotelType=?, hotelNotice=?, hotelQa=?, hotelIntroduction=? where hotelId = ?";
 	
 	@Override
-	public void updateHotel(OtherHotelVO otherhotelVO) {
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
+	public void updateHotel(HotelVO hotelVO,List<ServiceListVO> servicelist,List<HotelpicVO> Hotelpiclist) {
 		try {
-
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE);
-
-			pstmt.setString(1, otherhotelVO.getHotelEmail());
-			pstmt.setString(2, otherhotelVO.getHotelPassword());
-			pstmt.setString(3, otherhotelVO.getHotelName());
-			pstmt.setString(4, otherhotelVO.getHotelPhone());
-			pstmt.setString(5, otherhotelVO.getHotelPrincipal());
-			pstmt.setString(6, otherhotelVO.getHotelTaxid());
-			pstmt.setString(7, otherhotelVO.getHotelCounty());
-			pstmt.setString(8, otherhotelVO.getHotelAddress());
-			pstmt.setString(9, otherhotelVO.getHotelType());
-			pstmt.setString(10, otherhotelVO.getHotelNotice());
-			pstmt.setString(11, otherhotelVO.getHotelQa());
-			pstmt.setString(12, otherhotelVO.getHotelIntroduction());
-			pstmt.setInt(13, otherhotelVO.getHotelState());
-			pstmt.setInt(14, otherhotelVO.getHotelId());
-
+			Connection con = ds.getConnection();
+			con.setAutoCommit(false);
+			PreparedStatement pstmt = con.prepareStatement(UPDATE);			
+		
+			//OtherHotel table
+			pstmt.setString(1, hotelVO.getHotelCounty());
+			pstmt.setString(2, hotelVO.getHotelAddress());
+			pstmt.setString(3, hotelVO.getHotelType());
+			pstmt.setString(4, hotelVO.getHotelNotice());
+			pstmt.setString(5, hotelVO.getHotelQa());
+			pstmt.setString(6, hotelVO.getHotelIntroduction());
+			pstmt.setInt(7, hotelVO.getHotelId());
 			pstmt.executeUpdate();
-
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+			
+			//ServiceList table
+			ServiceListDAO servicelistdao = new ServiceListDAO(); 
+			int serviceId = 0;
+			servicelistdao.delete(hotelVO.getHotelId());
+			for(ServiceListVO service:servicelist) {
+				servicelistdao.insert2(service,con);
+//				servicelistdao.update2(service,con);
+			}
+			
+			//HOTELPIC table
+			HotelpicDAO hotelpicdao = new HotelpicDAO();
+			if(Hotelpiclist.size() > 0) {
+				hotelpicdao.delete2(hotelVO.getHotelId(),con);
+				for(HotelpicVO aData:Hotelpiclist) {
+					hotelpicdao.insert2(aData,con);
 				}
 			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+			
+			
+			con.commit();
+			con.setAutoCommit(true);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
 	}
 }
 

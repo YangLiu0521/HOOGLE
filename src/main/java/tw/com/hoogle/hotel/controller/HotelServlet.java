@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import tw.com.hoogle.hotel.model.HotelService;
 import tw.com.hoogle.hotel.model.HotelVO;
 import tw.com.hoogle.mail.model.MailService;
+import tw.com.hoogle.otherhotel.model.OtherHotelVO;
 
 @WebServlet("/hotel/HotelServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -226,6 +227,7 @@ public class HotelServlet extends HttpServlet {
 			try {
 
 				HotelVO hotelVO = new HotelVO();
+				OtherHotelVO otherhotelVO = new OtherHotelVO();
 				HotelService hotelSvc = new HotelService();
 
 				// 確認旅客輸入的值
@@ -270,6 +272,7 @@ public class HotelServlet extends HttpServlet {
 
 				// 確認資料無誤，則設定
 				session.setAttribute("hotelVO", hotelVO);
+				session.setAttribute("otherhotelVO", otherhotelVO);
 				System.out.println("be login...");
 				String location = (String) session.getAttribute("location"); // 看看有無來源網頁
 
