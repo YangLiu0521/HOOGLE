@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="tw.com.hoogle.administrator.model.*"%>
+<%@ page import="java.text.Format"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 
 <jsp:useBean id="administratorSvc" scope="page" class="tw.com.hoogle.administrator.model.AdministratorService"/>
 <%
@@ -11,6 +13,10 @@ AdministratorVO administratorVO = (AdministratorVO) request.getAttribute("admini
 String account = (String)session.getAttribute("account");
 AdministratorVO permissionsVO = administratorSvc.getPermissionsByAccount(account);
 pageContext.setAttribute("permissionsVO", permissionsVO);
+%>
+<%
+Format sfm = new SimpleDateFormat("yyyy/MM/dd");
+pageContext.setAttribute("sfm", sfm);
 %>
 <!DOCTYPE html>
 <html>
@@ -190,7 +196,7 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 					<%=(administratorVO.getHotelDominate()) == false ? "" : "checked"%> /></td>
 				<td><input type="checkbox" name="userDominate" value="true"
 					<%=(administratorVO.getUserDominate()) == false ? "" : "checked"%> /></td>
-				<td><%=administratorVO.getAdministratorHiredate()%></td>
+				<td>${sfm.format(administratorVO.administratorHiredate)}</td>
 			</tr>
 
 		</table>

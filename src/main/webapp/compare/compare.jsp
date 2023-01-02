@@ -242,7 +242,7 @@ b {
 飯店:${list1[0].hotelName} 
 地址:${list1[0].hotelAddress}
 服務設施:<c:forEach var="compareVO" items="${listservice1}">${compareVO.serviceName} </c:forEach>
-=================================================
+============================
 <c:forEach var="compareVO" items="${list1}">${compareVO.roomName}	價格:${compareVO.roomPrice}
 </c:forEach>
 </c:if>
@@ -253,7 +253,7 @@ b {
 飯店:${list2[0].hotelName} 
 地址:${list2[0].hotelAddress}
 服務設施:<c:forEach var="compareVO" items="${listservice2}">${compareVO.serviceName} </c:forEach>
-=================================================
+============================
 <c:forEach var="compareVO" items="${list2}">${compareVO.roomName}	價格:${compareVO.roomPrice}
 </c:forEach>
 
@@ -265,7 +265,7 @@ b {
 飯店:${list3[0].hotelName} 
 地址:${list3[0].hotelAddress}
 服務設施:<c:forEach var="compareVO" items="${listservice3}">${compareVO.serviceName} </c:forEach>
-=================================================
+============================
 <c:forEach var="compareVO" items="${list3}">${compareVO.roomName}	價格:${compareVO.roomPrice}
 </c:forEach>
 </c:if>

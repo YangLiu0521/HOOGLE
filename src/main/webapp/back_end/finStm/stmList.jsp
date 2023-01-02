@@ -4,6 +4,8 @@
 <%@ page import="java.util.*"%>
 <%@ page import="tw.com.hoogle.administrator.model.*"%>
 <%@ page import="tw.com.hoogle.finStm.model.*"%>
+<%@ page import="java.text.Format"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <jsp:useBean id="administratorSvc" scope="page" class="tw.com.hoogle.administrator.model.AdministratorService"/>
@@ -18,6 +20,11 @@ pageContext.setAttribute("finStmList", finStmList);
 String account = (String)session.getAttribute("account");
 AdministratorVO permissionsVO = administratorSvc.getPermissionsByAccount(account);
 pageContext.setAttribute("permissionsVO", permissionsVO);
+%>
+
+<%
+Format sfm = new SimpleDateFormat("yyyy/MM/dd");
+pageContext.setAttribute("sfm", sfm);
 %>
 
 <!DOCTYPE html>
@@ -194,7 +201,7 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 		<c:forEach var="finStmVO" items="${finStmList}">
 			<tr class="td_body"}>
 						
-				<td>${finStmVO.ordDate}</td>
+				<td>${sfm.format(finStmVO.ordDate)}</td>
 				<td>${finStmVO.hotelId}</td>
 				<td>${finStmVO.hotelName}</td>
 				<td>$${finStmVO.roomPrice}</td>

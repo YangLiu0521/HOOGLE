@@ -211,7 +211,7 @@ pageContext.setAttribute("list",list);
         <!-- popular destination box -->
         <div class="popular-destination-box">
           <div class="img-holder-overlay">
-            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/popular-destination/1.jpg" alt=""></div>
+            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/hotelPic/picHOOGLE.jpg" alt=""></div>
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>        
           
@@ -241,7 +241,7 @@ pageContext.setAttribute("list",list);
         <!-- popular destination box -->
         <div class="popular-destination-box">
           <div class="img-holder-overlay">
-            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/popular-destination/2.jpg" alt=""></div>
+            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/hotelPic/picHotel2.jpg" alt=""></div>
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
@@ -257,7 +257,7 @@ pageContext.setAttribute("list",list);
         <!-- popular destination box -->
         <div class="popular-destination-box">
           <div class="img-holder-overlay">
-            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/popular-destination/3.jpg" alt=""></div>
+            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/hotelPic/picHotel3.jpg" alt=""></div>
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
@@ -273,7 +273,7 @@ pageContext.setAttribute("list",list);
         <!-- popular destination box -->
         <div class="popular-destination-box">
           <div class="img-holder-overlay">
-            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/popular-destination/4.jpg" alt=""></div>
+            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/hotelPic/picHotel4.jpg" alt=""></div>
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
@@ -289,7 +289,7 @@ pageContext.setAttribute("list",list);
         <!-- popular destination box -->
         <div class="popular-destination-box">
           <div class="img-holder-overlay">
-            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/popular-destination/5.jpg" alt=""></div>
+            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/hotelPic/picHotel5.jpg" alt=""></div>
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
@@ -305,11 +305,11 @@ pageContext.setAttribute("list",list);
 <!--         popular destination box -->
         <div class="popular-destination-box">
           <div class="img-holder-overlay">
-            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/popular-destination/6.jpg" alt=""></div>
+            <div class="img-holder"><img src="${pageContext.request.contextPath}/images/hotelPic/picHotel6.jpg" alt=""></div>
             <div class="overlay"><a href="#"><i class="fas fa-share"></i></a></div>
           </div>
           <div class="title">
-            <h3><a href="${pageContext.request.contextPath}/hotelDetail/hotelDetail.jsp">測試用飯店</a></h3>
+            <h3><a href="${pageContext.request.contextPath}/hotelDetail/hotelDetail.jsp">飯店</a></h3>
           </div>
         </div>
 <!--         popular destination box end  -->

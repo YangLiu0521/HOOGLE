@@ -310,7 +310,7 @@ pageContext.setAttribute("nonreserved4003",nonreserved4003);
                       <ul class="hotel-featured">
                       	<li>
                       	<input type="hidden" name="nonreserved4002" id="nr4002" value="${nonreserved4002}"><font color=red>${errorMsgs.ordId}</font>
-                      	<div style="color:blue;"> 剩餘房數 : ${nonreserved4002}</div>
+                      	<div style="color:blue;"> 剩餘房數 : ${nonreserved4002}間</div>
                       	</li>                     
                       </ul>
                        <ul class="hotel-featured">
@@ -368,7 +368,7 @@ pageContext.setAttribute("nonreserved4003",nonreserved4003);
                       <ul class="hotel-featured">
                       	<li>
                       	<input type="hidden" name="nonreserved4003" id="nr4003" value="${nonreserved4003}"><font color=red>${errorMsgs.ordId}</font>
-                      	<div style="color:blue;"> 剩餘房數 : ${nonreserved4003}</div>
+                      	<div style="color:blue;"> 剩餘房數 : ${nonreserved4003}間</div>
                       	</li>                     
                       </ul>
                        <ul class="hotel-featured">
@@ -591,7 +591,7 @@ pageContext.setAttribute("nonreserved4003",nonreserved4003);
             			
             		}
             	}
-            	else if(nr4002<r3 ){
+            	else if(nr4003<r3 ){
             		if(alert("豪華四人房房數不足，麻煩修改訂房房數") == true){
             			
             		}

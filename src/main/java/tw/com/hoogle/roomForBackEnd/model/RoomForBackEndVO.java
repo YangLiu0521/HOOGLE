@@ -5,7 +5,6 @@ public class RoomForBackEndVO implements java.io.Serializable{
 	private String hotelName;
 	private Integer roomAuto;
 	private String roomName;
-	private String roomType;
 	private Integer roomPrice;
 	private Integer roomTotal;
 	private Integer nonreserved;
@@ -34,12 +33,6 @@ public class RoomForBackEndVO implements java.io.Serializable{
 	}
 	public void setRoomName(String roomName) {
 		this.roomName = roomName;
-	}
-	public String getRoomType() {
-		return roomType;
-	}
-	public void setRoomType(String roomType) {
-		this.roomType = roomType;
 	}
 	public Integer getRoomPrice() {
 		return roomPrice;

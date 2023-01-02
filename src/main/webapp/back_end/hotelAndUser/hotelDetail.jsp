@@ -227,13 +227,13 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 <!-- 			<th width="50">飯店負責人</th> -->
 <!-- 			<th width="50">飯店統一編號</th> -->
 <!-- 			<th width="30">飯店縣市</th> -->
-			<th width="70">飯店地址</th>
+			<th width="50">飯店地址</th>
 			<th width="20">飯店<br>類型</th>
 			<th width="50">訂房須知</th>
 <!-- 			<th width="50">QA</th> -->
-			<th width="50">飯店介紹</th>
-			<th width="50">房型及數量</th>
-			<th width="30">狀態</th>
+			<th width="75">飯店介紹</th>
+			<th width="30">房型及數量</th>
+			<th width="15">狀態</th>
 			
 		</tr>
 

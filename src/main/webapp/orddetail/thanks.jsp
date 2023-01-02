@@ -22,6 +22,7 @@
 		<h2><span>退房日期 : </span><span style="color:red">${checkoutInput}</span></h2><br>
 <!-- 		<h3><span>即將跳轉回首頁在</span><span class="second">5</span><span>秒</span></h3> -->
 		<h2><span>將於</span><span id="jumpTo" style="color:red">10</span>秒後返回首頁</h2>
+		<h2><a href="${pageContext.request.contextPath}/index.jsp">直接回首頁</a></h2>
 		<script type="text/javascript">
 		    JumpToIndex(10,'${pageContext.request.contextPath}/index.jsp');
 		    
