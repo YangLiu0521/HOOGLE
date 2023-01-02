@@ -26,7 +26,7 @@ public class RoomForBackEndDAO implements RoomForBackEndDAO_interface{
 		}
 	}
 
-	private static final String GET_ROOMDETAIL = "SELECT hotel.hotelId,hotelName,roomAuto,roomName,roomType,roomPrice,roomTotal,nonreserved "
+	private static final String GET_ROOMDETAIL = "SELECT hotel.hotelId,hotelName,roomAuto,roomName,roomPrice,roomTotal,nonreserved "
 			                                     + "FROM room as room "
 			                                     + "join hotel as hotel on room.hotelId = hotel.hotelId "
 			                                     + "WHERE hotel.hotelId = ?";
@@ -59,8 +59,7 @@ public class RoomForBackEndDAO implements RoomForBackEndDAO_interface{
 				roomForBackEndVO.setHotelId(rs.getInt("hotelId"));
 				roomForBackEndVO.setHotelName(rs.getString("hotelName"));
 				roomForBackEndVO.setRoomAuto(rs.getInt("roomAuto"));
-				roomForBackEndVO.setRoomType(rs.getString("roomName"));
-				roomForBackEndVO.setRoomName(rs.getString("roomType"));
+				roomForBackEndVO.setRoomName(rs.getString("roomName"));
 				roomForBackEndVO.setRoomPrice(rs.getInt("roomPrice"));
 				roomForBackEndVO.setRoomTotal(rs.getInt("roomTotal"));
 				roomForBackEndVO.setNonreserved(rs.getInt("nonreserved"));

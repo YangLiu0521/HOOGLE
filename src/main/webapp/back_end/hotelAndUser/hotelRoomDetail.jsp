@@ -172,7 +172,7 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 			<th width="50">飯店名稱</th>
 			<th width="40">房型編號</th>
 			<th width="60">房型名稱</th>
-			<th width="60">房型種類</th>
+<!-- 			<th width="60">房型種類</th> -->
 			<th width="50">房型價格</th>
 			<th width="50">房間總數</th>
 			<th width="50">剩餘數量</th>
@@ -186,7 +186,7 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 				<td>${roomForBackEndVO.hotelName}</td>
 				<td>${roomForBackEndVO.roomAuto}</td>
 				<td>${roomForBackEndVO.roomName}</td>
-				<td>${roomForBackEndVO.roomType}</td>
+<%-- 				<td>${roomForBackEndVO.roomType}</td> --%>
 				<td>$${roomForBackEndVO.roomPrice}</td>
 				<td>${roomForBackEndVO.roomTotal}</td>
 				<td>${roomForBackEndVO.nonreserved}</td>

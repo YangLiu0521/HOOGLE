@@ -189,7 +189,7 @@ pageContext.setAttribute("permissionsVO", permissionsVO);
 <!-- pageContext.setAttribute("adminName", adminName); -->
 					
 
-			  	<td><input type="text" name="administratorId" size="2" 
+			  	<td><input type="text" name="administratorId" size="2" readonly style="color: gray;"
 			  		value="<%=adminId %>"/></td>
 			  
 				<td><input type="date" name="newsDate" size="10"
