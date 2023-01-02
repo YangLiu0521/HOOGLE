@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.commend.model.*"%>
+<%@ page import="tw.com.hoogle.commend.model.*"%>
 <%
 CommendVO commendVO = (CommendVO) request.getAttribute("commendAuto");
 %>
