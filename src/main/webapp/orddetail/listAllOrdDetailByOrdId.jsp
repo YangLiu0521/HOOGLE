@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.orddetail.model.*"%>
+<%@ page import="tw.com.hoogle.orddetail.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
@@ -68,7 +68,7 @@
 		<th>訂房房數</th>
 	</tr>
 
-		<c:forEach var="orddetailVO" items="${orddetailVO}" >	
+		<c:forEach var="orddetailVO" items="${orddetailVO}" >
 	<tr>
 		<td>${orddetailVO.orddetailId}</td>
 		<td>${orddetailVO.ordId}</td>
