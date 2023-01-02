@@ -74,7 +74,7 @@ th, td {
 	<%-- 		</c:forEach> --%>
 	<!-- 	</ul> -->
 	<%-- </c:if> --%>
-	<FORM action="<%=request.getContextPath()%>/food/food.do" method=post
+	<FORM action="<%=request.getContextPath()%>/food/FoodServlet" method=post
 		enctype="multipart/form-data">
 
 		<table>

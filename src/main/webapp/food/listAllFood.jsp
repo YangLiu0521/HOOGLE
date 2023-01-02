@@ -78,13 +78,13 @@
 			<td><img src="${pageContext.request.contextPath}/food/read?foodPicid=${foodVO.foodPicid}" height="100" width="100"></td>
 			<td>${foodVO.foodName}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/food/food.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/food/FoodServlet" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="foodPicid"  value="${foodVO.foodPicid}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/food/food.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/food/FoodServlet" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
 			     <input type="hidden" name="foodPicid"  value="${foodVO.foodPicid}">
 			     <input type="hidden" name="action" value="delete"></FORM>

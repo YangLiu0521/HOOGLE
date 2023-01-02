@@ -52,7 +52,7 @@
   
   
   <li>
-    <FORM METHOD="post" ACTION="food.do" >
+    <FORM METHOD="post" ACTION="FoodServlet" >
         <b>輸入美食照片編號: (12001):</b>
         <input type="text" name="foodPicid" value="${param.foodPicid}"><font color=red>${errorMsgs.foodPicid}</font>
         <input type="hidden" name="action" value="getOne_For_Display">
@@ -63,7 +63,7 @@
   <jsp:useBean id="foodSvc" scope="page" class="tw.com.hoogle.food.model.FoodService" />
    
   <li>
-     <FORM METHOD="post" ACTION="food.do" >
+     <FORM METHOD="post" ACTION="FoodServlet" >
        <b>選擇美食照片編號:</b>
        <select size="1" name="foodPicid">
          <c:forEach var="foodVO" items="${foodSvc.all}" > 
@@ -76,7 +76,7 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="food.do" >
+     <FORM METHOD="post" ACTION="FoodServlet" >
        <b>美食照片名稱:</b>
        <select size="1" name="foodPicid">
          <c:forEach var="foodVO" items="${foodSvc.all}" > 

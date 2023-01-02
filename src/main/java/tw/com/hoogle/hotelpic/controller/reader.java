@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 /**
  * Servlet implementation class read
  */
-@WebServlet("/food/reader")
+@WebServlet("/hotel/reader")
 @MultipartConfig
 public class reader extends HttpServlet {
 	Connection con;
@@ -35,11 +35,11 @@ public class reader extends HttpServlet {
 
 		try {
 			Statement stmt = con.createStatement();
-			String foodPicid = req.getParameter("foodPicid");
-			ResultSet rs = stmt.executeQuery("SELECT foodPic FROM food WHERE foodPicid = " + foodPicid);
+			String hotelpicId = req.getParameter("hotelpicId");
+			ResultSet rs = stmt.executeQuery("SELECT hotelpicNo FROM food WHERE hotelpicId = " + hotelpicId);
 
 			if (rs.next()) {
-				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("foodPic"));
+				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("hotelpicNo"));
 				byte[] buf = new byte[4 * 1024]; // 4K buffer
 				int len;
 				while ((len = in.read(buf)) != -1) {

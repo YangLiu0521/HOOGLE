@@ -118,22 +118,21 @@ public class HotelpicServlet extends HttpServlet {
 		
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/			
 				
-//				Integer hotelpicId = null;
-//				try {
-//					hotelpicId = Integer.valueOf(req.getParameter("hotelpicId").trim());
-//				} catch (NumberFormatException e) {
-//					errorMsgs.put("hotelpicId","請填數字");
-//				}
+				Integer hotelpicId = null;
+				try {
+					hotelpicId = Integer.valueOf(req.getParameter("hotelpicId").trim());
+				} catch (NumberFormatException e) {
+					errorMsgs.put("hotelpicId","請填數字");
+				}
 				
-//				Integer hotelpicId = Integer.valueOf(req.getParameter("hotelpicId"));
 				 
 				
-//				Integer hotelId = null;
-//				try {
-//					hotelId = Integer.valueOf(req.getParameter("hotelId").trim());
-//				} catch (NumberFormatException e) {
-//					errorMsgs.put("hotelId","請填數字");
-//				}
+				Integer hotelId = null;
+				try {
+					hotelId = Integer.valueOf(req.getParameter("hotelId").trim());
+				} catch (NumberFormatException e) {
+					errorMsgs.put("hotelId","請填數字");
+				}
 				
 				
 				byte[] hotelpicNo = null;
@@ -176,8 +175,7 @@ public class HotelpicServlet extends HttpServlet {
 //				
 //				/***************************2.開始修改資料*****************************************/
 				HotelpicService hotelpicSvc = new HotelpicService();
-				HotelpicVO hotelpicVO = hotelpicSvc.updateHotelpic( hotelpicNo,  hotelpicName);
-				
+				HotelpicVO hotelpicVO = hotelpicSvc.updateHotelpic( hotelpicId,hotelId,hotelpicNo,  hotelpicName);
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("hotelpicVO", hotelpicVO); // 資料庫update成功後,正確的的hotelpicVO物件,存入req
 				String url = "/food/listOneFood.jsp";
