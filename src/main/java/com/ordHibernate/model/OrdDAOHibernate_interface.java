@@ -3,6 +3,8 @@ package com.ordHibernate.model;
 import java.util.Date;
 import java.util.List;
 
+import tw.com.hoogle.ordHibernate.model.OrdBean;
+
 public interface OrdDAOHibernate_interface {
 	public OrdBean insert(OrdBean ordBean);
 //	public void update(OrdBean ordBean);

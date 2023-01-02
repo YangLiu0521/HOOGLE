@@ -15,7 +15,6 @@ public class OrdBean {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ordId")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ordId;
 
 	@Column(name = "userId")

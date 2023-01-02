@@ -9,7 +9,9 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import model.hibernate.HibernateUtil;
+import tw.com.hoogle.ordHibernate.model.OrdBean;
+import tw.com.hoogle.util.HibernateUtil;
+
 
 public class OrdDAOHibernate implements OrdDAOHibernate_interface{
 	private SessionFactory sessionFactory;
