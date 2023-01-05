@@ -95,7 +95,7 @@ pageContext.setAttribute("sfm", sfm);
 											src="images/logo_small_removebg.png" style="width: 50px;"
 											alt="" class="img-fluid"></a></li>
 									<li><a class="nav-link" href="<%=request.getContextPath() %>/compare/compare.jsp">比較</a></li>
-									<li><a class="nav-link" href="gallery.html">美食</a></li>
+									<li><a class="nav-link" href="${pageContext.request.contextPath}/food/foodMap.jsp">美食</a></li>
 									<!--原pages-->
 									<li class="nav-item dropdown"><a
 										class="nav-link dropdown-toggle" href="#" id="dropdown05"
@@ -650,7 +650,7 @@ pageContext.setAttribute("sfm", sfm);
 						<ul class="footer-link">
 							<li><i class="fas fa-caret-right"></i> <a href="#">首頁</a></li>
 							<li><i class="fas fa-caret-right"></i> <a href="<%=request.getContextPath() %>/compare/compare.jsp">比較</a></li>
-							<li><i class="fas fa-caret-right"></i> <a href="#">美食</a></li>
+							<li><i class="fas fa-caret-right"></i> <a href="${pageContext.request.contextPath}/food/foodMap.jsp">美食</a></li>
 							<li><i class="fas fa-caret-right"></i> <a href="#">關於我們</a>
 							</li>
 							<li><i class="fas fa-caret-right"></i> <a href="#">服務條款</a>

@@ -262,7 +262,7 @@ public class RoomServlet extends HttpServlet {
 			System.out.println("here222");
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("roomVO", roomVO); // 資料庫update成功後,正確的的roomVO物件,存入req
-			String url = "/room/listAllRoom.jsp";
+			String url = "/hotel/hotelMemberCenter.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneFood.jsp
 			successView.forward(req, res);
 		}
@@ -338,7 +338,7 @@ public class RoomServlet extends HttpServlet {
 			roomSvc.addRoom(roomVO, roompicVO);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/room/listAllRoom.jsp";
+			String url = "/hotel/hotelMemberCenter.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllFood.jsp
 			successView.forward(req, res);
 		}
